@@ -1,4 +1,4 @@
-const createImgName = require("../assets/createImgName");
+const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
 
 const { Furniture, Rating } = require("../models/models");
@@ -30,8 +30,8 @@ class FurnitureController {
       if (req.files) {
         const { img: images, dimension_img, material_img } = req.files;
 
-         dimensionImgName = createImgName(dimension_img, "STRING");
-         filesNames = createImgName(images, "ARRAY");
+        dimensionImgName = createImgName(dimension_img, "STRING");
+        filesNames = createImgName(images, "ARRAY");
       }
 
       //here I need to do json.parse

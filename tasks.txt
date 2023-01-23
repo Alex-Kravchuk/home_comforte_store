@@ -1,0 +1,23 @@
+### SERVER
+	1. Testing controllers:
+		1.1 userController	OK
+
+			1.1.1 checkUserMiddleware / role checking / OK
+			1.1.2 why after decode JSON we have object with *dataValues* and *_previusDataValues*?
+					because these fields has user object from postgresql db
+					
+		1.2 brandController
+		1.3 typeController
+		1.4 reviewController
+		1.5 ratingController
+		1.6 additionalVatiantController
+		1.7 basketController
+		1.8 basketFurnitureController
+		1.9 furnitureController
+		1.10 perchaseHistoryController
+
+
+
+
+### CLIENT
+

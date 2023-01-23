@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const ApiError = require("../error/ApiError");
 
 const { User, Basket } = require("../models/models");
-const createImgName = require("../assets/createImgName");
+const createImgName = require("../helpers/createImgName");
 
 const generateJWT = (config) =>
   jwt.sign({ ...config }, process.env.SECRET_KEY, {
@@ -60,7 +60,7 @@ class UserController {
           )
         );
       }
-      
+
       const arrOfRoles =
         role.split(",").length > 1 ? [...role.split(",")] : [role];
 
@@ -76,7 +76,19 @@ class UserController {
         img: fileName,
       });
 
-      const token = generateJWT(user);
+      const jwtConfig = {
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        name: user.name,
+        mobile: user.mobile,
+        bonus: user.bonus,
+        address: user.address,
+        img: user.img,
+        role: user.role,
+      };
+
+      const token = generateJWT(jwtConfig);
 
       return res.json({ token });
     } catch (error) {
@@ -89,6 +101,7 @@ class UserController {
       const { email, password } = req.body;
 
       const user = await User.findOne({ where: { email } });
+    
 
       if (!user) {
         return next(
@@ -109,7 +122,19 @@ class UserController {
         );
       }
 
-      const token = generateJWT(user);
+      const jwtConfig = {
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        name: user.name,
+        mobile: user.mobile,
+        bonus: user.bonus,
+        address: user.address,
+        img: user.img,
+        role: user.role,
+      };
+
+      const token = generateJWT(jwtConfig);
 
       return res.json({ token });
     } catch (error) {

@@ -1,4 +1,4 @@
-const createImgName = require("../assets/createImgName");
+const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
 const { Review } = require("../models/models");
 

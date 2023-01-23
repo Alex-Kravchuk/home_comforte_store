@@ -15,11 +15,9 @@ module.exports = function (role) {
       }
 
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      console.log("decode", decoded.role);
+      const available = decoded.role.includes(role);
 
-      const available = decoded.role.include(role);
-
-      if (available) {
+      if (!available) {
         return res.status(401).json({ message: "Not available" });
       }
 
