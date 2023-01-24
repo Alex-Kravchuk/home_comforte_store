@@ -1,44 +1,47 @@
 const ApiError = require("../error/ApiError");
-const { Rating } = require("../models/models");
+const { Rating, Furniture, AdditionalVariant } = require("../models/models");
 
 class RatingController {
   static errorSource = "rating controller";
 
   async create(req, res, next) {
     try {
-      const { userId, furnitureId, additionalVariantId } = req.body;
+      const { rating, userId, furnitureId, additionalVariantId } = req.body;
       // without duplicate checking. User can rate a product many times
-      const rating = await Rating.create({
+      const _rating = await Rating.create({
+        rating,
         userId,
         furnitureId,
         additionalVariantId,
       });
 
-      return res.json(rating);
-    } catch (error) {
-      return next(
-        ApiError.unexpectedError(error, RatingController.errorSource)
-      );
-    }
-  }
-
-  async getFurnitureRating(req, res, next) {
-    try {
-      const { id } = req.params;
+      // for current updating furniture
       let ratings;
-      ratings = await Rating.findAll({ where: { furnitureId: id } });
+      let currentFurniture;
 
-      if (!ratings.length) {
-        ratings = await Rating.findAll({ where: { additionalVariantId: id } });
+      if (furnitureId !== undefined) {
+        ratings = await Rating.findAll({ where: { furnitureId } });
+        currentFurniture = await Furniture.findOne({
+          where: { id: furnitureId },
+        });
+      } else {
+        ratings = await Rating.findAll({ where: { additionalVariantId } });
+        currentFurniture = await AdditionalVariant.findOne({
+          where: { id: additionalVariantId },
+        });
       }
 
       const sumOfRatingValues = ratings.reduce(
         (acc, curr) => acc + curr.rating,
         0
       );
-      const averageValueRating = sumOfRatingValues / ratings.length;
 
-      return res.json({ averageValueRating });
+      const averageValueRating = sumOfRatingValues / ratings.length;
+      currentFurniture.update({
+        rating: averageValueRating.toFixed(1),
+      });
+
+      return res.json(_rating);
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, RatingController.errorSource)
@@ -52,7 +55,7 @@ class RatingController {
       const rating = await Rating.findOne({ where: { id } });
       rating.destroy();
 
-      return res.json({ message: "delete" });
+      return res.json({ message: "deleted" });
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, RatingController.errorSource)

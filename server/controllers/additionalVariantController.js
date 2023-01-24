@@ -1,6 +1,10 @@
 const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
 const { AdditionalVariant } = require("../models/models");
+const {
+  materialInfoMOCK,
+  dimensionInfoMOCK,
+} = require("../assets/mock/furnitureAdditionalnfo");
 
 class AdditionalVariantController {
   static errorSource = "additional variant furniture controller";
@@ -13,7 +17,6 @@ class AdditionalVariantController {
       const {
         furnitureId,
         name,
-        rating,
         typeId,
         brandId,
         description,
@@ -39,52 +42,20 @@ class AdditionalVariantController {
         filesNames = createImgName(images, "ARRAY");
       }
 
-      const materialInfoMOCK = {
-        data: [
-          {
-            title: "Leg Frame",
-            desription: "Side Legs: Plastic Leg; Middle Legs: Solid Wood",
-          },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          {
-            title: "Fabric Composition",
-            desription: "95% Polyester and 5% Acrylic",
-          },
-          { title: "Care", desription: "Upholstered Seating" },
-          { title: "Prop65 Warning", desription: "Formaldehyde" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-        ],
-      };
-
-      const dimensionInfoMOCK = {
-        data: [
-          { title: "Dimension", desription: "W82.7' x D89.8' x H47.2'" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-        ],
-        img: dimensionImgName,
-      };
+      // it's for testing
+      const materialInfo = JSON.parse(materialInfoMOCK);
+      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
 
       const furniture = await AdditionalVariant.create({
         furnitureId,
         name,
-        rating,
         typeId,
         brandId,
         description,
-        price,
+        price: Number(price),
         img: filesNames,
-        material_info: materialInfoMOCK,
-        dimension_info: dimensionInfoMOCK,
+        material_info: materialInfo,
+        dimension_info: dimensionInfo,
       });
 
       return res.json(furniture);
@@ -113,14 +84,8 @@ class AdditionalVariantController {
       let dimensionImgName;
       let filesNames;
 
-      const {
-        name,
-        rating,
-        description,
-        price,
-        material_info,
-        dimension_info,
-      } = req.body;
+      const { name, description, price, material_info, dimension_info } =
+        req.body;
 
       const { id } = req.params;
 
@@ -131,18 +96,20 @@ class AdditionalVariantController {
         filesNames = createImgName(images, "ARRAY");
       }
 
-      // TODO dimenisonImgName will be use in dimension_inso object
+      // TODO dimenisonImgName will be use in dimension_info object
+
+      const materialInfo = JSON.parse(materialInfoMOCK);
+      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
 
       const furniture = await AdditionalVariant.findOne({ where: { id } });
 
       furniture.update({
         name,
-        rating,
         description,
-        price,
+        price: Number(price),
         img: filesNames,
-        material_info,
-        dimension_info,
+        material_info: materialInfo,
+        dimension_info: dimensionInfo,
       });
 
       return res.json(furniture);

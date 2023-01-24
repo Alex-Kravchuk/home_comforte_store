@@ -6,6 +6,18 @@ class BasketFurnitureController {
   async create(req, res, next) {
     try {
       const { furnitureId, basketId, additionalVariantId } = req.body;
+
+      const duplicate = await BasketFurniture.findOne({
+        where: { furnitureId, basketId },
+      });
+      if (duplicate) {
+        return next(
+          ApiError.badRequest(
+            "The current furniture is already in this basket",
+            BasketFurnitureController.errorSource
+          )
+        );
+      }
       const basketFurniture = await BasketFurniture.create({
         furnitureId,
         basketId,

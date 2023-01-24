@@ -47,9 +47,11 @@ class ReviewController {
   async getAllFurnitureReviews(req, res, next) {
     try {
       const { id } = req.params;
+     
+
       let reviews;
       reviews = await Review.findAndCountAll({ where: { furnitureId: id } });
-      if (!reviews.length) {
+      if (!reviews.rows.length) {
         reviews = await Review.findAndCountAll({
           where: { additionalVariantId: id },
         });

@@ -1,6 +1,8 @@
-const {  PurchaseHistory } = require("../models/models");
+const { PurchaseHistory } = require("../models/models");
 
 const ApiError = require("../error/ApiError");
+
+const { goodsMOCK } = require("../assets/mock/purchaseHistory");
 
 class PurchaseHistoryController {
   static errorSource = "purchase history controller";
@@ -9,12 +11,13 @@ class PurchaseHistoryController {
     try {
       const { goods, userId, basketId } = req.body;
 
-      const goodsMOCK = {
-        furnitureIDs: [6, 7],
-        addVariandFurnitureIDs: [1, 2],
-      };
+      const goodsMOCK_test = JSON.parse(goodsMOCK);
 
-      const history = await PurchaseHistory.create({ goods: goodsMOCK, userId, basketId });
+      const history = await PurchaseHistory.create({
+        goods: goodsMOCK_test,
+        userId,
+        basketId,
+      });
 
       return res.json(history);
     } catch (error) {
@@ -44,7 +47,9 @@ class PurchaseHistoryController {
 
       return res.json({ message: "deleted" });
     } catch (error) {
-      return next(ApiError.unexpectedError(error, PurchaseHistoryController.errorSource));
+      return next(
+        ApiError.unexpectedError(error, PurchaseHistoryController.errorSource)
+      );
     }
   }
 }

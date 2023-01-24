@@ -6,11 +6,6 @@ const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware
 const createRatingMiddleware = require("../middleware/rating/createRatingMiddleware");
 
 router.post("/", createRatingMiddleware, ratingController.create);
-router.get(
-  "/furniture_rating/:id",
-  checkCorrectIDMiddleware("rating"),
-  ratingController.getFurnitureRating
-);
 router.delete(
   "/furniture_rating/:id",
   checkCorrectIDMiddleware("rating"),

@@ -3,6 +3,11 @@ const ApiError = require("../error/ApiError");
 
 const { Furniture, Rating } = require("../models/models");
 
+// it's for testing
+const { dimensionInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
+const { modifierInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
+const { materialInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
+
 class FurnitureController {
   static errorSource = "furniture controller";
   async create(req, res, next) {
@@ -21,134 +26,34 @@ class FurnitureController {
         modifier_info,
       } = req.body;
 
-      // here needs some material image
       const duplicateName = await Furniture.findOne({ where: { name } });
       if (duplicateName) {
         return next(ApiError.duplicateName(FurnitureController.errorSource));
       }
 
       if (req.files) {
+        // here needs some material image
         const { img: images, dimension_img, material_img } = req.files;
 
         dimensionImgName = createImgName(dimension_img, "STRING");
         filesNames = createImgName(images, "ARRAY");
       }
 
-      //here I need to do json.parse
-
-      const materialInfoMOCK = {
-        data: [
-          {
-            title: "Leg Frame",
-            desription: "Side Legs: Plastic Leg; Middle Legs: Solid Wood",
-          },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          {
-            title: "Fabric Composition",
-            desription: "95% Polyester and 5% Acrylic",
-          },
-          { title: "Care", desription: "Upholstered Seating" },
-          { title: "Prop65 Warning", desription: "Formaldehyde" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-        ],
-      };
-
-      const dimensionInfoMOCK = {
-        data: [
-          { title: "Dimension", desription: "W82.7' x D89.8' x H47.2'" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-        ],
-        img: dimensionImgName,
-      };
-
-      const modifierInfoMOCK = {
-        data: [
-          {
-            title: "Model",
-            values: [
-              { name: "Storm Gray", add_variant_Id: 1 },
-              { name: "Snow", add_variant_Id: 2 },
-            ],
-          },
-          {
-            title: "Size",
-            values: [
-              { name: "Queen", add_variant_Id: 1 },
-              { name: "Middle", add_variant_Id: 2 },
-              { name: "King", add_variant_Id: 3 },
-            ],
-          },
-          {
-            title: "Material",
-            values: [
-              {
-                name: "Indigo Blue",
-                fabric: "80% poliester",
-                care: "take care boy",
-                add_variant_Id: 1,
-                img: "",
-              },
-              {
-                name: "Ivory Beige",
-                fabric: "80% poliester, 20% linen",
-                care: "something washing",
-                add_variant_Id: 2,
-                img: "",
-              },
-              {
-                name: "Ivory White",
-                fabric: "80% poliester, 10% nylon",
-                care: "something washing2222",
-                add_variant_Id: 3,
-                img: "",
-              },
-              {
-                name: "Ocean Blue",
-                fabric: "88% poliester, 20% linen",
-                care: "something washing33333",
-                add_variant_Id: 4,
-                img: "",
-              },
-              {
-                name: "Forest Green",
-                fabric: "100% poliester",
-                care: "something washing3333312123",
-                add_variant_Id: 5,
-                img: "",
-              },
-            ],
-          },
-
-          {
-            tittle: "Quantity",
-            values: [
-              { name: "Single", add_variant_Id: 1 },
-              { name: "Set of 2", add_variant_Id: 2 },
-            ],
-          },
-        ],
-      };
+      // it's for testing
+      const materialInfo = JSON.parse(materialInfoMOCK);
+      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
+      const modifierInfo = JSON.parse(modifierInfoMOCK);
 
       const furniture = await Furniture.create({
         name,
+        price: Number(price),
         typeId,
         brandId,
         description,
-        price,
         img: filesNames,
-        material_info: materialInfoMOCK,
-        dimension_info: dimensionInfoMOCK,
-        modifier_info: modifierInfoMOCK,
+        material_info: materialInfo,
+        modifier_info: modifierInfo,
+        dimension_info: dimensionInfo,
       });
 
       return res.json(furniture);
@@ -223,7 +128,6 @@ class FurnitureController {
 
       const {
         name,
-        rating,
         description,
         price,
         material_info,
@@ -242,118 +146,18 @@ class FurnitureController {
 
       const furniture = await Furniture.findOne({ where: { id } });
 
-      const materialInfoMOCK = {
-        data: [
-          {
-            title: "Leg Frame",
-            desription: "Side Legs: Plastic Leg; Middle Legs: Solid Wood",
-          },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-          {
-            title: "Fabric Composition",
-            desription: "95% Polyester and 5% Acrylic",
-          },
-          { title: "Care", desription: "Upholstered Seating" },
-          { title: "Prop65 Warning", desription: "Formaldehyde" },
-          { title: "Frame", desription: "Plywood" },
-          { title: "Frame", desription: "Plywood" },
-        ],
-      };
-
-      const dimensionInfoMOCK = {
-        data: [
-          { title: "Dimension", desription: "W82.7' x D89.8' x H47.2'" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-          { title: "Product Weight", desription: "179.5 lbs" },
-        ],
-        img: dimensionImgName,
-      };
-
-      const modifierInfoMOCK = {
-        data: [
-          {
-            title: "Model",
-            values: [
-              { name: "Storm Gray", add_variant_Id: 1 },
-              { name: "Snow", add_variant_Id: 2 },
-            ],
-          },
-          {
-            title: "Size",
-            values: [
-              { name: "Queen", add_variant_Id: 1 },
-              { name: "Middle", add_variant_Id: 2 },
-              { name: "King", add_variant_Id: 3 },
-            ],
-          },
-          {
-            title: "Material",
-            values: [
-              {
-                name: "Indigo Blue",
-                fabric: "80% poliester",
-                care: "take care boy",
-                add_variant_Id: 1,
-                img: "",
-              },
-              {
-                name: "Ivory Beige",
-                fabric: "80% poliester, 20% linen",
-                care: "something washing",
-                add_variant_Id: 2,
-                img: "",
-              },
-              {
-                name: "Ivory White",
-                fabric: "80% poliester, 10% nylon",
-                care: "something washing2222",
-                add_variant_Id: 3,
-                img: "",
-              },
-              {
-                name: "Ocean Blue",
-                fabric: "88% poliester, 20% linen",
-                care: "something washing33333",
-                add_variant_Id: 4,
-                img: "",
-              },
-              {
-                name: "Forest Green",
-                fabric: "100% poliester",
-                care: "something washing3333312123",
-                add_variant_Id: 5,
-                img: "",
-              },
-            ],
-          },
-
-          {
-            tittle: "Quantity",
-            values: [
-              { name: "Single", add_variant_Id: 1 },
-              { name: "Set of 2", add_variant_Id: 2 },
-            ],
-          },
-        ],
-      };
+      // it's for testing
+      const materialInfo = JSON.parse(materialInfoMOCK);
+      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
+      const modifierInfo = JSON.parse(modifierInfoMOCK);
 
       furniture.update({
         name,
-        rating,
         description,
-        price,
-        material_info,
-        // it is MOCK data
-        dimension_info: dimensionInfoMOCK,
-        modifier_info,
+        price: Number(price),
+        material_info: materialInfo,
+        dimension_info: dimensionInfo,
+        modifier_info: modifierInfo,
         img: filesNames,
       });
 

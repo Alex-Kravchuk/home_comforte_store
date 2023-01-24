@@ -33,7 +33,7 @@ module.exports = function (req, res, next) {
       modifier_info;
 
     if (!allDataAreGiven) {
-      return next(ApiError.requestDataAreNotDefined(errorSource));
+      return next(ApiError.requestDataAreNotDefined(null, errorSource));
     }
 
     if (!img || !dimension_img) {

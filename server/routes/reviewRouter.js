@@ -14,6 +14,12 @@ router.get(
   reviewController.getAllFurnitureReviews
 );
 
+router.get(
+  "/user_id/:id",
+  checkCorrectIDMiddleware("review"),
+  reviewController.getAllUserReviews
+);
+
 router.get("/:id", checkCorrectIDMiddleware("review"), reviewController.getOne);
 
 router.delete(

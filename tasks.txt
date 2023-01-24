@@ -1,22 +1,27 @@
 ### SERVER
 	1. Testing controllers:
-		1.1 userController	OK
+		1.1 userController	---> OK
 
-			1.1.1 checkUserMiddleware / role checking / OK
+			1.1.1 checkUserMiddleware / role checking / ---> OK
 			1.1.2 why after decode JSON we have object with *dataValues* and *_previusDataValues*?
 					because these fields has user object from postgresql db
-					
-		1.2 brandController
-		1.3 typeController
-		1.4 reviewController
-		1.5 ratingController
-		1.6 additionalVatiantController
-		1.7 basketController
-		1.8 basketFurnitureController
-		1.9 furnitureController
-		1.10 perchaseHistoryController
 
+		1.2 brandController ---> OK
+		1.3 typeController --->	OK
+		1.4 reviewController ---> OK
+		1.5 ratingController ---> OK
+			note: In my opinion, a better way to implement the rating logic was to upadate 
+			      the furniture object in the database immediately after creating the rating object, which I did
+		1.6 additionalVatiantController ---> OK
+		1.7 basketController ---> OK
+		1.8 basketFurnitureController ---> OK
+		1.9 furnitureController ---> OK
+			1.9.1 when a data will gets in JSON.stringify forma I need to use JSON.parse
+			1.9.2 if those data will have img I think I need to use some function for it
+			1.9.3 don't forget about "material_img", "dimension_img"
+		1.10 purchaseHistoryController ---> OK
 
+		#### DON'T FORGET IN ALL OF CONTROLLERS ABOUT MOCK DATAS ####
 
 
 ### CLIENT
