@@ -1,3 +1,4 @@
+import App from "../App";
 import Home from "../components/pages/home/Home";
 import User from "../components/pages/user/User";
 import Brand from "../components/pages/brand/Brand";
@@ -13,73 +14,21 @@ import {
   PRODUCT_ROUTE,
   PROFILE_ROUTE,
 } from "../utils/routes_consts";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
-export const routes = [
-  {
-    path: PROFILE_ROUTE,
-    element: <User />,
-  },
-
-  {
-    path: ADMIN_ROUTE,
-    element: <Admin />,
-  },
-
-  {
-    path: BASKET_ROUTE,
-    element: <Basket />,
-  },
-  {
-    path: HOME_ROUTE,
-    element: <Home />,
-  },
-
-  {
-    path: PRODUCT_ROUTE,
-    element: <Product />,
-  },
-
-  {
-    path: BRAND_ROUTE,
-    element: <Brand />,
-  },
-
-  {
-    path: "*",
-    element: <Home />,
-  },
-];
-
-// export const authRoutes = [
-//   {
-//     path: PROFILE_ROUTE,
-//     element: <User />,
-//   },
-
-//   {
-//     path: ADMIN_ROUTE,
-//     element: <Admin />,
-//   },
-
-//   {
-//     path: BASKET_ROUTE,
-//     element: <Basket />,
-//   },
-// ];
-
-// export const publicRoutes = [
-//   {
-//     path: HOME_ROUTE,
-//     element: <Home />,
-//   },
-
-//   {
-//     path: PRODUCT_ROUTE,
-//     element: <Product />,
-//   },
-
-//   {
-//     path: BRAND_ROUTE,
-//     element: <Brand />,
-//   },
-// ];
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path={HOME_ROUTE} element={<App />}>
+      <Route index element={<Home />} />
+      <Route path={PROFILE_ROUTE} element={<User />} />
+      <Route path={ADMIN_ROUTE} element={<Admin />} />
+      <Route path={BASKET_ROUTE} element={<Basket />} />
+      <Route path={PRODUCT_ROUTE} element={<Product />} />
+      <Route path={BRAND_ROUTE} element={<Brand />} />
+    </Route>
+  )
+);

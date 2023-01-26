@@ -1,8 +1,16 @@
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/navbar/NavBar";
+
+import { Container, Wrapper } from "./styles/globalStyles";
+
 function App() {
   return (
-    <div>
-      WORKING
-    </div>
+    <Wrapper>
+      <NavBar />
+      <Container>
+        <Outlet />
+      </Container>
+    </Wrapper>
   );
 }
 

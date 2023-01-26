@@ -7,7 +7,7 @@ import { CustomeButton } from "./User.styled";
 
 
 const User = () => {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
