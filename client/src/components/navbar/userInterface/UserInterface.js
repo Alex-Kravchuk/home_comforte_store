@@ -12,8 +12,9 @@ import {
 import { Link } from "react-router-dom";
 import { ADMIN_ROUTE } from "../../../utils/routes_consts";
 
-const UserInterface = ({ setOpenSearch, mobileScreen }) => {
-  const openSearchFieldHandler = () => {
+const UserInterface = ({ setOpenSearch, mobileScreen,  }) => {
+  const openSearchFieldHandler = (event) => {
+    event.stopPropagation()
     setOpenSearch((state) => !state);
   };
 
@@ -21,7 +22,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
     <UserInterfaceWrapper>
       <UserInterfaceContainer>
         {!mobileScreen && (
-          <UserInterfaceIconContainer>
+          <UserInterfaceIconContainer >
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}

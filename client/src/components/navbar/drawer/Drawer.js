@@ -6,9 +6,12 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { DrawerContainer, DrawerIconContainer } from "./Drawer.styled";
 
 const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
-  const openSearchFieldHandler = () => {
+
+  const openSearchFieldHandler = (event) => {
+    event.stopPropagation();
     setOpenSearch((state) => !state);
   };
+  
   return (
     <DrawerContainer smallScreen={smallScreen}>
       {smallScreen && (

@@ -12,8 +12,8 @@ export const SearchFieldWrapper = styled.div`
   transition: all 0.3s ease;
   height: ${global.searchFieldHeight}px;
 
-  ${({ open }) =>
-    open
+  ${({ opened }) =>
+  opened
       ? css`
           bottom: -${global.searchFieldHeight + 1}px;
         `

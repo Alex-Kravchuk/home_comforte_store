@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import {
   SearchButton,
   SearchFieldContainer,
@@ -6,16 +6,21 @@ import {
   SearchInput,
 } from "./searchField.styled";
 
-import ContentPasteSearchOutlinedIcon from '@mui/icons-material/ContentPasteSearchOutlined';
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseIcon from "@mui/icons-material/Close";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
-const SearchField = ({ open, setOpenSearch }) => {
+const SearchField = ({ opened, setOpenSearch }) => {
+  const searchFieldRef = useRef();
   const closeSearchFieldHandler = () => setOpenSearch(false);
+
+  useClickOutside(searchFieldRef, opened, closeSearchFieldHandler);
+
   return (
-    <SearchFieldWrapper open={open}>
+    <SearchFieldWrapper opened={opened} ref={searchFieldRef}>
       <SearchFieldContainer>
         <SearchButton>
-          <ContentPasteSearchOutlinedIcon />
+          <SearchOutlinedIcon />
         </SearchButton>
 
         <SearchInput placeholder="What do you wont to find?" />

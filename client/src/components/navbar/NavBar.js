@@ -76,7 +76,7 @@ const NavBar = () => {
           </LogoMenuContainer>
         </NavContainer>
         <SearchField
-          open={openSearchField}
+          opened={openSearchField}
           setOpenSearch={setOpenSearchField}
         />
       </RelativeContainer>
