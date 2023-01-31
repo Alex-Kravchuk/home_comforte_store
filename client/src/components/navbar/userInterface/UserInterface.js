@@ -1,11 +1,42 @@
-import React from 'react';
+import React from "react";
 
-const UserInterface = () => {
-	return (
-	  <div>
-		userINTERFACE
-	  </div>
-	)
- }
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+
+import {
+  UserInterfaceContainer,
+  UserInterfaceIconContainer,
+  UserInterfaceWrapper,
+} from "./UserInterface.styled";
+import { Link } from "react-router-dom";
+import { ADMIN_ROUTE } from "../../../utils/routes_consts";
+
+const UserInterface = ({ setOpenSearch, mobileScreen }) => {
+  const openSearchFieldHandler = () => {
+    setOpenSearch((state) => !state);
+  };
+
+  return (
+    <UserInterfaceWrapper>
+      <UserInterfaceContainer>
+        {!mobileScreen && (
+          <UserInterfaceIconContainer>
+            <SearchOutlinedIcon onClick={openSearchFieldHandler} />
+          </UserInterfaceIconContainer>
+        )}
+        <Link to={ADMIN_ROUTE}>
+          <UserInterfaceIconContainer>
+            <PermIdentityOutlinedIcon />
+          </UserInterfaceIconContainer>
+        </Link>
+
+        <UserInterfaceIconContainer>
+          <ShoppingCartOutlinedIcon />
+        </UserInterfaceIconContainer>
+      </UserInterfaceContainer>
+    </UserInterfaceWrapper>
+  );
+};
 
 export default UserInterface;

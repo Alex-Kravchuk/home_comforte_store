@@ -9,24 +9,43 @@ import {
 } from "../../../utils/routes_consts";
 import { MenuContainer, MenuItem, MenuWrapper } from "./Menu.styled";
 
-const Menu = () => {
+const Menu = ({ bigScreen }) => {
   return (
-    <MenuWrapper>
-      <MenuContainer>
-        <Link to={HOME_ROUTE}>
-          <MenuItem>Furniture</MenuItem>
-        </Link>
-        <Link to={ADMIN_ROUTE}>
-          <MenuItem>Brands</MenuItem>
-        </Link>
-        <Link to={PRODUCT_ROUTE}>
-          <MenuItem>Sales</MenuItem>
-        </Link>
-        <Link to={PROFILE_ROUTE}>
-          <MenuItem>More</MenuItem>
-        </Link>
-      </MenuContainer>
-    </MenuWrapper>
+    <>
+      {bigScreen && (
+        <MenuWrapper>
+          <MenuContainer>
+            <Link to={HOME_ROUTE}>
+              <MenuItem>Sofas</MenuItem>
+            </Link>
+            <Link to={ADMIN_ROUTE}>
+              <MenuItem>Chairs</MenuItem>
+            </Link>
+            <Link to={PRODUCT_ROUTE}>
+              <MenuItem>Tables</MenuItem>
+            </Link>
+            <Link to={PROFILE_ROUTE}>
+              <MenuItem>Beds</MenuItem>
+            </Link>
+            <Link to={ADMIN_ROUTE}>
+              <MenuItem>Mirrors</MenuItem>
+            </Link>
+            <Link to={PRODUCT_ROUTE}>
+              <MenuItem>Carpets</MenuItem>
+            </Link>
+            <Link to={PROFILE_ROUTE}>
+              <MenuItem>Closets</MenuItem>
+            </Link>
+            <Link to={PROFILE_ROUTE}>
+              <MenuItem>Bags</MenuItem>
+            </Link>
+            <Link to={PROFILE_ROUTE}>
+              <MenuItem>Windows</MenuItem>
+            </Link>
+          </MenuContainer>
+        </MenuWrapper>
+      )}
+    </>
   );
 };
 

@@ -1,13 +1,19 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
+
+
+
+  * {
+    margin: 0;
+    padding: 0;
+    
+  }
 
   body {
     background-color: #f9faf7;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
 `;
 

@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
-import { getResponsiveSize } from "../../../helpers/getResponsiveSize";
-import { logoSizeIndex, fontSizeIndex } from "../../../utils/css_size_consts";
+import { sizes } from "../../../utils/css_size_consts";
+
+const { global, m, xs, s, xl } = sizes;
 
 export const LogoWrapper = styled.div`
-  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
 
   a {
     text-decoration: none;
     color: black;
+  }
+
+  @media (max-width: ${xl.width}px) {
+    flex: 1 1 60%;
   }
 `;
 
@@ -17,17 +24,26 @@ export const LogoTitle = styled.div`
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
-  font-size: ${getResponsiveSize(fontSizeIndex)};
+  margin: 10px 0px;
+  font-size: ${global.logoFontSize}px;
+
+  @media (max-width: ${m.width}px) {
+    font-size: ${m.logoFontSize}px;
+  }
+
+  @media (max-width: ${s.width}px) {
+    font-size: ${s.logoFontSize}px;
+  }
+
+  @media (max-width: ${xs.width}px) {
+    font-size: ${xs.logoFontSize}px;
+  }
 `;
 
 export const LogoTitlePart = styled.div``;
+
 export const LogoContainer = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-`;
-export const ImgContainer = styled.img`
-  width: ${getResponsiveSize(logoSizeIndex)};
-  height: ${getResponsiveSize(logoSizeIndex)};
 `;

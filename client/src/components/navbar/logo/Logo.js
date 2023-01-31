@@ -1,13 +1,11 @@
 import React from "react";
 import {
-  ImgContainer,
-  LogoContainer,
   LogoTitle,
   LogoTitlePart,
   LogoWrapper,
+  LogoContainer,
 } from "./Logo.styled";
 
-import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { HOME_ROUTE } from "../../../utils/routes_consts";
 
@@ -16,10 +14,8 @@ const Logo = () => {
     <LogoWrapper>
       <Link to={HOME_ROUTE}>
         <LogoContainer>
-          <ImgContainer src={logo} alt="logo" />
           <LogoTitle>
-            <LogoTitlePart>HOME</LogoTitlePart>
-            <LogoTitlePart>comfort</LogoTitlePart>
+            <LogoTitlePart>HOME COMFORT</LogoTitlePart>
           </LogoTitle>
         </LogoContainer>
       </Link>
