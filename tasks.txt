@@ -26,3 +26,13 @@
 
 ### CLIENT
 
+	1. Routing
+		1.1 To create all of correct routes
+
+	2. Layout of pages
+		2.2 NavBar
+			2.2.1 Responsive design ---> OK
+			2.2.2 Search field which hover under NavBar ---> OK
+			2.2.3 Side menu ---> NOT OK
+			2.2.4 Search field should to hide when click on the search button //commit "Adjusted the click 	logic outside the search field component."
+

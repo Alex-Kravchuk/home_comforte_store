@@ -4,7 +4,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import { DrawerContainer, DrawerIconContainer } from "./Drawer.styled";
-import SideMenu from "./SideMenu/SideMenu";
+import SideMenu from "../sideMenu/SideMenu";
 
 const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
   const [sideMenuOpened, setSideMenuOpened] = useState(false);

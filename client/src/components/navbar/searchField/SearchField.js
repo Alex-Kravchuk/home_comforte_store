@@ -1,4 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+
+import { Form } from "react-router-dom";
+
+import CloseIcon from "@mui/icons-material/Close";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+
 import {
   SearchButton,
   SearchFieldContainer,
@@ -6,10 +12,8 @@ import {
   SearchInput,
 } from "./searchField.styled";
 
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import CloseIcon from "@mui/icons-material/Close";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { Form } from "react-router-dom";
+
 import { SEARCH_ROUTE } from "../../../utils/routes_consts";
 
 const SearchField = ({ opened, setOpenSearch }) => {
