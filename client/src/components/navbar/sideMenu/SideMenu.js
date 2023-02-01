@@ -1,32 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideMenuHeader from "./header/SideMenuHeader";
 import SideMenuMain from "./main/SideMenuMain";
 
 import { Drawer } from "antd";
 import {
-  CustomDrawer,
+  drawerBodyStyles,
   DrawerContentContainer,
-  drawerContentSizeConfig,
   DrawerContentWrapper,
 } from "./SideMenu.styled";
 
-const SideMenu = ({ opened, closeHandler }) => {
-  const closeSideMenuHandler = () => closeHandler(false);
+import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
 
-  const widthCanBe = window.innerWidth > 475 ? "45vw" : "85vw";
+import CloseIcon from "@mui/icons-material/Close";
+import { sizes } from "../../../utils/css_size_consts";
+import SideMenuFooter from "./footer/SideMenuFooter";
+
+const SideMenu = ({ opened, closeHandler }) => {
+  const [drawerWidth, setDrawerDidwth] = useState(380);
+  const viewport = useGetWindowSize();
+
+  useEffect(() => {
+    if (viewport < 425) {
+      setDrawerDidwth(sizes.global.sideMenuSizeMobile);
+    } else {
+      setDrawerDidwth(sizes.global.sideMenuSize);
+    }
+  }, [viewport]);
+
   return (
-    <CustomDrawer
-      // title={<SideMenuHeader />}
-      width={widthCanBe}
+    <Drawer
+      width={drawerWidth}
+      bodyStyle={drawerBodyStyles}
       placement="left"
       key="left"
       open={opened}
-      onClose={closeSideMenuHandler}
+      onClose={closeHandler}
+      closeIcon={<CloseIcon />}
     >
       <DrawerContentWrapper>
-        <DrawerContentContainer>HUESOS</DrawerContentContainer>
+        <DrawerContentContainer>
+          <SideMenuMain />
+          <SideMenuFooter />
+        </DrawerContentContainer>
       </DrawerContentWrapper>
-    </CustomDrawer>
+    </Drawer>
   );
 };
 

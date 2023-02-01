@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { sizes } from "../utils/css_size_consts";
 
 export const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
@@ -24,4 +25,16 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   width: 75%;
   margin: 0 auto;
+
+  @media (max-width: ${sizes.xxl.width}px) {
+    width: 85%;
+  }
+
+  @media (max-width: ${sizes.xl.width}px) {
+    width: 90%;
+  }
+
+  @media (max-width: ${sizes.l.width}px) {
+    width: 95%;
+  }
 `;

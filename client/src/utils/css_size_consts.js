@@ -7,11 +7,19 @@ export const sizes = {
     headerHeightWhenOnTopPage: 70,
     headerHeightWhenScrollDown: 50,
     searchFieldHeight: 50,
+    sideMenuSize: 380,
+    sideMenuSizeMobile: "85vw",
   },
 
   xs: { width: viewport_sizes.xs, logoFontSize: 14, svgIconSize: 20 },
   s: { width: viewport_sizes.s, logoFontSize: 16, svgIconSize: 23 },
-  m: { width: viewport_sizes.m, logoFontSize: 20, svgIconSize: 30 },
+  m: {
+    width: viewport_sizes.m,
+    logoFontSize: 20,
+    svgIconSize: 30,
+    sideMenuLinkFontSize: 22,
+    sideMenuSubLinkFontSize: 20,
+  },
   l: {
     width: viewport_sizes.l,
     fontSize: 1.2,
@@ -26,6 +34,8 @@ export const sizes = {
     logoSize: 1.5,
     navLinkFontSize: 0.75,
     svgIconSize: 25,
+    sideMenuLinkFontSize: 24,
+    sideMenuSubLinkFontSize: 22,
   },
   xxl: {
     width: viewport_sizes.xxl,

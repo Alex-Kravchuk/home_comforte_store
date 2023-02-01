@@ -1,21 +1,15 @@
 import { Drawer } from "antd";
 import styled from "styled-components";
 
-// export const drawerContentSizeConfig = {
-//   sx: {
-//     width: {
-//       xs: "85vw",
-//       sm: "55vw",
-//       md: "45vw",
-//     },
-//   },
-// };
+// .css-dev-only-do-not-override-ixblex
+// .ant-drawer
+// .ant-drawer-body
 
-export const CustomDrawer = styled(Drawer)`
-  &.ant-drawer-content-wrapper {
-    width: 80vw;
-  }
+export const drawerBodyStyles = {
+  padding: 0,
+};
+
+export const DrawerContentWrapper = styled.div`
+  font-family: "Lato", sans-serif;
 `;
-
-export const DrawerContentWrapper = styled.div``;
 export const DrawerContentContainer = styled.div``;

@@ -36,12 +36,6 @@ const Menu = ({ bigScreen }) => {
             <Link to={PROFILE_ROUTE}>
               <MenuItem>Closets</MenuItem>
             </Link>
-            <Link to={PROFILE_ROUTE}>
-              <MenuItem>Bags</MenuItem>
-            </Link>
-            <Link to={PROFILE_ROUTE}>
-              <MenuItem>Windows</MenuItem>
-            </Link>
           </MenuContainer>
         </MenuWrapper>
       )}

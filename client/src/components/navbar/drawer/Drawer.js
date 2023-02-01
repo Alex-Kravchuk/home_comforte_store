@@ -14,7 +14,15 @@ const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
     setOpenSearch((state) => !state);
   };
 
-  const openSideMenuHandler = () => setSideMenuOpened(true);
+  // I set overflow value because something wrong with Drawer component from ANTD
+  const openSideMenuHandler = () => {
+    document.body.style.overflow = "hidden";
+    setSideMenuOpened(true);
+  };
+  const closeSideMenuHandler = () => {
+    document.body.style.overflow = "unset";
+    setSideMenuOpened(false);
+  };
 
   return (
     <DrawerContainer smallScreen={smallScreen}>
@@ -30,7 +38,7 @@ const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
           )}
         </>
       )}
-      <SideMenu opened={sideMenuOpened} closeHandler={setSideMenuOpened} />
+      <SideMenu opened={sideMenuOpened} closeHandler={closeSideMenuHandler} />
     </DrawerContainer>
   );
 };
