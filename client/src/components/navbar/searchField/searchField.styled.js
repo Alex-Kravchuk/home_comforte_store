@@ -30,6 +30,13 @@ export const SearchFieldContainer = styled.div`
   width: 75%;
   height: 100%;
 
+  form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   @media (max-width: ${xxl.width}px) {
     width: 85%;
   }
@@ -42,11 +49,14 @@ export const SearchFieldContainer = styled.div`
     width: 95%;
   }
 `;
-export const SearchButton = styled.div`
+export const SearchButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 15px;
+  border: none;
+  background: none;
+
   svg {
     height: 25px;
     width: 25px;
@@ -59,6 +69,7 @@ export const SearchButton = styled.div`
 `;
 
 export const SearchInput = styled.input`
+  background: none;
   border: none;
   width: 100%;
   height: 50%;
@@ -66,5 +77,12 @@ export const SearchInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+
+  &[type="search"]::-webkit-search-decoration,
+  &[type="search"]::-webkit-search-cancel-button,
+  &[type="search"]::-webkit-search-results-button,
+  &[type="search"]::-webkit-search-results-decoration {
+    display: none;
   }
 `;

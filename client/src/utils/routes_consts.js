@@ -4,3 +4,4 @@ export const PROFILE_ROUTE = "/user/account";
 export const BRAND_ROUTE = "/brands";
 export const BASKET_ROUTE = "/basket";
 export const ADMIN_ROUTE = "/admin";
+export const SEARCH_ROUTE = "/search"

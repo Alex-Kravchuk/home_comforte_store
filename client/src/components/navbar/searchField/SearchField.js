@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   SearchButton,
   SearchFieldContainer,
@@ -9,19 +9,31 @@ import {
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import { useClickOutside } from "../../../hooks/useClickOutside";
+import { Form } from "react-router-dom";
+import { SEARCH_ROUTE } from "../../../utils/routes_consts";
 
 const SearchField = ({ opened, setOpenSearch }) => {
+  const [searchRequest, setSearchRequest] = useState("");
   const searchFieldRef = useRef();
   const inputFieldRef = useRef();
   const closeSearchFieldHandler = () => setOpenSearch(false);
+  useClickOutside(searchFieldRef, opened, closeSearchFieldHandler);
 
-  const sendSearchRequest = () => {
-    // this is a function for handling search requst
-    // should use with form
-    setOpenSearch(false);
+  const searchRequestHandler = (event) => {
+    setSearchRequest(event.target.value);
   };
 
-  useClickOutside(searchFieldRef, opened, closeSearchFieldHandler);
+  const onSubmitHandler = (event) => {
+    setOpenSearch(false);
+    setSearchRequest("");
+  };
+
+  const onKeyDownHandler = (event) => {
+    if (event.code === "Enter") {
+      setOpenSearch(false);
+      setSearchRequest("");
+    }
+  };
 
   useEffect(() => {
     if (opened) {
@@ -34,15 +46,23 @@ const SearchField = ({ opened, setOpenSearch }) => {
   return (
     <SearchFieldWrapper opened={opened} ref={searchFieldRef}>
       <SearchFieldContainer>
-        <SearchButton>
-          <SearchOutlinedIcon onClick={sendSearchRequest} />
-        </SearchButton>
-
-        <SearchInput
-          placeholder="What do you wont to find?"
-          ref={inputFieldRef}
-        />
-        <CloseIcon onClick={closeSearchFieldHandler} />
+        <Form
+          action={SEARCH_ROUTE}
+          onSubmit={onSubmitHandler}
+          onKeyDown={onKeyDownHandler}
+        >
+          <SearchButton type="submit">
+            <SearchOutlinedIcon />
+          </SearchButton>
+          <SearchInput
+            placeholder="What do you wont to find?"
+            ref={inputFieldRef}
+            type="search"
+            value={searchRequest}
+            onChange={searchRequestHandler}
+          />
+          <CloseIcon onClick={closeSearchFieldHandler} />
+        </Form>
       </SearchFieldContainer>
     </SearchFieldWrapper>
   );

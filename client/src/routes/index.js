@@ -13,12 +13,14 @@ import {
   BASKET_ROUTE,
   PRODUCT_ROUTE,
   PROFILE_ROUTE,
+  SEARCH_ROUTE,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import Search from "../components/pages/search/Search";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +31,7 @@ export const router = createBrowserRouter(
       <Route path={BASKET_ROUTE} element={<Basket />} />
       <Route path={PRODUCT_ROUTE} element={<Product />} />
       <Route path={BRAND_ROUTE} element={<Brand />} />
+      <Route path={SEARCH_ROUTE} element={<Search />} />
     </Route>
   )
 );
