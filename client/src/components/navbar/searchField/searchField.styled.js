@@ -13,7 +13,7 @@ export const SearchFieldWrapper = styled.div`
   height: ${global.searchFieldHeight}px;
 
   ${({ opened }) =>
-  opened
+    opened
       ? css`
           bottom: -${global.searchFieldHeight + 1}px;
         `
@@ -62,6 +62,7 @@ export const SearchInput = styled.input`
   border: none;
   width: 100%;
   height: 50%;
+  font-size: 15px;
 
   &:focus {
     outline: none;
