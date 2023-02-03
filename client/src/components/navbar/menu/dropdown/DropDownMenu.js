@@ -6,9 +6,15 @@ import {
   DropdownMenuWrapper,
 } from "./DropDownMenu.styled";
 
-const DropDownMenu = ({ menuItems }) => {
+const DropDownMenu = ({ menuItems, setCurrentHover, id }) => {
+  const setCurrentHoverHandler = () => setCurrentHover(id);
+  const setNullCurrentHoverHandler = () => setCurrentHover(0);
+  
   return (
-    <DropdownMenuWrapper>
+    <DropdownMenuWrapper
+      onMouseMove={setCurrentHoverHandler}
+      onMouseLeave={setNullCurrentHoverHandler}
+    >
       <DropdownMenuContainer>
         <DropdownMenuLinkContainer>
           {menuItems.map(({ key, label }) => (

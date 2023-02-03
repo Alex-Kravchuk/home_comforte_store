@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { getResponsiveSize } from "../../../helpers/getResponsiveSize";
-import {  sizes } from "../../../utils/css_size_consts";
+import { sizes } from "../../../utils/css_size_consts";
 
 export const MenuWrapper = styled.div`
   height: 100%;
@@ -22,8 +22,6 @@ export const MenuWrapper = styled.div`
   @media (max-width: 768px) {
     font-size: ${getResponsiveSize(sizes.xl.navLinkFontSize)};
   }
-
-
 `;
 export const MenuContainer = styled.div`
   height: 100%;
@@ -37,6 +35,9 @@ export const MenuItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  border-bottom: ${({ activeMenuItem }) =>
+    activeMenuItem ? "2px solid black" : "none"};
 
   &:hover {
     border-bottom: 2px solid black;

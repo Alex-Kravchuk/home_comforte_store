@@ -27,6 +27,7 @@ export const sizes = {
     navLinkFontSize: 0.75,
     svgIconSize: 1.4,
     headerHeight: 50,
+    contentContainerWidth: 95,
   },
   xl: {
     width: viewport_sizes.xl,
@@ -36,6 +37,7 @@ export const sizes = {
     svgIconSize: 25,
     sideMenuLinkFontSize: 24,
     sideMenuSubLinkFontSize: 22,
+    contentContainerWidth: 90,
   },
   xxl: {
     width: viewport_sizes.xxl,
@@ -43,6 +45,7 @@ export const sizes = {
     logoSize: 1.5,
     navLinkFontSize: 0.8,
     svgIconSize: 1.3,
+    contentContainerWidth: 85,
   },
   xxxl: {
     width: viewport_sizes.xxxl,

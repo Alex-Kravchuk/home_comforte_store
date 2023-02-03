@@ -27,14 +27,14 @@ export const Container = styled.div`
   margin: 0 auto;
 
   @media (max-width: ${sizes.xxl.width}px) {
-    width: 85%;
+    width: ${sizes.xxl.contentContainerWidth}%;
   }
 
   @media (max-width: ${sizes.xl.width}px) {
-    width: 90%;
+    width: ${sizes.xl.contentContainerWidth}%;
   }
 
   @media (max-width: ${sizes.l.width}px) {
-    width: 95%;
+    width: ${sizes.l.contentContainerWidth}%;
   }
 `;

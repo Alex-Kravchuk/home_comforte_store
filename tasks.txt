@@ -47,6 +47,6 @@
 
 		2.2 Drawer
 			2.2.1 To fix scroll when drawer is open _FIXED
+			2.2.2 Maybe use for side menu "Menu" component from ANTD
 
 		
-

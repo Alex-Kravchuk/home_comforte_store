@@ -1,20 +1,15 @@
 import { Dropdown } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  ADMIN_ROUTE,
-  HOME_ROUTE,
-  PRODUCT_ROUTE,
-  PROFILE_ROUTE,
-} from "../../../utils/routes_consts";
 import { MenuContainer, MenuItem, MenuWrapper } from "./Menu.styled";
 import DropDownMenu from "./dropdown/DropDownMenu";
 
-import { DropdownMenuItemsSofa } from "../../../assets/mock/dropdownMenuItemsMOCK";
 import { menu_config } from "../../../utils/menu_config";
 
 const Menu = ({ bigScreen }) => {
+  const [currentHover, setCurrentHover] = useState(0);
+  
   return (
     <>
       {bigScreen && (
@@ -22,13 +17,20 @@ const Menu = ({ bigScreen }) => {
           <MenuContainer>
             {menu_config.map(({ id, label, link, dropdownItems }) => (
               <Dropdown
+                placement="bottom"
                 key={id}
                 dropdownRender={() => (
-                  <DropDownMenu menuItems={dropdownItems} />
+                  <DropDownMenu
+                    id={id}
+                    menuItems={dropdownItems}
+                    setCurrentHover={setCurrentHover}
+                  />
                 )}
               >
                 <Link to={link}>
-                  <MenuItem>{label}</MenuItem>
+                  <MenuItem activeMenuItem={id === currentHover}>
+                    {label}
+                  </MenuItem>
                 </Link>
               </Dropdown>
             ))}
