@@ -11,17 +11,17 @@ import {
   SideMenuFooterWrapper,
 } from "./SideMenuFooter.styled";
 
-const SideMenuFooter = () => {
+const SideMenuFooter = ({ closeHandler }) => {
   return (
     <SideMenuFooterWrapper>
       <SideMenuFooterContainer>
-        <SideMenuFooterItem>
+        <SideMenuFooterItem onClick={closeHandler}>
           <Link to={SHOWROOM_ROUTE}>Showrooms</Link>
         </SideMenuFooterItem>
-        <SideMenuFooterItem>
+        <SideMenuFooterItem onClick={closeHandler}>
           <Link to={CONTACT_ROUTE}>Contact</Link>
         </SideMenuFooterItem>
-        <SideMenuFooterItem>
+        <SideMenuFooterItem onClick={closeHandler}>
           <Link to={ABOUT_ROUTE}>About us</Link>
         </SideMenuFooterItem>
       </SideMenuFooterContainer>

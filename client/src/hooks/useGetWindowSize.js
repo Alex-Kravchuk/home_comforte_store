@@ -10,6 +10,6 @@ export const useGetWindowSize = () => {
     window.addEventListener("resize", resizeListenter);
     return () => window.removeEventListener("resize", resizeListenter);
   }, [size]);
-  
-  return size;
+
+  return size || window.innerWidth;
 };

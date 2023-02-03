@@ -24,6 +24,8 @@ const NavBar = () => {
   const mobileScreen = viewport < viewport_sizes.ml;
   const smallScreen = viewport <= viewport_sizes.xl;
   const bigScreen = viewport > viewport_sizes.xl;
+  console.log('screen', viewport);
+  
 
   useEffect(() => {
     const scrollListener = () => {

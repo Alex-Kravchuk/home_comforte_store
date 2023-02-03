@@ -8,11 +8,14 @@ import {
   SideMenuSubItem,
 } from "./SideMenuMain.styled";
 
-
 const SideMenuMain = () => {
   return (
     <SideMenuContainer>
-      <Collapse accordion expandIconPosition="end" ghost>
+      <Collapse
+        accordion
+        expandIconPosition="end"
+        ghost
+      >
         {sideMenuItems.map((item) => (
           <SideMenuItem header={item.title} key={item.id}>
             {item.children.map((child) => (

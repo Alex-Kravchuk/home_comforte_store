@@ -26,13 +26,27 @@
 
 ### CLIENT
 
+///// In the future: 
+					1. To add another currency
+
 	1. Routing
 		1.1 To create all of correct routes
 
 	2. Layout of pages
-		2.2 NavBar
-			2.2.1 Responsive design ---> OK
-			2.2.2 Search field which hover under NavBar ---> OK
-			2.2.3 Side menu ---> NOT OK
-			2.2.4 Search field should to hide when click on the search button //commit "Adjusted the click 	logic outside the search field component."
+		2.1 NavBar
+			2.1.1 Responsive design ---> OK
+			2.1.2 Search field which hover under NavBar ---> OK
+			2.1.3 Side menu ---> NOT OK
+			2.1.4 Search field should to hide when click on the search button //commit "Adjusted the click 	logic outside the search field component." ---> OK
+
+			2.1.5 Nav bar and search field not scrolling follow when input focus() --- OK
+
+			03.02.2023
+			2.1.6 To add dropdown for each menu item in desktop screen
+			2.1.7 To add button for scrolling up of the page
+
+		2.2 Drawer
+			2.2.1 To fix scroll when drawer is open _FIXED
+
+		
 
