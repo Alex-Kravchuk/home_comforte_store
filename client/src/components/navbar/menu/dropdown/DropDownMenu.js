@@ -1,15 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
+  CategoriesTitle,
+  DropdownImgItem,
   DropdownMenuContainer,
   DropdownMenuImgContainer,
+  DropdownMenuLink,
   DropdownMenuLinkContainer,
+  DropdownMenuLinkList,
   DropdownMenuWrapper,
 } from "./DropDownMenu.styled";
 
-const DropDownMenu = ({ menuItems, setCurrentHover, id }) => {
+const DropDownMenu = ({ menuItems, setCurrentHover, id, img }) => {
   const setCurrentHoverHandler = () => setCurrentHover(id);
   const setNullCurrentHoverHandler = () => setCurrentHover(0);
-  
+
   return (
     <DropdownMenuWrapper
       onMouseMove={setCurrentHoverHandler}
@@ -17,14 +22,19 @@ const DropDownMenu = ({ menuItems, setCurrentHover, id }) => {
     >
       <DropdownMenuContainer>
         <DropdownMenuLinkContainer>
-          {menuItems.map(({ key, label }) => (
-            <div key={key}>
-              <a>{label}</a>
-            </div>
-          ))}
+          <CategoriesTitle>Categories</CategoriesTitle>
+          <DropdownMenuLinkList>
+            {menuItems.map(({ key, label }) => (
+              <DropdownMenuLink key={key}>
+                <Link>{label}</Link>
+              </DropdownMenuLink>
+            ))}
+          </DropdownMenuLinkList>
         </DropdownMenuLinkContainer>
 
-        <DropdownMenuImgContainer></DropdownMenuImgContainer>
+        <DropdownMenuImgContainer>
+          <DropdownImgItem src={img} alt="img" />
+        </DropdownMenuImgContainer>
       </DropdownMenuContainer>
     </DropdownMenuWrapper>
   );

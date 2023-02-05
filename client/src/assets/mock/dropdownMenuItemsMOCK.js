@@ -15,6 +15,46 @@ export const DropdownMenuItemsSofa = [
     key: "4",
     label: "Castler TM",
   },
+  {
+    key: "5",
+    label: "Section",
+  },
+  {
+    key: "6",
+    label: "Modular",
+  },
+  {
+    key: "7",
+    label: "Castler TM",
+  },
+  {
+    key: "8",
+    label: "Section",
+  },
+  {
+    key: "9",
+    label: "Modular",
+  },
+  {
+    key: "10",
+    label: "Castler TM",
+  },
+  {
+    key: "1",
+    label: "All chairs",
+  },
+  {
+    key: "2",
+    label: "Luxary",
+  },
+  {
+    key: "3",
+    label: "Office",
+  },
+  {
+    key: "4",
+    label: "Lulu&Georgia TM",
+  },
 ];
 export const DropdownMenuItemsChairs = [
   {

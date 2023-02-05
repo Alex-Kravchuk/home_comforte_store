@@ -9,13 +9,13 @@ import { menu_config } from "../../../utils/menu_config";
 
 const Menu = ({ bigScreen }) => {
   const [currentHover, setCurrentHover] = useState(0);
-  
+
   return (
     <>
       {bigScreen && (
         <MenuWrapper>
           <MenuContainer>
-            {menu_config.map(({ id, label, link, dropdownItems }) => (
+            {menu_config.map(({ id, label, link, dropdownItems, menuImg }) => (
               <Dropdown
                 placement="bottom"
                 key={id}
@@ -24,6 +24,7 @@ const Menu = ({ bigScreen }) => {
                     id={id}
                     menuItems={dropdownItems}
                     setCurrentHover={setCurrentHover}
+                    img={menuImg}
                   />
                 )}
               >

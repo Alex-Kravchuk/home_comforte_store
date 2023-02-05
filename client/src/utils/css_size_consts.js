@@ -9,6 +9,9 @@ export const sizes = {
     searchFieldHeight: 50,
     sideMenuSize: 380,
     sideMenuSizeMobile: "85vw",
+    // temprary
+    imgWidth: 12.5,
+    imgHeight: 8.5,
   },
 
   xs: { width: viewport_sizes.xs, logoFontSize: 14, svgIconSize: 20 },
