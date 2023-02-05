@@ -15,13 +15,13 @@ import {
   SEARCH_ROUTE,
 } from "./routes_consts";
 
-import BedImg from "../assets/img/bed_example.jpg";
-import SofaImg from "../assets/img/sofa_example.jpg";
-import ChairsImg from "../assets/img/chairs_example.jpg";
-import TableImg from "../assets/img/table_example.jpg";
-import MirrorImg from "../assets/img/mirror_example.jpeg";
-import CarpetImg from "../assets/img/carpet_example.jpg";
-import ClosetImg from "../assets/img/closet_example.jpg";
+import BedImg from "../assets/img/menu/bed_example.jpg";
+import SofaImg from "../assets/img/menu/sofa_example.jpg";
+import ChairsImg from "../assets/img/menu/chairs_example.jpg";
+import TableImg from "../assets/img/menu/table_example.jpg";
+import MirrorImg from "../assets/img/menu/mirror_example.jpeg";
+import CarpetImg from "../assets/img/menu/carpet_example.jpg";
+import ClosetImg from "../assets/img/menu/closet_example.jpg";
 
 export const menu_config = [
   {

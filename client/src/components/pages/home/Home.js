@@ -1,7 +1,18 @@
 import React from "react";
 
+import HomeMain from "./main/HomeMain";
+import HomeHeader from "./header/HomeHeader";
+import HomeFooter from "./footer/HomeFooter";
+import { HomeWrapper } from "./Home.styled";
+
 const Home = () => {
-  return <div>Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100Home lorem*100</div>;
+  return (
+    <HomeWrapper>
+      <HomeHeader />
+      <HomeMain />
+      <HomeFooter />
+    </HomeWrapper>
+  );
 };
 
 export default Home;

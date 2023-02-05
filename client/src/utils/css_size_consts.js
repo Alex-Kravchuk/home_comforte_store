@@ -22,6 +22,8 @@ export const sizes = {
     svgIconSize: 30,
     sideMenuLinkFontSize: 22,
     sideMenuSubLinkFontSize: 20,
+    homeHeaderInscriptionTitleFontSize: 2,
+    homeHeaderInscriptionSubTitleFontSize: 1.2,
   },
   l: {
     width: viewport_sizes.l,
@@ -52,7 +54,7 @@ export const sizes = {
   },
   xxxl: {
     width: viewport_sizes.xxxl,
-    fontSize: 1,
+    fontSize: 1.6,
     logoSize: 1.5,
     navLinkFontSize: 0.75,
     svgIconSize: 1,

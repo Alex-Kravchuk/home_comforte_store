@@ -1,15 +1,15 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { sizes } from "../utils/css_size_consts";
 
-export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
+import HomeImg1 from "../assets/img/home_img_1.jpg";
 
+export const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
 
 
   * {
     margin: 0;
     padding: 0;
-    
   }
 
   body {
@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 10000px;
 `;
+
 export const Container = styled.div`
   width: 75%;
   margin: 0 auto;

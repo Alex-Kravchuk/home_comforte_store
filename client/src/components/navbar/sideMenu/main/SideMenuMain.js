@@ -1,6 +1,8 @@
 import React from "react";
 
-import { sideMenuItems } from "../../../../assets/mock/sideMenuItemsMOCK";
+import {
+  sideMenuItems,
+} from "../../../../assets/mock/sideMenuItemsMOCK";
 import { Collapse } from "antd";
 import {
   SideMenuContainer,

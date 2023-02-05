@@ -31,3 +31,4 @@ export const sideMenuItems = [
     children: ["All closets", "Luxary", "Kitchen", "Lulu&Georgia TM"],
   },
 ];
+
