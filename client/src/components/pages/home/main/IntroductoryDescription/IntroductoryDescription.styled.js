@@ -5,17 +5,17 @@ import { viewport_sizes } from "../../../../../utils/vieport_size_consts";
 export const { l, m } = viewport_sizes;
 
 export const IntrDescrWrapper = styled.div`
-  margin-top: 35px;
+  margin: 35px 0;
 
   @media (max-width: ${l}px) {
-    margin-top: 25px;
+    margin: 25px 0;
   }
 
   @media (max-width: ${m}px) {
-    margin-top: 15px;
+    margin: 15px 0;
   }
 `;
-export const IntrDescrContainer = styled.div``;
+
 export const IntrDescrTitle = styled.h2`
   color: #1e1f24;
   text-align: center;

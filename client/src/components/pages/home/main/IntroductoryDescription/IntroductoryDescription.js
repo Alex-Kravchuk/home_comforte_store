@@ -1,6 +1,6 @@
 import React from "react";
+import { Container } from "../../../../../styles/globalStyles";
 import {
-  IntrDescrContainer,
   IntrDescrMadeIn,
   IntrDescrSubTitle,
   IntrDescrTitle,
@@ -10,7 +10,7 @@ import {
 const IntroductoryDescription = () => {
   return (
     <IntrDescrWrapper>
-      <IntrDescrContainer>
+      <Container>
         <IntrDescrTitle>
           Amazingly simple and exquisitely beautiful
         </IntrDescrTitle>
@@ -19,7 +19,7 @@ const IntroductoryDescription = () => {
           Made of the highest quality materials.
         </IntrDescrSubTitle>
         <IntrDescrMadeIn>MADE IN UKRAINE</IntrDescrMadeIn>
-      </IntrDescrContainer>
+      </Container>
     </IntrDescrWrapper>
   );
 };

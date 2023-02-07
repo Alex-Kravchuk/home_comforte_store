@@ -1,16 +1,16 @@
 import React from "react";
 
 import { Container } from "../../../../styles/globalStyles";
-import { HomeWrapper } from "../Home.styled";
+import { HomeMainWrapper } from "./HomeMain.styled";
 import IntroductoryDescription from "./IntroductoryDescription/IntroductoryDescription";
+import MainVideo from "./mainVideo/MainVideo";
 
 const HomeMain = () => {
   return (
-    <HomeWrapper>
-      <Container>
-        <IntroductoryDescription />
-      </Container>
-    </HomeWrapper>
+    <HomeMainWrapper>
+      <IntroductoryDescription />
+      <MainVideo />
+    </HomeMainWrapper>
   );
 };
 
