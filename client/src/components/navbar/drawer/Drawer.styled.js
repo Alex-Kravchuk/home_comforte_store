@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import { sizes } from "../../../utils/css_size_consts";
+import styled, { css } from "styled-components";
+import { viewport_sizes } from "../../../utils/vieport_size_consts";
 
+const { ml, xs } = viewport_sizes;
 
 export const DrawerContainer = styled.div`
   display: ${({ smallScreen }) => (smallScreen ? "flex" : "none")};
@@ -12,9 +13,19 @@ export const DrawerContainer = styled.div`
 `;
 
 export const DrawerIconContainer = styled.div`
-  margin-right: 20px;
+  @media (min-width: ${ml}px) {
+    margin-left: 20px;
+  }
 
-  @media (max-width: ${sizes.xs.width}px) {
-    margin-right: 15px;
+  @media (max-width: ${ml}px) {
+    ${({ leftSideIcon }) =>
+      !leftSideIcon &&
+      css`
+        margin-left: 20px;
+
+        @media (max-width: ${xs}px) {
+          margin-left: 10px;
+        }
+      `}
   }
 `;

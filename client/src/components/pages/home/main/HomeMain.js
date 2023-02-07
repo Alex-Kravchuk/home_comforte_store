@@ -1,8 +1,16 @@
 import React from "react";
 
+import { Container } from "../../../../styles/globalStyles";
+import { HomeWrapper } from "../Home.styled";
+import IntroductoryDescription from "./IntroductoryDescription/IntroductoryDescription";
+
 const HomeMain = () => {
   return (
-    <div>hoem jalsdal ljkf sksdkf ksiisi nvnjj nnc dodozlvkoxkc sdcsjdco</div>
+    <HomeWrapper>
+      <Container>
+        <IntroductoryDescription />
+      </Container>
+    </HomeWrapper>
   );
 };
 

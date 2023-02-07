@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { getResponsiveSize } from "../../../../helpers/getResponsiveSize";
+
+import { getResponsiveFontSize } from "../../../../helpers/getResponsiveFontSize";
 import { sizes } from "../../../../utils/css_size_consts";
 
 export const DropdownMenuWrapper = styled.div`
@@ -33,14 +35,14 @@ export const DropdownMenuLinkList = styled.div`
 export const CategoriesTitle = styled.div`
   display: inline-block;
   border-bottom: 1px solid lightgray;
-  font-size: ${getResponsiveSize(sizes.xxxl.navLinkFontSize - 0.1)};
+  font-size: ${getResponsiveFontSize(12, 10, 1024)};
   color: #787878;
 `;
 export const DropdownMenuLink = styled.div`
   transition: all 0.2s ease;
 
   padding: 0 0 10px 0;
-  font-size: ${getResponsiveSize(sizes.xxxl.navLinkFontSize)};
+  font-size: ${getResponsiveFontSize(16, 14, 1024)};
 
   a {
     text-decoration: none;
@@ -54,14 +56,6 @@ export const DropdownMenuLink = styled.div`
     a:hover {
       color: #000;
     }
-  }
-
-  @media (max-width: ${sizes.xxl.width}px) {
-    font-size: ${getResponsiveSize(sizes.xxl.navLinkFontSize)};
-  }
-
-  @media (max-width: ${sizes.xl.width}px) {
-    font-size: ${getResponsiveSize(sizes.xl.navLinkFontSize)};
   }
 `;
 export const DropdownMenuImgContainer = styled.div`

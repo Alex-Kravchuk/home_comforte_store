@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { getResponsiveSize } from "../../../helpers/getResponsiveSize";
-import { sizes } from "../../../utils/css_size_consts";
+
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
 
 export const MenuWrapper = styled.div`
   height: 100%;
-  font-size: ${getResponsiveSize(sizes.xxxl.navLinkFontSize)};
+
+  font-size: ${getResponsiveFontSize(18, 16, 1024)};
 
   a {
     text-decoration: none;
@@ -14,14 +15,6 @@ export const MenuWrapper = styled.div`
   a:hover {
     color: #000;
   }
-
-  @media (max-width: 1024px) {
-    font-size: ${getResponsiveSize(sizes.xxl.navLinkFontSize)};
-  }
-
-  @media (max-width: 768px) {
-    font-size: ${getResponsiveSize(sizes.xl.navLinkFontSize)};
-  }
 `;
 export const MenuContainer = styled.div`
   height: 100%;
@@ -29,7 +22,7 @@ export const MenuContainer = styled.div`
 `;
 
 export const MenuItem = styled.div`
-  margin: 0 10px;
+  margin: 0 20px;
   height: 100%;
   width: auto;
   display: flex;
@@ -44,6 +37,6 @@ export const MenuItem = styled.div`
   }
 
   @media (max-width: 1200px) {
-    margin: 0 5px;
+    margin: 0 10px;
   }
 `;

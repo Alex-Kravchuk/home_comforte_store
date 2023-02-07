@@ -44,6 +44,8 @@ const SearchField = ({ opened, setOpenSearch }) => {
       if (inputFieldRef.current) {
         inputFieldRef.current.focus();
       }
+    } else {
+      inputFieldRef.current.blur();
     }
   }, [opened]);
 

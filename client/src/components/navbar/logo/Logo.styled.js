@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
+import { viewport_sizes } from "../../../utils/vieport_size_consts";
 
-import { sizes } from "../../../utils/css_size_consts";
-
-const { global, m, xs, s, xl } = sizes;
+const { xl } = viewport_sizes;
 
 export const LogoWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const LogoWrapper = styled.div`
     color: black;
   }
 
-  @media (max-width: ${xl.width}px) {
+  @media (max-width: ${xl}px) {
     flex: 1 1 60%;
   }
 `;
@@ -25,19 +25,7 @@ export const LogoTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
-  font-size: ${global.logoFontSize}px;
-
-  @media (max-width: ${m.width}px) {
-    font-size: ${m.logoFontSize}px;
-  }
-
-  @media (max-width: ${s.width}px) {
-    font-size: ${s.logoFontSize}px;
-  }
-
-  @media (max-width: ${xs.width}px) {
-    font-size: ${xs.logoFontSize}px;
-  }
+  font-size: ${getResponsiveFontSize(22, 18, 1024)};
 `;
 
 export const LogoTitlePart = styled.div``;

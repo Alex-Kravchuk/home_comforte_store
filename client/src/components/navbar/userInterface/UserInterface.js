@@ -27,7 +27,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen,  }) => {
           </UserInterfaceIconContainer>
         )}
         <Link to={ADMIN_ROUTE}>
-          <UserInterfaceIconContainer>
+          <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>
         </Link>

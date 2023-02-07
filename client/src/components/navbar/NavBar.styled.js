@@ -2,7 +2,13 @@ import styled from "styled-components";
 
 import { sizes } from "../../utils/css_size_consts";
 
-const { global, xs, s, l, xl, xxl } = sizes;
+import { getResponsiveFontSize } from "../../helpers/getResponsiveFontSize";
+
+import { viewport_sizes } from "../../utils/vieport_size_consts";
+
+const { global} = sizes;
+
+const {l, xl, xxl} = viewport_sizes;
 
 export const NavWrapper = styled.header`
   display: flex;
@@ -28,27 +34,15 @@ export const NavWrapper = styled.header`
   svg {
     cursor: pointer;
     color: #636466;
-    font-size: ${global.svgIconSize}px;
+    font-size: ${getResponsiveFontSize(27, 25)};
   }
 
   svg:hover {
     color: #000;
   }
 
-  @media (max-width: ${l.width}px) {
-    height: ${l.headerHeight}px;
-  }
-
-  @media (max-width: ${s.width}px) {
-    svg {
-      font-size: ${s.svgIconSize}px;
-    }
-  }
-
-  @media (max-width: ${xs.width}px) {
-    svg {
-      font-size: ${xs.svgIconSize}px;
-    }
+  @media (max-width: ${l}px) {
+    height: ${global.headerHeightOnSmallScreen}px;
   }
 `;
 
@@ -62,8 +56,8 @@ export const RelativeContainer = styled.div`
       ? global.headerHeightWhenScrollDown + "px"
       : global.headerHeightWhenOnTopPage + "px"};
 
-  @media (max-width: ${l.width}px) {
-    height: ${l.headerHeight}px;
+  @media (max-width: ${l}px) {
+    height: ${global.headerHeightOnSmallScreen}px;
   }
 `;
 
@@ -76,15 +70,15 @@ export const NavContainer = styled.div`
   margin: 0 auto;
   width: 75%;
 
-  @media (max-width: ${xxl.width}px) {
+  @media (max-width: ${xxl}px) {
     width: 85%;
   }
 
-  @media (max-width: ${xl.width}px) {
+  @media (max-width: ${xl}px) {
     width: 90%;
   }
 
-  @media (max-width: ${l.width}px) {
+  @media (max-width: ${l}px) {
     width: 95%;
   }
 `;

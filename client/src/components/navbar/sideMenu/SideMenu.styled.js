@@ -1,9 +1,4 @@
-import { Drawer } from "antd";
 import styled from "styled-components";
-
-// .css-dev-only-do-not-override-ixblex
-// .ant-drawer
-// .ant-drawer-body
 
 export const drawerBodyStyles = {
   padding: 0,

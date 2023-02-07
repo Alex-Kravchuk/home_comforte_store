@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 import { sizes } from "../../../utils/css_size_consts";
+import { viewport_sizes } from "../../../utils/vieport_size_consts";
 
-const { global, l, xl, xxl } = sizes;
+const { global } = sizes;
+const { l, xl, xxl } = viewport_sizes;
 
 export const SearchFieldWrapper = styled.div`
   width: 100%;
@@ -27,7 +29,7 @@ export const SearchFieldContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  width: 75%;
+  width: 75%; = vie
   height: 100%;
 
   form {
@@ -37,15 +39,15 @@ export const SearchFieldContainer = styled.div`
     align-items: center;
   }
 
-  @media (max-width: ${xxl.width}px) {
+  @media (max-width: ${xxl}px) {
     width: 85%;
   }
 
-  @media (max-width: ${xl.width}px) {
+  @media (max-width: ${xl}px) {
     width: 90%;
   }
 
-  @media (max-width: ${l.width}px) {
+  @media (max-width: ${l}px) {
     width: 95%;
   }
 `;

@@ -28,7 +28,7 @@ const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
     <DrawerContainer smallScreen={smallScreen}>
       {smallScreen && (
         <>
-          <DrawerIconContainer>
+          <DrawerIconContainer leftSideIcon>
             <MenuOutlinedIcon onClick={openSideMenuHandler} />
           </DrawerIconContainer>
           {mobileScreen && (

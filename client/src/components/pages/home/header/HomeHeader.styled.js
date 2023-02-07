@@ -1,9 +1,11 @@
 import styled, { css } from "styled-components";
 import { sizes } from "../../../../utils/css_size_consts";
 
-import { getResponsiveSize } from "../../../../helpers/getResponsiveSize";
+import { getResponsiveFontSize } from "../../../../helpers/getResponsiveFontSize";
+import { viewport_sizes } from "../../../../utils/vieport_size_consts";
 
-const { global, m, xxxl, xl, l } = sizes;
+const { global } = sizes;
+const { m, l } = viewport_sizes;
 
 export const HomeHeaderWrapper = styled.div`
   width: 100vw;
@@ -25,40 +27,28 @@ export const HomeHeaderInscriptionContainer = styled.div`
     ${position}
   `}
 
-  @media (max-width: ${m.width}px) {
+  @media (max-width: ${m}px) {
     width: 80vw;
   }
 `;
 
 export const HomeHeaderInscriptionTitle = styled.div`
   font-weight: bold;
-  font-size: ${getResponsiveSize(xxxl.fontSize)};
-
-  @media (max-width: ${m.width}px) {
-    font-size: ${getResponsiveSize(m.homeHeaderInscriptionTitleFontSize)};
-  }
+  font-size: ${getResponsiveFontSize(28, 20)};
 `;
 export const HomeHeaderInscriptionDiscription = styled.div`
-  font-size: ${getResponsiveSize(xxxl.fontSize - 0.6)};
-
-  @media (max-width: ${m.width}px) {
-    font-size: ${getResponsiveSize(m.homeHeaderInscriptionSubTitleFontSize)};
-  }
+  font-size: ${getResponsiveFontSize(20, 16)};
 `;
 
 export const HomeHeaderImg = styled.img`
   width: 100%;
   height: calc(100vh - ${global.headerHeightWhenOnTopPage}px);
 
-  @media (max-width: ${xl.width}px) {
+  @media (max-width: ${l}px) {
     height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);
   }
 
-  @media (max-width: ${l.width}px) {
-    height: auto;
-  }
-
-  @media (max-width: ${m.width}px) {
+  @media (max-width: ${m}px) {
     height: calc(80vh - ${global.headerHeightWhenOnTopPage}px);
   }
 `;
