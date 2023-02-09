@@ -6,6 +6,7 @@ const { global } = sizes;
 const { l, xl, xxl } = viewport_sizes;
 
 export const SearchFieldWrapper = styled.div`
+  display: flex;
   width: 100%;
   position: absolute;
   z-index: 1;

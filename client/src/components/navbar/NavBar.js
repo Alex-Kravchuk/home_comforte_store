@@ -21,9 +21,9 @@ const NavBar = () => {
   const [scrollDown, setScrollDown] = useState(false);
   const viewport = useGetWindowSize();
 
-  const mobileScreen = viewport < viewport_sizes.ml;
-  const smallScreen = viewport <= viewport_sizes.xl;
-  const bigScreen = viewport > viewport_sizes.xl;
+  const mobileScreen = viewport.width < viewport_sizes.ml;
+  const smallScreen = viewport.width <= viewport_sizes.xl;
+  const bigScreen = viewport.width > viewport_sizes.xl;
   console.log('screen', viewport);
   
 

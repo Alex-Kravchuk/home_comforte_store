@@ -13,7 +13,13 @@ import {
 
 import { home_header_slider_config } from "../../../../utils/home_header_slider_config";
 
+import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
+
 const HomeHeader = () => {
+  const vieport = useGetWindowSize();
+
+  const verticalOrientation = vieport.width < vieport.height;
+
   return (
     <HomeHeaderWrapper>
       <Carousel
@@ -38,7 +44,10 @@ const HomeHeader = () => {
             <picture>
               <source srcSet={item.mobileImg} media={item.mediaQuery.mobile} />
               <source srcSet={item.tabletImg} media={item.mediaQuery.tablet} />
-              <HomeHeaderImg src={item.desktopImg} />
+              <HomeHeaderImg
+                src={item.desktopImg}
+                verticalOrientation={verticalOrientation}
+              />
             </picture>
           </HomeHeaderImgContainer>
         ))}

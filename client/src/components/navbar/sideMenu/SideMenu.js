@@ -20,7 +20,7 @@ const SideMenu = ({ opened, closeHandler }) => {
   const viewport = useGetWindowSize();
 
   useEffect(() => {
-    if (viewport < 425) {
+    if (viewport.width < 425) {
       setDrawerDidwth(sizes.global.sideMenuSizeMobile);
     } else {
       setDrawerDidwth(sizes.global.sideMenuSize);

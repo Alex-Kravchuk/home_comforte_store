@@ -21,7 +21,7 @@ export const NavWrapper = styled.header`
   border-bottom: 1px solid lightgray;
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 4;
 
   box-shadow: ${({ openSearchField }) =>
     !openSearchField ? "0 8px 8px 0 rgb(0 0 0 / 10%)" : "none"};
@@ -48,7 +48,7 @@ export const NavWrapper = styled.header`
 
 export const RelativeContainer = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
 
   height: ${({ scrollDown }) =>
@@ -89,7 +89,7 @@ export const LogoMenuContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  z-index: 3;
+  z-index: 9;
   background: #fff;
 `;
 
@@ -101,5 +101,5 @@ export const EmptyContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 3;
+  z-index: 9;
 `;

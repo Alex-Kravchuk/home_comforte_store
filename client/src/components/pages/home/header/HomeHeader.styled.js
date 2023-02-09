@@ -42,7 +42,14 @@ export const HomeHeaderInscriptionDiscription = styled.div`
 
 export const HomeHeaderImg = styled.img`
   width: 100%;
-  height: calc(100vh - ${global.headerHeightWhenOnTopPage}px);
+  ${({ verticalOrientation }) =>
+  verticalOrientation
+    ? css`
+        height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);
+      `
+    : css`
+        height: calc(100vh - ${global.headerHeightWhenOnTopPage}px);
+      `}
 
   @media (max-width: ${l}px) {
     height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);
