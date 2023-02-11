@@ -5,8 +5,6 @@ const { l, m } = viewport_sizes;
 
 export const MainVideoWrapper = styled.div`
   margin: 35px 0;
-  padding: 0 0 35px 0;
-  border-bottom: 1px solid lightgray;
 
   @media (max-width: ${l}px) {
     margin: 25px 0;

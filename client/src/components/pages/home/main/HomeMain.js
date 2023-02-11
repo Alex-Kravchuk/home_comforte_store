@@ -1,4 +1,5 @@
 import React from "react";
+import CustomContructor from "./customConstructor/CustomConstructor";
 
 import { HomeMainWrapper } from "./HomeMain.styled";
 import IntroductoryDescription from "./IntroductoryDescription/IntroductoryDescription";
@@ -11,6 +12,7 @@ const HomeMain = () => {
       <IntroductoryDescription />
       <MainVideo />
       <ProductList />
+      <CustomContructor />
     </HomeMainWrapper>
   );
 };

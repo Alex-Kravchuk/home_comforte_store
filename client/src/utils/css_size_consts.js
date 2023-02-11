@@ -9,6 +9,7 @@ export const sizes = {
 
     imgWidth: 12.5,
     imgHeight: 8.5,
+    thumbSize: 60,
   },
 
   xs: {},
