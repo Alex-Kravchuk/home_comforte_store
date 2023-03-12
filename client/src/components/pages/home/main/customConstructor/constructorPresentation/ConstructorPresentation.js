@@ -1,31 +1,35 @@
-import React, { useRef, useState } from "react";
-import {
-  CPContainer,
-  CPImg,
-  CPImgLowerContainer,
-  CPImgUpperContainer,
-  CPThumb,
-  CPWrapper,
-  ExploreTipArrow,
-  ExploreTipContainer,
-  ExploreTipText,
-  OptionDescrptionContainer,
-  OptionDescrptionItem,
-  PresentationItem,
-} from "./ConstructorPresentation.styled";
+import React, { useState } from "react";
 
 import { Carousel } from "antd";
 
-import Thumb from "./Thumb";
 import { constructor_menu_config } from "../../../../../../utils/constructor_menu_config";
+
+import Thumb from "./thumb/Thumb";
 import ExploreHint from "./exploreHint/ExploreHint";
 
+import {
+  CPImg,
+  CPWrapper,
+  CPContainer,
+  PresentationItem,
+  CPImgLowerContainer,
+  CPImgUpperContainer,
+  OptionDescrptionItem,
+  OptionDescrptionContainer,
+} from "./ConstructorPresentation.styled";
+
 const ConstructorPresentation = ({
+  sliderRef,
   sliderShift,
   setSliderShiftHandler,
-  sliderRef,
 }) => {
-  const changeWidthHandler = (e) => setSliderShiftHandler(e.target.value);
+  const [hideHint, setHideHint] = useState(false);
+
+  const changeWidthHandler = (e) => {
+    setSliderShiftHandler(e.target.value);
+    setHideHint(true);
+  };
+
   return (
     <CPWrapper>
       <Carousel
@@ -57,7 +61,7 @@ const ConstructorPresentation = ({
           </PresentationItem>
         ))}
       </Carousel>
-      <ExploreHint />
+      <ExploreHint hideHint={hideHint} />
     </CPWrapper>
   );
 };

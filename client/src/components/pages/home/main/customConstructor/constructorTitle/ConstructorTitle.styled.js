@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
 
+import { viewport_sizes } from "../../../../../../utils/vieport_size_consts";
+const { xl } = viewport_sizes;
+
 export const ConstructorTitleWrapper = styled.div`
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     text-align: center;
   }
 `;

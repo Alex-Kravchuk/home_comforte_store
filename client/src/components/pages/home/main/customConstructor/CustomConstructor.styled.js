@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import { viewport_sizes } from "../../../../../utils/vieport_size_consts";
+const { xl } = viewport_sizes;
+
 export const CustomConstructorWrapper = styled.div`
   width: 100%;
   height: auto;
@@ -10,7 +13,7 @@ export const CustomConstructorContainer = styled.div`
   display: flex;
   width: 100%;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     display: flex;
     flex-direction: column;
   }

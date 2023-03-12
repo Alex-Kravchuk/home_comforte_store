@@ -1,12 +1,17 @@
 import React from "react";
-import { ExploreTipArrow, ExploreTipContainer, ExploreTipText } from "./ExploreHint.styled";
 
 import EastIcon from "@mui/icons-material/East";
 import WestIcon from "@mui/icons-material/West";
 
-const ExploreHint = () => {
+import {
+  ExploreTipText,
+  ExploreTipArrow,
+  ExploreTipContainer,
+} from "./ExploreHint.styled";
+
+const ExploreHint = ({ hideHint }) => {
   return (
-    <ExploreTipContainer>
+    <ExploreTipContainer active={hideHint}>
       <ExploreTipArrow>
         <WestIcon />
       </ExploreTipArrow>

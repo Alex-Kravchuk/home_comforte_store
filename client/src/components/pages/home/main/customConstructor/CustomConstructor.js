@@ -1,26 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  CustomConstructorContainer,
-  CustomConstructorWrapper,
-} from "./CustomConstructor.styled";
 
 import { Container } from "../../../../../styles/globalStyles";
 
-import ConstructorTitle from "./constructorTitle/ConstructorTitle";
+import {
+  CustomConstructorWrapper,
+  CustomConstructorContainer,
+} from "./CustomConstructor.styled";
+
 import ConstructorMenu from "./constructorMenu/ConstructorMenu";
+import ConstructorTitle from "./constructorTitle/ConstructorTitle";
 import ConstructorPresentation from "./constructorPresentation/ConstructorPresentation";
-import { Button } from "antd";
 
 const CustomContructor = () => {
   const [sliderShift, setSliderShift] = useState(50);
-  const [selectedItem, setSelectedItem] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(0);
+  
   const sliderRef = useRef();
 
   useEffect(() => {
-    const index = selectedItem - 1;
-
     const changePresentationHandler = (e) => {
-      sliderRef.current.goTo(index, false);
+      sliderRef.current.goTo(selectedItem, false);
       setSliderShift(50);
     };
 

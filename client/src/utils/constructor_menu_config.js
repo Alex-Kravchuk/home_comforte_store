@@ -23,7 +23,7 @@ import seatCushionImg_2 from "../assets/img/constructor/seatCushios/seat_cushion
 
 export const constructor_menu_config = [
   {
-    id: 1,
+    index: 0,
     title: "20+ collections",
     icon: bed_icon,
     upperImg: collectionImg_1,
@@ -32,7 +32,7 @@ export const constructor_menu_config = [
     lowerDescription: 'Sloan Soaf in Performance Vintage Velvet Ivy'
   },
   {
-    id: 2,
+    index: 1,
     title: "125+ fabrics",
     icon: fabric_icon,
     upperImg: fabricImg_1,
@@ -41,7 +41,7 @@ export const constructor_menu_config = [
     lowerDescription: 'Performance Pebble Knit Oat'
   },
   {
-    id: 3,
+    index: 2,
     title: "20+ legs",
     icon: leg_icon,
     upperImg: legImg_1,
@@ -50,7 +50,7 @@ export const constructor_menu_config = [
     lowerDescription: 'Matte Black Tall Curved Wood Leg'
   },
   {
-    id: 4,
+    index: 3,
     title: "length & depths",
     icon: dimension_icon,
     upperImg: lengtAndDepthImg_1,
@@ -59,7 +59,7 @@ export const constructor_menu_config = [
     lowerDescription: 'Deep 40" depth'
   },
   {
-    id: 5,
+    index: 4,
     title: "seat cushions",
     icon: seat_icon,
     upperImg: seatCushionImg_1,

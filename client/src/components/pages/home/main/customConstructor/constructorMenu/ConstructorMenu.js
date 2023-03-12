@@ -1,31 +1,29 @@
-import React, { useState } from "react";
-
-import {
-  ConstructorMenuContainer,
-  ConstructorMenuOptionsItem,
-  ConstructorMenuOptionsItemIcon,
-  ConstructorMenuOptionsItemIconContainer,
-  ConstructorMenuOptionsItemTitle,
-  ConstructorMenuOptionsList,
-  ConstructorMenuSubTitle,
-  ConstructorMenuTitle,
-  ConstructorMenuWrapper,
-} from "./ConstructorMenu.styled";
+import React from "react";
 
 import { constructor_menu_config } from "../../../../../../utils/constructor_menu_config";
+
+import {
+  ConstructorMenuWrapper,
+  ConstructorMenuContainer,
+  ConstructorMenuOptionsItem,
+  ConstructorMenuOptionsList,
+  ConstructorMenuOptionsItemIcon,
+  ConstructorMenuOptionsItemTitle,
+  ConstructorMenuOptionsItemIconContainer,
+} from "./ConstructorMenu.styled";
 
 const ConstructorMenu = ({ selectedItem, setSelectedHandler }) => {
   return (
     <ConstructorMenuWrapper>
       <ConstructorMenuContainer>
         <ConstructorMenuOptionsList>
-          {constructor_menu_config.map(({ id, icon, title }) => (
+          {constructor_menu_config.map(({ index, icon, title }) => (
             <ConstructorMenuOptionsItem
-              key={id}
-              onClick={() => setSelectedHandler(id)}
+              key={index}
+              onClick={() => setSelectedHandler(index)}
             >
               <ConstructorMenuOptionsItemIconContainer
-                selected={selectedItem === id}
+                selected={selectedItem === index}
               >
                 <ConstructorMenuOptionsItemIcon src={icon} />
               </ConstructorMenuOptionsItemIconContainer>

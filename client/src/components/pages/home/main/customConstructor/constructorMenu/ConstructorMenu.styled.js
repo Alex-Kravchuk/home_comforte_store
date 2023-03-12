@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
+import { viewport_sizes } from "../../../../../../utils/vieport_size_consts";
+import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
+
+const { xxl, xl, xs, m } = viewport_sizes;
+
 export const ConstructorMenuWrapper = styled.div`
   flex: 1 0 33.3%;
   height: auto;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     order: 2;
   }
   padding: 15px 0;
@@ -14,21 +19,13 @@ export const ConstructorMenuContainer = styled.div`
   width: auto;
   height: 100%;
 `;
-export const ConstructorMenuTitle = styled.div`
-  font-size: 16px;
-  color: #888888;
-  padding: 15px 0;
-`;
-export const ConstructorMenuSubTitle = styled.h2`
-  font-size: 22px;
-  color: #787878;
-`;
+
 export const ConstructorMenuOptionsList = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
@@ -43,7 +40,7 @@ export const ConstructorMenuOptionsItem = styled.div`
   width: 150px;
   margin: 10px 0;
 
-  @media (max-width: 320px) {
+  @media (max-width: ${xs}px) {
     width: auto;
   }
 `;
@@ -54,20 +51,36 @@ export const ConstructorMenuOptionsItemIconContainer = styled.div`
   margin-right: 25px;
   background: ${({ selected }) => (selected ? "#c6ccc2" : "transparent")};
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     margin-right: 10px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: ${xs}px) {
     margin-right: 25px;
   }
 `;
 
 export const ConstructorMenuOptionsItemIcon = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 52px;
+
+  @media (max-width: 1800px) {
+    width: 46px;
+    height: 46px;
+  }
+
+  @media (max-width: ${xxl}px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const ConstructorMenuOptionsItemTitle = styled.div`
+  font-size: ${getResponsiveFontSize(20, 16)};
+  white-space: nowrap;
   color: #808080;
+
+  @media (max-width: ${m}px) {
+    white-space: normal;
+  }
 `;

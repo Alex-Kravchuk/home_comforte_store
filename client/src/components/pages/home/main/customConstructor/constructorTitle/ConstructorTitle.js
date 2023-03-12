@@ -1,9 +1,10 @@
 import React from "react";
+
 import {
-  ConstructorSubTitle,
-  ConstructorTitleWrapper,
-  ConstructorMainTitle,
   SubTitleItem,
+  ConstructorSubTitle,
+  ConstructorMainTitle,
+  ConstructorTitleWrapper,
 } from "./ConstructorTitle.styled";
 
 const ConstructorTitle = () => {
