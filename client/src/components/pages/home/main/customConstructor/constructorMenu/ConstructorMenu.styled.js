@@ -12,7 +12,6 @@ export const ConstructorMenuWrapper = styled.div`
   @media (max-width: ${xl}px) {
     order: 2;
   }
-  padding: 15px 0;
 `;
 
 export const ConstructorMenuContainer = styled.div`
@@ -23,7 +22,6 @@ export const ConstructorMenuContainer = styled.div`
 export const ConstructorMenuOptionsList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 
   @media (max-width: ${xl}px) {
     justify-content: space-between;
@@ -79,6 +77,10 @@ export const ConstructorMenuOptionsItemTitle = styled.div`
   font-size: ${getResponsiveFontSize(20, 16)};
   white-space: nowrap;
   color: #808080;
+
+  @media (max-width: ${xl}px) {
+    white-space: normal;
+  }
 
   @media (max-width: ${m}px) {
     white-space: normal;

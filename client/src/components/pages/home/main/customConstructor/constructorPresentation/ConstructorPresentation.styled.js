@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
 
+import { viewport_sizes } from "../../../../../../utils/vieport_size_consts";
+const { xl} = viewport_sizes;
+
 // CP = ConstructorPresentation
 
 export const CPWrapper = styled.div`
@@ -8,11 +11,13 @@ export const CPWrapper = styled.div`
   flex: 0 0 67.3%;
   width: 67.7%;
   height: 100%;
+  min-height: 300px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     order: 1;
     width: 100%;
   }
+
 `;
 
 export const CPContainer = styled.div`
@@ -46,7 +51,6 @@ export const CPImg = styled.img`
   height: auto;
 `;
 
-
 export const OptionDescrptionContainer = styled.div`
   display: flex;
   align-items: center;
@@ -65,5 +69,3 @@ export const OptionDescrptionItem = styled.span`
 `;
 
 export const PresentationItem = styled.div``;
-
-
