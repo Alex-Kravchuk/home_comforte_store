@@ -11,7 +11,13 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 const Thumb = ({ onChnageHandler, shift }) => {
   return (
     <CPThumbWrapper>
-      <ThumbInput type="range" min="0" max="100" onChange={onChnageHandler} />
+      <ThumbInput
+        type="range"
+        min="0"
+        max="100"
+        onChange={onChnageHandler}
+        value={shift}
+      />
       <CPArrow shift={shift}>
         <ArrowBackIosNewOutlinedIcon />
         <ArrowForwardIosOutlinedIcon />

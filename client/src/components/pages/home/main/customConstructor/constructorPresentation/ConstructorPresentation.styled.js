@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
 import { sizes } from "../../../../../../utils/css_size_consts";
 
 // CP = ConstructorPresentation
@@ -22,9 +23,18 @@ height: 100%;
 background: transparent;
 `;
 
+// styled components-------------------------------------------------------
+
 export const CPWrapper = styled.div`
-  flex: 1 1 67.3%;
+  position: relative;
+  flex: 0 0 67.3%;
+  width: 67.7%;
   height: 100%;
+
+  @media (max-width: 1024px) {
+    order: 1;
+    width: 100%;
+  }
 `;
 
 export const CPContainer = styled.div`
@@ -40,9 +50,12 @@ export const CPThumbWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `;
 
 export const ThumbInput = styled.input`
+  position: relative;
+  z-index: 10;
   -webkit-appearance: none;
   width: calc(100% + 60px);
   height: 100%;
@@ -133,9 +146,30 @@ export const CPArrow = styled.span`
   width: 50px;
   text-align: center;
 
-
   svg {
     color: #fff;
     font-size: 18px;
   }
 `;
+
+export const OptionDescrptionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: ${getResponsiveFontSize(16, 14)};
+
+  span:nth-child(even) {
+    text-align: right;
+  }
+`;
+export const OptionDescrptionItem = styled.span`
+  text-align: left;
+  color: #9b9c9e;
+  width: 40%;
+  line-height: 1.3rem;
+  padding: 15px 0;
+`;
+
+export const PresentationItem = styled.div``;
+
+

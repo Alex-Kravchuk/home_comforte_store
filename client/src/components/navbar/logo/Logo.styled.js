@@ -25,7 +25,7 @@ export const LogoTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
-  font-size: ${getResponsiveFontSize(22, 18, 1024)};
+  font-size: ${getResponsiveFontSize(22, 16)};
 `;
 
 export const LogoTitlePart = styled.div``;

@@ -1,9 +1,10 @@
-import React from "react";
-import { CustomConstructorContainer } from "../CustomConstructor.styled";
+import React, { useState } from "react";
+
 import {
   ConstructorMenuContainer,
   ConstructorMenuOptionsItem,
   ConstructorMenuOptionsItemIcon,
+  ConstructorMenuOptionsItemIconContainer,
   ConstructorMenuOptionsItemTitle,
   ConstructorMenuOptionsList,
   ConstructorMenuSubTitle,
@@ -11,58 +12,28 @@ import {
   ConstructorMenuWrapper,
 } from "./ConstructorMenu.styled";
 
-const ConstructorMenu = () => {
+import { constructor_menu_config } from "../../../../../../utils/constructor_menu_config";
+
+const ConstructorMenu = ({ selectedItem, setSelectedHandler }) => {
   return (
     <ConstructorMenuWrapper>
       <ConstructorMenuContainer>
-        <ConstructorMenuTitle>The individuality</ConstructorMenuTitle>
-        <ConstructorMenuSubTitle>
-          The possibility of making to order
-        </ConstructorMenuSubTitle>
         <ConstructorMenuOptionsList>
-          <ConstructorMenuOptionsItem>
-            <ConstructorMenuOptionsItemIcon>
-              icon
-            </ConstructorMenuOptionsItemIcon>
-            <ConstructorMenuOptionsItemTitle>
-              20+ collections
-            </ConstructorMenuOptionsItemTitle>
-          </ConstructorMenuOptionsItem>
-
-          <ConstructorMenuOptionsItem>
-            <ConstructorMenuOptionsItemIcon>
-              icon
-            </ConstructorMenuOptionsItemIcon>
-            <ConstructorMenuOptionsItemTitle>
-              125+ fabrics
-            </ConstructorMenuOptionsItemTitle>
-          </ConstructorMenuOptionsItem>
-
-          <ConstructorMenuOptionsItem>
-            <ConstructorMenuOptionsItemIcon>
-              icon
-            </ConstructorMenuOptionsItemIcon>
-            <ConstructorMenuOptionsItemTitle>
-              20+ legs
-            </ConstructorMenuOptionsItemTitle>
-          </ConstructorMenuOptionsItem>
-          <ConstructorMenuOptionsItem>
-            <ConstructorMenuOptionsItemIcon>
-              icon
-            </ConstructorMenuOptionsItemIcon>
-            <ConstructorMenuOptionsItemTitle>
-              length & depths
-            </ConstructorMenuOptionsItemTitle>
-          </ConstructorMenuOptionsItem>
-
-          <ConstructorMenuOptionsItem>
-            <ConstructorMenuOptionsItemIcon>
-              icon
-            </ConstructorMenuOptionsItemIcon>
-            <ConstructorMenuOptionsItemTitle>
-              seat cushions
-            </ConstructorMenuOptionsItemTitle>
-          </ConstructorMenuOptionsItem>
+          {constructor_menu_config.map(({ id, icon, title }) => (
+            <ConstructorMenuOptionsItem
+              key={id}
+              onClick={() => setSelectedHandler(id)}
+            >
+              <ConstructorMenuOptionsItemIconContainer
+                selected={selectedItem === id}
+              >
+                <ConstructorMenuOptionsItemIcon src={icon} />
+              </ConstructorMenuOptionsItemIconContainer>
+              <ConstructorMenuOptionsItemTitle>
+                {title}
+              </ConstructorMenuOptionsItemTitle>
+            </ConstructorMenuOptionsItem>
+          ))}
         </ConstructorMenuOptionsList>
       </ConstructorMenuContainer>
     </ConstructorMenuWrapper>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   CPContainer,
   CPImg,
@@ -6,27 +6,58 @@ import {
   CPImgUpperContainer,
   CPThumb,
   CPWrapper,
+  ExploreTipArrow,
+  ExploreTipContainer,
+  ExploreTipText,
+  OptionDescrptionContainer,
+  OptionDescrptionItem,
+  PresentationItem,
 } from "./ConstructorPresentation.styled";
 
-import sofa1 from "../../../../../../assets/img/constructor/constructor_sofa_1.jpg";
-import sofa2 from "../../../../../../assets/img/constructor/constructor_sofa_2.jpg";
+import { Carousel } from "antd";
+
 import Thumb from "./Thumb";
+import { constructor_menu_config } from "../../../../../../utils/constructor_menu_config";
+import ExploreHint from "./exploreHint/ExploreHint";
 
-const ConstructorPresentation = () => {
-  const [value, setValue] = useState(50);
-
-  const changeWidthHandler = (e) => setValue(e.target.value);
+const ConstructorPresentation = ({
+  sliderShift,
+  setSliderShiftHandler,
+  sliderRef,
+}) => {
+  const changeWidthHandler = (e) => setSliderShiftHandler(e.target.value);
   return (
     <CPWrapper>
-      <CPContainer>
-        <CPImgUpperContainer>
-          <CPImg src={sofa1} />
-        </CPImgUpperContainer>
-        <CPImgLowerContainer width={value}>
-          <CPImg src={sofa2} />
-        </CPImgLowerContainer>
-        <Thumb onChnageHandler={changeWidthHandler} shift={value} />
-      </CPContainer>
+      <Carousel
+        ref={sliderRef}
+        effect="fade"
+        dots={false}
+        adaptiveHeight
+        swipe={false}
+      >
+        {constructor_menu_config.map((option) => (
+          <PresentationItem key={option.id}>
+            <CPContainer>
+              <CPImgUpperContainer>
+                <CPImg src={option.upperImg} />
+              </CPImgUpperContainer>
+              <CPImgLowerContainer width={sliderShift}>
+                <CPImg src={option.lowerImg} />
+              </CPImgLowerContainer>
+              <Thumb onChnageHandler={changeWidthHandler} shift={sliderShift} />
+            </CPContainer>
+            <OptionDescrptionContainer>
+              <OptionDescrptionItem>
+                {option.upperDescription}
+              </OptionDescrptionItem>
+              <OptionDescrptionItem>
+                {option.lowerDescription}
+              </OptionDescrptionItem>
+            </OptionDescrptionContainer>
+          </PresentationItem>
+        ))}
+      </Carousel>
+      <ExploreHint />
     </CPWrapper>
   );
 };

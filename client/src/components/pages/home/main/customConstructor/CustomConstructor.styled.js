@@ -8,9 +8,14 @@ export const CustomConstructorWrapper = styled.div`
 
 export const CustomConstructorContainer = styled.div`
   display: flex;
+  width: 100%;
 
-  @media (max-width: 500px) {
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
 `;
