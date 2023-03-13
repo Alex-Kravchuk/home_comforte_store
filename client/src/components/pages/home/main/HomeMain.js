@@ -1,4 +1,5 @@
 import React from "react";
+import Collections from "./collections/Collections";
 import CustomContructor from "./customConstructor/CustomConstructor";
 
 import { HomeMainWrapper } from "./HomeMain.styled";
@@ -13,6 +14,7 @@ const HomeMain = () => {
       <MainVideo />
       <ProductList />
       <CustomContructor />
+      <Collections />
     </HomeMainWrapper>
   );
 };

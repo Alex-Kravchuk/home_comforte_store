@@ -76,7 +76,7 @@ export const ConstructorMenuOptionsItemIcon = styled.img`
 export const ConstructorMenuOptionsItemTitle = styled.div`
   font-size: ${getResponsiveFontSize(20, 16)};
   white-space: nowrap;
-  color: #808080;
+  color: #888888;
 
   @media (max-width: ${xl}px) {
     white-space: normal;

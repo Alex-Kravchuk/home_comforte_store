@@ -8,10 +8,14 @@ export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
 
 
+
   * {
     margin: 0;
-    padding: 0;
-    
+    padding: 0;  
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
