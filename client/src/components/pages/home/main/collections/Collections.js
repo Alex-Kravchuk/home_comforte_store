@@ -1,34 +1,39 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
 
-import { Navigation } from "swiper";
+import { useGetWindowSize } from "../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../utils/vieport_size_consts";
 
-import { CollectionsWrapper } from "./Collections.styled";
-import CollectionsItem from "./collectionsItem/CollectionsItem";
-import { collections_config } from "./collections_config";
+import CollectionsSwiper from "./swiper/CollectionsSwiper";
+import { Container } from "../../../../../styles/globalStyles";
+
+import {
+  TitleContainer,
+  CollectionsWrapper,
+  FetchButtonContainer,
+  CollectionTitleContainer,
+} from "./Collections.styled";
 
 const Collections = () => {
+  const viewport = useGetWindowSize();
+  const smallScreen = viewport.width < viewport_sizes.ml;
   return (
     <CollectionsWrapper>
-      <Swiper
-        spaceBetween={30}
-        slidesPerView={"auto"}
-        slidesOffsetBefore={20}
-        slidesOffsetAfter={20}
-		navigation={true}
-        // slidesPerView={1}
-        // centeredSlides={true}
-        // freeMode={true}
-        modules={[Navigation]}
-      >
-        {collections_config.map((collection) => (
-          <SwiperSlide>
-            <CollectionsItem collection={collection} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Container>
+        <CollectionTitleContainer>
+          <TitleContainer>Our seating collections</TitleContainer>
+          {!smallScreen && (
+            <FetchButtonContainer>Show all of collections</FetchButtonContainer>
+          )}
+        </CollectionTitleContainer>
+      </Container>
+      <CollectionsSwiper />
+      {smallScreen && (
+        <Container>
+          <FetchButtonContainer bottomPosition={true}>
+            Show all of collections
+          </FetchButtonContainer>
+        </Container>
+      )}
     </CollectionsWrapper>
   );
 };

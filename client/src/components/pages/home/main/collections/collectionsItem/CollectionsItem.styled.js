@@ -3,8 +3,6 @@ import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFo
 
 export const CollectionsItemWrapper = styled.div`
   cursor: pointer;
-  width: 80vw;
-  max-width: 420px;
   color: #555759;
 
   &:hover {
@@ -23,10 +21,10 @@ export const CollectionsItemImg = styled.img`
 export const CollectionsItemTitleContainer = styled.div`
   padding: 10px 10px 10px 0;
   display: inline-block;
-  font-size: ${getResponsiveFontSize(32, 24)};
+  font-size: ${getResponsiveFontSize(24, 22)};
 
   svg {
-    font-size: ${getResponsiveFontSize(32, 24)};
+    font-size: ${getResponsiveFontSize(24, 22)};
   }
 `;
 export const CollectionsItemTitleName = styled.div`
@@ -35,6 +33,8 @@ export const CollectionsItemTitleName = styled.div`
   align-items: center;
   text-align: left;
 `;
+
+export const NameContainer = styled.div``;
 export const CollectionsItemTitleArrow = styled.div`
   display: flex;
   align-items: center;
@@ -50,4 +50,6 @@ export const CollectionsItemTitleArrow = styled.div`
     left: 10px;
   }
 `;
-export const CollectionsItemDescription = styled.div``;
+export const CollectionsItemDescription = styled.div`
+  font-size: ${getResponsiveFontSize(16, 14)};
+`;

@@ -1,14 +1,16 @@
 import React from "react";
-import {
-  CollectionsItemDescription,
-  CollectionsItemImg,
-  CollectionsItemTitleArrow,
-  CollectionsItemTitleContainer,
-  CollectionsItemTitleName,
-  CollectionsItemWrapper,
-} from "./CollectionsItem.styled";
 
 import EastIcon from "@mui/icons-material/East";
+
+import {
+  NameContainer,
+  CollectionsItemImg,
+  CollectionsItemWrapper,
+  CollectionsItemTitleName,
+  CollectionsItemTitleArrow,
+  CollectionsItemDescription,
+  CollectionsItemTitleContainer,
+} from "./CollectionsItem.styled";
 
 const CollectionsItem = ({ collection }) => {
   const { img, name, description } = collection;
@@ -18,7 +20,7 @@ const CollectionsItem = ({ collection }) => {
       <CollectionsItemImg src={img} />
       <CollectionsItemTitleContainer>
         <CollectionsItemTitleName>
-          <div>{name}</div>
+          <NameContainer>{name}</NameContainer>
           <CollectionsItemTitleArrow>
             <EastIcon />
           </CollectionsItemTitleArrow>
