@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { sizes } from "../../../../utils/css_size_consts";
 
 import { getResponsiveFontSize } from "../../../../helpers/getResponsiveFontSize";
-import { viewport_sizes } from "../../../../utils/vieport_size_consts";
+import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 
 const { global } = sizes;
 const { m, l } = viewport_sizes;
@@ -43,13 +43,13 @@ export const HomeHeaderInscriptionDiscription = styled.div`
 export const HomeHeaderImg = styled.img`
   width: 100%;
   ${({ verticalOrientation }) =>
-  verticalOrientation
-    ? css`
-        height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);
-      `
-    : css`
-        height: calc(100vh - ${global.headerHeightWhenOnTopPage}px);
-      `}
+    verticalOrientation
+      ? css`
+          height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);
+        `
+      : css`
+          height: calc(100vh - ${global.headerHeightWhenOnTopPage}px);
+        `}
 
   @media (max-width: ${l}px) {
     height: calc(85vh - ${global.headerHeightWhenOnTopPage}px);

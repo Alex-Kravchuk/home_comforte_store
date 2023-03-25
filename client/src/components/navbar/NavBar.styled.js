@@ -4,11 +4,11 @@ import { sizes } from "../../utils/css_size_consts";
 
 import { getResponsiveFontSize } from "../../helpers/getResponsiveFontSize";
 
-import { viewport_sizes } from "../../utils/vieport_size_consts";
+import { viewport_sizes } from "../../utils/viewport_size_consts";
 
-const { global} = sizes;
+const { global } = sizes;
 
-const {l, xl, xxl} = viewport_sizes;
+const { l, xl, xxl } = viewport_sizes;
 
 export const NavWrapper = styled.header`
   display: flex;

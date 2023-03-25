@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
-import { viewport_sizes } from "../../../../../utils/vieport_size_consts";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
 const { xl, l, m } = viewport_sizes;
 
 export const ProductListWrapper = styled.div`
   margin: 35px 0;
-  
+
   @media (max-width: ${l}px) {
     margin: 25px 0;
     padding: 0 0 25px 0;

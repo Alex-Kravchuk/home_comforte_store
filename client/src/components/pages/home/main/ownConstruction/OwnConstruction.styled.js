@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+
+const { m, l } = viewport_sizes;
 
 export const OwnConstructionWrapper = styled.div`
   width: 100%;
@@ -7,7 +10,7 @@ export const OwnConstructionWrapper = styled.div`
   margin: 30px 0;
   padding-bottom: 50px;
 
-  @media (max-width: 425px) {
+  @media (max-width: ${m}px) {
     padding-bottom: 25px;
   }
 `;
@@ -27,7 +30,7 @@ export const ConstructionTitle = styled.div`
   padding: 50px 0;
   font-size: ${getResponsiveFontSize(30, 22)};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     padding: 25px;
   }
 `;

@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import { viewport_sizes } from "../../../../../../../utils/vieport_size_consts";
+import { viewport_sizes } from "../../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../../helpers/getResponsiveFontSize";
-
 
 const { l, m } = viewport_sizes;
 

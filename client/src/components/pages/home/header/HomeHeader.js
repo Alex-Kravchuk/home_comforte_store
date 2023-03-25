@@ -16,9 +16,9 @@ import { home_header_slider_config } from "../../../../utils/home_header_slider_
 import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
 
 const HomeHeader = () => {
-  const vieport = useGetWindowSize();
+  const viewport = useGetWindowSize();
 
-  const verticalOrientation = vieport.width < vieport.height;
+  const verticalOrientation = viewport.width < viewport.height;
 
   return (
     <HomeHeaderWrapper>

@@ -1,6 +1,11 @@
-import { Button, Card } from "antd";
 import styled from "styled-components";
+
+import { Button, Card } from "antd";
+
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
+
+const { l, s } = viewport_sizes;
 
 export const ConstructionItemWrap = styled(Card)`
   flex: 1 1 33.3%;
@@ -16,7 +21,7 @@ export const ConstructionItemWrap = styled(Card)`
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: ${s}px) {
     .ant-card-body {
       padding: 15px;
     }
@@ -67,11 +72,11 @@ export const ConstructionItemButton = styled(Button)`
     color: green;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     padding: 15px 15px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: ${s}px) {
     padding: 10px 10px;
   }
 `;

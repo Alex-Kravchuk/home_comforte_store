@@ -1,10 +1,11 @@
 import React from "react";
+
 import {
   ConstructionItemButton,
-  ConstructionItemButtonContainer,
-  ConstructionItemButtonText,
   ConstructionItemDescrText,
   ConstructionItemDescrWrap,
+  ConstructionItemButtonText,
+  ConstructionItemButtonContainer,
 } from "./ConstructionItem.styled";
 
 const ConstructionItemDescription = ({ descr, buttons }) => {

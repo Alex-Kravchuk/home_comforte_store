@@ -1,15 +1,15 @@
 import { ConstructionItemTitle } from "./ConstructionItem.styled";
 
+import WebAR from "../../../../../../assets/img/construction/web-ar.jpg";
 import VisitImg from "../../../../../../assets/img/construction/visit.jpg";
 import DesignWork from "../../../../../../assets/img/construction/design_work.jpg";
-import WebAR from "../../../../../../assets/img/construction/web-ar.jpg";
 
-import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
+import ViewInArOutlinedIcon from "@mui/icons-material/ViewInArOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAltOutlined";
-import ViewInArOutlinedIcon from "@mui/icons-material/ViewInArOutlined";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 export const constructionItemsConfig = [
   {

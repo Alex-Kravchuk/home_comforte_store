@@ -1,11 +1,14 @@
-import { Card } from "antd";
 import React from "react";
+
+import { Card } from "antd";
+
+import ConstructionItemDescription from "./ConstructionItemDescription";
+
 import {
   ConstructionItemImg,
-  ConstructionItemTitle,
   ConstructionItemWrap,
+  ConstructionItemTitle,
 } from "./ConstructionItem.styled";
-import ConstructionItemDescription from "./ConstructionItemDescription";
 
 const { Meta } = Card;
 
