@@ -13,8 +13,12 @@ export const OwnConstructionWrapper = styled.div`
 `;
 export const OwnConstructionContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  width: 100%;
+
+  @media (max-width: 970px) {
+    flex-direction: column;
+  }
 `;
 
 export const ConstructionTitle = styled.div`

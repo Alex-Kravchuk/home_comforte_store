@@ -3,7 +3,18 @@ import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
 
 export const ConstructionItemWrap = styled(Card)`
+  flex: 1 1 33.3%;
   min-height: 500px;
+
+  &:nth-child(even) {
+    margin: 0 15px;
+  }
+
+  @media (max-width: 970px) {
+    &:nth-child(even) {
+      margin: 20px 0;
+    }
+  }
 
   @media (max-width: 375px) {
     .ant-card-body {
@@ -49,20 +60,24 @@ export const ConstructionItemButtonContainer = styled.div`
 export const ConstructionItemButton = styled(Button)`
   display: flex;
   align-items: center;
-  padding: 25px 25px;
+  height: auto;
+  padding: 20px 20px;
 
-  font-size: ${getResponsiveFontSize(16, 14)};
+  &:hover {
+    color: green;
+  }
 
-  @media (max-width: 1024px) {
-    padding: 25px 15px;
+  @media (max-width: 768px) {
+    padding: 15px 15px;
   }
 
   @media (max-width: 375px) {
-    padding: 25px 10px;
+    padding: 10px 10px;
   }
 `;
 
 export const ConstructionItemButtonText = styled.div`
   margin-left: 10px;
   white-space: normal;
+  font-size: ${getResponsiveFontSize(15, 14)};
 `;
