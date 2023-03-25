@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
 
   @media (max-width: ${xxl}px) {

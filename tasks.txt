@@ -42,11 +42,44 @@
 			2.1.5 Nav bar and search field not scrolling follow when input focus() --- OK
 
 			03.02.2023
-			2.1.6 To add dropdown for each menu item in desktop screen
-			2.1.7 To add button for scrolling up of the page
+			2.1.6 To add dropdown for each menu item in desktop screen [done: 05.02.2023]
+			2.1.7 To add button for scrolling up of the page. Why? [in my opinion it is not necessary]
+
+			05.02.2023
+			2.1.8 Nav link responsive design is incorrect, so small when window resize
+
+			04.03.2023
+			2.1.9 When to click on logo [HOME COMFORTE] move to top of page [DONE 12.03.2023]
 
 		2.2 Drawer
 			2.2.1 To fix scroll when drawer is open _FIXED
-			2.2.2 Maybe use for side menu "Menu" component from ANTD
+			2.2.2 Maybe use for side menu "Menu" component from ANTD [NO]
 
-		
+		2.3 Main screen
+			2.3.1 Cover all of main screen images [done on desktop]
+				2.3.1.1 Between 700 px and 425px needs one more picture another size [done by using "height: auto"]
+			2.3.2 To make some slider of them [done]
+			2.3.3 Add original inscription [done]
+
+			[done: 07.02.2023]
+			2.3.4 To change viewport size const everywhere 
+			2.3.5 Maybe I have to do refactoring css code with using some index value for responsive [done with function "getResponsiveFontSize"]
+
+		2.4 DropDown 07.02.2023
+			2.4.1 To delete margin on the dropdown [not necessary]
+
+		2.3 Main screen MAYBE USE SOME COMMON WRAPPER COMPONENNT FOR EACH BLOCK OF PAGE
+			2.3.6. To add a home video on the page [done]
+			2.3.7. To add custom constructor
+					2.3.7.1 Background has different color
+					2.3.7.2 
+			2.3.8. To add product type list [done: 09.02.2023]
+			2.3.9. To add collections
+			2.3.10. To add reviews
+			2.3.11. To add footer
+
+
+
+
+Try to use webp image format
+

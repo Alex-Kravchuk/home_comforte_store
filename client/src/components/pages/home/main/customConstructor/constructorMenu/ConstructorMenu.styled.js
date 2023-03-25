@@ -59,12 +59,12 @@ export const ConstructorMenuOptionsItemIconContainer = styled.div`
 `;
 
 export const ConstructorMenuOptionsItemIcon = styled.img`
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
 
   @media (max-width: 1800px) {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
   }
 
   @media (max-width: ${xxl}px) {

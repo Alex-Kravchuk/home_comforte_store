@@ -68,18 +68,18 @@ export const NavContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  width: 75%;
+  width: 80%;
 
   @media (max-width: ${xxl}px) {
-    width: 85%;
+    width: ${sizes.xxl.contentContainerWidth}%;
   }
 
   @media (max-width: ${xl}px) {
-    width: 90%;
+    width: ${sizes.xl.contentContainerWidth}%;
   }
 
   @media (max-width: ${l}px) {
-    width: 95%;
+    width: ${sizes.l.contentContainerWidth}%;
   }
 `;
 
