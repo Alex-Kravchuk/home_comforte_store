@@ -11,7 +11,7 @@ export const CollectionTitleContainer = styled.div`
   color: #555759;
 `;
 export const TitleContainer = styled.div`
-  font-size: ${getResponsiveFontSize(30, 22)};
+  font-size: ${getResponsiveFontSize(30, 28)};
 `;
 export const FetchButtonContainer = styled.div`
   text-align: center;

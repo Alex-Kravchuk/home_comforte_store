@@ -7,6 +7,7 @@ import IntroductoryDescription from "./IntroductoryDescription/IntroductoryDescr
 import MainVideo from "./mainVideo/MainVideo";
 import OwnConstruction from "./ownConstruction/OwnConstruction";
 import ProductList from "./productList/ProductList";
+import Reviews from "./reviews/Reviews";
 
 const HomeMain = () => {
   return (
@@ -17,6 +18,7 @@ const HomeMain = () => {
       <CustomContructor />
       <Collections />
       <OwnConstruction />
+      <Reviews />
     </HomeMainWrapper>
   );
 };

@@ -7,7 +7,7 @@ const { m, l } = viewport_sizes;
 export const OwnConstructionWrapper = styled.div`
   width: 100%;
   background: rgba(215, 215, 196, 0.8);
-  margin: 30px 0;
+  margin: 30px 0 0 0;
   padding-bottom: 50px;
 
   @media (max-width: ${m}px) {
@@ -28,7 +28,7 @@ export const ConstructionTitle = styled.div`
   color: #555759;
   text-align: center;
   padding: 50px 0;
-  font-size: ${getResponsiveFontSize(30, 22)};
+  font-size: ${getResponsiveFontSize(30, 28)};
 
   @media (max-width: ${l}px) {
     padding: 25px;
