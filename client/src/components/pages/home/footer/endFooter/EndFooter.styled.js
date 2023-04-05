@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+
+const { l } = viewport_sizes;
+
 export const EndFooterWrapper = styled.div`
   background: #dbd7d5;
   padding: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     padding: 10px;
   }
 `;
@@ -14,8 +18,12 @@ export const EndFooterContainer = styled.div`
 `;
 export const EndFooterBrandName = styled.div`
   margin: 5px 0 5px 20px;
+  font-size: 14px;
+  color: #656565;
 `;
-// ------links
+
+// ---links---------------------------------------------------------------------------------
+// should be <a></a> tag or Link in the future
 export const EndFooterLinksContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -24,6 +32,9 @@ export const EndFooterLinksContainer = styled.div`
 export const EndFooterLinkItem = styled.div`
   position: relative;
   margin: 5px 0 5px 20px;
+  font-size: 14px;
+  color: #656565;
+  transition: all .2s ease;
 
   &:before {
     content: " ";
@@ -34,10 +45,19 @@ export const EndFooterLinkItem = styled.div`
     width: 5px;
     height: 5px;
     border-radius: 10px;
-    background: #000;
+    background: #656565;
     display: block;
   }
+
+  &:hover {
+    color: #000;
+
+    &:before {
+      background: #000;
+    }
+  }
 `;
-// -----icons
+
+// ---icons---------------------------------------------------------------------------------
 export const EndFooterIconsContainer = styled.div``;
 export const EndFooterIcon = styled.div``;

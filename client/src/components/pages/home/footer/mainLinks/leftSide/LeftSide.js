@@ -1,17 +1,20 @@
 import React from "react";
+
+import { Collapse } from "antd";
+
+import { leftSideConfig } from "./leftSideConfig";
+import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
+
+import CollapseOwnIcon from "./collapseOwnIcon/CollapseOwnIcon";
+
 import {
-  CustomCollapse,
+  MLItem,
   MLColumn,
   MLColumnTitle,
-  MLItem,
+  CustomCollapse,
   MLItemsContainer,
 } from "../MainLinks.styled";
-
-import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
-import { leftSideConfig } from "./leftSideConfig";
-import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
-import { Collapse } from "antd";
-import CollapseOwnIcon from "./collapseOwnIcon/CollapseOwnIcon";
 
 const { Panel } = Collapse;
 
@@ -24,7 +27,7 @@ const LeftSide = () => {
         <CustomCollapse
           accordion
           expandIconPosition="end"
-          expandIcon={({isActive}) => <CollapseOwnIcon open={isActive} />}
+          expandIcon={({ isActive }) => <CollapseOwnIcon open={isActive} />}
         >
           {leftSideConfig.map(({ title, id, subTitles }) => (
             <Panel header={title} key={id}>

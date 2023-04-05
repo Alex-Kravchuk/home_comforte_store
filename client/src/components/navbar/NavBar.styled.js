@@ -35,11 +35,12 @@ export const NavWrapper = styled.header`
     cursor: pointer;
     color: #636466;
     font-size: ${getResponsiveFontSize(27, 25)};
+
+    &:hover {
+      color: #000;
+    }
   }
 
-  svg:hover {
-    color: #000;
-  }
 
   @media (max-width: ${l}px) {
     height: ${global.headerHeightOnSmallScreen}px;

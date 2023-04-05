@@ -1,7 +1,11 @@
 import styled from "styled-components";
+
 import { Input } from "antd";
-import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+
+const { l, xs } = viewport_sizes;
 
 export const MailSubscribeWrapper = styled.div`
   width: 100%;
@@ -9,7 +13,7 @@ export const MailSubscribeWrapper = styled.div`
   border-bottom: 1px solid #d9d9d9;
   padding: 45px 0;
 
-  @media (max-width: ${viewport_sizes.xs}px) {
+  @media (max-width: ${xs}px) {
     padding: 35px 0;
   }
 `;
@@ -19,16 +23,16 @@ export const MailSubscribeContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: ${viewport_sizes.l}px) {
+  @media (max-width: ${l}px) {
     flex-direction: column;
   }
 `;
-
+// ---title------------------------------------------------------------------------------------
 export const MailSubscribeTitlesContainer = styled.div`
   width: 100%;
   padding-right: 30px;
 
-  @media (max-width: ${viewport_sizes.l}px) {
+  @media (max-width: ${l}px) {
     padding: 0;
   }
 `;
@@ -43,7 +47,7 @@ export const MailSubscribeSubTitle = styled.div`
   padding-bottom: 30px;
 `;
 
-// input---------------------
+// ---input------------------------------------------------------------------------------
 export const MailSubscribeInputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -55,7 +59,7 @@ export const CustomIntput = styled(Input)`
   width: 100%;
   height: 60px;
 
-  @media (max-width: ${viewport_sizes.xs}px) {
+  @media (max-width: ${xs}px) {
     height: 50px;
   }
 `;
@@ -79,7 +83,7 @@ export const MailSubscribeSubmitBtn = styled.div`
     border: 1px solid #000;
   }
 
-  @media (max-width: ${viewport_sizes.xs}px) {
+  @media (max-width: ${xs}px) {
     height: 50px;
   }
 `;

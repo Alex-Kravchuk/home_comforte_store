@@ -1,20 +1,20 @@
 import React from "react";
 
-import {
-  MLFAQContainer,
-  MLFAQInfoContainer,
-  MLFAQItemAddInfo,
-  MLFAQItemName,
-  MLFAQItems,
-  MLFAQItemSubWrap,
-  MLFAQItemWrap,
-  MLFAQTitle,
-  MLFAQTitleMain,
-  MLFAQTitleSub,
-} from "../MainLinks.styled";
-
-import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import { rightSideConfig } from "./rightSideConfig";
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+
+import {
+  MLFAQItems,
+  MLFAQTitle,
+  MLFAQItemWrap,
+  MLFAQItemName,
+  MLFAQTitleSub,
+  MLFAQContainer,
+  MLFAQTitleMain,
+  MLFAQItemAddInfo,
+  MLFAQItemSubWrap,
+  MLFAQInfoContainer,
+} from "../MainLinks.styled";
 
 const RightSide = () => {
   return (

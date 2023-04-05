@@ -1,5 +1,10 @@
-import { Collapse } from "antd";
 import styled from "styled-components";
+
+import { Collapse } from "antd";
+
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+
+const { xl, l } = viewport_sizes;
 
 // ML = MainLinks + [block name]
 
@@ -7,34 +12,34 @@ export const MLWrapper = styled.div`
   margin: 50px 0;
   font-size: 14px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}}px) {
     margin: 0;
   }
 `;
+
 export const MLContainer = styled.div`
   display: flex;
   align-items: start;
   justify-content: space-between;
   flex-direction: row;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     flex-direction: column;
   }
 `;
-// ------------------------------------------------- links block
+// ---links block------------------------------------------------------------------------------
 export const MLItemsContainer = styled.div`
   width: 100%;
   display: grid;
   row-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(180px, auto));
-
   flex: 1 1 65%;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     flex: 1 1 50%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     display: block;
   }
 `;
@@ -55,18 +60,18 @@ export const MLItem = styled.div`
   }
 `;
 
-// -------------------------------------------------- FAQ block
+// ---FAQ block----------------------------------------------------------------------------------
 export const MLFAQContainer = styled.div`
   width: auto;
   border-left: 1px solid #d9d9d9;
   flex: 1 1 35%;
   padding-left: 50px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     flex: 1 1 50%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${l}px) {
     border-left: none;
     padding: 25px 0;
     width: 100%;
@@ -83,6 +88,7 @@ export const MLFAQTitleSub = styled.div`
 `;
 export const MLFAQItems = styled.div``;
 export const MLFAQItemWrap = styled.div`
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -118,12 +124,11 @@ export const MLFAQItemWrap = styled.div`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     padding: 15px;
   }
 
-  @media (max-width: 768px) {
-    padding: 15px;
+  @media (max-width: ${l}px) {
     width: 100%;
   }
 `;
@@ -145,11 +150,17 @@ export const MLFAQItemAddInfo = styled.div`
   color: rgba(0, 0, 0, 0.45);
 `;
 
-// --------------------- mobile screen panel styles
+// ---mobile screen panel styles-----------------------------------------------------------------
 export const CustomCollapse = styled(Collapse)`
   background: #fff;
   border-left: none;
   border-right: none;
   border-top: none;
-  border-radius: 0px;
+  border-radius: 0;
+
+  .ant-collapse-item:last-child {
+    border-radius: 0;
+  }
 `;
+
+

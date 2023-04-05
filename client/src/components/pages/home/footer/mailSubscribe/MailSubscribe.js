@@ -1,16 +1,17 @@
 import React from "react";
-import {
-  CustomIntput,
-  MailSubscribeContainer,
-  MailSubscribeInputContainer,
-  MailSubscribeSubmitBtn,
-  MailSubscribeSubTitle,
-  MailSubscribeTitle,
-  MailSubscribeTitlesContainer,
-  MailSubscribeWrapper,
-} from "./MailSubscribe.styled";
 
 import { Container } from "../../../../../styles/globalStyles";
+
+import {
+  CustomIntput,
+  MailSubscribeTitle,
+  MailSubscribeWrapper,
+  MailSubscribeSubTitle,
+  MailSubscribeContainer,
+  MailSubscribeSubmitBtn,
+  MailSubscribeInputContainer,
+  MailSubscribeTitlesContainer,
+} from "./MailSubscribe.styled";
 
 const MailSubscribe = () => {
   return (
