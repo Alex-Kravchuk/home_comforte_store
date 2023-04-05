@@ -4,6 +4,7 @@ import { Card } from "antd";
 
 export const ReviewItemWrapper = styled(Card)`
   min-height: 465px;
+  margin-bottom: 50px;
 `;
 export const ReviewContainer = styled.div``;
 export const ReviewItemTitelWrap = styled.div``;
