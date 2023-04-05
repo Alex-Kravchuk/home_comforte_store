@@ -23,6 +23,7 @@ export const ReviewsWrapper = styled.div`
 
   .swiper-button-next,
   .swiper-button-prev {
+    box-sizing: unset;
     color: #000;
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;

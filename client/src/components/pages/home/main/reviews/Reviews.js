@@ -40,7 +40,7 @@ const Reviews = () => {
       <ReviewsTitle>Home Comfort in the real world</ReviewsTitle>
       <ReviewsSubTitle>
         We are happy to see our work in your home. We are pleased when you are
-        delighted! Show us more of your options by tagging #hc and #homecoimfort
+        delighted! Show us more of your options by tagging #hc and #homecomfort
       </ReviewsSubTitle>
 
       <Swiper

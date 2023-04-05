@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;  
+    box-sizing: border-box;
   }
 
   html {
@@ -26,7 +27,6 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 10000px;
 `;
 
 export const Container = styled.div`
