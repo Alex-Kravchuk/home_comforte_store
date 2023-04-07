@@ -4,10 +4,16 @@ import { Button, Card } from "antd";
 
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../../../../styles/globalStyles";
 
 const { l, s } = viewport_sizes;
 
 export const ConstructionItemWrap = styled(Card)`
+  .ant-card-meta-title,
+  .ant-card-meta-description {
+    color: ${textColors.main};
+  }
+
   flex: 1 1 33.3%;
   min-height: 500px;
 
@@ -35,15 +41,12 @@ export const ConstructionItemImg = styled.img`
 `;
 
 export const ConstructionItemTitle = styled.div`
-  color: #555759;
   font-size: ${getResponsiveFontSize(24, 22)};
   white-space: normal;
 `;
 
-// description
-export const ConstructionItemDescrWrap = styled.div`
-  color: #555759;
-`;
+// ---description-------------------------------------------------------------
+export const ConstructionItemDescrWrap = styled.div``;
 export const ConstructionItemDescrText = styled.div`
   font-size: ${getResponsiveFontSize(18, 16)};
   line-height: 1.4em;
@@ -68,9 +71,6 @@ export const ConstructionItemButton = styled(Button)`
   height: auto;
   padding: 20px 20px;
 
-  &:hover {
-    color: green;
-  }
 
   @media (max-width: ${l}px) {
     padding: 15px 15px;

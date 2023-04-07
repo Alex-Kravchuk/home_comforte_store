@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Lato', sans-serif;
-    
+    color: #555759;
   }
 `;
 
@@ -45,6 +45,15 @@ export const Container = styled.div`
     width: ${sizes.l.contentContainerWidth}%;
   }
 `;
+
+export const textColors = {
+  main: "#555759",
+  title: "#000000",
+  productTitle: "#ffffff",
+  plain: "#8f8f8f",
+  svgColor: "rgba(0, 0, 0, 0.45)",
+  svgHoverColor: "rgba(0, 0, 0, 0.65)",
+};
 
 export const swiperStyles = `
 .swiper {

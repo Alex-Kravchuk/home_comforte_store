@@ -25,7 +25,6 @@ export const OwnConstructionContainer = styled.div`
 `;
 
 export const ConstructionTitle = styled.div`
-  color: #555759;
   text-align: center;
   padding: 50px 0;
   font-size: ${getResponsiveFontSize(30, 28)};

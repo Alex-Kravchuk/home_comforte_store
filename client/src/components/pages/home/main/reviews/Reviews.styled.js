@@ -26,7 +26,6 @@ export const ReviewsWrapper = styled.div`
 `;
 export const ReviewsContainer = styled.div``;
 export const ReviewsTitle = styled.div`
-  color: #555759;
   text-align: center;
   padding: 70px 0 10px 0;
   font-size: ${getResponsiveFontSize(30, 28)};
@@ -36,7 +35,6 @@ export const ReviewsTitle = styled.div`
   }
 `;
 export const ReviewsSubTitle = styled.div`
-  color: #555759;
   text-align: center;
   padding: 0 15px 30px 15px;
   font-size: ${getResponsiveFontSize(16, 16)};

@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const CollapseOwnIconWrapper = styled.div``;
-export const CollapseOwnIconContainer = styled.div`
+import { textColors } from "../../styles/globalStyles";
+
+export const ExpandIconWrapper = styled.div``;
+export const ExpandIconContainer = styled.div`
   position: relative;
   width: 100%;
 
@@ -12,11 +14,10 @@ export const CollapseOwnIconContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     content: "";
-    background: black;
     height: 2px;
     width: 15px;
     display: block;
-    background-color: rgba(0, 0, 0, 0.88);
+    background-color: ${textColors.main};
   }
 
   &:before {
@@ -26,11 +27,10 @@ export const CollapseOwnIconContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     content: "";
-    background: black;
     width: 2px;
     height: 15px;
     display: block;
-    background-color: rgba(0, 0, 0, 0.88);
+    background-color: ${textColors.main};
   }
 
   ${({ open }) =>

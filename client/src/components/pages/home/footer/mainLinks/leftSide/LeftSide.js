@@ -6,7 +6,7 @@ import { leftSideConfig } from "./leftSideConfig";
 import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
-import CollapseOwnIcon from "./collapseOwnIcon/CollapseOwnIcon";
+import ExpandIcon from "../../../../../../helpers/ExpandIcon/ExpandIcon";
 
 import {
   MLItem,
@@ -27,7 +27,7 @@ const LeftSide = () => {
         <CustomCollapse
           accordion
           expandIconPosition="end"
-          expandIcon={({ isActive }) => <CollapseOwnIcon open={isActive} />}
+          expandIcon={({ isActive }) => <ExpandIcon open={isActive} />}
         >
           {leftSideConfig.map(({ title, id, subTitles }) => (
             <Panel header={title} key={id}>

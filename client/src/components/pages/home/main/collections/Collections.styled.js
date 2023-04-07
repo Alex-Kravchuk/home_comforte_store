@@ -8,7 +8,6 @@ export const CollectionTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #555759;
 `;
 export const TitleContainer = styled.div`
   font-size: ${getResponsiveFontSize(30, 28)};

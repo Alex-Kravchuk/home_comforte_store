@@ -5,6 +5,7 @@ import { sizes } from "../../utils/css_size_consts";
 import { getResponsiveFontSize } from "../../helpers/getResponsiveFontSize";
 
 import { viewport_sizes } from "../../utils/viewport_size_consts";
+import { textColors } from "../../styles/globalStyles";
 
 const { global } = sizes;
 
@@ -33,14 +34,13 @@ export const NavWrapper = styled.header`
 
   svg {
     cursor: pointer;
-    color: #636466;
+    color: ${textColors.svgColor};
     font-size: ${getResponsiveFontSize(27, 25)};
 
     &:hover {
-      color: #000;
+      color: ${textColors.svgHoverColor};
     }
   }
-
 
   @media (max-width: ${l}px) {
     height: ${global.headerHeightOnSmallScreen}px;

@@ -3,8 +3,7 @@ import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFo
 
 export const CollectionsItemWrapper = styled.div`
   cursor: pointer;
-  color: #555759;
-
+  
   &:hover {
     svg {
       left: 15px;

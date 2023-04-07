@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../../../styles/globalStyles";
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
 const { xl, l, m } = viewport_sizes;
@@ -94,7 +95,7 @@ export const ProductListItemTitle = styled.h2`
   left: 5%;
   z-index: 3;
 
-  color: #fff;
+  color: ${textColors.productTitle};
 
   &::after {
     content: "";
@@ -103,7 +104,7 @@ export const ProductListItemTitle = styled.h2`
     left: 0;
     width: 0px;
     height: 2px;
-    background: #fff;
+    background: ${textColors.productTitle};
     transition: all 0.2s ease;
   }
 `;

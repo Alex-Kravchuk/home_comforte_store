@@ -13,7 +13,6 @@ export const ConstructorTitleWrapper = styled.div`
 export const ConstructorMainTitle = styled.div`
   font-weight: 600;
   font-size: ${getResponsiveFontSize(16, 14)};
-  color: #888888;
   padding: 35px 0;
 `;
 export const ConstructorSubTitle = styled.h2`
@@ -24,7 +23,6 @@ export const ConstructorSubTitle = styled.h2`
 
 export const SubTitleItem = styled.h2`
   font-size: ${getResponsiveFontSize(32, 24)};
-  color: #787878;
 
   &:nth-child(1) {
     margin-bottom: 5px;

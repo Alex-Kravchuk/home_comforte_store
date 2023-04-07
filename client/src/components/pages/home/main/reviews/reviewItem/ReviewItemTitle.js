@@ -1,15 +1,15 @@
 import React from "react";
 import {
-  ReviewItemTitelMain,
-  ReviewItemTitelSub,
+  ReviewItemTitleMain,
+  ReviewItemTitleSub,
   ReviewItemTitelWrap,
 } from "./ReviewItem.styled";
 
 const ReviewTitleItem = ({ main, sub }) => {
   return (
     <ReviewItemTitelWrap>
-      <ReviewItemTitelMain>{main}</ReviewItemTitelMain>
-      <ReviewItemTitelSub>{sub}</ReviewItemTitelSub>
+      <ReviewItemTitleMain>{main}</ReviewItemTitleMain>
+      <ReviewItemTitleSub>{sub}</ReviewItemTitleSub>
     </ReviewItemTitelWrap>
   );
 };

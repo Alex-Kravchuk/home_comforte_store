@@ -40,12 +40,11 @@ const Reviews = () => {
       <ReviewsTitle>Home Comfort in the real world</ReviewsTitle>
       <ReviewsSubTitle>
         We are happy to see our work in your home. We are pleased when you are
-        delighted! Show us more of your options by tagging #hc and #homecomfort
+        delighted! Show us more of your options by tagging <strong>#hc </strong>
+        and <strong> #homecomfort</strong>
       </ReviewsSubTitle>
 
-      <Swiper
-        {...swiperConfig}
-      >
+      <Swiper {...swiperConfig}>
         {reviewsItemConfig.map(
           ({ userName, img, id, productName, reviewText }) => (
             <SwiperSlide key={id}>

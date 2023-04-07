@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../../../../styles/globalStyles";
 
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 const { xl } = viewport_sizes;
@@ -61,7 +62,7 @@ export const OptionDescrptionContainer = styled.div`
   }
 `;
 export const OptionDescrptionItem = styled.span`
-  color: #9b9c9e;
+  color: ${textColors.plain};
   width: 40%;
   line-height: 1.3rem;
   padding: 15px 0;

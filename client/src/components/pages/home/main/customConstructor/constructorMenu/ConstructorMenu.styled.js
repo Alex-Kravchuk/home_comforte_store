@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../../../../styles/globalStyles";
 
 const { xxl, xl, xs, m } = viewport_sizes;
 
@@ -41,6 +42,12 @@ export const ConstructorMenuOptionsItem = styled.div`
   @media (max-width: ${xs}px) {
     width: auto;
   }
+
+  &:hover {
+    div:nth-child(2) {
+      left: 5px;
+    }
+  }
 `;
 export const ConstructorMenuOptionsItemIconContainer = styled.div`
   border: 1px solid #000;
@@ -74,9 +81,12 @@ export const ConstructorMenuOptionsItemIcon = styled.img`
 `;
 
 export const ConstructorMenuOptionsItemTitle = styled.div`
+  position: relative;
+  left: 0;
   font-size: ${getResponsiveFontSize(20, 16)};
   white-space: nowrap;
-  color: #888888;
+  color: ${textColors.plain};
+  transition: all 0.2s ease;
 
   @media (max-width: ${xl}px) {
     white-space: normal;

@@ -4,6 +4,7 @@ import { Input } from "antd";
 
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../../../styles/globalStyles";
 
 const { l, xs } = viewport_sizes;
 
@@ -38,12 +39,12 @@ export const MailSubscribeTitlesContainer = styled.div`
 `;
 export const MailSubscribeTitle = styled.div`
   font-size: ${getResponsiveFontSize(24, 22)};
-  color: black;
+  color: ${textColors.title};
   margin-bottom: 10px;
 `;
 export const MailSubscribeSubTitle = styled.div`
   font-size: ${getResponsiveFontSize(18, 16)};
-  color: #676564;
+
   padding-bottom: 30px;
 `;
 
@@ -65,7 +66,6 @@ export const CustomIntput = styled(Input)`
 `;
 export const MailSubscribeSubmitBtn = styled.div`
   font-size: ${getResponsiveFontSize(18, 14)};
-  color: #555759;
   display: flex;
   align-items: center;
   justify-content: center;

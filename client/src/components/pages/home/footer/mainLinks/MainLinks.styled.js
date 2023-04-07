@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Collapse } from "antd";
 
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+import { textColors } from "../../../../../styles/globalStyles";
 
 const { xl, l } = viewport_sizes;
 
@@ -12,7 +13,7 @@ export const MLWrapper = styled.div`
   margin: 50px 0;
   font-size: 14px;
 
-  @media (max-width: ${l}}px) {
+  @media (max-width: ${l}px) {
     margin: 0;
   }
 `;
@@ -45,10 +46,11 @@ export const MLItemsContainer = styled.div`
 `;
 export const MLColumn = styled.div``;
 export const MLColumnTitle = styled.div`
+  color: ${textColors.title};
   padding-bottom: 10px;
 `;
 export const MLItem = styled.div`
-  color: rgba(0, 0, 0, 0.45);
+  color: ${textColors.plain};
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
@@ -82,9 +84,11 @@ export const MLFAQTitle = styled.div`
 `;
 export const MLFAQTitleMain = styled.div`
   margin-bottom: 10px;
+  color: ${textColors.title};
 `;
 export const MLFAQTitleSub = styled.div`
   color: rgba(0, 0, 0, 0.45);
+  color: ${textColors.plain};
 `;
 export const MLFAQItems = styled.div``;
 export const MLFAQItemWrap = styled.div`
@@ -101,7 +105,7 @@ export const MLFAQItemWrap = styled.div`
     transition: all 0.2s ease;
     position: relative;
     left: 0;
-    color: rgba(0, 0, 0, 0.45);
+    color: ${textColors.svgColor};
   }
 
   &:nth-child(even) {
@@ -120,7 +124,7 @@ export const MLFAQItemWrap = styled.div`
     }
 
     svg {
-      color: rgba(0, 0, 0, 0.65);
+      color: ${textColors.svgHoverColor};
     }
   }
 
@@ -144,10 +148,11 @@ export const MLFAQInfoContainer = styled.div`
 export const MLFAQItemName = styled.div`
   text-align: left;
   margin-bottom: 5px;
+  color: ${textColors.title};
 `;
 export const MLFAQItemAddInfo = styled.div`
   text-align: left;
-  color: rgba(0, 0, 0, 0.45);
+  color: ${textColors.plain};
 `;
 
 // ---mobile screen panel styles-----------------------------------------------------------------
@@ -162,5 +167,3 @@ export const CustomCollapse = styled(Collapse)`
     border-radius: 0;
   }
 `;
-
-

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../styles/globalStyles";
 
 export const MenuWrapper = styled.div`
   height: 100%;
@@ -9,7 +10,10 @@ export const MenuWrapper = styled.div`
 
   a {
     text-decoration: none;
-    color: #636466;
+  }
+
+  a:visited {
+    color: inherit;
   }
 
   a:hover {
