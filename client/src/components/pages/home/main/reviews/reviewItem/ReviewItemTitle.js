@@ -1,7 +1,8 @@
 import React from "react";
+
 import {
-  ReviewItemTitleMain,
   ReviewItemTitleSub,
+  ReviewItemTitleMain,
   ReviewItemTitelWrap,
 } from "./ReviewItem.styled";
 

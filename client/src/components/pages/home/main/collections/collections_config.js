@@ -43,7 +43,7 @@ export const collections_config = [
     id: 6,
     name: "Tatum",
     description:
-      "A versatile, modular design that’s customized to adapt to how you live—today and tomorrow.",
+      "A versatile, modular design that`s customized to adapt to how you live-today and tomorrow.",
     img: Tatum,
   },
 ];

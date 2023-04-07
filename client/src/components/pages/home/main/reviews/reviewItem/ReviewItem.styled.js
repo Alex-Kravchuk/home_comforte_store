@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 import { Card } from "antd";
-import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
+
 import { textColors } from "../../../../../../styles/globalStyles";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 const { ml } = viewport_sizes;
 

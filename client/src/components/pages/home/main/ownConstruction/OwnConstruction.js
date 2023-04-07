@@ -1,14 +1,15 @@
 import React from "react";
 
+import { Container } from "../../../../../styles/globalStyles";
+
+import ConstructionItem from "./constructionItem/ConstuctionItem";
+import { constructionItemsConfig } from "./constructionItem/itemsConfig";
+
 import {
   ConstructionTitle,
   OwnConstructionWrapper,
   OwnConstructionContainer,
 } from "./OwnConstruction.styled";
-import { Container } from "../../../../../styles/globalStyles";
-
-import ConstructionItem from "./constructionItem/ConstuctionItem";
-import { constructionItemsConfig } from "./constructionItem/itemsConfig";
 
 const OwnConstruction = () => {
   return (

@@ -3,7 +3,7 @@ import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFo
 
 export const CollectionsItemWrapper = styled.div`
   cursor: pointer;
-  
+
   &:hover {
     svg {
       left: 15px;
@@ -18,6 +18,7 @@ export const CollectionsItemImg = styled.img`
   object-fit: cover;
 `;
 export const CollectionsItemTitleContainer = styled.div`
+  position: relative;
   padding: 10px 10px 10px 0;
   display: inline-block;
   font-size: ${getResponsiveFontSize(24, 22)};
@@ -25,12 +26,6 @@ export const CollectionsItemTitleContainer = styled.div`
   svg {
     font-size: ${getResponsiveFontSize(24, 22)};
   }
-`;
-export const CollectionsItemTitleName = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  text-align: left;
 `;
 
 export const NameContainer = styled.div``;

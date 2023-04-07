@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import { Button, Card } from "antd";
 
+import { textColors } from "../../../../../../styles/globalStyles";
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
-import { textColors } from "../../../../../../styles/globalStyles";
 
 const { l, s } = viewport_sizes;
 
@@ -58,7 +58,7 @@ export const ConstructionItemButtonContainer = styled.div`
   flex-direction: column;
 
   button {
-    color: #555759;
+    color: ${textColors.main};
   }
 
   button:nth-child(odd) {

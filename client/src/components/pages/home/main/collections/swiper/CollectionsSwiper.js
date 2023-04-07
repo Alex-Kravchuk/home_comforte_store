@@ -3,9 +3,9 @@ import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { collections_config } from "../collections_config";
 import CollectionsItem from "../collectionsItem/CollectionsItem";
 
-import { collections_config } from "../collections_config";
 import { SwiperContainer } from "./CollectionsSwiper.styled";
 
 import "swiper/css";

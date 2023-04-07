@@ -8,6 +8,9 @@ const { global } = sizes;
 const { m, l } = viewport_sizes;
 
 export const HomeHeaderWrapper = styled.div`
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
   width: 100vw;
   max-width: 100%;
   height: auto;

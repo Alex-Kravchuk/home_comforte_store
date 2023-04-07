@@ -1,10 +1,10 @@
 import React from "react";
 
-import { useGetWindowSize } from "../../../../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
-
 import CollectionsSwiper from "./swiper/CollectionsSwiper";
 import { Container } from "../../../../../styles/globalStyles";
+
+import { useGetWindowSize } from "../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
 import {
   TitleContainer,
@@ -16,6 +16,7 @@ import {
 const Collections = () => {
   const viewport = useGetWindowSize();
   const smallScreen = viewport.width < viewport_sizes.ml;
+
   return (
     <CollectionsWrapper>
       <Container>
@@ -26,6 +27,7 @@ const Collections = () => {
           )}
         </CollectionTitleContainer>
       </Container>
+      {/* on mobile screen hide descktop button and move it under swiper using flex-direction: column */}
       <CollectionsSwiper />
       {smallScreen && (
         <Container>

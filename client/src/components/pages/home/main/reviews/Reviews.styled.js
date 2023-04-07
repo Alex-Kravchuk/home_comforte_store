@@ -8,8 +8,8 @@ import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 const { l } = viewport_sizes;
 
 export const ReviewsWrapper = styled.div`
-// it's the separate swiper styles
-// from global styles file
+  // it's the separate swiper styles
+  // from global styles file
   ${swiperStyles}
 
   -moz-user-select: none;
@@ -23,6 +23,7 @@ export const ReviewsWrapper = styled.div`
   .swiper-pagination-bullet-active {
     background-color: #555759 !important;
   }
+  
 `;
 export const ReviewsContainer = styled.div``;
 export const ReviewsTitle = styled.div`
@@ -42,4 +43,8 @@ export const ReviewsSubTitle = styled.div`
   @media (max-width: ${l}px) {
     padding: 0 20px 15px 20px;
   }
+`;
+
+export const ReviewHashTag = styled.span`
+  font-weight: 600;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
 
 export const CollectionsWrapper = styled.div``;

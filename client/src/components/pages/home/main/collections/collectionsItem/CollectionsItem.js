@@ -6,7 +6,6 @@ import {
   NameContainer,
   CollectionsItemImg,
   CollectionsItemWrapper,
-  CollectionsItemTitleName,
   CollectionsItemTitleArrow,
   CollectionsItemDescription,
   CollectionsItemTitleContainer,
@@ -19,12 +18,10 @@ const CollectionsItem = ({ collection }) => {
     <CollectionsItemWrapper>
       <CollectionsItemImg src={img} />
       <CollectionsItemTitleContainer>
-        <CollectionsItemTitleName>
-          <NameContainer>{name}</NameContainer>
-          <CollectionsItemTitleArrow>
-            <EastIcon />
-          </CollectionsItemTitleArrow>
-        </CollectionsItemTitleName>
+        <NameContainer>{name}</NameContainer>
+        <CollectionsItemTitleArrow>
+          <EastIcon />
+        </CollectionsItemTitleArrow>
       </CollectionsItemTitleContainer>
       <CollectionsItemDescription>{description}</CollectionsItemDescription>
     </CollectionsItemWrapper>
