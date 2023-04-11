@@ -7,12 +7,9 @@ const { l, xl, xxl, m } = viewport_sizes;
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
 
-
-
   * {
     margin: 0;
     padding: 0;  
-    // box-sizing: border-box;
   }
 
   html {
@@ -82,5 +79,17 @@ export const swiperStyles = `
   .swiper-button-next::after {
     font-size: 34px;
   }
+}
+`;
+
+export const marginConsts = `
+margin-top: 55px;
+
+@media (max-width: ${l}px) {
+  margin-top: 45px;
+}
+
+@media (max-width: ${m}px) {
+  margin-top: 35px;
 }
 `;

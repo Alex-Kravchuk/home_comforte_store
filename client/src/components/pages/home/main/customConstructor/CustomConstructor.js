@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import ConstructorMenu from "./constructorMenu/ConstructorMenu";
+import ConstructorTitle from "./constructorTitle/ConstructorTitle";
+import ConstructorPresentation from "./constructorPresentation/ConstructorPresentation";
+
 import { Container } from "../../../../../styles/globalStyles";
 
 import {
@@ -7,14 +11,10 @@ import {
   CustomConstructorContainer,
 } from "./CustomConstructor.styled";
 
-import ConstructorMenu from "./constructorMenu/ConstructorMenu";
-import ConstructorTitle from "./constructorTitle/ConstructorTitle";
-import ConstructorPresentation from "./constructorPresentation/ConstructorPresentation";
-
 const CustomContructor = () => {
   const [sliderShift, setSliderShift] = useState(50);
   const [selectedItem, setSelectedItem] = useState(0);
-  
+
   const sliderRef = useRef();
 
   useEffect(() => {

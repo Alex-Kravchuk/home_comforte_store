@@ -51,7 +51,7 @@ export const CPImg = styled.img`
   height: auto;
 `;
 
-export const OptionDescrptionContainer = styled.div`
+export const OptionDescriptionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,7 +61,7 @@ export const OptionDescrptionContainer = styled.div`
     text-align: right;
   }
 `;
-export const OptionDescrptionItem = styled.span`
+export const OptionDescriptionItem = styled.span`
   color: ${textColors.plain};
   width: 40%;
   line-height: 1.3rem;

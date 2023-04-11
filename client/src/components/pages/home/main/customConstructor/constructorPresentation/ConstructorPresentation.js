@@ -14,8 +14,8 @@ import {
   PresentationItem,
   CPImgLowerContainer,
   CPImgUpperContainer,
-  OptionDescrptionItem,
-  OptionDescrptionContainer,
+  OptionDescriptionItem,
+  OptionDescriptionContainer,
 } from "./ConstructorPresentation.styled";
 
 const ConstructorPresentation = ({
@@ -50,14 +50,14 @@ const ConstructorPresentation = ({
               </CPImgLowerContainer>
               <Thumb onChnageHandler={changeWidthHandler} shift={sliderShift} />
             </CPContainer>
-            <OptionDescrptionContainer>
-              <OptionDescrptionItem>
+            <OptionDescriptionContainer>
+              <OptionDescriptionItem>
                 {option.upperDescription}
-              </OptionDescrptionItem>
-              <OptionDescrptionItem>
+              </OptionDescriptionItem>
+              <OptionDescriptionItem>
                 {option.lowerDescription}
-              </OptionDescrptionItem>
-            </OptionDescrptionContainer>
+              </OptionDescriptionItem>
+            </OptionDescriptionContainer>
           </PresentationItem>
         ))}
       </Carousel>

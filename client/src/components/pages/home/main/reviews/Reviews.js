@@ -41,7 +41,7 @@ const Reviews = () => {
       <ReviewsSubTitle>
         We are happy to see our work in your home. We are pleased when you are
         delighted! Show us more of your options by tagging
-        <ReviewHashTag>#hc </ReviewHashTag>
+        <ReviewHashTag> #hc </ReviewHashTag>
         and <ReviewHashTag> #homecomfort</ReviewHashTag>
       </ReviewsSubTitle>
 

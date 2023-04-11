@@ -20,7 +20,7 @@ height: 100%;
 background: transparent;
 `;
 
-// styled components------------------------------------------------------------------------------------
+// ---styled components------------------------------------------------------------------------------------
 
 export const CPThumbWrapper = styled.div`
   position: absolute;

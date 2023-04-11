@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+import { marginConsts } from "../../../../../styles/globalStyles";
 
-export const CollectionsWrapper = styled.div``;
+export const CollectionsWrapper = styled.div`
+  ${marginConsts}
+`;
 
 export const CollectionTitleContainer = styled.div`
   margin: 50px 0 25px 0;

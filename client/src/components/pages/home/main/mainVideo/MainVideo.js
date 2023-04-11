@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MainVideoContent, MainVideoWrapper } from "./MainVideo.styled";
 
 import videoContent from "../../../../../assets/videos/main_video.mp4";
+
 import { Container } from "../../../../../styles/globalStyles";
+import { MainVideoContent, MainVideoWrapper } from "./MainVideo.styled";
 
 const MainVideo = () => {
   const [playing, setPlaying] = useState(true);

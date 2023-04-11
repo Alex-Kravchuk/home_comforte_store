@@ -1,34 +1,63 @@
 import React from "react";
+
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { product_list_config } from "./product_list_config";
+import { useGetWindowSize } from "../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
 import {
-  ProductListContainer,
   ProductListItemContainer,
   ProductListItemImage,
   ProductListItemImageContainer,
   ProductListItemTitle,
-  ProductListOpacityItemContainer,
   ProductListWrapper,
 } from "./ProductList.styled";
 
-import { Container } from "../../../../../styles/globalStyles";
-
-import { product_list } from "../../../../../utils/product_list";
-
 const ProductList = () => {
+  const viewport = useGetWindowSize();
+
+  const mobileScreen = viewport.width < viewport_sizes.m;
+  const mediumScreen = viewport.width < viewport_sizes.ml;
+  const tabletScreen = viewport.width < viewport_sizes.l;
+  const smallDesctopScreen = viewport.width < viewport_sizes.xl;
+
+  const swiperConfig = {
+    spaceBetween: 10,
+    slidesPerView: mobileScreen
+      ? 2
+      : mediumScreen
+      ? 3
+      : tabletScreen
+      ? 4
+      : smallDesctopScreen
+      ? 5
+      : 6,
+    slidesOffsetAfter: mobileScreen ? 0 : 60,
+    slidesOffsetBefore: mobileScreen ? 0 : 60,
+    navigation: true,
+    modules: [Navigation],
+    centeredSlides: mobileScreen,
+  };
+
   return (
     <ProductListWrapper>
-      <Container>
-        <ProductListContainer>
-          {product_list.map(({ title, img, id }) => (
-            <ProductListItemContainer key={id}>
-              <ProductListOpacityItemContainer />
-              <ProductListItemTitle>{title}</ProductListItemTitle>
+      <Swiper {...swiperConfig}>
+        {product_list_config.map(({ title, img, id }) => (
+          <SwiperSlide key={id}>
+            <ProductListItemContainer>
               <ProductListItemImageContainer>
                 <ProductListItemImage src={img} />
               </ProductListItemImageContainer>
+              <ProductListItemTitle>{title}</ProductListItemTitle>
             </ProductListItemContainer>
-          ))}
-        </ProductListContainer>
-      </Container>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </ProductListWrapper>
   );
 };

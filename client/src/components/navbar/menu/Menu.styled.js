@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
-import { textColors } from "../../../styles/globalStyles";
 
 export const MenuWrapper = styled.div`
   height: 100%;

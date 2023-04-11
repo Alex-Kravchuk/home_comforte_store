@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
+import { textColors } from "../../../../../../styles/globalStyles";
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { getResponsiveFontSize } from "../../../../../../helpers/getResponsiveFontSize";
-import { textColors } from "../../../../../../styles/globalStyles";
 
 const { xxl, xl, xs, m } = viewport_sizes;
 
@@ -11,6 +11,7 @@ export const ConstructorMenuWrapper = styled.div`
   height: auto;
 
   @media (max-width: ${xl}px) {
+    // this is necessary in order to display under the constructor 
     order: 2;
   }
 `;
