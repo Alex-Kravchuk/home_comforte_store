@@ -1,6 +1,6 @@
 const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
-const { AdditionalVariant } = require("../models/models");
+const { AdditionalVarigant } = require("../models/models");
 const {
   materialInfoMOCK,
   dimensionInfoMOCK,
