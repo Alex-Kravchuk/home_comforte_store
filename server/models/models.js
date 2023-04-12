@@ -1,5 +1,8 @@
 const sequelize = require("../db");
+
 const { DataTypes } = require("sequelize");
+
+// user settings
 
 const User = sequelize.define("user", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -16,6 +19,7 @@ const User = sequelize.define("user", {
 const Basket = sequelize.define("basket", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
+
 const PurchaseHistory = sequelize.define("purchase_history", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   goods: { type: DataTypes.JSON, allowNull: false },
@@ -25,37 +29,20 @@ const BasketFurniture = sequelize.define("basket_furniture", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
-const Furniture = sequelize.define("furniture", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
-  price: { type: DataTypes.INTEGER, allowNull: false },
-  rating: { type: DataTypes.STRING, defaultValue: 0 },
-  img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
-  description: { type: DataTypes.STRING, allowNull: false },
-  material_info: { type: DataTypes.JSON, allowNull: false },
-  dimension_info: { type: DataTypes.JSON, allowNull: false },
-  modifier_info: { type: DataTypes.JSON },
-});
-
-const AdditionalVariant = sequelize.define("additional_variant", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
-  price: { type: DataTypes.INTEGER, allowNull: false },
-  rating: { type: DataTypes.STRING, defaultValue: 0 },
-  img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
-  description: { type: DataTypes.STRING, allowNull: false },
-  material_info: { type: DataTypes.JSON, allowNull: false },
-  dimension_info: { type: DataTypes.JSON, allowNull: false },
-});
-
 const Review = sequelize.define("review", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
-  date: { type: DataTypes.DATE, allowNull: false },
   review_title: { type: DataTypes.STRING },
   review_body: { type: DataTypes.STRING },
   rating: { type: DataTypes.INTEGER, allowNull: false },
   img: { type: DataTypes.ARRAY(DataTypes.STRING) },
+});
+
+// furniture settings
+
+const Category = sequelize.define("category", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
 const Type = sequelize.define("type", {
@@ -63,9 +50,37 @@ const Type = sequelize.define("type", {
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
-const Brand = sequelize.define("brand", {
+const SubType = sequelize.define("sub_type", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
+});
+
+const Furniture = sequelize.define("furniture", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  price: { type: DataTypes.INTEGER, allowNull: false },
+  rating: { type: DataTypes.STRING, defaultValue: 0 },
+  img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
+  description: { type: DataTypes.STRING, allowNull: false },
+  dimension_info: { type: DataTypes.JSON, allowNull: false },
+});
+
+const Modifier = sequelize.define("modifier", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  items: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
+  displayMethod: { type: DataTypes.STRING, allowNull: false },
+});
+
+const Preview = sequelize.define("preview", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  content: { type: DataTypes.JSON, allowNull: false },
+});
+
+const Seating = sequelize.define("seating", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  content: { type: DataTypes.JSON, allowNull: false },
+  details: { type: DataTypes.JSON, allowNull: false },
 });
 
 const Rating = sequelize.define("rating", {
@@ -73,8 +88,11 @@ const Rating = sequelize.define("rating", {
   rating: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
 });
 
-const TypeBrand = sequelize.define("type_brand", {
+const Collections = sequelize.define("collections", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, allowNull: false },
+  description: { type: DataTypes.STRING, allowNull: false },
+  img: { type: DataTypes.STRING },
 });
 
 // user settings
@@ -99,13 +117,24 @@ BasketFurniture.belongsTo(Basket);
 Basket.hasMany(PurchaseHistory);
 PurchaseHistory.belongsTo(Basket);
 
-// ordinary furniture
+// category and types settings
+
+Category.hasMany(Type);
+Type.belongsTo(Category);
+
+Type.hasMany(SubType);
+SubType.belongsTo(Type);
+
+Category.hasMany(Furniture);
+Furniture.belongsTo(Category);
 
 Type.hasMany(Furniture);
 Furniture.belongsTo(Type);
 
-Brand.hasMany(Furniture);
-Furniture.belongsTo(Brand);
+SubType.hasMany(Furniture);
+Furniture.belongsTo(SubType);
+
+// furnture settings
 
 Furniture.hasMany(Rating);
 Rating.belongsTo(Furniture);
@@ -116,31 +145,17 @@ Review.belongsTo(Furniture);
 Furniture.hasMany(BasketFurniture);
 BasketFurniture.belongsTo(Furniture);
 
-Furniture.hasMany(AdditionalVariant);
-AdditionalVariant.belongsTo(Furniture);
+Furniture.hasMany(Modifier);
+Modifier.belongsTo(Furniture);
 
-// additional furniture
+Furniture.hasMany(Preview);
+Preview.belongsTo(Furniture);
 
-Type.hasMany(AdditionalVariant);
-AdditionalVariant.belongsTo(Type);
+Furniture.hasMany(Seating);
+Seating.belongsTo(Furniture);
 
-Brand.hasMany(AdditionalVariant);
-AdditionalVariant.belongsTo(Brand);
-
-AdditionalVariant.hasMany(Rating);
-Rating.belongsTo(AdditionalVariant);
-
-AdditionalVariant.hasMany(Review);
-Review.belongsTo(AdditionalVariant);
-
-AdditionalVariant.hasMany(BasketFurniture);
-BasketFurniture.belongsTo(AdditionalVariant);
-
-Furniture.hasMany(AdditionalVariant);
-AdditionalVariant.belongsTo(Furniture);
-
-Type.belongsToMany(Brand, { through: TypeBrand });
-Brand.belongsToMany(Type, { through: TypeBrand });
+Collections.hasMany(Furniture);
+Furniture.belongsTo(Collections);
 
 module.exports = {
   User,
@@ -148,10 +163,13 @@ module.exports = {
   Furniture,
   BasketFurniture,
   Type,
-  Brand,
   Rating,
   Review,
-  AdditionalVariant,
-  TypeBrand,
   PurchaseHistory,
+  Collections,
+  Category,
+  SubType,
+  Seating,
+  Preview,
+  Modifier,
 };
