@@ -1,7 +1,7 @@
-const ApiError = require("../../error/ApiError");
+const ApiError = require("../error/ApiError");
 
-module.exports = (req, res, next) => {
-  const errorSource = "type or brand controller";
+module.exports = (source) => (req, res, next) => {
+  const errorSource = `${source} controller`;
 
   const { name } = req.body;
   if (!name) {

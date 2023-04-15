@@ -48,6 +48,7 @@ const Category = sequelize.define("category", {
 const Type = sequelize.define("type", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  img: { type: DataTypes.STRING, allowNull: false },
 });
 
 const SubType = sequelize.define("sub_type", {
@@ -88,11 +89,11 @@ const Rating = sequelize.define("rating", {
   rating: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
 });
 
-const Collections = sequelize.define("collections", {
+const Collection = sequelize.define("collections", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false },
-  img: { type: DataTypes.STRING },
+  img: { type: DataTypes.STRING, allowNull: false },
 });
 
 // user settings
@@ -154,8 +155,8 @@ Preview.belongsTo(Furniture);
 Furniture.hasMany(Seating);
 Seating.belongsTo(Furniture);
 
-Collections.hasMany(Furniture);
-Furniture.belongsTo(Collections);
+Collection.hasMany(Furniture);
+Furniture.belongsTo(Collection);
 
 module.exports = {
   User,
@@ -166,7 +167,7 @@ module.exports = {
   Rating,
   Review,
   PurchaseHistory,
-  Collections,
+  Collection,
   Category,
   SubType,
   Seating,

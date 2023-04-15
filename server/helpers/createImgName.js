@@ -7,7 +7,7 @@ const createImgName = (image, type) => {
     return;
   }
 
-  const imgIsArray = image.length >= 1;
+  const imgIsArray = Array.isArray(image);
   const typeIsArray = type === "ARRAY";
 
   let filesNames = [];
