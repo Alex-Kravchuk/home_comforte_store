@@ -4,7 +4,6 @@ const { Modifier } = require("../models/models");
 const createImgName = require("../helpers/createImgName");
 const createModifier = require("../helpers/createModifier");
 
-const mockLISTMODIFIER = require("../assets/mock/modifierMOCK");
 
 class ModifierController {
   static errorSource = "modifier controller";
@@ -27,11 +26,10 @@ class ModifierController {
       }
 
       const items = createModifier(displayMethod, fileNames, descriptions);
-
-   
-
       const modifier = await Modifier.create({ name, items, displayMethod, furnitureId });
+
       return res.json(modifier);
+      
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, ModifierController.errorSource)
