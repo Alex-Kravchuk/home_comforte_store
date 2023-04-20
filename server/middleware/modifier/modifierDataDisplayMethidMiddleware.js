@@ -5,6 +5,8 @@ module.exports = async (req, res, next) => {
 
   const { displayMethod, descriptions } = req.body;
 
+  const descriptionsParsed = JSON.parse(descriptions);
+
   const correctDisplayMethod =
     displayMethod === "list" ||
     displayMethod === "tile" ||
@@ -14,6 +16,15 @@ module.exports = async (req, res, next) => {
     return next(
       ApiError.requestDataAreNotDefined(
         "The display method is not in the correct format of is undefined",
+        errorSource
+      )
+    );
+  }
+
+  if (!descriptionsParsed.length) {
+    return next(
+      ApiError.requestDataAreNotDefined(
+        "There is no list of described values",
         errorSource
       )
     );
@@ -29,7 +40,6 @@ module.exports = async (req, res, next) => {
     const { img } = req.files;
     // if there is only one image, then we set the length to 1
     const imagesLength = img.length ?? 1;
-    const descriptionsParsed = JSON.parse(descriptions);
 
     const wrongNumberElements = imagesLength !== descriptionsParsed.length;
 
