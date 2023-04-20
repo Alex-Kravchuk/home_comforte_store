@@ -1,15 +1,18 @@
 const ApiError = require("../../error/ApiError");
 const { Furniture } = require("../../models/models");
 
-module.exports = async function (req, res, next) {
-  const errorSource = "review controller";
-  const { name, userId, furnitureId, date, review_title, review_body, rating } =
-    req.body;
+module.exports = async (req, res, next) => {
+  const errorSource = "preview controller";
 
-  const allDataAreGiven = name && userId && date && rating;
+  const { furnitureId, details } = req.body;
 
-  if (!allDataAreGiven) {
-    return next(ApiError.requestDataAreNotDefined(null, errorSource));
+  if (!details) {
+    return next(
+      ApiError.requestDataAreNotDefined(
+        "The details are not defined",
+        errorSource
+      )
+    );
   }
 
   if (isNaN(furnitureId)) {
@@ -19,9 +22,8 @@ module.exports = async function (req, res, next) {
         errorSource
       )
     );
-  }else {
-	const furniture = await Furniture.findOne({ where: { id: furnitureId } });
-
+  } else {
+    const furniture = await Furniture.findOne({ where: { id: furnitureId } });
     if (!furniture) {
       return next(
         ApiError.requestDataAreNotDefined(
@@ -30,6 +32,12 @@ module.exports = async function (req, res, next) {
         )
       );
     }
+  }
+
+  if (!req.files) {
+    return next(
+      ApiError.requestDataAreNotDefined("The img is not defined", errorSource)
+    );
   }
 
   next();

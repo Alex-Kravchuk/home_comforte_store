@@ -21,9 +21,11 @@ class SubTypeController {
     }
   }
 
+  // this method is used when you want to get all subTypes by typeId
   async getAll(req, res, next) {
+    const { id } = req.params;
     try {
-      const subTypes = await SubType.findAll();
+      const subTypes = await SubType.findAll({ where: { typeId: id } });
       return res.json(subTypes);
     } catch (error) {
       return next(

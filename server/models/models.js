@@ -63,13 +63,12 @@ const Furniture = sequelize.define("furniture", {
   rating: { type: DataTypes.STRING, defaultValue: 0 },
   img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false },
-  dimension_info: { type: DataTypes.JSON, allowNull: false },
 });
 
 const Modifier = sequelize.define("modifier", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
-  items: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
+  items: { type: DataTypes.JSON, allowNull: false },
   displayMethod: { type: DataTypes.STRING, allowNull: false },
 });
 
@@ -78,9 +77,9 @@ const Preview = sequelize.define("preview", {
   content: { type: DataTypes.JSON, allowNull: false },
 });
 
-const Seating = sequelize.define("seating", {
+const Dimension = sequelize.define("dimension", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  content: { type: DataTypes.JSON, allowNull: false },
+  img: { type: DataTypes.STRING, allowNull: false },
   details: { type: DataTypes.JSON, allowNull: false },
 });
 
@@ -152,8 +151,8 @@ Modifier.belongsTo(Furniture);
 Furniture.hasMany(Preview);
 Preview.belongsTo(Furniture);
 
-Furniture.hasMany(Seating);
-Seating.belongsTo(Furniture);
+Furniture.hasOne(Dimension);
+Dimension.belongsTo(Furniture);
 
 Collection.hasMany(Furniture);
 Furniture.belongsTo(Collection);
@@ -170,7 +169,7 @@ module.exports = {
   Collection,
   Category,
   SubType,
-  Seating,
   Preview,
   Modifier,
+  Dimension,
 };

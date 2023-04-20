@@ -4,10 +4,10 @@ const router = new Router();
 const previewController = require("../controllers/previewController");
 
 const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
-const incorrectRequestDataMiddleware = require("../middleware/incorrectRequestDataMiddleware");
+const incReqPreviewDataMiddleware = require("../middleware/preview/incReqPreviewDataMiddleware");
 
-router.post("/", incorrectRequestDataMiddleware, previewController.create);
-router.get("/", previewController.getAll);
+router.post("/", incReqPreviewDataMiddleware, previewController.create);
+
 router.get(
   "/:id",
   checkCorrectIDMiddleware("preview"),

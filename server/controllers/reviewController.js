@@ -11,7 +11,6 @@ class ReviewController {
         name,
         userId,
         furnitureId,
-        additionalVariantId,
         date,
         review_title,
         review_body,
@@ -26,13 +25,12 @@ class ReviewController {
 
       const review = await Review.create({
         name,
-        userId,
-        furnitureId,
-        additionalVariantId,
         date,
+        userId,
+        rating,
+        furnitureId,
         review_body,
         review_title,
-        rating,
         img: filesNames,
       });
 
@@ -47,7 +45,6 @@ class ReviewController {
   async getAllFurnitureReviews(req, res, next) {
     try {
       const { id } = req.params;
-     
 
       let reviews;
       reviews = await Review.findAndCountAll({ where: { furnitureId: id } });

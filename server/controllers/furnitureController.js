@@ -18,12 +18,11 @@ class FurnitureController {
       const {
         name,
         typeId,
-        brandId,
+        categoryId,
+        subTypeId,
+        collectionId,
         description,
         price,
-        material_info,
-        dimension_info,
-        modifier_info,
       } = req.body;
 
       const duplicateName = await Furniture.findOne({ where: { name } });
@@ -32,11 +31,9 @@ class FurnitureController {
       }
 
       if (req.files) {
-        // here needs some material image
-        const { img: images, dimension_img, material_img } = req.files;
+        const { img } = req.files;
 
-        dimensionImgName = createImgName(dimension_img, "STRING");
-        filesNames = createImgName(images, "ARRAY");
+        filesNames = createImgName(img, "ARRAY");
       }
 
       // it's for testing
@@ -48,12 +45,11 @@ class FurnitureController {
         name,
         price: Number(price),
         typeId,
-        brandId,
+        categoryId,
+        subTypeId,
         description,
+        collectionId,
         img: filesNames,
-        material_info: materialInfo,
-        modifier_info: modifierInfo,
-        dimension_info: dimensionInfo,
       });
 
       return res.json(furniture);

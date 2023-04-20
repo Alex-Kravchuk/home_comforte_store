@@ -7,7 +7,11 @@ const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware
 const incReqSubTypeDataMiddleware = require("../middleware/subType/incReqSubTypeDataMiddleware");
 
 router.post("/", incReqSubTypeDataMiddleware, subTypeController.create);
-router.get("/", subTypeController.getAll);
+router.get(
+  "/:id",
+  checkCorrectIDMiddleware("subType"),
+  subTypeController.getAll
+);
 router.get(
   "/:id",
   checkCorrectIDMiddleware("subType"),

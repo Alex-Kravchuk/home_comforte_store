@@ -1,18 +1,36 @@
 const ApiError = require("../error/ApiError");
 const { Modifier } = require("../models/models");
 
+const createImgName = require("../helpers/createImgName");
+const createModifier = require("../helpers/createModifier");
+
+const mockLISTMODIFIER = require("../assets/mock/modifierMOCK");
+
 class ModifierController {
   static errorSource = "modifier controller";
   async create(req, res, next) {
     try {
-      const { name, items, displayMethod } = req.body;
+      let fileNames;
+      const { name, descriptions, displayMethod, furnitureId } = req.body;
 
-      const alreadyExists = await Modifier.findOne({ where: { name } });
+      const alreadyExists = await Modifier.findOne({
+        where: { name, furnitureId },
+      });
+
       if (alreadyExists) {
         return next(ApiError.duplicateName(ModifierController.errorSource));
       }
 
-      const modifier = await Modifier.create({ name, items, displayMethod });
+      if (req.files) {
+        const { img } = req.files;
+        fileNames = createImgName(img, "ARRAY");
+      }
+
+      const items = createModifier(displayMethod, fileNames, descriptions);
+
+   
+
+      const modifier = await Modifier.create({ name, items, displayMethod, furnitureId });
       return res.json(modifier);
     } catch (error) {
       return next(

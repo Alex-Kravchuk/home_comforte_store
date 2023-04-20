@@ -3,16 +3,8 @@ const ApiError = require("../../error/ApiError");
 module.exports = function (req, res, next) {
   const errorSource = "furniture controller";
   try {
-    const {
-      name,
-      typeId,
-      brandId,
-      description,
-      price,
-      material_info,
-      dimension_info,
-      modifier_info = true,
-    } = req.body;
+    const { name, typeId, description, subTypeId, categoryId, price } =
+      req.body;
 
     if (!req.files) {
       return next(
@@ -20,23 +12,16 @@ module.exports = function (req, res, next) {
       );
     }
 
-    const { img, dimension_img } = req.files;
+    const { img } = req.files;
 
     const allDataAreGiven =
-      name &&
-      typeId &&
-      brandId &&
-      description &&
-      price &&
-      material_info &&
-      dimension_info &&
-      modifier_info;
+      name && typeId && description && price && subTypeId && categoryId;
 
     if (!allDataAreGiven) {
       return next(ApiError.requestDataAreNotDefined(null, errorSource));
     }
 
-    if (!img || !dimension_img) {
+    if (!img) {
       return next(
         ApiError.requestDataAreNotDefined("No image selected", errorSource)
       );

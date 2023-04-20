@@ -1,30 +1,42 @@
 const ApiError = require("../error/ApiError");
 const { Preview } = require("../models/models");
 
+const createImgName = require("../helpers/createImgName");
+
 class PreviewController {
   static errorSource = "preview controller";
   async create(req, res, next) {
+    // details are an array each index of which is equal to the image index in req.files array
     try {
-      const { name, content } = req.body;
+      const { furnitureId, details } = req.body;
+      let filesNames;
+      let content = [];
+      const detailsParse = JSON.parse(details);
 
-      const alreadyExists = await Preview.findOne({ where: { name } });
+      const alreadyExists = await Preview.findOne({ where: { furnitureId } });
       if (alreadyExists) {
         return next(ApiError.duplicateName(PreviewController.errorSource));
       }
 
-      const preview = await Preview.create({ name, content });
-      return res.json(preview);
-    } catch (error) {
-      return next(
-        ApiError.unexpectedError(error, PreviewController.errorSource)
-      );
-    }
-  }
+      if (req.files) {
+        const { img } = req.files;
+        filesNames = createImgName(img, "ARRAY");
+      }
 
-  async getAll(req, res, next) {
-    try {
-      const previews = await Preview.findAll();
-      return res.json(previews);
+      content = filesNames.map((element, index) => {
+        let contentItem = { description: "", img: "" };
+
+        contentItem.img = element;
+        contentItem.description = detailsParse[index];
+
+        return contentItem;
+      });
+
+      const preview = await Preview.create({
+        furnitureId,
+        content,
+      });
+      return res.json(preview);
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, PreviewController.errorSource)
@@ -35,9 +47,10 @@ class PreviewController {
   async getOne(req, res) {
     try {
       const { id } = req.params;
-      const preview = await Preview.findOne({ where: { id } });
+      const preview = await Preview.findOne({ where: { furnitureId: id } });
 
       return res.json(preview);
+
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, PreviewController.errorSource)
@@ -48,7 +61,7 @@ class PreviewController {
   async delete(req, res) {
     try {
       const { id } = req.params;
-      const preview = await Preview.findOne({ where: { id } });
+      const preview = await Preview.findOne({ where: { furnitureId: id  } });
 
       preview.destroy();
 

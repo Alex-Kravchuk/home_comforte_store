@@ -4,9 +4,9 @@ const router = new Router();
 const collectionController = require("../controllers/collectionController");
 
 const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
-const incorrectRequestDataMiddleware = require("../middleware/incorrectRequestDataMiddleware");
+const incReqCollectionDataMiddleware = require("../middleware/collection/incReqCollectionDataMiddleware");
 
-router.post("/", incorrectRequestDataMiddleware, collectionController.create);
+router.post("/", incReqCollectionDataMiddleware, collectionController.create);
 router.get("/", collectionController.getAll);
 router.get(
   "/:id",
