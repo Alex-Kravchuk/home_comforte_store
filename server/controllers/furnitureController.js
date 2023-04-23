@@ -3,16 +3,10 @@ const ApiError = require("../error/ApiError");
 
 const { Furniture, Rating } = require("../models/models");
 
-// it's for testing
-const { dimensionInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
-const { modifierInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
-const { materialInfoMOCK } = require("../assets/mock/furnitureAdditionalnfo");
-
 class FurnitureController {
   static errorSource = "furniture controller";
   async create(req, res, next) {
     try {
-      let dimensionImgName;
       let filesNames;
 
       const {
@@ -25,21 +19,8 @@ class FurnitureController {
         price,
       } = req.body;
 
-      const duplicateName = await Furniture.findOne({ where: { name } });
-      if (duplicateName) {
-        return next(ApiError.duplicateName(FurnitureController.errorSource));
-      }
-
-      if (req.files) {
-        const { img } = req.files;
-
-        filesNames = createImgName(img, "ARRAY");
-      }
-
-      // it's for testing
-      const materialInfo = JSON.parse(materialInfoMOCK);
-      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
-      const modifierInfo = JSON.parse(modifierInfoMOCK);
+      const { img } = req.files;
+      filesNames = createImgName(img, "ARRAY");
 
       const furniture = await Furniture.create({
         name,
@@ -60,28 +41,39 @@ class FurnitureController {
     }
   }
 
+  async getAllByCollectionId(req, res, next) {
+    try {
+      let { limit, page } = req.query;
+      let { id } = req.params;
+
+      page = page || 1;
+      limit = limit || 3;
+      const offset = page * limit - limit;
+
+      const furnitures = await Furniture.findAndCountAll({
+        where: { collectionId: id },
+        limit,
+        offset,
+      });
+
+      return res.json(furnitures);
+    } catch (error) {
+      return next(
+        ApiError.unexpectedError(error, FurnitureController.errorSource)
+      );
+    }
+  }
+
   async getAll(req, res, next) {
     try {
-      let { brandId, typeId, limit, page } = req.query;
+      let { subTypeId, typeId, limit, page } = req.query;
       page = page || 1;
       limit = limit || 3;
       const offset = page * limit - limit;
 
       let furnitures;
 
-      if (!brandId && !typeId) {
-        furnitures = await Furniture.findAndCountAll({ limit, offset });
-      }
-
-      if (brandId && !typeId) {
-        furnitures = await Furniture.findAndCountAll({
-          where: { brandId },
-          limit,
-          offset,
-        });
-      }
-
-      if (!brandId && typeId) {
+      if (typeId) {
         furnitures = await Furniture.findAndCountAll({
           where: { typeId },
           limit,
@@ -89,12 +81,16 @@ class FurnitureController {
         });
       }
 
-      if (brandId && typeId) {
+      if (subTypeId) {
         furnitures = await Furniture.findAndCountAll({
-          where: { typeId, brandId },
+          where: { subTypeId },
           limit,
           offset,
         });
+      }
+
+      if (!subTypeId && !typeId) {
+        furnitures = await Furniture.findAndCountAll({ limit, offset });
       }
 
       return res.json(furnitures);
@@ -119,41 +115,26 @@ class FurnitureController {
 
   async update(req, res, next) {
     try {
-      let dimensionImgName;
       let filesNames;
 
-      const {
-        name,
-        description,
-        price,
-        material_info,
-        dimension_info,
-        modifier_info,
-      } = req.body;
+      const { name, description, price } = req.body;
 
       const { id } = req.params;
 
       if (req.files) {
-        const { img: images, dimension_img, material_img } = req.files;
+        const { img } = req.files;
 
-        dimensionImgName = createImgName(dimension_img, "STRING");
-        filesNames = createImgName(images, "ARRAY");
+        filesNames = createImgName(img, "ARRAY");
       }
 
       const furniture = await Furniture.findOne({ where: { id } });
 
       // it's for testing
-      const materialInfo = JSON.parse(materialInfoMOCK);
-      const dimensionInfo = JSON.parse(dimensionInfoMOCK(dimensionImgName));
-      const modifierInfo = JSON.parse(modifierInfoMOCK);
 
       furniture.update({
         name,
         description,
         price: Number(price),
-        material_info: materialInfo,
-        dimension_info: dimensionInfo,
-        modifier_info: modifierInfo,
         img: filesNames,
       });
 

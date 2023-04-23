@@ -12,6 +12,14 @@ router.get(
   checkCorrectIdMiddleware("furniture"),
   furnitureController.getOne
 );
+
+router.get(
+  "/collection/:id",
+  checkCorrectIdMiddleware("furniture"),
+  furnitureController.getAllByCollectionId
+);
+
+
 router.put(
   "/:id",
   checkCorrectIdMiddleware("furniture"),
