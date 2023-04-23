@@ -5,12 +5,12 @@ const modifierController = require("../controllers/modifierController");
 
 const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
 const incReqModifierDataMiddleware = require("../middleware/modifier/incReqModifierDataMiddleware");
-const modifierDataDisplayMethidMiddleware = require("../middleware/modifier/modifierDataDisplayMethidMiddleware");
+const modifierDataDisplayMethodMiddleware = require("../middleware/modifier/modifierDataDisplayMethodMiddleware");
 
 router.post(
   "/",
   incReqModifierDataMiddleware,
-  modifierDataDisplayMethidMiddleware,
+  modifierDataDisplayMethodMiddleware,
   modifierController.create
 );
 

@@ -4,13 +4,9 @@ const router = new Router();
 const categoryController = require("../controllers/categoryController");
 
 const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
-const incorrectRequestDataMiddleware = require("../middleware/incorrectRequestDataMiddleware");
+const incReqCategoryDataMiddleware = require("../middleware/category/incReqCategoryDataMiddleware");
 
-router.post(
-  "/",
-  incorrectRequestDataMiddleware("category"),
-  categoryController.create
-);
+router.post("/", incReqCategoryDataMiddleware, categoryController.create);
 
 router.get("/", categoryController.getAll);
 

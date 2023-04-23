@@ -2,8 +2,8 @@ const ApiError = require("../error/ApiError");
 
 module.exports = function (source) {
   return function (req, res, next) {
-    const errorSource = `${source} controller`;
     try {
+      const errorSource = `${source} controller`;
       const { id } = req.params;
       const idIsNaN = isNaN(id);
 

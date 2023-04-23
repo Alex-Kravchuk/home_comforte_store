@@ -6,37 +6,34 @@ class RatingController {
 
   async create(req, res, next) {
     try {
-      const { rating, userId, furnitureId, additionalVariantId } = req.body;
+      const { rating, userId, furnitureId } = req.body;
       // without duplicate checking. User can rate a product many times
       const _rating = await Rating.create({
         rating,
         userId,
         furnitureId,
-        additionalVariantId,
       });
 
       // for current updating furniture
       let ratings;
       let currentFurniture;
 
-      if (furnitureId !== undefined) {
+    
         ratings = await Rating.findAll({ where: { furnitureId } });
         currentFurniture = await Furniture.findOne({
           where: { id: furnitureId },
         });
-      } else {
-        ratings = await Rating.findAll({ where: { additionalVariantId } });
-        currentFurniture = await AdditionalVariant.findOne({
-          where: { id: additionalVariantId },
-        });
-      }
+     
 
       const sumOfRatingValues = ratings.reduce(
         (acc, curr) => acc + curr.rating,
         0
       );
 
+      // getting all rating values of current furniture
+      // and to find average value for updating current furniture
       const averageValueRating = sumOfRatingValues / ratings.length;
+
       currentFurniture.update({
         rating: averageValueRating.toFixed(1),
       });
