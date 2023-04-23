@@ -67,7 +67,7 @@ const Furniture = sequelize.define("furniture", {
 
 const Modifier = sequelize.define("modifier", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false },
   items: { type: DataTypes.JSON, allowNull: false },
   displayMethod: { type: DataTypes.STRING, allowNull: false },
 });

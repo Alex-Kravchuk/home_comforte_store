@@ -4,7 +4,6 @@ const { Modifier } = require("../models/models");
 const createImgName = require("../helpers/createImgName");
 const createModifier = require("../helpers/createModifier");
 
-
 class ModifierController {
   static errorSource = "modifier controller";
   async create(req, res, next) {
@@ -26,10 +25,14 @@ class ModifierController {
       }
 
       const items = createModifier(displayMethod, fileNames, descriptions);
-      const modifier = await Modifier.create({ name, items, displayMethod, furnitureId });
+      const modifier = await Modifier.create({
+        name,
+        items,
+        displayMethod,
+        furnitureId,
+      });
 
       return res.json(modifier);
-      
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, ModifierController.errorSource)
@@ -37,21 +40,11 @@ class ModifierController {
     }
   }
 
-  async getAll(req, res, next) {
-    try {
-      const modifiers = await Modifier.findAll();
-      return res.json(modifiers);
-    } catch (error) {
-      return next(
-        ApiError.unexpectedError(error, ModifierController.errorSource)
-      );
-    }
-  }
-
+// to get all modifiers of current furniture
   async getOne(req, res) {
     try {
       const { id } = req.params;
-      const modifier = await Modifier.findOne({ where: { id } });
+      const modifier = await Modifier.findAll({ where: { furnitureId: id } });
 
       return res.json(modifier);
     } catch (error) {

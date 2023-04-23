@@ -13,7 +13,7 @@ router.post(
   modifierDataDisplayMethidMiddleware,
   modifierController.create
 );
-router.get("/", modifierController.getAll);
+
 router.get(
   "/:id",
   checkCorrectIDMiddleware("modifier"),
