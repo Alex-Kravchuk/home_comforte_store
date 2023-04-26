@@ -3,12 +3,13 @@ const { Category } = require("../models/models");
 
 class CategoryController {
   static errorSource = "category controller";
-  
+
   async create(req, res, next) {
     try {
       const { name } = req.body;
-
+      console.log(name);
       const alreadyExists = await Category.findOne({ where: { name } });
+
       if (alreadyExists) {
         return next(ApiError.duplicateName(CategoryController.errorSource));
       }
@@ -16,7 +17,9 @@ class CategoryController {
       const category = await Category.create({ name });
       return res.json(category);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, CategoryController.errorSource));
+      return next(
+        ApiError.unexpectedError(error, CategoryController.errorSource)
+      );
     }
   }
 
@@ -25,7 +28,9 @@ class CategoryController {
       const categorys = await Category.findAll();
       return res.json(categorys);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, CategoryController.errorSource));
+      return next(
+        ApiError.unexpectedError(error, CategoryController.errorSource)
+      );
     }
   }
 
@@ -36,7 +41,9 @@ class CategoryController {
 
       return res.json(category);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, CategoryController.errorSource));
+      return next(
+        ApiError.unexpectedError(error, CategoryController.errorSource)
+      );
     }
   }
 
@@ -49,7 +56,9 @@ class CategoryController {
 
       return res.json({ message: "deleted" });
     } catch (error) {
-      return next(ApiError.unexpectedError(error, CategoryController.errorSource));
+      return next(
+        ApiError.unexpectedError(error, CategoryController.errorSource)
+      );
     }
   }
 }

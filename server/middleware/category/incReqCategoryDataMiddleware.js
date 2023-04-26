@@ -1,10 +1,11 @@
 const ApiError = require("../../error/ApiError");
 
-module.exports = () => (req, res, next) => {
+module.exports = (req, res, next) => {
   try {
     const errorSource = "category controller";
 
     const { name } = req.body;
+
     if (!name) {
       return next(
         ApiError.requestDataAreNotDefined(
