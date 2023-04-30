@@ -1,42 +1,52 @@
-import { Dropdown } from "antd";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
 
-import { MenuContainer, MenuItem, MenuWrapper } from "./Menu.styled";
 import DropDownMenu from "./dropdown/DropDownMenu";
+import { useMouseLeave } from "../../../hooks/useMouseLeave";
 
-import { menu_config } from "../../../utils/menu_config";
+import {
+  MenuItem,
+  MenuWrapper,
+  MenuContainer,
+  DropdownDarkBackgroundWrapper,
+} from "./Menu.styled";
 
-const Menu = ({ bigScreen }) => {
-  const [currentHover, setCurrentHover] = useState(0);
+const Menu = ({ bigScreen, menuCategories }) => {
+  const [currentHover, setCurrentHover] = useState(false);
+
+  const menuRef = useRef();
+
+  const hoverHandler = (id) => {
+    setCurrentHover(id);
+  };
+
+  const nothingHoverHandler = () => setCurrentHover(false);
+
+  useMouseLeave(menuRef, currentHover, nothingHoverHandler);
 
   return (
     <>
       {bigScreen && (
-        <MenuWrapper>
-          <MenuContainer>
-            {menu_config.map(({ id, label, link, dropdownItems, menuImg }) => (
-              <Dropdown
-                placement="bottom"
-                key={id}
-                dropdownRender={() => (
-                  <DropDownMenu
-                    id={id}
-                    menuItems={dropdownItems}
-                    setCurrentHover={setCurrentHover}
-                    img={menuImg}
-                  />
-                )}
-              >
-                <Link to={link}>
-                  <MenuItem activeMenuItem={id === currentHover}>
-                    {label}
-                  </MenuItem>
-                </Link>
-              </Dropdown>
-            ))}
-          </MenuContainer>
-        </MenuWrapper>
+        <>
+          <MenuWrapper ref={menuRef}>
+            <MenuContainer>
+              {menuCategories.map(({ id, name }, index) => (
+                <MenuItem
+                  key={id}
+                  activeMenuItem={index === currentHover}
+                  onMouseOver={() => hoverHandler(index)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+              <DropDownMenu
+                currentHover={currentHover}
+                menuCategories={menuCategories}
+                closeDropDownHandler={nothingHoverHandler}
+              />
+            </MenuContainer>
+          </MenuWrapper>
+          {currentHover !== false && <DropdownDarkBackgroundWrapper />}
+        </>
       )}
     </>
   );

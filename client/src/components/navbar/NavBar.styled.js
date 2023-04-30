@@ -9,7 +9,7 @@ import { textColors } from "../../styles/globalStyles";
 
 const { global } = sizes;
 
-const { l, xl, xxl } = viewport_sizes;
+const { l } = viewport_sizes;
 
 export const NavWrapper = styled.header`
   display: flex;
@@ -22,7 +22,7 @@ export const NavWrapper = styled.header`
   border-bottom: 1px solid lightgray;
   position: sticky;
   top: 0;
-  z-index: 4;
+  z-index: 16;
 
   box-shadow: ${({ openSearchField }) =>
     !openSearchField ? "0 8px 8px 0 rgb(0 0 0 / 10%)" : "none"};
@@ -60,38 +60,6 @@ export const RelativeContainer = styled.div`
   @media (max-width: ${l}px) {
     height: ${global.headerHeightOnSmallScreen}px;
   }
-`;
-
-export const NavContainer = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  width: 80%;
-
-  @media (max-width: ${xxl}px) {
-    width: ${sizes.xxl.contentContainerWidth}%;
-  }
-
-  @media (max-width: ${xl}px) {
-    width: ${sizes.xl.contentContainerWidth}%;
-  }
-
-  @media (max-width: ${l}px) {
-    width: ${sizes.l.contentContainerWidth}%;
-  }
-`;
-
-export const LogoMenuContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  z-index: 9;
-  background: #fff;
 `;
 
 // I use <EmptyContainer /> for correct view of search field by usin position and z-index

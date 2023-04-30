@@ -16,7 +16,7 @@ export const ConstructorMainTitle = styled.div`
   font-size: ${getResponsiveFontSize(16, 14)};
   padding: 35px 0;
 `;
-export const ConstructorSubTitle = styled.h2`
+export const ConstructorSubTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 35px;

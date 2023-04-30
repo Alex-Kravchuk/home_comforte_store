@@ -23,6 +23,26 @@ import MirrorImg from "../assets/img/menu/mirror_example.jpeg";
 import CarpetImg from "../assets/img/menu/carpet_example.jpg";
 import ClosetImg from "../assets/img/menu/closet_example.jpg";
 
+
+/**
+ * 
+ * {
+ *  id: 1,
+ * label: "living",
+ * types: [
+ *      {
+ *    
+ *        }
+ *      ]
+ * }
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 export const menu_config = [
   {
     id: 1,

@@ -40,7 +40,7 @@ const ConstructorPresentation = ({
         swipe={false}
       >
         {constructor_menu_config.map((option) => (
-          <PresentationItem key={option.id}>
+          <PresentationItem key={option.index}>
             <CPContainer>
               <CPImgUpperContainer>
                 <CPImg src={option.upperImg} />

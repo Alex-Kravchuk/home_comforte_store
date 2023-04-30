@@ -1,64 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Logo from "./logo/Logo";
-import Menu from "./menu/Menu";
-import {
-  EmptyContainer,
-  LogoMenuContainer,
-  NavContainer,
-  NavWrapper,
-  RelativeContainer,
-} from "./NavBar.styled";
+import { EmptyContainer, NavWrapper, RelativeContainer } from "./NavBar.styled";
 import SearchField from "./searchField/SearchField";
-import UserInterface from "./userInterface/UserInterface";
 
-import Drawer from "./drawer/Drawer";
-import { useGetWindowSize } from "../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../utils/viewport_size_consts";
+import { useScrollObserver } from "../../hooks/useScrollObserver";
+import NavContainer from "./navContainer/NavContainer";
+import { getAllCategories } from "../../api/product/productAPI";
 
 const NavBar = () => {
   const [openSearchField, setOpenSearchField] = useState(false);
-  const [scrollDown, setScrollDown] = useState(false);
-  const viewport = useGetWindowSize();
-
-  const mobileScreen = viewport.width < viewport_sizes.ml;
-  const smallScreen = viewport.width <= viewport_sizes.xl;
-  const bigScreen = viewport.width > viewport_sizes.xl;
+  const [menuCategories, setCategories] = useState([]);
+  const scrollDown = useScrollObserver();
 
   useEffect(() => {
-    const scrollListener = () => {
-      setScrollDown(true);
-      const onTopOfTHePage = document.documentElement.scrollTop === 0;
-
-      if (onTopOfTHePage) {
-        setScrollDown(false);
-      }
+    const getCategories = async () => {
+      const response = await getAllCategories();
+      setCategories(response);
     };
 
-    window.addEventListener("scroll", scrollListener);
-
-    return () => window.removeEventListener("scroll", scrollListener);
+    getCategories();
   }, []);
+
+  console.log("categories navbar", menuCategories);
 
   return (
     <NavWrapper scrollDown={scrollDown} openSearchField={openSearchField}>
       <RelativeContainer scrollDown={scrollDown}>
         <EmptyContainer />
-        <NavContainer>
-          <LogoMenuContainer>
-            <Drawer
-              setOpenSearch={setOpenSearchField}
-              smallScreen={smallScreen}
-              mobileScreen={mobileScreen}
-            />
-            <Logo scrollDown={scrollDown} />
-            <Menu bigScreen={bigScreen} />
-            <UserInterface
-              setOpenSearch={setOpenSearchField}
-              mobileScreen={mobileScreen}
-            />
-          </LogoMenuContainer>
-        </NavContainer>
+
+        <NavContainer
+          menuCategories={menuCategories}
+          setOpenSearchField={setOpenSearchField}
+          scrollDown={scrollDown}
+        />
+
         <SearchField
           opened={openSearchField}
           setOpenSearch={setOpenSearchField}

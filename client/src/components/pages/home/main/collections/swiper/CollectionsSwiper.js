@@ -23,7 +23,7 @@ const CollectionsSwiper = () => {
         modules={[Navigation]}
       >
         {collections_config.map((collection) => (
-          <SwiperSlide>
+          <SwiperSlide key={collection.id}>
             <CollectionsItem collection={collection} />
           </SwiperSlide>
         ))}

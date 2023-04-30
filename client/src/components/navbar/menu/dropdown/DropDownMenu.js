@@ -1,41 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  CategoriesTitle,
-  DropdownImgItem,
   DropdownMenuContainer,
-  DropdownMenuImgContainer,
-  DropdownMenuLink,
-  DropdownMenuLinkContainer,
-  DropdownMenuLinkList,
   DropdownMenuWrapper,
+  SubTypeContainer,
+  SubTypeName,
+  TypeColumn,
+  TypeTitleContainer,
+  TypeTitleImg,
+  TypeTitleName,
 } from "./DropDownMenu.styled";
+import { useScrollObserver } from "../../../../hooks/useScrollObserver";
+import { ADMIN_ROUTE } from "../../../../utils/routes_consts";
 
-const DropDownMenu = ({ menuItems, setCurrentHover, id, img }) => {
-  const setCurrentHoverHandler = () => setCurrentHover(id);
-  const setNullCurrentHoverHandler = () => setCurrentHover(0);
+const DropDownMenu = ({
+  currentHover,
+  menuCategories,
+  closeDropDownHandler,
+}) => {
+  const scroll = useScrollObserver();
+
+  const dataAreExist = menuCategories[currentHover];
+
+  const closeDropDown = () => {
+    closeDropDownHandler();
+  };
+
+  console.log("dataAreExist", dataAreExist);
 
   return (
-    <DropdownMenuWrapper
-      onMouseMove={setCurrentHoverHandler}
-      onMouseLeave={setNullCurrentHoverHandler}
-    >
-      <DropdownMenuContainer>
-        <DropdownMenuLinkContainer>
-          <CategoriesTitle>Categories</CategoriesTitle>
-          <DropdownMenuLinkList>
-            {menuItems.map(({ key, label }) => (
-              <DropdownMenuLink key={key}>
-                <Link>{label}</Link>
-              </DropdownMenuLink>
-            ))}
-          </DropdownMenuLinkList>
-        </DropdownMenuLinkContainer>
-
-        <DropdownMenuImgContainer>
-          <DropdownImgItem src={img} alt="img" />
-        </DropdownMenuImgContainer>
-      </DropdownMenuContainer>
+    <DropdownMenuWrapper scrollDown={scroll} currentHover={currentHover}>
+      {dataAreExist && (
+        <DropdownMenuContainer>
+          {dataAreExist.types.map((type) => (
+            <TypeColumn>
+              <TypeTitleContainer>
+                <TypeTitleImg src={process.env.REACT_APP_API_URL + type.img} />
+                <TypeTitleName>{type.name}</TypeTitleName>
+              </TypeTitleContainer>
+              <SubTypeContainer>
+                {type.subTypes.map((subtype) => (
+                  // LINK here is for temprorary test
+                  <SubTypeName onClick={closeDropDown}>
+                    <Link to={ADMIN_ROUTE}>{subtype.name}</Link>
+                  </SubTypeName>
+                ))}
+              </SubTypeContainer>
+            </TypeColumn>
+          ))}
+        </DropdownMenuContainer>
+      )}
     </DropdownMenuWrapper>
   );
 };

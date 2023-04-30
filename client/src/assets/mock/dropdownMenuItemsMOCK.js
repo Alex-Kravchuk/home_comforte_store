@@ -40,19 +40,19 @@ export const DropdownMenuItemsSofa = [
     label: "Castler TM",
   },
   {
-    key: "1",
+    key: "11",
     label: "All chairs",
   },
   {
-    key: "2",
+    key: "12",
     label: "Luxary",
   },
   {
-    key: "3",
+    key: "13",
     label: "Office",
   },
   {
-    key: "4",
+    key: "14",
     label: "Lulu&Georgia TM",
   },
 ];
