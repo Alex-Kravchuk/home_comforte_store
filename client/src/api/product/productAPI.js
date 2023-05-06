@@ -58,7 +58,6 @@ export const getAllCategories = async () => {
 };
 
 
-
 export const createCategory = async (name) => {
   const response = await $host.post("api/category", { name });
   return response;

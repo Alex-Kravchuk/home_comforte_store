@@ -154,16 +154,3 @@ export const MLFAQItemAddInfo = styled.div`
   text-align: left;
   color: ${textColors.plain};
 `;
-
-// ---mobile screen panel styles-----------------------------------------------------------------
-export const CustomCollapse = styled(Collapse)`
-  background: #fff;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-radius: 0;
-
-  .ant-collapse-item:last-child {
-    border-radius: 0;
-  }
-`;

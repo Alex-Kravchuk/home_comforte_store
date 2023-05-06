@@ -1,22 +1,17 @@
 import React from "react";
 
-import { Collapse } from "antd";
+import MobileFooterLinks from "../mobileFooterLinks/MobileFooterLinks";
 
-import { leftSideConfig } from "./leftSideConfig";
 import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
-
-import ExpandIcon from "../../../../../../helpers/ExpandIcon/ExpandIcon";
+import { mobileFooterLinks_leftSide_config } from "../mobileFooterLinks/mobileFooterLinks_config";
 
 import {
   MLItem,
   MLColumn,
   MLColumnTitle,
-  CustomCollapse,
   MLItemsContainer,
 } from "../MainLinks.styled";
-
-const { Panel } = Collapse;
 
 const LeftSide = () => {
   const viewport = useGetWindowSize();
@@ -24,21 +19,9 @@ const LeftSide = () => {
   return (
     <MLItemsContainer>
       {smallScreen ? (
-        <CustomCollapse
-          accordion
-          expandIconPosition="end"
-          expandIcon={({ isActive }) => <ExpandIcon open={isActive} />}
-        >
-          {leftSideConfig.map(({ title, id, subTitles }) => (
-            <Panel header={title} key={id}>
-              {subTitles.map((subTit, index) => (
-                <MLItem key={index}>{subTit}</MLItem>
-              ))}
-            </Panel>
-          ))}
-        </CustomCollapse>
+        <MobileFooterLinks />
       ) : (
-        leftSideConfig.map(({ id, title, subTitles }) => (
+        mobileFooterLinks_leftSide_config.map(({ id, title, subTitles }) => (
           <MLColumn key={id}>
             <MLColumnTitle>{title}</MLColumnTitle>
             {subTitles.map((subTit, index) => (

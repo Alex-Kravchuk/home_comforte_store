@@ -7,7 +7,7 @@ import { textColors } from "../../../../styles/globalStyles";
 const { Panel } = Collapse;
 
 export const SideMenuContainer = styled.div`
-  border-bottom: 1px solid lightgray;
+  border-bottom: 2.5px solid lightgray;
 
   & .css-dev-only-do-not-override-ixblex,
   .ant-collapse > .ant-collapse-item > .ant-collapse-header {

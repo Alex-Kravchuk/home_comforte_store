@@ -44,6 +44,9 @@ const ProductList = () => {
     centeredSlides: mobileScreen,
   };
 
+  // here I use static product list (not form database) just for display
+  // all of actual product in store are in side or main menu
+
   return (
     <ProductListWrapper>
       <Swiper {...swiperConfig}>

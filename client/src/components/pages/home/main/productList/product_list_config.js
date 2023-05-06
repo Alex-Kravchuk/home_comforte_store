@@ -1,13 +1,13 @@
-import sectional_menu from "../../../../../assets/img/menu/sectional_menu.webp";
-import benches_menu from "../../../../../assets/img/menu/benches_menu.webp";
+import rugs_menu from "../../../../../assets/img/menu/rugs_menu.webp";
 import sofas_menu from "../../../../../assets/img/menu/sofas_menu.webp";
 import chairs_menu from "../../../../../assets/img/menu/chairs_menu.webp";
 import decors_menu from "../../../../../assets/img/menu/decors_menu.webp";
-import lightings_menu from "../../../../../assets/img/menu/lightings_menu.webp";
-import ottomans_menu from "../../../../../assets/img/menu/ottomans_menu.webp";
-import dinings_menu from "../../../../../assets/img/menu/dinings_menu.webp";
 import tables_menu from "../../../../../assets/img/menu/tables_menu.webp";
-import rugs_menu from "../../../../../assets/img/menu/rugs_menu.webp";
+import dinings_menu from "../../../../../assets/img/menu/dinings_menu.webp";
+import benches_menu from "../../../../../assets/img/menu/benches_menu.webp";
+import ottomans_menu from "../../../../../assets/img/menu/ottomans_menu.webp";
+import lightings_menu from "../../../../../assets/img/menu/lightings_menu.webp";
+import sectional_menu from "../../../../../assets/img/menu/sectional_menu.webp";
 
 export const product_list_config = [
   {

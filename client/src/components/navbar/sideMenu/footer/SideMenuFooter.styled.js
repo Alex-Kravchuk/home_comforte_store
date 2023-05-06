@@ -6,7 +6,7 @@ export const SideMenuFooterContainer = styled.div`
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  padding: 0 16px;
+  padding: 0 16px 0 0;
 `;
 export const SideMenuFooterItem = styled.div`
   padding: 15px 0;
@@ -20,3 +20,4 @@ export const SideMenuFooterItem = styled.div`
     }
   }
 `;
+

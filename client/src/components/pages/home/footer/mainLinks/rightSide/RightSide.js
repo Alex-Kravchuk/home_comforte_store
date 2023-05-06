@@ -1,7 +1,8 @@
 import React from "react";
 
-import { rightSideConfig } from "./rightSideConfig";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+
+import { rightSideConfig } from "../../mobileFooterLinks/mobileFooterLinks_config";
 
 import {
   MLFAQItems,
