@@ -10,6 +10,10 @@ import Contact from "../components/pages/contact/Contact";
 import Product from "../components/pages/product/Product";
 import Showroom from "../components/pages/showrooms/ShowRoom";
 
+import { Provider, useSelector } from "react-redux";
+
+import { store } from "../redux/index";
+
 import {
   HOME_ROUTE,
   ADMIN_ROUTE,
@@ -31,7 +35,14 @@ import Search from "../components/pages/search/Search";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path={HOME_ROUTE} element={<App />}>
+    <Route
+      path={HOME_ROUTE}
+      element={
+        <Provider store={store}>
+          <App />
+        </Provider>
+      }
+    >
       <Route index element={<Home />} />
       <Route path={PROFILE_ROUTE} element={<User />} />
       <Route path={ADMIN_ROUTE} element={<Admin />} />

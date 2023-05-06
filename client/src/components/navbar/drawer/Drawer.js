@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-import { DrawerContainer, DrawerIconContainer } from "./Drawer.styled";
 import SideMenu from "../sideMenu/SideMenu";
 
-const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
-  const [sideMenuOpened, setSideMenuOpened] = useState(false);
+import { DrawerContainer, DrawerIconContainer } from "./Drawer.styled";
 
+const Drawer = ({ smallScreen, mobileScreen, setOpenSearch, menuData }) => {
+  const [sideMenuOpened, setSideMenuOpened] = useState(false);
   const openSearchFieldHandler = (event) => {
     event.stopPropagation();
     setOpenSearch((state) => !state);
@@ -38,7 +38,11 @@ const Drawer = ({ smallScreen, mobileScreen, setOpenSearch }) => {
           )}
         </>
       )}
-      <SideMenu opened={sideMenuOpened} closeHandler={closeSideMenuHandler} />
+      <SideMenu
+        opened={sideMenuOpened}
+        closeHandler={closeSideMenuHandler}
+        menuData={menuData}
+      />
     </DrawerContainer>
   );
 };

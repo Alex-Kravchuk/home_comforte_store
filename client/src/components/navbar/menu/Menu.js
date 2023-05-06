@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import DropDownMenu from "./dropdown/DropDownMenu";
+
 import { useMouseLeave } from "../../../hooks/useMouseLeave";
 
 import {
@@ -10,7 +11,7 @@ import {
   DropdownDarkBackgroundWrapper,
 } from "./Menu.styled";
 
-const Menu = ({ bigScreen, menuCategories }) => {
+const Menu = ({ bigScreen, menuData }) => {
   const [currentHover, setCurrentHover] = useState(false);
 
   const menuRef = useRef();
@@ -29,7 +30,7 @@ const Menu = ({ bigScreen, menuCategories }) => {
         <>
           <MenuWrapper ref={menuRef}>
             <MenuContainer>
-              {menuCategories.map(({ id, name }, index) => (
+              {menuData.map(({ id, name }, index) => (
                 <MenuItem
                   key={id}
                   activeMenuItem={index === currentHover}
@@ -40,7 +41,7 @@ const Menu = ({ bigScreen, menuCategories }) => {
               ))}
               <DropDownMenu
                 currentHover={currentHover}
-                menuCategories={menuCategories}
+                menuCategories={menuData}
                 closeDropDownHandler={nothingHoverHandler}
               />
             </MenuContainer>

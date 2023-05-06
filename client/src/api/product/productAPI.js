@@ -1,3 +1,4 @@
+import axios from "axios";
 import { $host } from "..";
 
 // get menu data
@@ -9,6 +10,9 @@ export const getAllCategories = async () => {
 
     const combineTypesSubtypes = async (types) => {
       let newTypes = [];
+
+      // repeat the request with each element of the array
+      // and push each response to the subTypes array
       for (const type of types) {
         const response_subtype = await $host.get(`api/subType/${type.id}`);
         subTypes.push(...response_subtype.data);
@@ -31,11 +35,9 @@ export const getAllCategories = async () => {
       return newTypes;
     };
 
-    const response_cat = await $host.get("api/category");
-    categories = response_cat.data;
+    categories = await $host.get("api/category").then((resp) => resp.data);
+    types = await $host.get("api/type").then((resp) => resp.data);
 
-    const response_type = await $host.get("api/type");
-    types = response_type.data;
     const newTypes = await combineTypesSubtypes(types);
 
     categories.forEach(({ id }, index) => {
@@ -54,6 +56,8 @@ export const getAllCategories = async () => {
     console.log("something went wrong", error);
   }
 };
+
+
 
 export const createCategory = async (name) => {
   const response = await $host.post("api/category", { name });

@@ -40,7 +40,7 @@ export const DropdownMenuContainer = styled.div`
 
 export const TypeColumn = styled.div`
   width: 300px;
-  margin: 0 0 45px 0;
+  margin: 0 15px 45px 15px;
 `;
 
 export const TypeTitleContainer = styled.div`

@@ -26,8 +26,6 @@ const DropDownMenu = ({
     closeDropDownHandler();
   };
 
-  console.log("dataAreExist", dataAreExist);
-
   return (
     <DropdownMenuWrapper scrollDown={scroll} currentHover={currentHover}>
       {dataAreExist && (

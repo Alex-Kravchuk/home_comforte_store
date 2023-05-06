@@ -1,30 +1,23 @@
 import React from "react";
 
-import {
-  sideMenuItems,
-} from "../../../../assets/mock/sideMenuItemsMOCK";
 import { Collapse } from "antd";
-import {
-  SideMenuContainer,
-  SideMenuItem,
-  SideMenuSubItem,
-} from "./SideMenuMain.styled";
 
-const SideMenuMain = () => {
+import NestedCollapse from "./panel/NestedCollapse";
+
+import { SideMenuItem, SideMenuContainer } from "./SideMenuMain.styled";
+
+const SideMenuMain = ({ menuData }) => {
   return (
     <SideMenuContainer>
-      <Collapse
-        accordion
-        expandIconPosition="end"
-        ghost
-      >
-        {sideMenuItems.map((item) => (
-          <SideMenuItem header={item.title} key={item.id}>
-            {item.children.map((child) => (
-              <SideMenuSubItem key={child}>{child}</SideMenuSubItem>
-            ))}
-          </SideMenuItem>
-        ))}
+      <Collapse accordion expandIconPosition="end" ghost>
+        {menuData !== undefined &&
+          menuData.map((item) => (
+            <SideMenuItem header={item.name} key={item.id}>
+              {item.types.map((type) => (
+                <NestedCollapse type={type} />
+              ))}
+            </SideMenuItem>
+          ))}
       </Collapse>
     </SideMenuContainer>
   );

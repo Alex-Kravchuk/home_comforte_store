@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import SideMenuHeader from "./header/SideMenuHeader";
-import SideMenuMain from "./main/SideMenuMain";
 
 import { Drawer } from "antd";
-import {
-  drawerBodyStyles,
-  DrawerContentContainer,
-  DrawerContentWrapper,
-} from "./SideMenu.styled";
+import CloseIcon from "@mui/icons-material/Close";
+
+import SideMenuMain from "./main/SideMenuMain";
+import SideMenuFooter from "./footer/SideMenuFooter";
+import { sizes } from "../../../utils/css_size_consts";
 
 import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
 
-import CloseIcon from "@mui/icons-material/Close";
-import { sizes } from "../../../utils/css_size_consts";
-import SideMenuFooter from "./footer/SideMenuFooter";
+import {
+  drawerBodyStyles,
+  DrawerContentWrapper,
+  DrawerContentContainer,
+} from "./SideMenu.styled";
 
-const SideMenu = ({ opened, closeHandler }) => {
+const SideMenu = ({ opened, closeHandler, menuData }) => {
   const [drawerWidth, setDrawerDidwth] = useState(380);
   const viewport = useGetWindowSize();
 
@@ -39,7 +39,7 @@ const SideMenu = ({ opened, closeHandler }) => {
     >
       <DrawerContentWrapper>
         <DrawerContentContainer>
-          <SideMenuMain />
+          <SideMenuMain menuData={menuData} />
           <SideMenuFooter closeHandler={closeHandler} />
         </DrawerContentContainer>
       </DrawerContentWrapper>

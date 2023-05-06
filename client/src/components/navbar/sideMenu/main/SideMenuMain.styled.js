@@ -27,8 +27,9 @@ export const SideMenuItem = styled(Panel)`
   }
 `;
 
+
 export const SideMenuSubItem = styled.div`
-  font-size: ${getResponsiveFontSize(22, 20)};
+  font-size: ${getResponsiveFontSize(18, 16)};
   margin-left: 25px;
   padding: 0 0 10px 0;
   color: ${textColors.plain};

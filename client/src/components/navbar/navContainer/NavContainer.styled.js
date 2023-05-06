@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { sizes } from "../../../utils/css_size_consts";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
 
-const { l, xxl, xl } = sizes;
+const { l, xxl, xl } = viewport_sizes;
+
 
 export const NavContainerWrapper = styled.div`
   height: 100%;
@@ -13,15 +15,15 @@ export const NavContainerWrapper = styled.div`
   width: 80%;
 
   @media (max-width: ${xxl}px) {
-    width: ${xxl.contentContainerWidth}%;
+    width: ${sizes.xxl.contentContainerWidth}%;
   }
 
   @media (max-width: ${xl}px) {
-    width: ${xl.contentContainerWidth}%;
+    width: ${sizes.xl.contentContainerWidth}%;
   }
 
   @media (max-width: ${l}px) {
-    width: ${l.contentContainerWidth}%;
+    width: ${sizes.l.contentContainerWidth}%;
   }
 `;
 
