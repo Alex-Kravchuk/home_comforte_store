@@ -1,6 +1,6 @@
 import { Collapse } from "antd";
 import styled from "styled-components";
-import { textColors } from "../../../../../../styles/globalStyles";
+import { textColors } from "../../../../styles/globalStyles";
 
 // MFL - MobileFooterLinks
 

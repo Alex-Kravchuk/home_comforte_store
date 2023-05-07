@@ -31,7 +31,11 @@ const NavContainer = ({ scrollDown, setOpenSearchField }) => {
           menuData={menuData}
         />
         <Logo scrollDown={scrollDown} />
-        <Menu bigScreen={bigScreen} menuData={menuData} />
+        <Menu
+          bigScreen={bigScreen}
+          menuData={menuData}
+          scrollDown={scrollDown}
+        />
         <UserInterface
           setOpenSearch={setOpenSearchField}
           mobileScreen={mobileScreen}

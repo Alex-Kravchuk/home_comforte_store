@@ -2,7 +2,7 @@ import React from "react";
 
 import { Collapse } from "antd";
 
-import ExpandIcon from "../../../../../../helpers/ExpandIcon/ExpandIcon";
+import ExpandIcon from "../../../../helpers/ExpandIcon/ExpandIcon";
 import { mobileFooterLinks_leftSide_config } from "./mobileFooterLinks_config";
 
 import { MFLWrapper, MFLItem } from "./MobileFooterLinks.styled";

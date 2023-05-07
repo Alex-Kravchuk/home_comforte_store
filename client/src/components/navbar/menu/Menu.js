@@ -11,7 +11,7 @@ import {
   DropdownDarkBackgroundWrapper,
 } from "./Menu.styled";
 
-const Menu = ({ bigScreen, menuData }) => {
+const Menu = ({ bigScreen, menuData, scrollDown }) => {
   const [currentHover, setCurrentHover] = useState(false);
 
   const menuRef = useRef();
@@ -46,7 +46,10 @@ const Menu = ({ bigScreen, menuData }) => {
               />
             </MenuContainer>
           </MenuWrapper>
-          {currentHover !== false && <DropdownDarkBackgroundWrapper />}
+          {console.log(currentHover, "hover")}
+          {currentHover !== false && (
+            <DropdownDarkBackgroundWrapper scrollDown={scrollDown} />
+          )}
         </>
       )}
     </>

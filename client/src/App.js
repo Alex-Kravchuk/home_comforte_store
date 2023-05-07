@@ -8,9 +8,10 @@ import { ConfigProvider } from "antd";
 import NavBar from "./components/navbar/NavBar";
 import FullScreenLoader from "./components/loader/FullScreenLoader";
 
-import { Wrapper } from "./styles/globalStyles";
+import {  Wrapper } from "./styles/globalStyles";
 import { customTheme } from "./utils/custom_theme_styles_ANTD";
 import { getMenuData } from "./redux/loading/loadingSlice";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const state = useSelector((state) => state.menuData);
@@ -26,7 +27,10 @@ function App() {
       <Wrapper>
         <NavBar />
         {/* {`${JSON.stringify(state.data)}`} */}
+
         <Outlet />
+
+        <Footer />
       </Wrapper>
     </ConfigProvider>
   );

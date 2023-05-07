@@ -4,9 +4,9 @@ import MainLinks from "./mainLinks/MainLinks";
 import EndFooter from "./endFooter/EndFooter";
 import MailSubscribe from "./mailSubscribe/MailSubscribe";
 
-import { FooterWrapper } from "./HomeFooter.styled";
+import { FooterWrapper } from "./Footer.styled";
 
-const HomeFooter = () => {
+const Footer = () => {
   return (
     <FooterWrapper>
       <MailSubscribe />
@@ -16,4 +16,4 @@ const HomeFooter = () => {
   );
 };
 
-export default HomeFooter;
+export default Footer;

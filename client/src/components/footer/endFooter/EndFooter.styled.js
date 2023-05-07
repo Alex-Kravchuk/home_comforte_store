@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
 
 const { l } = viewport_sizes;
 

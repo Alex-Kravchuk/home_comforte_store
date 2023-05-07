@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 import { Collapse } from "antd";
 
-import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
-import { textColors } from "../../../../../styles/globalStyles";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
+import { textColors } from "../../../styles/globalStyles";
 
 const { xl, l } = viewport_sizes;
 

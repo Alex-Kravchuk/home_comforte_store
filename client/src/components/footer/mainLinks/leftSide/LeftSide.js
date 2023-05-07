@@ -2,8 +2,8 @@ import React from "react";
 
 import MobileFooterLinks from "../mobileFooterLinks/MobileFooterLinks";
 
-import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
+import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 import { mobileFooterLinks_leftSide_config } from "../mobileFooterLinks/mobileFooterLinks_config";
 
 import {

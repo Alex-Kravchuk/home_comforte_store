@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import { Input } from "antd";
 
-import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
-import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
-import { textColors } from "../../../../../styles/globalStyles";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
+import { textColors } from "../../../styles/globalStyles";
 
 const { l, xs } = viewport_sizes;
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
 
@@ -48,13 +48,17 @@ export const DropdownDarkBackgroundWrapper = styled.div`
   position: absolute;
   z-index: 1;
 
-  top: ${({ scrollDown }) =>
-    scrollDown
+  ${({ scrollDown }) => css`
+    top: ${scrollDown
       ? headerHeightWhenScrollDown + "px"
       : headerHeightWhenOnTopPage + "px"};
 
+    height: ${scrollDown
+      ? `calc(100vh - ${headerHeightWhenScrollDown}px)`
+      : `calc(100vh - ${headerHeightWhenOnTopPage}px)`};
+  `}
+
   right: 0;
   width: 100vw;
-  height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "../../../../../styles/globalStyles";
+import { Container } from "../../../styles/globalStyles";
 
 import {
   CustomIntput,

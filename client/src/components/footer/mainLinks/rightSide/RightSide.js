@@ -2,7 +2,7 @@ import React from "react";
 
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
-import { rightSideConfig } from "../../mobileFooterLinks/mobileFooterLinks_config";
+import { rightSideConfig } from "../mobileFooterLinks/mobileFooterLinks_config";
 
 import {
   MLFAQItems,

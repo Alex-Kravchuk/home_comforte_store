@@ -6,7 +6,7 @@ import {
   SideMenuFooterContainer,
 } from "./SideMenuFooter.styled";
 
-import MobileFooterLinks from "../../../pages/home/footer/mainLinks/mobileFooterLinks/MobileFooterLinks";
+import MobileFooterLinks from "../../../footer/mainLinks/mobileFooterLinks/MobileFooterLinks";
 
 const SideMenuFooter = ({ closeHandler }) => {
   return (

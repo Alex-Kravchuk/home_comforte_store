@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import { marginConsts } from "../../../../styles/globalStyles";
+import { marginConsts } from "../../styles/globalStyles";
 
 export const FooterWrapper = styled.div`
   width: 100%;
-  ${marginConsts}
+  margin-top: auto;
 `;
 export const FooterContainer = styled.div``;

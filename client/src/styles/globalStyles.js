@@ -12,18 +12,21 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;  
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
+  html, body {
+    height: 100%;
+    scroll-behavior: smooth;    
     font-family: 'Lato', sans-serif;
     color: #555759;
   }
+
+
 `;
 
 export const Wrapper = styled.div`
+  min-height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Container = styled.div`
@@ -93,5 +96,3 @@ margin-top: 55px;
   margin-top: 35px;
 }
 `;
-
-
