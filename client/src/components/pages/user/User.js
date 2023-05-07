@@ -10,11 +10,11 @@ const User = () => {
   const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!auth) {
-      navigate(HOME_ROUTE);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!auth) {
+  //     navigate(HOME_ROUTE);
+  //   }
+  // }, []);
 
   return (
     <div>

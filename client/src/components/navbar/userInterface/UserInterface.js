@@ -10,11 +10,15 @@ import {
   UserInterfaceWrapper,
 } from "./UserInterface.styled";
 import { Link } from "react-router-dom";
-import { ADMIN_ROUTE } from "../../../utils/routes_consts";
+import {
+  ACCOUNT_ROUTE,
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+} from "../../../utils/routes_consts";
 
-const UserInterface = ({ setOpenSearch, mobileScreen,  }) => {
+const UserInterface = ({ setOpenSearch, mobileScreen }) => {
   const openSearchFieldHandler = (event) => {
-    event.stopPropagation()
+    event.stopPropagation();
     setOpenSearch((state) => !state);
   };
 
@@ -22,11 +26,11 @@ const UserInterface = ({ setOpenSearch, mobileScreen,  }) => {
     <UserInterfaceWrapper>
       <UserInterfaceContainer>
         {!mobileScreen && (
-          <UserInterfaceIconContainer >
+          <UserInterfaceIconContainer>
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={ADMIN_ROUTE}>
+        <Link to={`${ACCOUNT_ROUTE}/${LOGIN_ROUTE}`}>
           <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>
