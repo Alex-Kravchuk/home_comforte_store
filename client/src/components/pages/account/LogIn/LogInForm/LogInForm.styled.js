@@ -14,3 +14,9 @@ export const LogInFormWrapper = styled.div`
     margin-bottom: 50px;
   }
 `;
+
+export const LogInButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

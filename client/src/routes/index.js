@@ -37,7 +37,7 @@ import {
 import Search from "../components/pages/search/Search";
 import Account from "../components/pages/account/Account";
 import LogIn from "../components/pages/account/LogIn/LogIn";
-import CreateAccount from "../components/pages/account/CreateAccount/CreateAccount";
+import SignUp from "../components/pages/account/SignUp/SignUp";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +52,7 @@ export const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path={ACCOUNT_ROUTE} element={<Account />}>
         <Route path={LOGIN_ROUTE} element={<LogIn />} />
-        <Route path={CREATE_ROUTE} element={<CreateAccount />} />
+        <Route path={CREATE_ROUTE} element={<SignUp />} />
         <Route path={USER_ROUTE} element={<User />} />
         <Route path={ADMIN_ROUTE} element={<Admin />} />
       </Route>

@@ -8,14 +8,12 @@ export const customTheme = {
       colorPrimaryTextHover: "black",
     },
     Input: {
-      colorPrimaryBorderHover: "black",
-      colorPrimaryHover: "black",
-      colorPrimary: "black",
+      colorPrimaryBorderHover: "lightgray",
+      colorPrimaryHover: "#969696",
+      colorPrimary: "#969696",
       colorPrimaryActive: "black",
       colorPrimaryTextHover: "black",
-    },
 
-    
-    
+    },
   },
 };

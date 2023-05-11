@@ -1,47 +1,52 @@
 import React from "react";
-import { FormsSubTitle, FormsTitle } from "../../Account.styled";
+import {
+  FormInput,
+  FormLabel,
+  FormSubTitle,
+  FormTitle,
+  FromSubmitButton,
+} from "../../Account.styled";
 import { Form } from "antd";
-import { LogInButton, LogInFormInput } from "../LogIn.styled";
-import { LogInFormWrapper } from "./LogInForm.styled";
+
+import {
+  ForgotPassLink,
+  LogInButtonContainer,
+  LogInFormWrapper,
+} from "./LogInForm.styled";
+import { Link } from "react-router-dom";
+import { formRules } from "../../formRules";
 
 const LogInForm = ({ submitHandler }) => {
   return (
     <LogInFormWrapper>
-      <FormsTitle>Log in to your account</FormsTitle>
-      <FormsSubTitle>
+      <FormTitle>Log in to your account</FormTitle>
+      <FormSubTitle>
         Check your order status, update your billing info, and review past
         purchases.
-      </FormsSubTitle>
+      </FormSubTitle>
       <Form layout="vertical" onFinish={submitHandler}>
         <Form.Item
           name="email"
-          label="Email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email!",
-            },
-          ]}
+          label={<FormLabel>Email</FormLabel>}
+          rules={formRules}
         >
-          <LogInFormInput />
+          <FormInput />
         </Form.Item>
 
         <Form.Item
           name="password"
-          label="Passowrd"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
+          label={<FormLabel>Password</FormLabel>}
+          rules={formRules}
         >
-          <LogInFormInput />
+          <FormInput />
         </Form.Item>
 
-        <LogInButton type="primary" htmlType="submit" size="large">
-          Log in
-        </LogInButton>
+        <LogInButtonContainer>
+          <FromSubmitButton type="primary" htmlType="submit" size="large">
+            Log in
+          </FromSubmitButton>
+          <Link>Forgot a password?</Link>
+        </LogInButtonContainer>
       </Form>
     </LogInFormWrapper>
   );

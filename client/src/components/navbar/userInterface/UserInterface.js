@@ -30,7 +30,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={`${ACCOUNT_ROUTE}/${LOGIN_ROUTE}`}>
+        <Link to={ACCOUNT_ROUTE}>
           <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>

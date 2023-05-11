@@ -34,6 +34,10 @@ export const OCAContainer = styled.div`
   @media (max-width: ${xl}px) {
     padding: 25px;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const OCAOffersList = styled.ul`
