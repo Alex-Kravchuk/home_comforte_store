@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import LogInForm from "./LogInForm/LogInForm";
 import OfferCreateAccount from "./offerCreateAccount/OfferCreateAccount";
 
 import { LogInContainer, LogInWrapper } from "./LogIn.styled";
+import { useLocation } from "react-router-dom";
 
 const LogIn = () => {
   const formSubmitHandler = (event) => {

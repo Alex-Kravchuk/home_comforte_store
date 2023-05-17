@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import HomeMain from "./main/HomeMain";
 import HomeHeader from "./header/HomeHeader";

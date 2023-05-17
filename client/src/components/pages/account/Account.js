@@ -1,24 +1,53 @@
 import React, { useEffect } from "react";
 import { AccountPageContainer, AccountPageWrapper } from "./Account.styled";
 
-import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
-  CREATE_ROUTE,
+  Outlet,
+  useNavigate,
+  useLocation,
+  redirect,
+  Navigate,
+} from "react-router-dom";
+import {
+  ACCOUNT_ROUTE,
+  ADMIN_ROUTE,
   LOGIN_ROUTE,
   USER_ROUTE,
 } from "../../../utils/routes_consts";
+import { useAuth } from "../../../hooks/userApi/useAuth";
+import LogIn from "./LogIn/LogIn";
 
 const Account = () => {
-  const auth = false;
+  const { auth, role } = useAuth();
   const navigate = useNavigate();
+  const { pathname, state } = useLocation();
+
+  const adminAccess = auth && role.includes("ADMIN");
+  const userAccess = auth;
+
 
   useEffect(() => {
-    if (auth) {
-      navigate(USER_ROUTE);
-    } else {
-      navigate(LOGIN_ROUTE);
+    redirectHandler();
+  }, []);
+
+
+  // in this case I have the one problem
+  // when using browser hsitory tools (go back go next arrows)
+  // we will see the empty page, it is account page wrapper withoun any nested child
+  // and I don't know how it it to fix
+  const redirectHandler = () => {
+    if (adminAccess) {
+      return navigate(ADMIN_ROUTE);
     }
-  }, [auth, navigate]);
+
+    if (userAccess) {
+      return navigate(USER_ROUTE);
+    }
+
+    if (!adminAccess && !userAccess) {
+      return navigate(LOGIN_ROUTE);
+    }
+  };
 
   return (
     <AccountPageWrapper>

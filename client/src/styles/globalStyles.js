@@ -5,8 +5,6 @@ import { viewport_sizes } from "../utils/viewport_size_consts";
 const { l, xl, xxl, m } = viewport_sizes;
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Lato&family=Roboto+Condensed&family=Roboto+Slab&display=swap');
-
   * {
     margin: 0;
     padding: 0;  
@@ -15,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     scroll-behavior: smooth;    
-    font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
     color: #555759;
   }
 

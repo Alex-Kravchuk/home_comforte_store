@@ -20,12 +20,12 @@ export const LogoWrapper = styled.div`
 `;
 
 export const LogoTitle = styled.div`
-  font-family: "Roboto Condensed", sans-serif;
-  font-weight: 600;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 800;
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
-  font-size: ${getResponsiveFontSize(22, 16)};
+  font-size: ${getResponsiveFontSize(24, 18)};
 `;
 
 export const LogoTitlePart = styled.div``;

@@ -9,14 +9,17 @@ import {
   UserInterfaceIconContainer,
   UserInterfaceWrapper,
 } from "./UserInterface.styled";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   ACCOUNT_ROUTE,
   ADMIN_ROUTE,
   LOGIN_ROUTE,
+  USER_ROUTE,
 } from "../../../utils/routes_consts";
 
 const UserInterface = ({ setOpenSearch, mobileScreen }) => {
+  const { pathname } = useLocation();
+
   const openSearchFieldHandler = (event) => {
     event.stopPropagation();
     setOpenSearch((state) => !state);
@@ -30,7 +33,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={ACCOUNT_ROUTE}>
+        <Link to={ACCOUNT_ROUTE} state={{ from: pathname }}>
           <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>

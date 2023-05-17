@@ -42,7 +42,7 @@ export const FormTitle = styled.div`
   padding: 0 0 20px 0;
   margin-bottom: 30px;
 
-  @media (max-width: ${s}px)  {
+  @media (max-width: ${s}px) {
     padding: 0 0 15px 0;
     margin-bottom: 25px;
   }
@@ -50,10 +50,6 @@ export const FormTitle = styled.div`
 
 export const FormSubTitle = styled.div`
   margin-bottom: 30px;
-
-  @media (max-width: ${m}px) {
-    margin-bottom: 15px;
-  }
 `;
 
 export const FormInput = styled(Input)`
@@ -61,7 +57,7 @@ export const FormInput = styled(Input)`
   font-size: 16px;
   color: ${textColors.main};
 
-  @media (max-width: ${s}px)  {
+  @media (max-width: ${s}px) {
     height: 45px;
   }
 `;
@@ -73,7 +69,7 @@ export const FormLabel = styled.div`
   font-size: 16px;
   color: ${textColors.plain};
 
-  @media (max-width: ${s}px)  {
+  @media (max-width: ${s}px) {
     font-size: 15px;
   }
 `;

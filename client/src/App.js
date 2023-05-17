@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { ConfigProvider } from "antd";
 import { Outlet } from "react-router-dom";
@@ -10,8 +10,10 @@ import FullScreenLoader from "./components/loader/FullScreenLoader";
 
 import { getMenuData } from "./redux/loading/loadingSlice";
 
-import { Wrapper } from "./styles/globalStyles";
+import { GlobalStyle, Wrapper } from "./styles/globalStyles";
 import { customTheme } from "./utils/custom_theme_styles_ANTD";
+import { firstLogin } from "./api/user/userAPI";
+import { getUserData } from "./redux/user/userSlice";
 
 function App() {
   const state = useSelector((state) => state.menuData);
@@ -19,20 +21,24 @@ function App() {
 
   useEffect(() => {
     dispatch(getMenuData());
+    dispatch(getUserData());
   }, [dispatch]);
 
   return (
-    <ConfigProvider theme={customTheme}>
-      <FullScreenLoader loading={state.loadingIsActive} />
-      <Wrapper>
-        <NavBar />
-        {/* {`${JSON.stringify(state.data)}`} */}
+    <>
+      <GlobalStyle />
+      <ConfigProvider theme={customTheme}>
+        <FullScreenLoader loading={state.loadingIsActive} />
+        <Wrapper>
+          <NavBar />
+          {/* {`${JSON.stringify(state.data)}`} */}
 
-        <Outlet />
+          <Outlet />
 
-        <Footer />
-      </Wrapper>
-    </ConfigProvider>
+          <Footer />
+        </Wrapper>
+      </ConfigProvider>
+    </>
   );
 }
 

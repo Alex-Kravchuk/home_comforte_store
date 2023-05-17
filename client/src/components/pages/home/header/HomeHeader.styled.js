@@ -22,7 +22,6 @@ export const HomeHeaderImgContainer = styled.div`
 
 export const HomeHeaderInscriptionContainer = styled.div`
   text-align: ${({ textPosition }) => textPosition};
-  font-family: "Anton", sans-serif;
   color: #fff;
   position: absolute;
 

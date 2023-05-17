@@ -46,7 +46,6 @@ const Menu = ({ bigScreen, menuData, scrollDown }) => {
               />
             </MenuContainer>
           </MenuWrapper>
-          {console.log(currentHover, "hover")}
           {currentHover !== false && (
             <DropdownDarkBackgroundWrapper scrollDown={scrollDown} />
           )}

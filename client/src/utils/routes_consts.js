@@ -10,7 +10,7 @@ export const CREATE_ROUTE = "create";
 export const PRODUCT_ROUTE = "/product/:id";
 
 export const BRAND_ROUTE = "/brands";
-export const BASKET_ROUTE = "/basket";
+export const BASKET_ROUTE = "basket";
 
 export const SEARCH_ROUTE = "/search";
 export const CONTACT_ROUTE = "/contact";
