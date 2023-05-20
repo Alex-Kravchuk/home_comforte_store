@@ -4,13 +4,13 @@ import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 const { xl, l, m } = viewport_sizes;
 
 export const SignUpWrapper = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 70px 0;
 
   @media (max-width: ${m}px) {
+    display: block;
     margin: 50px 0;
   }
 `;

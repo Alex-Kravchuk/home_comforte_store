@@ -30,7 +30,7 @@ export const AccountPageWrapper = styled.div`
 
 export const AccountPageContainer = styled.div`
   @media (max-width: ${m}px) {
-    padding: 0 15px;
+    padding: 0 20px;
   }
 `;
 
@@ -69,8 +69,8 @@ export const FormLabel = styled.div`
   font-size: 16px;
   color: ${textColors.plain};
 
-  @media (max-width: ${s}px) {
-    font-size: 15px;
+  @media (max-width: ${m}px) {
+    font-size: 14px;
   }
 `;
 

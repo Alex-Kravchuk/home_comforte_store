@@ -8,7 +8,11 @@ const incReqTypeDataMiddleware = require("../middleware/type/incReqTypeDataMiddl
 
 router.post("/", incReqTypeDataMiddleware, typeController.create);
 router.get("/", typeController.getAll);
-router.get("/:id", checkCorrectIDMiddleware("type"), typeController.getOne);
+router.get(
+  "/:id",
+  checkCorrectIDMiddleware("type"),
+  typeController.getAllByCategoryId
+);
 router.delete("/:id", checkCorrectIDMiddleware("type"), typeController.delete);
 
 module.exports = router;

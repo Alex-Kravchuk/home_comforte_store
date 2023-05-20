@@ -25,7 +25,6 @@ const Account = () => {
   const adminAccess = auth && role.includes("ADMIN");
   const userAccess = auth;
 
-
   useEffect(() => {
     redirectHandler();
   }, []);
@@ -33,8 +32,8 @@ const Account = () => {
 
   // in this case I have the one problem
   // when using browser hsitory tools (go back go next arrows)
-  // we will see the empty page, it is account page wrapper withoun any nested child
-  // and I don't know how it it to fix
+  // we will account page 2 times
+  // and I don't know how it to fix
   const redirectHandler = () => {
     if (adminAccess) {
       return navigate(ADMIN_ROUTE);

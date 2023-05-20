@@ -9,14 +9,9 @@ class TypeController {
     try {
       const { name, categoryId } = req.body;
       const { img } = req.files;
-      
+
       let imgName;
       imgName = createImgName(img, "STRING");
-
-      const alreadyExists = await Type.findOne({ where: { name } });
-      if (alreadyExists) {
-        return next(ApiError.duplicateName(TypeController.errorSource));
-      }
 
       const type = await Type.create({ name, img: imgName, categoryId });
       return res.json(type);
@@ -34,10 +29,12 @@ class TypeController {
     }
   }
 
-  async getOne(req, res) {
+  // maybe getOne will be need later
+
+  async getAllByCategoryId(req, res) {
     try {
       const { id } = req.params;
-      const type = await Type.findOne({ where: { id } });
+      const type = await Type.findAll({ where: { categoryId: id } });
 
       return res.json(type);
     } catch (error) {

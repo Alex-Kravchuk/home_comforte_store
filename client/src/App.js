@@ -14,6 +14,7 @@ import { GlobalStyle, Wrapper } from "./styles/globalStyles";
 import { customTheme } from "./utils/custom_theme_styles_ANTD";
 import { firstLogin } from "./api/user/userAPI";
 import { getUserData } from "./redux/user/userSlice";
+import { getGuest } from "./redux/guest/guestSlice";
 
 function App() {
   const state = useSelector((state) => state.menuData);
@@ -21,7 +22,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getMenuData());
-    dispatch(getUserData());
+    // dispatch(getUserData());
+    dispatch(getGuest());
   }, [dispatch]);
 
   return (

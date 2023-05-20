@@ -16,8 +16,10 @@ const categoryRouter = require("./categoryRouter");
 const modifierRouter = require("./modifierRouter");
 const previewRouter = require("./previewRouter");
 const basketFurnitureRouter = require("./basketFurnitureRouter");
+const guestRouter = require("./guestRouter");
 
 router.use("/user", userRouter);
+router.use("/guest", guestRouter);
 router.use("/type", typeRouter);
 router.use("/rating", ratingRouter);
 router.use("/review", reviewRouter);

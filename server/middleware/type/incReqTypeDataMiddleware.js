@@ -1,5 +1,5 @@
 const ApiError = require("../../error/ApiError");
-const { Category } = require("../../models/models");
+const { Category, Type } = require("../../models/models");
 
 module.exports = async (req, res, next) => {
   try {
@@ -14,6 +14,17 @@ module.exports = async (req, res, next) => {
           errorSource
         )
       );
+    } else {
+      const alreadyExists = await Type.findOne({ where: { name, categoryId } });
+
+      if (alreadyExists) {
+        return next(
+          ApiError.requestDataAreNotDefined(
+            "A type with that name already exists for the current category",
+            errorSource
+          )
+        );
+      }
     }
 
     if (isNaN(categoryId)) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useAuth = () => {
-  const [isAuth, setAuth] = useState({ auth: true, role: ["USER", "ADMIN"] });
+  const [isAuth, setAuth] = useState({ auth: false, role: ["USER", "ADMIN"] });
 
   useEffect(() => {
     let timeoutID;

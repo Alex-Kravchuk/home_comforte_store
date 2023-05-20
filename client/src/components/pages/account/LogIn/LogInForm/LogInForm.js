@@ -2,6 +2,7 @@ import React from "react";
 import {
   FormInput,
   FormLabel,
+  FormPasswordInput,
   FormSubTitle,
   FormTitle,
   FromSubmitButton,
@@ -14,7 +15,7 @@ import {
   LogInFormWrapper,
 } from "./LogInForm.styled";
 import { Link } from "react-router-dom";
-import { formRules } from "../../formRules";
+import { formRules } from "../../../../../helpers/formRules";
 
 const LogInForm = ({ submitHandler }) => {
   return (
@@ -28,7 +29,7 @@ const LogInForm = ({ submitHandler }) => {
         <Form.Item
           name="email"
           label={<FormLabel>Email</FormLabel>}
-          rules={formRules}
+          rules={formRules.emailInput}
         >
           <FormInput />
         </Form.Item>
@@ -36,9 +37,9 @@ const LogInForm = ({ submitHandler }) => {
         <Form.Item
           name="password"
           label={<FormLabel>Password</FormLabel>}
-          rules={formRules}
+          rules={formRules.passwordInput}
         >
-          <FormInput />
+          <FormPasswordInput />
         </Form.Item>
 
         <LogInButtonContainer>

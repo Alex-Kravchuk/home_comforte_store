@@ -83,3 +83,5 @@
 
 Try to use webp image format
 
+
+SOMEDAY Try to use pCloud for saving files

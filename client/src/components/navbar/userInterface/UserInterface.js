@@ -16,9 +16,17 @@ import {
   LOGIN_ROUTE,
   USER_ROUTE,
 } from "../../../utils/routes_consts";
+import { useAuth } from "../../../hooks/userApi/useAuth";
 
 const UserInterface = ({ setOpenSearch, mobileScreen }) => {
-  const { pathname } = useLocation();
+  const { auth, role } = useAuth();
+
+  const correctRoute =
+    auth && role.includes("ADMIN")
+      ? ADMIN_ROUTE
+      : auth
+      ? USER_ROUTE
+      : LOGIN_ROUTE;
 
   const openSearchFieldHandler = (event) => {
     event.stopPropagation();
@@ -33,7 +41,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={ACCOUNT_ROUTE} state={{ from: pathname }}>
+        <Link to={ACCOUNT_ROUTE + "/" + correctRoute}>
           <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>

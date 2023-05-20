@@ -1,79 +1,24 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const ApiError = require("../error/ApiError");
 
 const { User, Basket } = require("../models/models");
 const createImgName = require("../helpers/createImgName");
-
-const generateJWT = (config) =>
-  jwt.sign({ ...config }, process.env.SECRET_KEY, {
-    expiresIn: "24h",
-  });
+const { generateJWT } = require("../helpers/generateJWT");
 
 class UserController {
   static errorSource = "user controller";
 
-  async firstLogin(req, res, next) {
-    try {
-      const user = await User.create({ role: ["USER"] });
-      const basket = await Basket.create({ userId: user.id });
-
-      const jwtConfig = {
-        user_id: user.id,
-        basket_id: basket.id,
-        role: user.role,
-      };
-
-      const token = generateJWT(jwtConfig);
-
-      return res.json({ token });
-    } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
-    }
-  }
-
   async signUp(req, res, next) {
     try {
-      let fileName;
-      const {
-        email,
-        password,
-        name,
-        mobile,
-        address,
-        bonus,
-        role = "USER",
-      } = req.body;
-
-      if (req.files) {
-        const { img } = req.files;
-        fileName = createImgName(img, "STRING");
-      }
-
-      const emailAlreadyInUse = await User.findOne({ where: { email } });
-      if (emailAlreadyInUse) {
-        return next(
-          ApiError.badRequest(
-            "The current email is already in use",
-            UserController.errorSource
-          )
-        );
-      }
-
-      const arrOfRoles =
-        role.split(",").length > 1 ? [...role.split(",")] : [role];
+      const { email, password, name, lastname } = req.body;
 
       const hashPassword = await bcrypt.hash(password, 5);
       const user = await User.create({
         name,
+        lastname,
         email,
         password: hashPassword,
-        mobile,
-        address,
-        role: arrOfRoles,
-        bonus,
-        img: fileName,
       });
 
       const jwtConfig = {
@@ -81,10 +26,7 @@ class UserController {
         email: user.email,
         password: user.password,
         name: user.name,
-        mobile: user.mobile,
-        bonus: user.bonus,
-        address: user.address,
-        img: user.img,
+        lastname: user.lastname,
         role: user.role,
       };
 
@@ -101,7 +43,6 @@ class UserController {
       const { email, password } = req.body;
 
       const user = await User.findOne({ where: { email } });
-    
 
       if (!user) {
         return next(

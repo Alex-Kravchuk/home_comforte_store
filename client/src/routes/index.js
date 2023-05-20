@@ -38,7 +38,6 @@ import Search from "../components/pages/search/Search";
 import Account from "../components/pages/account/Account";
 import LogIn from "../components/pages/account/LogIn/LogIn";
 import SignUp from "../components/pages/account/SignUp/SignUp";
-import RequireAuth from "../hoc/RequireAuth";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,27 +54,13 @@ export const router = createBrowserRouter(
       <Route path={ACCOUNT_ROUTE} element={<Account />}>
         <Route path={LOGIN_ROUTE} element={<LogIn />} />
         <Route path={CREATE_ROUTE} element={<SignUp />} />
-        <Route
-          path={USER_ROUTE}
-          element={
-            <RequireAuth>
-              <User />
-            </RequireAuth>
-          }
-        >
+        <Route path={USER_ROUTE} element={<User />}>
           <Route
             path="purchase_history"
             element={<div>I'm inside of the user page</div>}
           />
         </Route>
-        <Route
-          path={ADMIN_ROUTE}
-          element={
-            <RequireAuth>
-              <Admin />
-            </RequireAuth>
-          }
-        />
+        <Route path={ADMIN_ROUTE} element={<Admin />} />
       </Route>
 
       <Route path={BASKET_ROUTE} element={<Basket />} />

@@ -7,40 +7,45 @@ import {
   FromSubmitButton,
   FormPasswordInput,
 } from "../../Account.styled";
-import { formRules } from "../../formRules";
+import { formRules } from "../../../../../helpers/formRules";
 
-const SignUpForm = () => {
+const SignUpForm = ({ formDataHandler, signUpForm }) => {
   return (
     <SignUpFormWrapper>
       <SignUpFormContainer>
-        <Form name="signup" layout="vertical">
+        <Form
+          name="signup"
+          layout="vertical"
+          onFinish={formDataHandler}
+          form={signUpForm}
+        >
           <Form.Item
             label={<FormLabel>First name</FormLabel>}
-            name="first_name"
-            rules={formRules}
+            name="name"
+            rules={formRules.normalInputField("name")}
           >
             <FormInput />
           </Form.Item>
           <Form.Item
             label={<FormLabel>Last Name</FormLabel>}
-            name="last_name"
-            rules={formRules}
+            name="lastname"
+            rules={formRules.normalInputField("last name")}
           >
             <FormInput />
           </Form.Item>
           <Form.Item
             label={<FormLabel>Email Address</FormLabel>}
             name="email"
-            rules={formRules}
+            rules={formRules.emailInput}
           >
-            <FormInput />
+            <FormInput type="email" />
           </Form.Item>
           <Form.Item
             label={
-              <FormLabel>Password (6 or mote characters, no spaces)</FormLabel>
+              <FormLabel>Password (6 or more characters, no spaces)</FormLabel>
             }
             name="password"
-            rules={formRules}
+            rules={formRules.passwordInput}
           >
             <FormPasswordInput />
           </Form.Item>
@@ -48,11 +53,11 @@ const SignUpForm = () => {
           <Form.Item
             label={
               <FormLabel>
-                Confirm Password (6 or mote characters, no spaces)
+                Confirm Password (6 or more characters, no spaces)
               </FormLabel>
             }
             name="confirm_password"
-            rules={formRules}
+            rules={formRules.confirmPaswordInput}
           >
             <FormPasswordInput />
           </Form.Item>

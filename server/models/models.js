@@ -9,11 +9,17 @@ const User = sequelize.define("user", {
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
   name: { type: DataTypes.STRING },
+  lastname: { type: DataTypes.STRING },
   mobile: { type: DataTypes.STRING },
   address: { type: DataTypes.STRING },
   bonus: { type: DataTypes.INTEGER, defaultValue: 0 },
   img: { type: DataTypes.STRING },
   role: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: ["USER"] },
+});
+
+const Guest = sequelize.define("guest", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  role: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: ["GUEST"] },
 });
 
 const Basket = sequelize.define("basket", {
@@ -47,13 +53,13 @@ const Category = sequelize.define("category", {
 
 const Type = sequelize.define("type", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },
 });
 
 const SubType = sequelize.define("sub_type", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const Furniture = sequelize.define("furniture", {
@@ -99,6 +105,9 @@ const Collection = sequelize.define("collections", {
 
 User.hasOne(Basket);
 Basket.belongsTo(User);
+
+Guest.hasOne(Basket);
+Basket.belongsTo(Guest);
 
 User.hasMany(Rating);
 Rating.belongsTo(User);
@@ -172,4 +181,5 @@ module.exports = {
   Preview,
   Modifier,
   Dimension,
+  Guest,
 };

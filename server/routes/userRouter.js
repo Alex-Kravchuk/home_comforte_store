@@ -12,7 +12,6 @@ const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware
 router.post("/login", userController.logIn);
 router.post("/auth", checkUserMiddleware("ADMIN"), userController.check);
 router.post("/signup", signUpUserMiddleware, userController.signUp);
-router.post("/first_login", authUserMiddleware, userController.firstLogin);
 router.get("/:id", checkCorrectIDMiddleware("user"), userController.getOne);
 router.put(
   "/:id",
