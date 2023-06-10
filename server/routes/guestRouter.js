@@ -7,6 +7,6 @@ const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware
 const checkGuestTokenMiddleware = require("../middleware/guestMiddleware/checkGuestTokenMiddleware");
 
 router.post("/create", guestController.create);
-router.get("/:id", checkCorrectIDMiddleware("guest"), guestController.getOne);
+router.post("/delete", guestController.removeGuest);
 
 module.exports = router;

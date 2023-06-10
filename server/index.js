@@ -6,6 +6,7 @@ const cors = require("cors");
 const path = require("path");
 const sequelize = require("./db");
 const fileUpload = require("express-fileupload");
+const cookieParser = require("cookie-parser");
 
 const router = require("./routes/index");
 const models = require("./models/models");
@@ -16,8 +17,21 @@ const notFoundMiddleware = require("./middleware/notFoundMiddleware");
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors());
+
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: [
+      "http://172.20.10.2:3000",
+      "http://localhost:3000",
+      "http://192.168.31.84:3000",
+    ],
+    // origin: '*',
+    credentials: true,
+  })
+);
+
 app.use(express.static(path.resolve(__dirname, "static")));
 app.use(fileUpload({}));
 app.use("/api", router);

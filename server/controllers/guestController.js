@@ -1,35 +1,38 @@
 const ApiError = require("../error/ApiError");
 const { generateJWT } = require("../helpers/generateJWT");
 const { Guest, Basket } = require("../models/models");
+const guestService = require("../services/guest-service");
 
 class GuestController {
   static errorSource = "guest controller";
 
   async create(req, res, next) {
     try {
-      const guest = await Guest.create();
-      const basket = await Basket.create({ guestId: guest.id });
+      const guestToken = await guestService.create();
 
-      const jwtConfig = {
-        guest_id: guest.id,
-        basket_id: basket.id,
-        role: guest.role,
-      };
-
-      const token = generateJWT(jwtConfig);
-
-      return res.json({ token });
+      return res.json({ token: guestToken });
     } catch (error) {
       return next(ApiError.unexpectedError(error, GuestController.errorSource));
     }
   }
 
-  async getOne(req, res, next) {
+  async removeGuest(req, res, next) {
     try {
-      const { id } = req.params;
-      const basket = await Guest.findOne({ where: { id } });
+      const { token } = req.body;
 
-      return res.json(basket);
+      if (token) {
+        const guestRemoved = await guestService.removeGuest(token);
+        if (guestRemoved) {
+          return res.json({ message: "deleted" });
+        } else {
+          return next(
+            ApiError.unexpectedError(
+              "Error deleting guest",
+              GuestController.errorSource
+            )
+          );
+        }
+      }
     } catch (error) {
       return next(ApiError.unexpectedError(error, GuestController.errorSource));
     }

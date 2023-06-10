@@ -13,9 +13,7 @@ module.exports = async function (req, res, next) {
 
     const emailAlreadyInUse = await User.findOne({ where: { email } });
     if (emailAlreadyInUse) {
-      return next(
-        ApiError.badRequest("The current email is already in use", errorSource)
-      );
+      return next(ApiError.duplicate("email", errorSource));
     }
 
     if (!email || !password || !name || !lastname) {

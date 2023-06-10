@@ -22,6 +22,11 @@ const Guest = sequelize.define("guest", {
   role: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: ["GUEST"] },
 });
 
+const Token = sequelize.define("token", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  refreshToken: { type: DataTypes.TEXT, allowNull: false },
+});
+
 const Basket = sequelize.define("basket", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
@@ -42,6 +47,11 @@ const Review = sequelize.define("review", {
   review_body: { type: DataTypes.STRING },
   rating: { type: DataTypes.INTEGER, allowNull: false },
   img: { type: DataTypes.ARRAY(DataTypes.STRING) },
+});
+
+const ResetPasswordToken = sequelize.define("res_pass_token", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  token: { type: DataTypes.STRING, allowNull: false },
 });
 
 // furniture settings
@@ -118,6 +128,12 @@ PurchaseHistory.belongsTo(User);
 User.hasMany(Review);
 Review.belongsTo(User);
 
+User.hasOne(Token);
+Token.belongsTo(User);
+
+User.hasOne(ResetPasswordToken);
+ResetPasswordToken.belongsTo(User);
+
 // basket settings
 
 Basket.hasMany(BasketFurniture);
@@ -182,4 +198,6 @@ module.exports = {
   Modifier,
   Dimension,
   Guest,
+  Token,
+  ResetPasswordToken,
 };

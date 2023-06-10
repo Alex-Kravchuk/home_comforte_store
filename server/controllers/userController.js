@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 
 const ApiError = require("../error/ApiError");
 
-const { User, Basket } = require("../models/models");
+const { User } = require("../models/models");
 const createImgName = require("../helpers/createImgName");
-const { generateJWT } = require("../helpers/generateJWT");
+const userService = require("../services/user-service");
 
 class UserController {
   static errorSource = "user controller";
@@ -12,29 +12,21 @@ class UserController {
   async signUp(req, res, next) {
     try {
       const { email, password, name, lastname } = req.body;
-
-      const hashPassword = await bcrypt.hash(password, 5);
-      const user = await User.create({
-        name,
-        lastname,
+      const userData = await userService.signup(
         email,
-        password: hashPassword,
+        password,
+        name,
+        lastname
+      );
+
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24),
+        httpOnly: true,
       });
 
-      const jwtConfig = {
-        id: user.id,
-        email: user.email,
-        password: user.password,
-        name: user.name,
-        lastname: user.lastname,
-        role: user.role,
-      };
-
-      const token = generateJWT(jwtConfig);
-
-      return res.json({ token });
+      return res.json(userData);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
+      return next(error);
     }
   }
 
@@ -42,55 +34,94 @@ class UserController {
     try {
       const { email, password } = req.body;
 
-      const user = await User.findOne({ where: { email } });
+      const userData = await userService.login(email, password);
 
-      if (!user) {
-        return next(
-          ApiError.badRequest(
-            "The user is not defined",
-            UserController.errorSource
-          )
-        );
-      }
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24),
+        httpOnly: true,
+      });
 
-      const comparePassword = bcrypt.compareSync(password, user.password);
-      if (!comparePassword) {
-        return next(
-          ApiError.badRequest(
-            "The password is incorrect",
-            UserController.errorSource
-          )
-        );
-      }
+      return res.json(userData);
+    } catch (error) {
+      return next(error);
+    }
+  }
 
-      const jwtConfig = {
-        id: user.id,
-        email: user.email,
-        password: user.password,
-        name: user.name,
-        mobile: user.mobile,
-        bonus: user.bonus,
-        address: user.address,
-        img: user.img,
-        role: user.role,
-      };
+  async logOut(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const token = await userService.logout(refreshToken);
+      res.clearCookie("refreshToken");
+      return res.status(200).json({ message: "Logged out" });
+    } catch (error) {
+      return next(error);
+    }
+  }
 
-      const token = generateJWT(jwtConfig);
+  async refresh(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const userData = await userService.refresh(refreshToken);
 
-      return res.json({ token });
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24),
+        httpOnly: true,
+      });
+
+      return res.json(userData);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async testFuncGetUsers(req, res, next) {
+    try {
+      const users = await User.findAndCountAll();
+
+      return res.json(users);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async checkAuth(req, res, next) {
+    try {
+      const { user } = req;
+      const userData = await userService.checkAuth(user);
+
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24),
+        httpOnly: true,
+      });
+
+      return res.json(userData);
     } catch (error) {
       return next(ApiError.unexpectedError(error, UserController.errorSource));
     }
   }
 
-  // check function I use before firstLogin function
-
-  async check(req, res, next) {
+  async forgotPassword(req, res, next) {
     try {
-      const { user } = req;
-      const token = generateJWT({ user });
+      const { email } = req.body;
+      await userService.forgotPassword(email);
 
-      return res.json({ token });
+      return res.status(200).json({ message: "processed" });
+    } catch (error) {
+      return next(ApiError.unexpectedError(error, UserController.errorSource));
+    }
+  }
+
+  async resetPassword(req, res, next) {
+    try {
+      const { token, password, userId } = req.body;
+      const userData = await userService.resetPassword(token, userId, password);
+
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24),
+        httpOnly: true,
+      });
+
+      return res.json(userData);
     } catch (error) {
       return next(ApiError.unexpectedError(error, UserController.errorSource));
     }

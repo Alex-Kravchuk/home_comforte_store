@@ -7,7 +7,11 @@ class ApiError extends Error {
   }
 
   static badRequest(message, source) {
-    return new ApiError(404, message, source);
+    return new ApiError(400, message, source);
+  }
+
+  static notAuthorized(source, message = "Not authorized") {
+    return new ApiError(401, message, source);
   }
 
   static requestDataAreNotDefined(details, source) {
@@ -18,8 +22,8 @@ class ApiError extends Error {
     );
   }
 
-  static duplicateName(source) {
-    return new ApiError(409, "The current name is already in use", source);
+  static duplicate(value, source) {
+    return new ApiError(409, `The current ${value} is already in use`, source);
   }
 
   static idIsNotANumber(source) {

@@ -15,6 +15,7 @@ class CategoryController {
       }
 
       const category = await Category.create({ name });
+      res.header("Access-Control-Allow-Origin", "http://localhost:3000");
       return res.json(category);
     } catch (error) {
       return next(
