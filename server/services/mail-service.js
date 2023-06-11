@@ -15,7 +15,8 @@ class MailService {
     });
   }
 
-  async sendResetPasswordEmail(to, link) {
+  async sendResetPasswordEmail(to, link, user) {
+    const { name, lastname } = user;
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
@@ -23,7 +24,7 @@ class MailService {
       text: "",
       html: `
 			<div style="padding: 50px 0;">
-				<h1 style="text-align: center;">Password Reset</h1>
+				<h1 style="text-align: center;">Hello ${name} ${lastname}!</h1>
 				<p style="text-align: justify; font-size: 18px;">At your request, this letter has been sent to change the password for the account in our online store "Home Comfort". If you've lost your password or 
 				wish to reset it, use the link below to get started.</p>
 				<div style="text-align: center; align-items: center; margin: 50px 0;">

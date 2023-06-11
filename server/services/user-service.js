@@ -91,88 +91,83 @@ class UserService {
   }
 
   async forgotPassword(email) {
-    try {
-      const user = await User.findOne({ where: { email } });
-      if (!user) {
-        return ApiError.badRequest(
-          "The user with this email does not exist",
-          UserService.errorSource
-        );
-      }
-
-      const oldResetToken = await ResetPasswordToken.findOne({
-        where: { userId: user.id },
-      });
-
-      if (oldResetToken) {
-        await oldResetToken.destroy();
-      }
-
-      const newlyGeneratedToken = await tokenService.generateSimpleToken({
-        id: user.id,
-      });
-
-      const newResetToken = await ResetPasswordToken.create({
-        token: newlyGeneratedToken,
-        userId: user.id,
-      });
-
-      const resetLink = `${process.env.CLIENT_APP_URL}/account/reset-password/${newResetToken.token}/${user.id}`;
-
-      const response = await mailService.sendResetPasswordEmail(
-        email,
-        resetLink
+    // try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw ApiError.badRequest(
+        "The user with this email does not exist",
+        UserService.errorSource
       );
-
-      return response;
-    } catch (error) {
-      throw ApiError.unexpectedError(error, UserService.errorSource);
     }
+
+    const oldResetToken = await ResetPasswordToken.findOne({
+      where: { userId: user.id },
+    });
+
+    if (oldResetToken) {
+      await oldResetToken.destroy();
+    }
+
+    const newlyGeneratedToken = await tokenService.generateSimpleToken({
+      id: user.id,
+    });
+
+    const newResetToken = await ResetPasswordToken.create({
+      token: newlyGeneratedToken,
+      userId: user.id,
+    });
+
+    const resetLink = `${process.env.CLIENT_APP_URL}/account/reset-password/${newResetToken.token}/${user.id}`;
+
+    const response = await mailService.sendResetPasswordEmail(
+      email,
+      resetLink,
+      user
+    );
+
+    return response;
   }
 
   async resetPassword(token, userId, password) {
-    try {
-      const tokenFromDB = await ResetPasswordToken.findOne({
-        where: { token: token },
-      });
+    const tokenFromDB = await ResetPasswordToken.findOne({
+      where: { userId: userId },
+    });
+    console.log("====================================");
+    console.log("lasd", token, userId, password);
+    console.log("====================================");
+    if (!tokenFromDB) {
+
       console.log('====================================');
-      console.log('lasd', token);
+      console.log('suka', tokenFromDB);
       console.log('====================================');
-      if (!tokenFromDB) {
-        return ApiError.unexpectedError(
-          "Something went wrong",
-          UserService.errorSource
-        );
-      }
-
-      
-      const user = await User.findOne({ where: { id: userId } });
-      if (!user) {
-        return ApiError.badRequest(
-          "The user with this email does not exist",
-          UserService.errorSource
-        );
-      }
-
-
-      const isValid = tokenService.validateSimpleToken(tokenFromDB.token);
-      // because the marker is valid for 60 minutes
-      if (!isValid) {
-        return ApiError.badRequest(
-          "Password reset timed out. Submit the password change form again.",
-          UserService.errorSource
-        );
-      }
-
-
-      const hashPassword = await bcrypt.hash(password, 5);
-      await user.update({ password: hashPassword });
-
-      const response = await createUserResponse(user);
-      return response;
-    } catch (error) {
-      return ApiError.unexpectedError(error, UserService.errorSource);
+      throw ApiError.badRequest(
+        "Something went wrong",
+        UserService.errorSource
+      );
     }
+
+    const user = await User.findOne({ where: { id: userId } });
+    if (!user) {
+      throw ApiError.badRequest(
+        "The user with this email does not exist",
+        UserService.errorSource
+      );
+    }
+
+    const isValid = tokenService.validateSimpleToken(tokenFromDB.token);
+    // because the marker is valid for 60 minutes
+    if (!isValid) {
+      throw ApiError.badRequest(
+        "Password reset timed out. Submit the password change form again.",
+        UserService.errorSource
+      );
+    }
+
+    const hashPassword = await bcrypt.hash(password, 5);
+    await user.update({ password: hashPassword });
+
+    // const response = await createUserResponse(user);
+    return true;
   }
 }
 

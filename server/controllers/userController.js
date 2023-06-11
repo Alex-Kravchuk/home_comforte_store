@@ -107,23 +107,18 @@ class UserController {
 
       return res.status(200).json({ message: "processed" });
     } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
+      return next(error);
     }
   }
 
   async resetPassword(req, res, next) {
     try {
       const { token, password, userId } = req.body;
-      const userData = await userService.resetPassword(token, userId, password);
+      await userService.resetPassword(token, userId, password);
 
-      res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: 30 * (3600 * 24),
-        httpOnly: true,
-      });
-
-      return res.json(userData);
+      return res.status(200).json({ message: "processed" });
     } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
+      return next(error);
     }
   }
 
