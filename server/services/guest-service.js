@@ -1,32 +1,56 @@
-const ApiError = require("../error/ApiError");
 const { Basket, Guest } = require("../models/models");
-const bcrypt = require("bcrypt");
 
-const UserDTO = require("../dtos/user-dto");
 const tokenService = require("./token-service");
-const createUserResponse = require("../helpers/createUserResponse");
-const { generateJWT } = require("../helpers/generateJWT");
 
 class GuestService {
   static errorSource = "guest service";
 
-  async create() {
-    const guest = await Guest.create();
-    const basket = await Basket.create({ guestId: guest.id });
+  async create(oldToken) {
+    if (!oldToken) {
+      const newGuest = await Guest.create();
+      const newBasket = await Basket.create({ guestId: newGuest.id });
 
-    const jwtPayload = {
-      guest_id: guest.id,
-      basket_id: basket.id,
-      role: guest.role,
-    };
+      const payload = {
+        guest_id: newGuest.id,
+        basket_id: newBasket.id,
+        role: newGuest.role,
+      };
 
-    const token = generateJWT(jwtPayload);
-    return token;
+      const token = tokenService.generateSimpleToken(payload, "24h");
+      return token;
+    }
+
+    const decoded = tokenService.decode(oldToken);
+    const isValid = tokenService.validateSimpleToken(oldToken);
+
+    if (!isValid) {
+      const oldGuest = await Guest.findOne({ where: { id: decoded.guest_id } });
+      const oldBasket = await Basket.findOne({
+        where: { id: decoded.basket_id },
+      });
+
+      await oldGuest.destroy();
+      await oldBasket.destroy();
+
+      const newGuest = await Guest.create();
+      const newBasket = await Basket.create({ guestId: newGuest.id });
+
+      const payload = {
+        guest_id: newGuest.id,
+        basket_id: newBasket.id,
+        role: newGuest.role,
+      };
+
+      const token = tokenService.generateSimpleToken(payload, "24h");
+      return token;
+    }
+
+    return oldToken;
   }
 
   //   do it after user login
   async removeGuest(guestToken) {
-    const decoded = tokenService.tokenDecode(guestToken);
+    const decoded = tokenService.decode(guestToken);
 
     if (decoded) {
       const guest = await Guest.findOne({ where: { id: decoded.guest_id } });

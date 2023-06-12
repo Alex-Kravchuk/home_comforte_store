@@ -15,7 +15,7 @@ class TokenService {
         payload,
         process.env.JWT_REFRESH_SECRET_KEY,
         {
-          expiresIn: "30d",
+          expiresIn: "40d",
         }
       );
 
@@ -28,10 +28,10 @@ class TokenService {
     }
   }
 
-  async generateSimpleToken(payload) {
+   generateSimpleToken(payload, expiresIn = '24h') {
     try {
       const token = jwt.sign(payload, process.env.JWT_SIMPLE_SECRET_KEY, {
-        expiresIn: "60m",
+        expiresIn,
       });
 
       return token;
@@ -105,7 +105,7 @@ class TokenService {
     }
   }
 
-  tokenDecode(token) {
+  decode(token) {
     try {
       const decoded = jwt.decode(token);
       return decoded;

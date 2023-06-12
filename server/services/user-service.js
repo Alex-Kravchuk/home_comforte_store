@@ -1,11 +1,12 @@
-const ApiError = require("../error/ApiError");
-const { User, Basket, ResetPasswordToken } = require("../models/models");
 const bcrypt = require("bcrypt");
 
-const UserDTO = require("../dtos/user-dto");
-const tokenService = require("./token-service");
-const createUserResponse = require("../helpers/createUserResponse");
+const ApiError = require("../error/ApiError");
+const { User, ResetPasswordToken } = require("../models/models");
+
 const mailService = require("./mail-service");
+const tokenService = require("./token-service");
+
+const createUserResponse = require("../helpers/createUserResponse");
 
 class UserService {
   static errorSource = "user service";
@@ -52,46 +53,34 @@ class UserService {
   }
 
   async logout(refreshToken) {
-    try {
-      const response = await tokenService.removeToken(refreshToken);
-      return response;
-    } catch (error) {
-      return ApiError.unexpectedError(error, UserService.errorSource);
-    }
+    const response = await tokenService.removeToken(refreshToken);
+    return response;
   }
 
   async refresh(refreshToken) {
-    try {
-      const userData = tokenService.validateRefreshToken(refreshToken);
-      const tokenFromDB = await tokenService.findToken(refreshToken);
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDB = await tokenService.findToken(refreshToken);
 
-      if (!userData || !tokenFromDB) {
-        throw ApiError.notAuthorized(UserService.errorSource);
-      }
-
-      const user = await User.findOne({ where: { id: userData.id } });
-
-      const response = await createUserResponse(user);
-      return response;
-    } catch (error) {
-      throw ApiError.unexpectedError(error, UserService.errorSource);
+    if (!userData || !tokenFromDB) {
+      throw ApiError.notAuthorized(UserService.errorSource);
     }
+
+    const user = await User.findOne({ where: { id: userData.id } });
+
+    const response = await createUserResponse(user);
+    return response;
   }
 
   async checkAuth(userData) {
-    try {
-      // TODO if null?
-      const user = await User.findOne({ where: { id: userData.id } });
-
-      const response = await createUserResponse(user);
-      return response;
-    } catch (error) {
-      throw ApiError.unexpectedError(error, UserService.errorSource);
+    const user = await User.findOne({ where: { id: userData.id } });
+    if (!user) {
+      throw ApiError.notAuthorized(UserService.errorSource);
     }
+    const response = await createUserResponse(user);
+    return response;
   }
 
   async forgotPassword(email) {
-    // try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       throw ApiError.badRequest(
@@ -108,9 +97,12 @@ class UserService {
       await oldResetToken.destroy();
     }
 
-    const newlyGeneratedToken = await tokenService.generateSimpleToken({
-      id: user.id,
-    });
+    const newlyGeneratedToken = tokenService.generateSimpleToken(
+      {
+        id: user.id,
+      },
+      "60m"
+    );
 
     const newResetToken = await ResetPasswordToken.create({
       token: newlyGeneratedToken,
@@ -132,14 +124,7 @@ class UserService {
     const tokenFromDB = await ResetPasswordToken.findOne({
       where: { userId: userId },
     });
-    console.log("====================================");
-    console.log("lasd", token, userId, password);
-    console.log("====================================");
     if (!tokenFromDB) {
-
-      console.log('====================================');
-      console.log('suka', tokenFromDB);
-      console.log('====================================');
       throw ApiError.badRequest(
         "Something went wrong",
         UserService.errorSource
@@ -149,7 +134,7 @@ class UserService {
     const user = await User.findOne({ where: { id: userId } });
     if (!user) {
       throw ApiError.badRequest(
-        "The user with this email does not exist",
+        "An error occurred. No user found",
         UserService.errorSource
       );
     }
@@ -166,7 +151,6 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 5);
     await user.update({ password: hashPassword });
 
-    // const response = await createUserResponse(user);
     return true;
   }
 }

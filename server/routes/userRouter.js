@@ -10,13 +10,18 @@ const signUpUserMiddleware = require("../middleware/user/signUpUserMiddleware");
 const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
 
 router.post("/login", userController.logIn);
-router.post("/signup", signUpUserMiddleware, userController.signUp);
-router.get("/refresh", userController.refresh);
 router.get("/logout", userController.logOut);
-router.post("/forgot-password", userController.forgotPassword);
+router.get("/refresh", userController.refresh);
 router.post("/reset-password", userController.resetPassword);
-
 router.get("/auth", authMiddleware, userController.checkAuth);
+router.post("/forgot-password", userController.forgotPassword);
+router.post("/signup", signUpUserMiddleware, userController.signUp);
+
+
+
+
+
+
 
 router.get("/:id", checkCorrectIDMiddleware("user"), userController.getOne);
 router.put(

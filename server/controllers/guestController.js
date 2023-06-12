@@ -1,6 +1,5 @@
 const ApiError = require("../error/ApiError");
-const { generateJWT } = require("../helpers/generateJWT");
-const { Guest, Basket } = require("../models/models");
+
 const guestService = require("../services/guest-service");
 
 class GuestController {
@@ -8,11 +7,12 @@ class GuestController {
 
   async create(req, res, next) {
     try {
-      const guestToken = await guestService.create();
+      const { token } = req.body;
+      const guestToken = await guestService.create(token);
 
       return res.json({ token: guestToken });
     } catch (error) {
-      return next(ApiError.unexpectedError(error, GuestController.errorSource));
+      return next(error);
     }
   }
 
@@ -26,7 +26,7 @@ class GuestController {
           return res.json({ message: "deleted" });
         } else {
           return next(
-            ApiError.unexpectedError(
+            ApiError.badRequest(
               "Error deleting guest",
               GuestController.errorSource
             )
@@ -34,7 +34,7 @@ class GuestController {
         }
       }
     } catch (error) {
-      return next(ApiError.unexpectedError(error, GuestController.errorSource));
+      return next(error);
     }
   }
 }

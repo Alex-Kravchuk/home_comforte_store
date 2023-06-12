@@ -1,5 +1,3 @@
-const bcrypt = require("bcrypt");
-
 const ApiError = require("../error/ApiError");
 
 const { User } = require("../models/models");
@@ -50,7 +48,7 @@ class UserController {
   async logOut(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
-      const token = await userService.logout(refreshToken);
+      await userService.logout(refreshToken);
       res.clearCookie("refreshToken");
       return res.status(200).json({ message: "Logged out" });
     } catch (error) {
@@ -96,7 +94,7 @@ class UserController {
 
       return res.json(userData);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
+      return next(error);
     }
   }
 
@@ -122,6 +120,7 @@ class UserController {
     }
   }
 
+  // later--------
   async update(req, res, next) {
     try {
       let fileName;
