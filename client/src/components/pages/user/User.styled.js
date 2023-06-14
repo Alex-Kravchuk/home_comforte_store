@@ -1,10 +1,17 @@
-// import styled from "styled-components";
+import styled from "styled-components";
 
-import Button from "@mui/material/Button";
-import { styled } from "@mui/system";
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
 
-export const CustomeButton = styled(Button)({
-  color: "red",
-  background: "yellow",
-  border: '5px solid gray'
-});
+export const UserWrapper = styled.div`
+  .ant-menu-horizontal .ant-menu-item {
+    padding-inline: 0 16px;
+    font-size: ${getResponsiveFontSize(20, 18)};
+  }
+
+  .ant-menu-horizontal .ant-menu-item-icon {
+    font-size: ${getResponsiveFontSize(20, 18)};
+  }
+`;
+export const UserContainer = styled.div`
+  padding: 15px 0;
+`;

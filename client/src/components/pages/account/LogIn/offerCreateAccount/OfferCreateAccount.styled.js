@@ -13,11 +13,11 @@ export const OCAWrapper = styled.div`
   margin: 0 50px;
 
   .ant-btn-primary {
-    background-color: #b3bac7;
+    background-color: #9ca6a1;
   }
 
   .ant-btn-primary:hover {
-    background-color: #8e949e;
+    background-color: #838a86;
   }
 
   @media (max-width: ${xl}px) {

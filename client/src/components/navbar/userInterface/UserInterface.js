@@ -1,32 +1,26 @@
 import React from "react";
 
+import { Link, useLocation } from "react-router-dom";
+
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+
+import { ACCOUNT_ROUTE, USER_ROUTE } from "../../../utils/routes_consts";
 
 import {
+  UserInterfaceWrapper,
   UserInterfaceContainer,
   UserInterfaceIconContainer,
-  UserInterfaceWrapper,
 } from "./UserInterface.styled";
-import { Link, useLocation } from "react-router-dom";
-import {
-  ACCOUNT_ROUTE,
-  ADMIN_ROUTE,
-  LOGIN_ROUTE,
-  USER_ROUTE,
-} from "../../../utils/routes_consts";
-import { useAuth } from "../../../hooks/userApi/useAuth";
 
 const UserInterface = ({ setOpenSearch, mobileScreen }) => {
-  const { auth, role } = useAuth();
+  const { pathname } = useLocation();
 
-  const correctRoute =
-    auth && role.includes("ADMIN")
-      ? ADMIN_ROUTE
-      : auth
-      ? USER_ROUTE
-      : LOGIN_ROUTE;
+  const accountPageRoute =
+    pathname.includes("login") || pathname.includes("create")
+      ? "#"
+      : ACCOUNT_ROUTE + "/" + USER_ROUTE;
 
   const openSearchFieldHandler = (event) => {
     event.stopPropagation();
@@ -41,7 +35,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={ACCOUNT_ROUTE + "/" + correctRoute}>
+        <Link to={accountPageRoute} state={{ from: pathname }}>
           <UserInterfaceIconContainer rightSideIcon>
             <PermIdentityOutlinedIcon />
           </UserInterfaceIconContainer>

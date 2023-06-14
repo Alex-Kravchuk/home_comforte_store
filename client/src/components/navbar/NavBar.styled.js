@@ -25,7 +25,7 @@ export const NavWrapper = styled.header`
   z-index: 16;
 
   box-shadow: ${({ openSearchField }) =>
-    !openSearchField ? "0 8px 8px 0 rgb(0 0 0 / 10%)" : "none"};
+    !openSearchField ? "0 5px 5px 0 rgb(0 0 0 / 10%)" : "none"};
 
   height: ${({ scrollDown }) =>
     scrollDown

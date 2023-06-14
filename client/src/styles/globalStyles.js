@@ -18,6 +18,17 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 
+  // loading spinner styles
+  .ant-spin .ant-spin-dot-item {
+    background-color: #408003;
+  }
+
+  .ant-spin-text {
+    color: #408003;
+    font-size: 18px;
+  }
+
+
 `;
 
 export const Wrapper = styled.div`
@@ -94,3 +105,7 @@ margin-top: 55px;
   margin-top: 35px;
 }
 `;
+
+export const messageStyleConfig = {
+  marginTop: "8vh",
+};

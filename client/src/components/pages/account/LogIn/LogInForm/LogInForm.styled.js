@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
-const { xl, l } = viewport_sizes;
+const { xl, l, m } = viewport_sizes;
 
 export const LogInFormWrapper = styled.div`
   padding: 50px;
@@ -12,6 +12,10 @@ export const LogInFormWrapper = styled.div`
 
   @media (max-width: ${l}px) {
     margin-bottom: 50px;
+  }
+
+  @media (max-width: ${m}px) {
+    padding: 20px 0;
   }
 `;
 

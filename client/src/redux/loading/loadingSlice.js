@@ -27,7 +27,7 @@ export const menuDataSlice = createSlice({
     });
 
     builder.addCase(getMenuData.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.data = action.payload ?? [];
       state.loadingIsActive = false;
     });
   },

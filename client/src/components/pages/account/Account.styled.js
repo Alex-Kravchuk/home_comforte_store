@@ -7,6 +7,9 @@ import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
 const { m, s } = viewport_sizes;
 
 export const AccountPageWrapper = styled.div`
+  position: relative;
+  min-height: 400px;
+
   .ant-btn-primary {
     background-color: #acb39b;
     padding: 30px;
@@ -28,13 +31,10 @@ export const AccountPageWrapper = styled.div`
   }
 `;
 
-export const AccountPageContainer = styled.div`
-  @media (max-width: ${m}px) {
-    padding: 0 20px;
-  }
-`;
-
 // common forms components
+
+export const FormWrapper = styled.div``;
+export const FormContainer = styled.div``;
 
 export const FormTitle = styled.div`
   border-bottom: 1px solid lightgray;

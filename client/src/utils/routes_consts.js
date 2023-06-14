@@ -1,10 +1,15 @@
 export const HOME_ROUTE = "/";
 // account routes
-export const ACCOUNT_ROUTE = "account";
-export const LOGIN_ROUTE = "login";
 export const USER_ROUTE = "user";
+export const LOGIN_ROUTE = "login";
 export const ADMIN_ROUTE = "admin";
 export const CREATE_ROUTE = "create";
+export const ACCOUNT_ROUTE = "account";
+export const PROFILE_ROUTE = "profile";
+export const SETTINGS_ROUTE = "settings";
+export const RESET_PASSWORD_ROUTE = "reset-password";
+export const FORGOT_PASSWORD_ROUTE = "forgot-password";
+
 // -------------------------------------------------
 
 export const PRODUCT_ROUTE = "/product/:id";

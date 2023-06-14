@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   FormInput,
   FormLabel,
@@ -16,8 +16,9 @@ import {
 } from "./LogInForm.styled";
 import { Link } from "react-router-dom";
 import { formRules } from "../../../../../helpers/formRules";
+import { FORGOT_PASSWORD_ROUTE } from "../../../../../utils/routes_consts";
 
-const LogInForm = ({ submitHandler }) => {
+const LogInForm = memo(({ loginForm, submitHandler }) => {
   return (
     <LogInFormWrapper>
       <FormTitle>Log in to your account</FormTitle>
@@ -25,13 +26,13 @@ const LogInForm = ({ submitHandler }) => {
         Check your order status, update your billing info, and review past
         purchases.
       </FormSubTitle>
-      <Form layout="vertical" onFinish={submitHandler}>
+      <Form layout="vertical" onFinish={submitHandler} form={loginForm}>
         <Form.Item
           name="email"
           label={<FormLabel>Email</FormLabel>}
           rules={formRules.emailInput}
         >
-          <FormInput />
+          <FormInput type="email" />
         </Form.Item>
 
         <Form.Item
@@ -46,11 +47,11 @@ const LogInForm = ({ submitHandler }) => {
           <FromSubmitButton type="primary" htmlType="submit" size="large">
             Log in
           </FromSubmitButton>
-          <Link>Forgot a password?</Link>
+          <Link to={"../" + FORGOT_PASSWORD_ROUTE}>Forgot a password?</Link>
         </LogInButtonContainer>
       </Form>
     </LogInFormWrapper>
   );
-};
+});
 
 export default LogInForm;

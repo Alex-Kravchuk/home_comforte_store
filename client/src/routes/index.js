@@ -28,6 +28,10 @@ import {
   ACCOUNT_ROUTE,
   LOGIN_ROUTE,
   CREATE_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
+  RESET_PASSWORD_ROUTE,
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -38,6 +42,11 @@ import Search from "../components/pages/search/Search";
 import Account from "../components/pages/account/Account";
 import LogIn from "../components/pages/account/LogIn/LogIn";
 import SignUp from "../components/pages/account/SignUp/SignUp";
+import RequireAuth from "../hoc/RequireAuth";
+import ForgotPassword from "../components/pages/account/forgotResetPassword/forgotPassword/ForgotPassword";
+import ResetPassword from "../components/pages/account/forgotResetPassword/resetPassword/ResetPassword";
+import Profile from "../components/pages/user/userPages/profile/Profile";
+import Settings from "../components/pages/user/userPages/settings/Settings";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -54,11 +63,21 @@ export const router = createBrowserRouter(
       <Route path={ACCOUNT_ROUTE} element={<Account />}>
         <Route path={LOGIN_ROUTE} element={<LogIn />} />
         <Route path={CREATE_ROUTE} element={<SignUp />} />
-        <Route path={USER_ROUTE} element={<User />}>
-          <Route
-            path="purchase_history"
-            element={<div>I'm inside of the user page</div>}
-          />
+        <Route path={FORGOT_PASSWORD_ROUTE} element={<ForgotPassword />} />
+        <Route
+          path={`${RESET_PASSWORD_ROUTE}/:token/:userId`}
+          element={<ResetPassword />}
+        />
+        <Route
+          path={USER_ROUTE}
+          element={
+            <RequireAuth>
+              <User />
+            </RequireAuth>
+          }
+        >
+          <Route path={PROFILE_ROUTE} element={<Profile />} />
+          <Route path={SETTINGS_ROUTE} element={<Settings />} />
         </Route>
         <Route path={ADMIN_ROUTE} element={<Admin />} />
       </Route>

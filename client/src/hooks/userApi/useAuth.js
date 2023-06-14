@@ -1,24 +1,34 @@
 import { useEffect, useState } from "react";
+import { $authHost } from "../../api";
 
 export const useAuth = () => {
-  const [isAuth, setAuth] = useState({ auth: false, role: ["USER", "ADMIN"] });
+  // const [auth, setAuth] = useState({
+  //   isAuth: false,
+  //   role: ["GUEST"],
+  //   error: null,
+  // });
+
+  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    let timeoutID;
-    const getUser = async () => {
-      new Promise((res, rej) => {
-        try {
-          //   timeoutID = setTimeout(() => setAuth({ auth: false }), 0);
-        } catch (error) {
-          console.log("something went wrong", error);
-        }
-      });
+    console.log("inside useAuth", auth);
+  }, [auth]);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      console.log("before fetching", auth);
+
+      try {
+        const authResponse = await $authHost.get("api/user/auth/");
+
+        setAuth(true);
+      } catch (error) {
+        setAuth(false);
+      }
     };
 
-    getUser();
+    checkAuth();
+  }, []);
 
-    return () => clearTimeout(timeoutID);
-  });
-
-  return isAuth;
+  return auth;
 };

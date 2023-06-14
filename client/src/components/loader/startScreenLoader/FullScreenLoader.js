@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { LoaderWrapper } from "./FullScreenLoader.styled";
+import { FullScreenLoaderWrapper } from "./FullScreenLoader.styled";
 import { Spin } from "antd";
 
-const Loader = ({ loading }) => {
+const StartScreenLoader = ({ loading }) => {
   useEffect(() => {
     if (loading) {
       document.body.style.overflow = "hidden";
@@ -14,12 +14,12 @@ const Loader = ({ loading }) => {
   return (
     <>
       {loading && (
-        <LoaderWrapper>
+        <FullScreenLoaderWrapper>
           <Spin size="large" tip="Just one second..." />
-        </LoaderWrapper>
+        </FullScreenLoaderWrapper>
       )}
     </>
   );
 };
 
-export default Loader;
+export default StartScreenLoader;

@@ -16,7 +16,7 @@ export const sizes = {
   s: {},
   m: {},
   l: {
-    contentContainerWidth: 95,
+    contentContainerWidth: 92,
   },
   xl: {
     contentContainerWidth: 90,

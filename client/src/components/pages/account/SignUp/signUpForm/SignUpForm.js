@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { SignUpFormContainer, SignUpFormWrapper } from "./SignUpForm.styled";
 import { Form } from "antd";
 import {
@@ -9,7 +9,9 @@ import {
 } from "../../Account.styled";
 import { formRules } from "../../../../../helpers/formRules";
 
-const SignUpForm = ({ formDataHandler, signUpForm }) => {
+const SignUpForm = memo(({ formDataHandler, signUpForm }) => {
+  console.log("sign up form render");
+
   return (
     <SignUpFormWrapper>
       <SignUpFormContainer>
@@ -71,6 +73,6 @@ const SignUpForm = ({ formDataHandler, signUpForm }) => {
       </SignUpFormContainer>
     </SignUpFormWrapper>
   );
-};
+});
 
 export default SignUpForm;
