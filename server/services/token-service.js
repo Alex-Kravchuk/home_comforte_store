@@ -15,7 +15,7 @@ class TokenService {
         payload,
         process.env.JWT_REFRESH_SECRET_KEY,
         {
-          expiresIn: "40d",
+          expiresIn: "30d",
         }
       );
 
