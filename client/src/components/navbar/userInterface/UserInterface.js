@@ -6,7 +6,11 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-import { ACCOUNT_ROUTE, USER_ROUTE } from "../../../utils/routes_consts";
+import {
+  ACCOUNT_ROUTE,
+  PROFILE_ROUTE,
+  USER_ROUTE,
+} from "../../../utils/routes_consts";
 
 import {
   UserInterfaceWrapper,
@@ -20,7 +24,7 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
   const accountPageRoute =
     pathname.includes("login") || pathname.includes("create")
       ? "#"
-      : ACCOUNT_ROUTE + "/" + USER_ROUTE;
+      : ACCOUNT_ROUTE + "/" + USER_ROUTE + "/" + PROFILE_ROUTE;
 
   const openSearchFieldHandler = (event) => {
     event.stopPropagation();

@@ -5,12 +5,16 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import PageLoader from "../components/loader/pageLoader/PageLoader";
 
 import { $authHost } from "../api";
-import { LOGIN_ROUTE } from "../utils/routes_consts";
+import { LOGIN_ROUTE, PROFILE_ROUTE, USER_ROUTE } from "../utils/routes_consts";
+import { useDispatch } from "react-redux";
+import { notAuthorized } from "../redux/user/userSlice";
+
 
 const RequireAuth = ({ children }) => {
   const [endOfLoading, setEndOfLoading] = useState(false);
   const { state } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const isGuest = localStorage.getItem("guest_token");
 
@@ -38,8 +42,12 @@ const RequireAuth = ({ children }) => {
       }
 
       const authresponse = await $authHost.get("api/user/auth/");
+      // if (authresponse.status === 200) {
       setEndOfLoading(true);
+      return navigate(PROFILE_ROUTE);
+      // }
     } catch (error) {
+      dispatch(notAuthorized());
       setEndOfLoading(false);
 
       return navigate("../" + LOGIN_ROUTE);

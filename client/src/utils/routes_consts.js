@@ -10,6 +10,8 @@ export const SETTINGS_ROUTE = "settings";
 export const RESET_PASSWORD_ROUTE = "reset-password";
 export const FORGOT_PASSWORD_ROUTE = "forgot-password";
 
+export const ORDER_ROUTE = "order";
+
 // -------------------------------------------------
 
 export const PRODUCT_ROUTE = "/product/:id";

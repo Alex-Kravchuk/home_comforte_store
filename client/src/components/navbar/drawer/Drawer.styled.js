@@ -13,10 +13,6 @@ export const DrawerContainer = styled.div`
 `;
 
 export const DrawerIconContainer = styled.div`
-  @media (min-width: ${ml}px) {
-    // margin-left: 20px;
-  }
-
   @media (max-width: ${ml}px) {
     ${({ leftSideIcon }) =>
       !leftSideIcon &&

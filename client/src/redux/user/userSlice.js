@@ -41,9 +41,9 @@ export const userSlice = createSlice({
     },
 
     notAuthorized: (state) => {
-      state.error = null;
+      
       state.userData = null;
-      state.loadingIsActive = false;
+      
     },
   },
 

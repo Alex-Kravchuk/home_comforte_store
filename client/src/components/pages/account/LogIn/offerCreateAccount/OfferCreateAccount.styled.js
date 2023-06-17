@@ -10,7 +10,7 @@ const { xl, l, m } = viewport_sizes;
 
 export const OCAWrapper = styled.div`
   background: #f3f5f0;
-  margin: 0 50px;
+  margin: 0 0 0 50px;
 
   .ant-btn-primary {
     background-color: #9ca6a1;
@@ -21,11 +21,12 @@ export const OCAWrapper = styled.div`
   }
 
   @media (max-width: ${xl}px) {
-    margin: 0 20px;
+    margin: 0 0 0 20px;
   }
 
   @media (max-width: ${l}px) {
     width: 100%;
+    margin: 0;
   }
 `;
 export const OCAContainer = styled.div`

@@ -32,6 +32,7 @@ import {
   RESET_PASSWORD_ROUTE,
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
+  ORDER_ROUTE,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -47,6 +48,7 @@ import ForgotPassword from "../components/pages/account/forgotResetPassword/forg
 import ResetPassword from "../components/pages/account/forgotResetPassword/resetPassword/ResetPassword";
 import Profile from "../components/pages/user/userPages/profile/Profile";
 import Settings from "../components/pages/user/userPages/settings/Settings";
+import Order from "../components/pages/user/userPages/order/Order";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -76,7 +78,9 @@ export const router = createBrowserRouter(
             </RequireAuth>
           }
         >
-          <Route path={PROFILE_ROUTE} element={<Profile />} />
+          <Route path={PROFILE_ROUTE} element={<Profile />}>
+            <Route path={ORDER_ROUTE + "/:id"} element={<Order />} />
+          </Route>
           <Route path={SETTINGS_ROUTE} element={<Settings />} />
         </Route>
         <Route path={ADMIN_ROUTE} element={<Admin />} />
