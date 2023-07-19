@@ -1,28 +1,26 @@
-import { Avatar, Modal, Upload, message } from "antd";
 import React, { useState } from "react";
-import { getBase64 } from "../../../../../../../../helpers/getBase64";
 
-import { UserOutlined } from "@ant-design/icons";
-import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
-
-import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
-import {
-  UploadButtonContainer,
-  UploadButtonWrapper,
-} from "./UploadAvatar.styled";
+import {  Upload } from "antd";
 import { useSelector } from "react-redux";
 
+import { PlusOutlined } from "@ant-design/icons";
+import { getBase64 } from "../../../../../../../../helpers/getBase64";
+import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+
+import { UploadButtonWrapper } from "./UploadAvatar.styled";
+import PreviewModal from "./PreviewModal/PreviewModal";
+
 const UploadAvatar = ({ saveFileHandler }) => {
-  const { userData } = useSelector((state) => state.user);
-  const [imageURL, setImageURL] = useState(userData.img);
+  const { id, img } = useSelector((state) => state.user.userData);
+  const [imageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
 
-  const defaultFileList = userData.img
+  const defaultFileList = img
     ? [
         {
-          uid: userData.id,
-          name: userData.img,
-          url: process.env.REACT_APP_API_URL + userData.img,
+          uid: id,
+          name: img,
+          url: process.env.REACT_APP_API_URL + img,
         },
       ]
     : [];
@@ -78,10 +76,9 @@ const UploadAvatar = ({ saveFileHandler }) => {
     <>
       <Upload
         name="avatar"
-        listType="picture-card"
-        // className="avatar-uploader"
-        showUploadList={true}
         maxCount={1}
+        showUploadList={true}
+        listType="picture-card"
         accept="image/png, image/jpg, image/jpeg"
         defaultFileList={defaultFileList}
         onChange={handleChange}
@@ -91,13 +88,12 @@ const UploadAvatar = ({ saveFileHandler }) => {
       >
         {uploadButton}
       </Upload>
-      <Modal open={previewOpen} onCancel={handleCancel} footer={null}>
-        <img
-          alt="example"
-          style={{ width: "100%", height: "auto" }}
-          src={process.env.REACT_APP_API_URL + imageURL}
-        />
-      </Modal>
+      <PreviewModal
+        previewOpenHandler={previewOpen}
+        cancelHandler={handleCancel}
+        avatar={img}
+        imageURL={imageURL}
+      />
     </>
   );
 };
