@@ -1,38 +1,48 @@
-import React, { memo } from "react";
+import React from "react";
 
 import { Form } from "antd";
 
 import { formRules } from "../../../../../helpers/formRules";
 
 import {
-  FormInput,
   FormLabel,
-  FormWrapper,
-  FormContainer,
+  FormInput,
+  FormTitle,
+  FormSubTitle,
   FromSubmitButton,
-} from "../../Account.styled";
+  FormWrapper,
+} from "../../../../../styles/formComponentStyles";
 
-const ForgotPasswordForm = memo(({ submitHandler }) => {
+
+const ForgotPasswordForm = ({ loading, submitHandler }) => {
   return (
     <FormWrapper>
-      <FormContainer>
-        <Form layout="vertical" onFinish={submitHandler}>
-          <Form.Item
-            name="email"
-            rules={formRules.emailInput}
-            label={<FormLabel>Email address</FormLabel>}
+      <FormTitle>Reset your password</FormTitle>
+      <FormSubTitle>
+        Please enter your email address below. You will receive a link to reset
+        your password.
+      </FormSubTitle>
+      <Form layout="vertical" onFinish={submitHandler}>
+        <Form.Item
+          name="email"
+          rules={formRules.emailInput}
+          label={<FormLabel>Email address</FormLabel>}
+        >
+          <FormInput type="email" />
+        </Form.Item>
+        <Form.Item>
+          <FromSubmitButton
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={loading}
           >
-            <FormInput type="email" />
-          </Form.Item>
-          <Form.Item>
-            <FromSubmitButton type="primary" htmlType="submit" size="large">
-              Submit
-            </FromSubmitButton>
-          </Form.Item>
-        </Form>
-      </FormContainer>
+            Submit
+          </FromSubmitButton>
+        </Form.Item>
+      </Form>
     </FormWrapper>
   );
-});
+};
 
 export default ForgotPasswordForm;

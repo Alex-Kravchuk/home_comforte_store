@@ -1,17 +1,21 @@
 import React from "react";
-import {
-  OCAButton,
-  OCAContainer,
-  OCAListItem,
-  OCAOffersList,
-  OCAWrapper,
-} from "./OfferCreateAccount.styled";
-import { FormSubTitle, FormTitle } from "../../Account.styled";
+
 import { Link } from "react-router-dom";
+
+import { CREATE_ROUTE } from "../../../../../utils/routes_consts";
+
 import {
-  ACCOUNT_ROUTE,
-  CREATE_ROUTE,
-} from "../../../../../utils/routes_consts";
+  FormTitle,
+  FormSubTitle,
+  FromSubmitButton,
+} from "../../../../../styles/formComponentStyles";
+
+import {
+  OCAWrapper,
+  OCAListItem,
+  OCAContainer,
+  OCAOffersList,
+} from "./OfferCreateAccount.styled";
 
 const OfferCreateAccount = () => {
   return (
@@ -31,7 +35,7 @@ const OfferCreateAccount = () => {
         </OCAOffersList>
         {/* use the path like this for relative display */}
         <Link to={"../" + CREATE_ROUTE}>
-          <OCAButton type="primary">Create an account</OCAButton>
+          <FromSubmitButton type="primary">Create an account</FromSubmitButton>
         </Link>
       </OCAContainer>
     </OCAWrapper>

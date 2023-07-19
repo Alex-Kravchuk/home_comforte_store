@@ -63,7 +63,7 @@ export const ReviewDate = styled.div`
 export const ReviewText = styled.div`
   position: relative;
 `;
-export const ReviewTextParagraph = styled.p`
+export const ReviewTextParagraph = styled.div`
   margin: 10px 0;
   text-align: justify;
 `;

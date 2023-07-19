@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import NameWidget from "../widgets/nameWidget/NameWidget";
 import OrderWidget from "../widgets/orderWidget/OrderWidget";
@@ -13,15 +13,18 @@ import {
   ProfileContainer,
   ProfileGlobalInfo,
 } from "./Profile.styled";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const { userData } = useSelector((state) => state.user);
+
   return (
     <ProfileWrapper>
       <ProfileContainer>
         <ProfileGlobalInfo>
           <PGIContacts>
-            <NameWidget />
-            <ContactWidget />
+            <NameWidget userData={userData} />
+            <ContactWidget userData={userData} />
           </PGIContacts>
           <PGIOrders>
             <OrderWidget />

@@ -1,15 +1,18 @@
-import React from 'react';
-import { SettingsContainer, SettingsWrapper } from './Settings.styled';
+import React from "react";
+import { Outlet } from "react-router-dom";
+
+import { SettingsWrapper, SettingsContainer } from "./Settings.styled";
+
+
 
 const Settings = () => {
-	console.log('====================================');
-	console.log('render settings');
-	console.log('====================================');
-	return (
-	  <SettingsWrapper>
-		<SettingsContainer>Settings page</SettingsContainer>
-	  </SettingsWrapper>
-	)
- }
+  return (
+    <SettingsWrapper>
+      <SettingsContainer>
+        <Outlet />
+      </SettingsContainer>
+    </SettingsWrapper>
+  );
+};
 
 export default Settings;

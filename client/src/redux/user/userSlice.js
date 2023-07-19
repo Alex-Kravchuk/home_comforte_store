@@ -4,6 +4,7 @@ import { AuthService } from "../../api/user/authService";
 
 const initialState = {
   userData: null,
+  activeUserPage: "profile",
 };
 
 export const getUserData = createAsyncThunk(
@@ -13,8 +14,8 @@ export const getUserData = createAsyncThunk(
       const response = await AuthService.loginWithToken();
       return response;
     } catch (error) {
-      console.log('who I am');
-      
+      console.log("who I am");
+
       return rejectWithValue(null);
     }
   }
@@ -40,10 +41,16 @@ export const userSlice = createSlice({
       state.userData = action.payload;
     },
 
+    updateUser: (state, action) => {
+      state.userData = action.payload;
+    },
+
     notAuthorized: (state) => {
-      
       state.userData = null;
-      
+    },
+
+    changeActiveUserPage: (state, action) => {
+      state.activeUserPage = action.payload;
     },
   },
 
@@ -59,7 +66,14 @@ export const userSlice = createSlice({
   },
 });
 
-export const { notAuthorized, login, loginWithToken, logout, signup } =
-  userSlice.actions;
+export const {
+  login,
+  signup,
+  logout,
+  updateUser,
+  notAuthorized,
+  loginWithToken,
+  changeActiveUserPage,
+} = userSlice.actions;
 
 export default userSlice.reducer;

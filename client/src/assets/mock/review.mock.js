@@ -43,7 +43,7 @@ export const reviewMOCK = [
   },
 
   {
-    id: "4",
+    id: "5",
     product_img: chair_img,
     product_name: "Oslo Leather Petite Chair",
     raiting: 5,

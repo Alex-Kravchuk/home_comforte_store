@@ -18,5 +18,5 @@ export const PageLoaderContainer = styled.div`
   width: auto;
   height: fit-content;
   position: relative;
-  top: 15%;
+  top: 50%;
 `;

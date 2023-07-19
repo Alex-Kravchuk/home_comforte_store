@@ -33,6 +33,9 @@ import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
   ORDER_ROUTE,
+  PERSONAL_SETTINGS,
+  CONTACTS_SETTINGS,
+  PAYMENT_SETTINGS,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -49,6 +52,10 @@ import ResetPassword from "../components/pages/account/forgotResetPassword/reset
 import Profile from "../components/pages/user/userPages/profile/Profile";
 import Settings from "../components/pages/user/userPages/settings/Settings";
 import Order from "../components/pages/user/userPages/order/Order";
+
+import Payment from "../components/pages/user/userPages/settings/Tabs/Payment/Payment";
+import Personal from "../components/pages/user/userPages/settings/Tabs/Personal/Personal";
+import Contacts from "../components/pages/user/userPages/settings/Tabs/Contacts/Contacts";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -81,7 +88,11 @@ export const router = createBrowserRouter(
           <Route path={PROFILE_ROUTE} element={<Profile />}>
             <Route path={ORDER_ROUTE + "/:id"} element={<Order />} />
           </Route>
-          <Route path={SETTINGS_ROUTE} element={<Settings />} />
+          <Route path={SETTINGS_ROUTE} element={<Settings />}>
+            <Route path={PERSONAL_SETTINGS} element={<Personal />} />
+            <Route path={CONTACTS_SETTINGS} element={<Contacts />} />
+            <Route path={PAYMENT_SETTINGS} element={<Payment />} />
+          </Route>
         </Route>
         <Route path={ADMIN_ROUTE} element={<Admin />} />
       </Route>

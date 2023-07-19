@@ -1,24 +1,21 @@
-import React, { memo } from "react";
-import {
-  FormInput,
-  FormLabel,
-  FormPasswordInput,
-  FormSubTitle,
-  FormTitle,
-  FromSubmitButton,
-} from "../../Account.styled";
+import React from "react";
+
 import { Form } from "antd";
 
-import {
-  ForgotPassLink,
-  LogInButtonContainer,
-  LogInFormWrapper,
-} from "./LogInForm.styled";
+import { LogInButtonContainer, LogInFormWrapper } from "./LogInForm.styled";
 import { Link } from "react-router-dom";
 import { formRules } from "../../../../../helpers/formRules";
 import { FORGOT_PASSWORD_ROUTE } from "../../../../../utils/routes_consts";
+import {
+  FormLabel,
+  FormTitle,
+  FormSubTitle,
+  FormInput,
+  FormPasswordInput,
+  FromSubmitButton,
+} from "../../../../../styles/formComponentStyles";
 
-const LogInForm = memo(({ loginForm, submitHandler }) => {
+const LogInForm = ({ loginForm, submitHandler, loading }) => {
   return (
     <LogInFormWrapper>
       <FormTitle>Log in to your account</FormTitle>
@@ -44,7 +41,12 @@ const LogInForm = memo(({ loginForm, submitHandler }) => {
         </Form.Item>
 
         <LogInButtonContainer>
-          <FromSubmitButton type="primary" htmlType="submit" size="large">
+          <FromSubmitButton
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={loading}
+          >
             Log in
           </FromSubmitButton>
           <Link to={"../" + FORGOT_PASSWORD_ROUTE}>Forgot a password?</Link>
@@ -52,6 +54,6 @@ const LogInForm = memo(({ loginForm, submitHandler }) => {
       </Form>
     </LogInFormWrapper>
   );
-});
+};
 
 export default LogInForm;

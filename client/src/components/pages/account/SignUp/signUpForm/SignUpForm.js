@@ -1,19 +1,24 @@
-import React, { memo } from "react";
-import { SignUpFormContainer, SignUpFormWrapper } from "./SignUpForm.styled";
+import React from "react";
+
 import { Form } from "antd";
-import {
-  FormInput,
-  FormLabel,
-  FromSubmitButton,
-  FormPasswordInput,
-} from "../../Account.styled";
+
 import { formRules } from "../../../../../helpers/formRules";
 
-const SignUpForm = memo(({ formDataHandler, signUpForm }) => {
-  console.log("sign up form render");
+import {
+  FormLabel,
+  FormTitle,
+  FormInput,
+  FromSubmitButton,
+  FormPasswordInput,
+  FormWrapper,
+} from "../../../../../styles/formComponentStyles";
 
+import { SignUpFormContainer } from "./SignUpForm.styled";
+
+const SignUpForm = ({ formDataHandler, loading, signUpForm }) => {
   return (
-    <SignUpFormWrapper>
+    <FormWrapper>
+      <FormTitle>Create an account</FormTitle>
       <SignUpFormContainer>
         <Form
           name="signup"
@@ -65,14 +70,19 @@ const SignUpForm = memo(({ formDataHandler, signUpForm }) => {
           </Form.Item>
 
           <Form.Item>
-            <FromSubmitButton type="primary" htmlType="submit" size="large">
+            <FromSubmitButton
+              type="primary"
+              htmlType="submit"
+              size="large"
+              loading={loading}
+            >
               Submit
             </FromSubmitButton>
           </Form.Item>
         </Form>
       </SignUpFormContainer>
-    </SignUpFormWrapper>
+    </FormWrapper>
   );
-});
+};
 
 export default SignUpForm;

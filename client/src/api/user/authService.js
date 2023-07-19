@@ -33,21 +33,21 @@ export class AuthService {
   };
 
   static logout = async () => {
-      localStorage.removeItem("user_token");
-      const response = await $host.get("api/user/logout/");
-      return response;
+    localStorage.removeItem("user_token");
+    const response = await $host.get("api/user/logout/");
+    return response;
   };
 
   static loginWithToken = async () => {
-      const userTokenFromLocalStorage = localStorage.getItem("user_token");
-      if (!userTokenFromLocalStorage) {
-        return null;
-      }
+    const userTokenFromLocalStorage = localStorage.getItem("user_token");
+    if (!userTokenFromLocalStorage) {
+      return null;
+    }
 
-      const authResponse = await $authHost.get("api/user/auth/");
-      localStorage.setItem("user_token", authResponse.data.accessToken);
+    const authResponse = await $authHost.get("api/user/auth/");
+    localStorage.setItem("user_token", authResponse.data.accessToken);
 
-      return authResponse.data.user;
+    return authResponse.data.user;
   };
 
   static forgotPassword = async ({ email }) => {
@@ -63,6 +63,13 @@ export class AuthService {
     });
     return response;
   };
+
+  static updateUserData = async (updatedData) => {
+    const response = await $authHost.put("api/user/update/", updatedData);
+
+    return response.data.user;
+  };
 }
 
 // TODO check auth wiht default axios instance
+// TODO use $authost for resetpasword and forgot password request

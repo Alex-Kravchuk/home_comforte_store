@@ -25,7 +25,7 @@ const ReviewBody = ({ date, showMore, showMoreHandler, body, body_img }) => {
           ? shortPreview.map((item, index) => {
               if (index === 1 && tooLongReview) {
                 return (
-                  <ReviewTextParagraph>
+                  <ReviewTextParagraph key={index}>
                     {item}
                     <ReviewReadMoreButton onClick={showMoreHandler}>
                       Read more
@@ -34,12 +34,14 @@ const ReviewBody = ({ date, showMore, showMoreHandler, body, body_img }) => {
                 );
               }
 
-              return <ReviewTextParagraph>{item}</ReviewTextParagraph>;
+              return (
+                <ReviewTextParagraph key={index}>{item}</ReviewTextParagraph>
+              );
             })
           : bodyParagraphs.map((item, index) => {
               if (index === lastParagraphIndex) {
                 return (
-                  <ReviewTextParagraph>
+                  <ReviewTextParagraph key={index}>
                     {item}
                     <ReviewReadMoreButton onClick={showMoreHandler}>
                       Read less
@@ -48,12 +50,12 @@ const ReviewBody = ({ date, showMore, showMoreHandler, body, body_img }) => {
                 );
               }
 
-              return <ReviewTextParagraph>{item}</ReviewTextParagraph>;
+              return <ReviewTextParagraph key={index}>{item}</ReviewTextParagraph>;
             })}
       </ReviewText>
       <ReviewImages>
-        {body_img.map((img) => (
-          <ReviewImg src={img} />
+        {body_img.map((img, index) => (
+          <ReviewImg key={index} src={img} />
         ))}
       </ReviewImages>
     </ReviewBodyWrapper>

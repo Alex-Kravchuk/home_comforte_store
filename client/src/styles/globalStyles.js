@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { sizes } from "../utils/css_size_consts";
 import { viewport_sizes } from "../utils/viewport_size_consts";
 
-const { l, xl, xxl, m } = viewport_sizes;
+const { l, xl, xxl, m, s } = viewport_sizes;
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,10 +13,9 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     scroll-behavior: smooth;    
-  font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif;
     color: #555759;
   }
-
 
   // loading spinner styles
   .ant-spin .ant-spin-dot-item {
@@ -28,6 +27,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 18px;
   }
 
+  
+
 
 `;
 
@@ -36,6 +37,38 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  .ant-btn.ant-btn-lg {
+    padding: 15px 40px;
+    height: auto;
+  }
+
+  .ant-btn-lg:hover {
+    background-color: #8e9482;
+  }
+
+  .ant-btn-primary {
+    background-color: #acb39b;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+
+  @media (max-width: ${s}px) {
+    .ant-btn-primary {
+      padding: 25px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: ${m}px) {
+    .ant-btn.ant-btn-lg {
+      padding: 12px 30px;
+      height: auto;
+    }
+  }
 `;
 
 export const Container = styled.div`

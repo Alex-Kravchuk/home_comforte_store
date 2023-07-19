@@ -3,9 +3,10 @@ import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontS
 
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
-const {xl} = viewport_sizes
+const { xl } = viewport_sizes;
 
 export const ProfileWrapper = styled.div`
+  position: relative;
   margin-top: 25px;
   font-size: ${getResponsiveFontSize(17, 15)};
 `;
@@ -40,3 +41,4 @@ export const PGIOrders = styled.div`
     margin: 20px 0 0 0;
   }
 `;
+

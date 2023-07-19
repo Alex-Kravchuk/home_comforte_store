@@ -1,18 +1,17 @@
 import styled from "styled-components";
 
-import { Button } from "antd";
-
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
 const { xl, l, m } = viewport_sizes;
 
-//  OCA - OCA
+//  OCA = OfferCreateAccount
 
 export const OCAWrapper = styled.div`
   background: #f3f5f0;
   margin: 0 0 0 50px;
 
-  .ant-btn-primary {
+  .ant-btn-primary,
+  .ant-btn.ant-btn-lg {
     background-color: #9ca6a1;
   }
 
@@ -42,7 +41,7 @@ export const OCAContainer = styled.div`
 `;
 
 export const OCAOffersList = styled.ul`
-  margin-left: 25px;
+  margin: 0 0 30px 25px;
 `;
 export const OCAListItem = styled.li`
   padding: 15px 0;
@@ -50,8 +49,4 @@ export const OCAListItem = styled.li`
   @media (max-width: ${m}px) {
     padding: 10px 0;
   }
-`;
-
-export const OCAButton = styled(Button)`
-  margin-top: 30px;
 `;

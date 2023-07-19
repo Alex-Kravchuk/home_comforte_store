@@ -1,26 +1,26 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Form, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import SignUpForm from "./signUpForm/SignUpForm";
-import PageLoader from "../../../loader/pageLoader/PageLoader";
 
 import { signup } from "../../../../redux/user/userSlice";
 import { AuthService } from "../../../../api/user/authService";
 import { deleteGuest } from "../../../../redux/guest/guestSlice";
 
-import { USER_ROUTE } from "../../../../utils/routes_consts";
+import { PROFILE_ROUTE, USER_ROUTE } from "../../../../utils/routes_consts";
 
-import { FormTitle } from "../Account.styled";
-import { SignUpContainer, SignUpWrapper } from "./SignUp.styled";
 import { messageStyleConfig } from "../../../../styles/globalStyles";
+import {
+  FormComponentWrapper,
+  FormContainer,
+} from "../../../../styles/formComponentStyles";
 
 const SignUp = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [blockNewSubmit, setBlockNewSubmit] = useState(false);
 
   const { userData } = useSelector((state) => state.user);
 
@@ -37,14 +37,11 @@ const SignUp = () => {
 
   useEffect(() => {
     if (error) {
-      setBlockNewSubmit(true);
-      messageApi
-        .open({
-          type: "error",
-          content: error.message,
-          style: messageStyleConfig,
-        })
-        .then(() => setBlockNewSubmit(false));
+      messageApi.open({
+        type: "error",
+        content: error.message,
+        style: messageStyleConfig,
+      });
     }
   }, [error, messageApi]);
 
@@ -52,40 +49,36 @@ const SignUp = () => {
     if (userData) {
       dispatch(deleteGuest());
 
-      return navigate("../" + USER_ROUTE, { state: { from: pathname } });
+      return navigate("../" + USER_ROUTE + "/" + PROFILE_ROUTE, {
+        state: { from: pathname },
+      });
     }
   }, [userData, navigate, dispatch, pathname]);
 
-  const signUpFormFinishHandler = useCallback(
-    async (values) => {
-      if (blockNewSubmit) return;
-
+  const signUpFormFinishHandler = async (values) => {
+    try {
       setLoading(true);
-      try {
-        const response = await AuthService.signup(values);
-        dispatch(signup(response));
-        form.resetFields();
-      } catch (er) {
-        setError(er.response.data);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [blockNewSubmit]
-  );
+      const response = await AuthService.signup(values);
+      dispatch(signup(response));
+      form.resetFields();
+    } catch (er) {
+      setError(er.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <SignUpWrapper>
-      {loading && <PageLoader />}
-      <SignUpContainer>
-        <FormTitle>Create an account</FormTitle>
+    <FormComponentWrapper>
+      <FormContainer>
         {contextHolder}
         <SignUpForm
           formDataHandler={signUpFormFinishHandler}
           signUpForm={form}
+          loading={loading}
         />
-      </SignUpContainer>
-    </SignUpWrapper>
+      </FormContainer>
+    </FormComponentWrapper>
   );
 };
 

@@ -13,21 +13,48 @@ import {
   NWAvatarNameContainer,
 } from "./NameWidget.styled";
 import { WidgetWrapper } from "../Widget.styled";
+import { useNavigate } from "react-router-dom";
+import {
+  PERSONAL_SETTINGS,
+  SETTINGS_ROUTE,
+} from "../../../../../../utils/routes_consts";
+import { useDispatch } from "react-redux";
+import { changeActiveUserPage } from "../../../../../../redux/user/userSlice";
 
-const NameWidget = () => {
+const NameWidget = ({ userData }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { img, name, lastname } = userData ?? {};
+
+  const redirectToSettingsPage = () => {
+    dispatch(changeActiveUserPage("personal"));
+    navigate("../" + SETTINGS_ROUTE + "/" + PERSONAL_SETTINGS);
+  };
   return (
     <NWWrapper>
       <WidgetWrapper>
         <NWContainer>
           <NWAvatarNameContainer>
             <NWAvatar>
-              <Avatar size={64} icon={<UserOutlined />} />
+              <Avatar
+                size={64}
+                icon={
+                  (
+                    <img
+                      src={img ? process.env.REACT_APP_API_URL + img : ""}
+                      alt="avatar"
+                    />
+                  ) ?? <UserOutlined />
+                }
+              />
             </NWAvatar>
-            <NWUserName>Felicia Harvey</NWUserName>
+            <NWUserName>
+              {name} {lastname}
+            </NWUserName>
           </NWAvatarNameContainer>
 
           <NWEditBtn>
-            <Button>EDIT</Button>
+            <Button onClick={redirectToSettingsPage}>Edit</Button>
           </NWEditBtn>
         </NWContainer>
       </WidgetWrapper>

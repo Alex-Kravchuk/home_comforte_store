@@ -17,10 +17,28 @@ import {
   CWInfoLowerPart,
   CWInfoUpperPart,
 } from "./ContactWidget.styled";
+import { AddSpaceToEmail } from "../../../../../../helpers/AddSpaceToEmail";
+import { Button } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  CONTACTS_SETTINGS,
+  PERSONAL_SETTINGS,
+  SETTINGS_ROUTE,
+} from "../../../../../../utils/routes_consts";
+import { useDispatch } from "react-redux";
+import { changeActiveUserPage } from "../../../../../../redux/user/userSlice";
 
-const ContactWidget = () => {
-  // to add space before @
-  const email = "sodasoad450 @gmail.com";
+const ContactWidget = ({ userData }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { email, mobile, address, bonus } = userData ?? {};
+  // to add space before @ for moving a long string to another page
+  const emailWithSpace = AddSpaceToEmail(email);
+
+  const redirectToSettingsPage = () => {
+    dispatch(changeActiveUserPage("contacts"));
+    navigate("../" + SETTINGS_ROUTE + "/" + CONTACTS_SETTINGS);
+  };
 
   return (
     <WidgetWrapper>
@@ -33,23 +51,29 @@ const ContactWidget = () => {
           <CWInfoUpperPart>
             <CWInfoBlock>
               <CWLabel>EMAIL</CWLabel>
-              <CWValue>{email}</CWValue>
+              <CWValue>{emailWithSpace}</CWValue>
             </CWInfoBlock>
             <CWInfoBlock>
               <CWLabel>MOBILE</CWLabel>
-              <CWValue>+380983455570</CWValue>
+              <CWValue>
+                {mobile ?? (
+                  <Button onClick={redirectToSettingsPage}>Add</Button>
+                )}
+              </CWValue>
             </CWInfoBlock>
           </CWInfoUpperPart>
           <CWInfoLowerPart>
             <CWInfoBlock>
               <CWLabel>ADDRESS</CWLabel>
               <CWValue>
-                Ukraine, Lviv region, city of Dublyany, Nova Poshta branch #1
+                {address ?? (
+                  <Button onClick={redirectToSettingsPage}>Add</Button>
+                )}
               </CWValue>
             </CWInfoBlock>
             <CWInfoBlock>
               <CWLabel>BONUS</CWLabel>
-              <CWValue>0</CWValue>
+              <CWValue>{bonus}</CWValue>
             </CWInfoBlock>
           </CWInfoLowerPart>
         </CWInfo>

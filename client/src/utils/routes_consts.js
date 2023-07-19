@@ -12,6 +12,10 @@ export const FORGOT_PASSWORD_ROUTE = "forgot-password";
 
 export const ORDER_ROUTE = "order";
 
+export const PERSONAL_SETTINGS = "personal";
+export const CONTACTS_SETTINGS = "contacts";
+export const PAYMENT_SETTINGS = "payment";
+
 // -------------------------------------------------
 
 export const PRODUCT_ROUTE = "/product/:id";

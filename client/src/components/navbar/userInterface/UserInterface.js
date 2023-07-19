@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
@@ -17,9 +17,13 @@ import {
   UserInterfaceContainer,
   UserInterfaceIconContainer,
 } from "./UserInterface.styled";
+import { useDispatch } from "react-redux";
+import { changeActiveUserPage } from "../../../redux/user/userSlice";
 
 const UserInterface = ({ setOpenSearch, mobileScreen }) => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const accountPageRoute =
     pathname.includes("login") || pathname.includes("create")
@@ -31,6 +35,16 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
     setOpenSearch((state) => !state);
   };
 
+
+  const opeUserPageHandler = () => {
+    console.log('zaulpa', pathname);
+    
+    const arrPathname = pathname.split("/");
+    if (arrPathname[arrPathname.length - 1] === PROFILE_ROUTE) return;
+    dispatch(changeActiveUserPage(PROFILE_ROUTE));
+    navigate(accountPageRoute, { state: { from: pathname } });
+  };
+
   return (
     <UserInterfaceWrapper>
       <UserInterfaceContainer>
@@ -39,11 +53,10 @@ const UserInterface = ({ setOpenSearch, mobileScreen }) => {
             <SearchOutlinedIcon onClick={openSearchFieldHandler} />
           </UserInterfaceIconContainer>
         )}
-        <Link to={accountPageRoute} state={{ from: pathname }}>
-          <UserInterfaceIconContainer rightSideIcon>
-            <PermIdentityOutlinedIcon />
-          </UserInterfaceIconContainer>
-        </Link>
+
+        <UserInterfaceIconContainer rightSideIcon onClick={opeUserPageHandler}>
+          <PermIdentityOutlinedIcon />
+        </UserInterfaceIconContainer>
 
         <UserInterfaceIconContainer>
           <ShoppingCartOutlinedIcon />
