@@ -13,16 +13,20 @@ import {
   FormInput,
   FormPasswordInput,
   FromSubmitButton,
+  FormTitleGroup,
 } from "../../../../../styles/formComponentStyles";
 
 const LogInForm = ({ loginForm, submitHandler, loading }) => {
   return (
     <LogInFormWrapper>
-      <FormTitle>Log in to your account</FormTitle>
-      <FormSubTitle>
-        Check your order status, update your billing info, and review past
-        purchases.
-      </FormSubTitle>
+      <FormTitleGroup>
+        <FormTitle>Log in to your account</FormTitle>
+        <FormSubTitle>
+          Check your order status, update your billing info, and review past
+          purchases.
+        </FormSubTitle>
+      </FormTitleGroup>
+
       <Form layout="vertical" onFinish={submitHandler} form={loginForm}>
         <Form.Item
           name="email"

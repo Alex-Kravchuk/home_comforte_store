@@ -7,9 +7,12 @@ export const PersonalWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin: 70px 0 35px 0;
+
   @media (max-width: ${m}px) {
     display: block;
+    margin: 40px 0 35px 0;
+  }
 
     .ant-upload-wrapper.ant-upload-picture-card-wrapper
       .ant-upload-list.ant-upload-list-picture-card

@@ -11,17 +11,19 @@ import {
   FromSubmitButton,
   FormPasswordInput,
   FormWrapper,
+  FormTitleGroup,
 } from "../../../../../styles/formComponentStyles";
-
-
 
 const ResetPasswordForm = ({ loading, submitHandler }) => {
   return (
     <FormWrapper>
-      <FormTitle>Come up with a new password</FormTitle>
-      <FormSubTitle>
-        Please enter a new password for your account below.
-      </FormSubTitle>
+      <FormTitleGroup>
+        <FormTitle>Come up with a new password</FormTitle>
+        <FormSubTitle>
+          Please enter a new password for your account below.
+        </FormSubTitle>
+      </FormTitleGroup>
+
       <Form layout="vertical" onFinish={submitHandler}>
         <Form.Item
           name="password"

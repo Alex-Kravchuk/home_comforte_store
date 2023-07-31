@@ -24,8 +24,5 @@ export const SettingsWrapper = styled.div`
     font-size: ${getResponsiveFontSize(18, 16)};
   }
 
-  @media (max-width: ${l}px) {
-    // margin-top: 0;
-  }
 `;
 export const SettingsContainer = styled.div``;

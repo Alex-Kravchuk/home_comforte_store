@@ -11,17 +11,20 @@ import {
   FormSubTitle,
   FromSubmitButton,
   FormWrapper,
+  FormTitleGroup,
 } from "../../../../../styles/formComponentStyles";
-
 
 const ForgotPasswordForm = ({ loading, submitHandler }) => {
   return (
     <FormWrapper>
-      <FormTitle>Reset your password</FormTitle>
-      <FormSubTitle>
-        Please enter your email address below. You will receive a link to reset
-        your password.
-      </FormSubTitle>
+      <FormTitleGroup>
+        <FormTitle>Reset your password</FormTitle>
+        <FormSubTitle>
+          Please enter your email address below. You will receive a link to
+          reset your password.
+        </FormSubTitle>
+      </FormTitleGroup>
+
       <Form layout="vertical" onFinish={submitHandler}>
         <Form.Item
           name="email"

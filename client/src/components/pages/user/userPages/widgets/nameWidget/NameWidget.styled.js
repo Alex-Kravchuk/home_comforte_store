@@ -26,3 +26,5 @@ export const NWUserName = styled.div`
   font-size: ${getResponsiveFontSize(20, 16)};
 `;
 export const NWEditBtn = styled.div``;
+
+export const NWAvatarImg = styled.img``;

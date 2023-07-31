@@ -11,6 +11,7 @@ import {
   NWUserName,
   NWContainer,
   NWAvatarNameContainer,
+  NWAvatarImg,
 } from "./NameWidget.styled";
 import { WidgetWrapper } from "../Widget.styled";
 import { useNavigate } from "react-router-dom";
@@ -37,10 +38,11 @@ const NameWidget = ({ userData }) => {
           <NWAvatarNameContainer>
             <NWAvatar>
               <Avatar
+                shape="square"
                 size={64}
                 icon={
                   (
-                    <img
+                    <NWAvatarImg
                       src={img ? process.env.REACT_APP_API_URL + img : ""}
                       alt="avatar"
                     />

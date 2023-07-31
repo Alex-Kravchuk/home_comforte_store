@@ -19,10 +19,10 @@ import {
 } from "./ContactWidget.styled";
 import { AddSpaceToEmail } from "../../../../../../helpers/AddSpaceToEmail";
 import { Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   CONTACTS_SETTINGS,
-  PERSONAL_SETTINGS,
+  
   SETTINGS_ROUTE,
 } from "../../../../../../utils/routes_consts";
 import { useDispatch } from "react-redux";

@@ -43,9 +43,25 @@ export const formRules = {
     },
   ],
 
-  normalInputField: (label) => [
+  secondaryEmailInput: (alternativeEmailChecked) => [
     {
-      required: true,
+      validator: (_, email) => {
+        if (alternativeEmailChecked && !email) {
+          return Promise.reject("Please enter your secondary email address");
+        }
+
+        return Promise.resolve();
+      },
+    },
+    {
+      type: "email",
+      message: "The input is not valid E-mail!",
+    },
+  ],
+
+  normalInputField: (label, required = true) => [
+    {
+      required,
       message: `Please input your ${label}`,
     },
   ],

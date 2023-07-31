@@ -10,11 +10,11 @@ export const FormComponentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 70px 0;
+  margin: 70px 0 35px 0;
 
   @media (max-width: ${m}px) {
     display: block;
-    margin: 50px 0;
+    margin: 40px 0 35px 0;
   }
 `;
 
@@ -45,20 +45,26 @@ export const FormLabel = styled.div`
   }
 `;
 
-export const FormTitle = styled.div`
+export const FormTitleGroup = styled.div`
   border-bottom: 1px solid lightgray;
-  font-size: ${getResponsiveFontSize(24, 18)};
   padding: 0 0 20px 0;
   margin-bottom: 30px;
 
   @media (max-width: ${s}px) {
     padding: 0 0 15px 0;
-    margin-bottom: 25px;
+  }
+`;
+
+export const FormTitle = styled.div`
+  font-size: ${getResponsiveFontSize(24, 18)};
+
+  @media (max-width: ${s}px) {
+    padding: 0 0 15px 0;
   }
 `;
 
 export const FormSubTitle = styled.div`
-  margin-bottom: 30px;
+  margin-top: 20px;
 `;
 
 export const FormInput = styled(Input)`

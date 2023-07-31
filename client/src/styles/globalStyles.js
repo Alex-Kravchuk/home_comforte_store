@@ -56,6 +56,11 @@ export const Wrapper = styled.div`
     font-size: 17px;
   }
 
+  // .ant-checkbox+span {
+  //   position: relative;
+  //   top: 10px;
+  // }
+
   @media (max-width: ${s}px) {
     .ant-btn-primary {
       padding: 25px;

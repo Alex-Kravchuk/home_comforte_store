@@ -12,8 +12,8 @@ import {
   FormInput,
   FromSubmitButton,
   FormWrapper,
+  FormTitleGroup,
 } from "../../../../../../../../styles/formComponentStyles";
-
 
 const PersonalForm = ({
   userData,
@@ -21,13 +21,16 @@ const PersonalForm = ({
   onFinishHandler,
   saveFileHandler,
 }) => {
+  const { name, lastname } = userData ?? {};
   return (
     <FormWrapper>
-      <FormTitle>Personal settings</FormTitle>
+      <FormTitleGroup>
+        <FormTitle>Personal settings</FormTitle>
+      </FormTitleGroup>
       <Form
         onFinish={onFinishHandler}
         layout="vertical"
-        initialValues={{ name: userData.name, lastname: userData.lastname }}
+        initialValues={{ name, lastname }}
       >
         <Form.Item label={<FormLabel>Upload avatar</FormLabel>} name="avatar">
           <UploadAvatar saveFileHandler={saveFileHandler} />

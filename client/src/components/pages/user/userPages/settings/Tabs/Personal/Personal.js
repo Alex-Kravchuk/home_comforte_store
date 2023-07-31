@@ -10,10 +10,7 @@ import { AuthService } from "../../../../../../../api/user/authService";
 
 import { PersonalWrapper } from "./Personal.styled";
 import { messageStyleConfig } from "../../../../../../../styles/globalStyles";
-import {
-  FormContainer,
-  FormComponentWrapper,
-} from "../../../../../../../styles/formComponentStyles";
+import { FormContainer } from "../../../../../../../styles/formComponentStyles";
 
 const Personal = () => {
   const { userData } = useSelector((state) => state.user);
@@ -24,7 +21,7 @@ const Personal = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [avatar, setAvatar] = useState(userData.img);
+  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
     if (error) {
