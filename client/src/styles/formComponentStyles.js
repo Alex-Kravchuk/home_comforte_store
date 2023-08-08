@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { viewport_sizes } from "../utils/viewport_size_consts";
 import { textColors } from "./globalStyles";
 import { getResponsiveFontSize } from "../helpers/getResponsiveFontSize";
-import { Button, Input } from "antd";
+import { Button, DatePicker, Form, Input } from "antd";
 
 const { xl, l, m, s } = viewport_sizes;
 
@@ -76,10 +76,36 @@ export const FormInput = styled(Input)`
     height: 45px;
   }
 `;
+
+export const FormDatePicker = styled(DatePicker)`
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  color: ${textColors.main};
+
+  @media (max-width: ${s}px) {
+    height: 45px;
+  }
+`;
 export const FormPasswordInput = styled(Input.Password)`
   height: 50px;
+
+  @media (max-width: ${s}px) {
+    height: 45px;
+  }
 `;
 
 export const FromSubmitButton = styled(Button)`
   margin-top: 10px;
+`;
+
+// I use thoose component for display two input or another Form.Item in one line
+export const FormItemInOneLineLeft = styled(Form.Item)`
+  display: inline-block;
+  width: 50%;
+`;
+export const FormItemInOneLineRight = styled(Form.Item)`
+  display: inline-block;
+  margin-left: 8px;
+  width: calc(50% - 8px);
 `;

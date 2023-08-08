@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
-import { FullScreenLoaderWrapper } from "./FullScreenLoader.styled";
+import { FullScreenLoaderWrapper } from "./StartScreenLoader.styled";
 import { Spin } from "antd";
 
 const StartScreenLoader = ({ loading }) => {
-  useEffect(() => {
-    if (loading) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [loading]);
-
   return (
     <>
       {loading && (

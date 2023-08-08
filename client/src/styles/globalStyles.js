@@ -11,11 +11,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-    height: 100%;
+    /**
+     * I use it !important with width
+     * because when I show modal somwhere
+     * added 17px to body width. I don't know how it fix 
+     * *//
+
+    width: 100% !important;
     scroll-behavior: smooth;    
     font-family: 'Lato', sans-serif;
     color: #555759;
   }
+
 
   // loading spinner styles
   .ant-spin .ant-spin-dot-item {
@@ -26,10 +33,6 @@ export const GlobalStyle = createGlobalStyle`
     color: #408003;
     font-size: 18px;
   }
-
-  
-
-
 `;
 
 export const Wrapper = styled.div`
@@ -55,11 +58,6 @@ export const Wrapper = styled.div`
     justify-content: center;
     font-size: 17px;
   }
-
-  // .ant-checkbox+span {
-  //   position: relative;
-  //   top: 10px;
-  // }
 
   @media (max-width: ${s}px) {
     .ant-btn-primary {

@@ -1,39 +1,28 @@
 import React, { useState } from "react";
 
+import AddNewCard from "../AddNewCard/AddNewCard";
 import PaymentCard from "../../PaymentCard/PaymentCard";
-import { FromSubmitButton } from "../../../../../../../../../styles/formComponentStyles";
-
-import AddCardIcon from "@mui/icons-material/AddCard";
 
 import {
   PFTitle,
   PFBlock,
   PFSubTitle,
+  PFCardList,
   PFTitleBlock,
   PFFormItemGroupe,
-  PFCardList,
-  PFAddCardContainer,
-  PFAddCardIcon,
-  PFAddCardText,
 } from "../PaymentForm.styled";
+import { FromSubmitButton } from "../../../../../../../../../styles/formComponentStyles";
 
+import { userCards } from "../../../../../../../../../assets/mock/PaymentSettingsMOCK/paymentSettingsMOCK";
 
+const PaymentCardsBlock = ({
+  checkedCard,
+  loading,
+  checkedHandler,
+  submitHandler,
+}) => {
+  const [cards, setCards] = useState(userCards);
 
-const PaymentCardsBlock = ({ checkedCard, loading, checkedHandler }) => {
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      system: "visa",
-      number: 1231241341123123,
-      expiry: "01/2024",
-    },
-    {
-      id: 2,
-      system: "mastercard",
-      number: 51687461248492313,
-      expiry: "07/2022",
-    },
-  ]);
   return (
     <PFBlock>
       <PFTitleBlock>
@@ -45,22 +34,20 @@ const PaymentCardsBlock = ({ checkedCard, loading, checkedHandler }) => {
           {cards.map((card) => (
             <PaymentCard
               checkedCard={checkedCard}
-              key={card.id}
+              key={card.number}
               card={card}
+              cards={cards}
               checkedHandler={checkedHandler}
-			  changeCards={setCards}
+              changeCards={setCards}
             />
           ))}
-          <PFAddCardContainer>
-            <AddCardIcon />
-            <PFAddCardText>Add a new card</PFAddCardText>
-          </PFAddCardContainer>
+          <AddNewCard addNewCardHandler={setCards} cards={cards} />
         </PFCardList>
 
         <FromSubmitButton
+          onClick={submitHandler}
           type="primary"
           size="large"
-          htmlType="submit"
           loading={loading}
         >
           Save changes

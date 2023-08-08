@@ -50,7 +50,7 @@ export const PFCheckboxInfo = styled.div`
   font-size: 16px;
 
   input {
-    margin-top: 5px;
+    margin: 5px 0 20px 0;
   }
 `;
 
@@ -67,6 +67,7 @@ export const PFTitleBlock = styled.div`
 export const PFTitle = styled.div`
   font-weight: 600;
   font-size: 16px;
+  margin-bottom: 5px;
 `;
 export const PFSubTitle = styled.div`
   color: ${textColors.plain};
@@ -75,20 +76,3 @@ export const PFSubTitle = styled.div`
 `;
 
 export const PFCardList = styled.div``;
-export const PFAddCardContainer = styled.div`
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  transition: all 0.2s ease;
-  margin: 10px 0 30px 0;
-
-  &:hover {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-export const PFAddCardIcon = styled.div``;
-export const PFAddCardText = styled.div`
-  font-weight: 500;
-  font-size: 16px;
-  padding-left: 15px;
-`;

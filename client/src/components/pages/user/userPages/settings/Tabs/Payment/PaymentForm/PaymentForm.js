@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
-import { Form } from "antd";
+import InvoiceBlock from "./InvoiceBlock/InvoiceBlock";
+import PaymentCardsBlock from "./PaymentCardsBlock/PaymentCardsBlock";
 
 import {
   FormTitle,
@@ -8,9 +9,6 @@ import {
   FormSubTitle,
   FormTitleGroup,
 } from "../../../../../../../../styles/formComponentStyles";
-
-import InvoiceBlock from "./InvoiceBlock/InvoiceBlock";
-import PaymentCardsBlock from "./PaymentCardsBlock/PaymentCardsBlock";
 
 const PaymentForm = ({ checkedCard, checkedHandler, onFinishHandler }) => {
   const [alternativeEmailChecked, setAlternaiveEmailChecked] = useState(false);
@@ -47,20 +45,19 @@ const PaymentForm = ({ checkedCard, checkedHandler, onFinishHandler }) => {
         <FormSubTitle>Update your biling details and address</FormSubTitle>
       </FormTitleGroup>
 
-      <Form onFinish={submitHandler} layout="vertical">
-        <InvoiceBlock
-          alternativeEmailRef={alternativeEmailRef}
-          defaultEmailChecked={defaultEmailChecked}
-          alternativeEmailChecked={alternativeEmailChecked}
-          defaultEmailHandler={defaultEmailHandler}
-          alternativeEmailHandler={alternativeEmailHandler}
-        />
+      <InvoiceBlock
+        alternativeEmailRef={alternativeEmailRef}
+        defaultEmailChecked={defaultEmailChecked}
+        alternativeEmailChecked={alternativeEmailChecked}
+        defaultEmailHandler={defaultEmailHandler}
+        alternativeEmailHandler={alternativeEmailHandler}
+      />
 
-        <PaymentCardsBlock
-          checkedCard={checkedCard}
-          checkedHandler={checkedHandler}
-        />
-      </Form>
+      <PaymentCardsBlock
+        checkedCard={checkedCard}
+        checkedHandler={checkedHandler}
+        submitHandler={submitHandler}
+      />
     </FormWrapper>
   );
 };

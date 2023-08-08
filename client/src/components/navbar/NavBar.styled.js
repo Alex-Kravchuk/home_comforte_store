@@ -23,6 +23,7 @@ export const NavWrapper = styled.header`
   position: sticky;
   top: 0;
   z-index: 16;
+  box-sizing: border-box;
 
   box-shadow: ${({ openSearchField }) =>
     !openSearchField ? "0 5px 5px 0 rgb(0 0 0 / 10%)" : "none"};

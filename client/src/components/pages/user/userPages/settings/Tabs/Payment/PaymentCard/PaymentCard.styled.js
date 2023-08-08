@@ -43,22 +43,26 @@ export const PCNumber = styled.div`
   font-weight: 600;
   font-size: 16px;
 `;
-export const PCCheckbox = styled.div``;
+export const PCCheckbox = styled.div`
+  margin-right: 4px;
+`;
 export const PCExpiry = styled.div`
   color: ${textColors.plain};
 `;
 
 export const PCButtonGroupe = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 15px;
-
-  div:last-child {
-    margin-left: 20px;
-    color: #ff471a;
-  }
 `;
+
+export const PCStopPropagationBlock = styled.div``;
 export const PCButton = styled.div`
   cursor: pointer;
   font-weight: 500;
-  color: #0086b3;
+  color: #f13206c7;
+`;
+
+export const PCCardHolderName = styled.div`
+  font-weight: 600;
 `;

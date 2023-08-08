@@ -20,7 +20,7 @@ const Drawer = ({ smallScreen, mobileScreen, setOpenSearch, menuData }) => {
     setSideMenuOpened(true);
   };
   const closeSideMenuHandler = () => {
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = "auto";
     setSideMenuOpened(false);
   };
 

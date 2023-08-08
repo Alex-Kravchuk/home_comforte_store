@@ -65,4 +65,51 @@ export const formRules = {
       message: `Please input your ${label}`,
     },
   ],
+
+  cvvInput: [
+    {
+      type: "string",
+      required: true,
+      message: "Please input your CVC/CVV",
+      whitespace: true,
+    },
+    {
+      min: 3,
+      message: "The CVC/CVV number must consist of 3 characters",
+    },
+  ],
+
+  cardInput: [
+    {
+      required: true,
+      message: "Please enter your card number",
+      whitespace: true,
+    },
+    {
+      validator: (_, number) => {
+        const regExpOnlyNumbers = /^\d+$/;
+
+        const cardNumberIsExist = number !== undefined;
+        const cardNumberIsNotEmptyString = number !== "";
+
+        if (
+          cardNumberIsExist &&
+          cardNumberIsNotEmptyString &&
+          !regExpOnlyNumbers.test(number)
+        ) {
+          console.log("log validarot", number);
+
+          return Promise.reject("You can only enter numbers");
+        }
+
+        if (cardNumberIsExist && number.length < 16 && number.length > 0) {
+          return Promise.reject(
+            "The card number must consist of 16 characters"
+          );
+        }
+
+        return Promise.resolve();
+      },
+    },
+  ],
 };

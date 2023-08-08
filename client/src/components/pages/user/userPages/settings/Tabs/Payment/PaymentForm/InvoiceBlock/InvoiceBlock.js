@@ -1,17 +1,19 @@
 import React from "react";
+
+import { Checkbox } from "antd";
+
+import { FormInput } from "../../../../../../../../../styles/formComponentStyles";
+
 import {
   PFBlock,
+  PFTitle,
+  PFSubTitle,
+  PFTitleBlock,
   PFCheckboxInfo,
+  PFItemContainer,
   PFCheckboxLabel,
   PFFormItemGroupe,
-  PFItemContainer,
-  PFSubTitle,
-  PFTitle,
-  PFTitleBlock,
 } from "../PaymentForm.styled";
-import { Checkbox, Form } from "antd";
-import { FormInput } from "../../../../../../../../../styles/formComponentStyles";
-import { formRules } from "../../../../../../../../../helpers/formRules";
 
 const InvoiceBlock = ({
   alternativeEmailRef,
@@ -45,16 +47,11 @@ const InvoiceBlock = ({
             <PFCheckboxLabel>Send to an alternative email</PFCheckboxLabel>
           </Checkbox>
           <PFCheckboxInfo>
-            <Form.Item
-              name="alternativeEmail"
-              rules={formRules.secondaryEmailInput(alternativeEmailChecked)}
-            >
               <FormInput
                 type="email"
                 disabled={!alternativeEmailChecked}
                 ref={alternativeEmailRef}
               />
-            </Form.Item>
           </PFCheckboxInfo>
         </PFItemContainer>
       </PFFormItemGroupe>
