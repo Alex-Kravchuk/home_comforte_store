@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-
-import PageLoader from "../components/loader/pageLoader/PageLoader";
+import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { $authHost } from "../api";
-import { LOGIN_ROUTE, PROFILE_ROUTE, USER_ROUTE } from "../utils/routes_consts";
-import { useDispatch } from "react-redux";
+import PageLoader from "../components/loader/pageLoader/PageLoader";
 import { notAuthorized, updateUser } from "../redux/user/userSlice";
+
+import {
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+  PROFILE_ROUTE,
+} from "../utils/routes_consts";
 
 const RequireAuth = ({ children }) => {
   const [endOfLoading, setEndOfLoading] = useState(false);
-  const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,32 +28,14 @@ const RequireAuth = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      
-      // console.log("zalupka check auth");
       setEndOfLoading(false);
-      // const redirectFromLoginPage = state
-      //   ? state.from.includes("login")
-      //   : false;
-      // const redirectFromSignUpPage = state
-      //   ? state.from.includes("create")
-      //   : false;
-      // when redirect was from sign up or login page
-      // return user page without authentification
-      // debugger;
-      // if (redirectFromLoginPage || redirectFromSignUpPage) {
-      //   console.log("state from", state.from);
+      const { data } = await $authHost.get("api/user/auth/");
+      const isAdmin = data?.admin;
+      dispatch(updateUser(isAdmin ? data.admin : data.user));
+      console.log("check auth data", data);
 
-        // setEndOfLoading(true);
-        // return children;
-      // }
-
-      const authresponse = await $authHost.get("api/user/auth/");
-      dispatch(updateUser(authresponse.data.user))
-      console.log("zalupa koya", authresponse);
-
-      
       setEndOfLoading(true);
-      return navigate(PROFILE_ROUTE);
+      return navigate(isAdmin ? "../" + ADMIN_ROUTE : PROFILE_ROUTE);
     } catch (error) {
       console.log("error", error);
 
@@ -66,7 +51,7 @@ const RequireAuth = ({ children }) => {
   }
 
   if (!endOfLoading) {
-    return <PageLoader loading={!endOfLoading} from="requre" />;
+    return <PageLoader loading={!endOfLoading} from="require" />;
   }
 
   return children;

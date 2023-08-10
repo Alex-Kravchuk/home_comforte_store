@@ -41,12 +41,14 @@ const NameWidget = ({ userData }) => {
                 shape="square"
                 size={64}
                 icon={
-                  (
+                  img ? (
                     <NWAvatarImg
-                      src={img ? process.env.REACT_APP_API_URL + img : ""}
+                      src={process.env.REACT_APP_API_URL + img}
                       alt="avatar"
                     />
-                  ) ?? <UserOutlined />
+                  ) : (
+                    <UserOutlined />
+                  )
                 }
               />
             </NWAvatar>

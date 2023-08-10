@@ -11,6 +11,7 @@ import {
   FromSubmitButton,
   FormPasswordInput,
   FormWrapper,
+  FormTitleGroup,
 } from "../../../../../styles/formComponentStyles";
 
 import { SignUpFormContainer } from "./SignUpForm.styled";
@@ -18,7 +19,10 @@ import { SignUpFormContainer } from "./SignUpForm.styled";
 const SignUpForm = ({ formDataHandler, loading, signUpForm }) => {
   return (
     <FormWrapper>
-      <FormTitle>Create an account</FormTitle>
+      <FormTitleGroup>
+        <FormTitle>Create an account</FormTitle>
+      </FormTitleGroup>
+
       <SignUpFormContainer>
         <Form
           name="signup"

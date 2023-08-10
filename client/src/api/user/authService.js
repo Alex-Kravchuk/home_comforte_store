@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 
-import { $authHost, $host } from "..";
+import { $adminHost, $authHost, $host } from "..";
 import axios from "axios";
 
 // TODO
@@ -27,9 +27,10 @@ export class AuthService {
 
   static login = async ({ email, password }) => {
     const response = await $host.post("api/user/login/", { email, password });
+    // const response = await $adminHost.post("api/user/login/", { email, password });
     localStorage.setItem("user_token", response.data.accessToken);
 
-    return response.data.user;
+    return response.data.user ?? response.data.admin;
   };
 
   static logout = async () => {
@@ -70,6 +71,3 @@ export class AuthService {
     return response.data.user;
   };
 }
-
-// TODO check auth wiht default axios instance
-// TODO use $authost for resetpasword and forgot password request

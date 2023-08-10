@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Form, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,11 @@ import { login } from "../../../../redux/user/userSlice";
 import { AuthService } from "../../../../api/user/authService";
 import { deleteGuest } from "../../../../redux/guest/guestSlice";
 
-import { PROFILE_ROUTE, USER_ROUTE } from "../../../../utils/routes_consts";
+import {
+  ADMIN_ROUTE,
+  PROFILE_ROUTE,
+  USER_ROUTE,
+} from "../../../../utils/routes_consts";
 
 import { LogInContainer, LogInWrapper } from "./LogIn.styled";
 import { messageStyleConfig } from "../../../../styles/globalStyles";
@@ -19,7 +23,7 @@ import { messageStyleConfig } from "../../../../styles/globalStyles";
 const LogIn = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const { userData } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -51,7 +55,11 @@ const LogIn = () => {
       localStorage.removeItem("guest_token");
       form.resetFields();
 
-      return navigate("../" + USER_ROUTE + "/" + PROFILE_ROUTE, {
+      const route = userData.role.includes("ADMIN")
+        ? ADMIN_ROUTE
+        : USER_ROUTE + "/" + PROFILE_ROUTE;
+
+      return navigate("../" + route, {
         state: { from: pathname },
       });
     }
