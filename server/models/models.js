@@ -4,6 +4,15 @@ const { DataTypes } = require("sequelize");
 
 // user settings
 
+const Admin = sequelize.define("admin", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  email: { type: DataTypes.STRING, unique: true },
+  password: { type: DataTypes.STRING },
+  name: { type: DataTypes.STRING },
+  lastname: { type: DataTypes.STRING },
+  role: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: ["ADMIN"] },
+});
+
 const User = sequelize.define("user", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING, unique: true },
@@ -131,6 +140,9 @@ Review.belongsTo(User);
 User.hasOne(Token);
 Token.belongsTo(User);
 
+Admin.hasOne(Token);
+Token.belongsTo(Admin);
+
 User.hasOne(ResetPasswordToken);
 ResetPasswordToken.belongsTo(User);
 
@@ -183,6 +195,7 @@ Collection.hasMany(Furniture);
 Furniture.belongsTo(Collection);
 
 module.exports = {
+  Admin,
   User,
   Basket,
   Furniture,

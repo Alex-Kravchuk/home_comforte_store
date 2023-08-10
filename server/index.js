@@ -13,6 +13,7 @@ const models = require("./models/models");
 
 const errorHandling = require("./middleware/errorHandlingMiddleware");
 const notFoundMiddleware = require("./middleware/notFoundMiddleware");
+const adminService = require("./services/admin-service");
 
 const PORT = process.env.PORT || 5000;
 
@@ -43,7 +44,10 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Server start on port ${PORT}`);
+      adminService.initialization();
+    });
   } catch (error) {
     console.log(error);
   }

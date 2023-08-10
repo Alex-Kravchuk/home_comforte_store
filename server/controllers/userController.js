@@ -1,7 +1,6 @@
 const ApiError = require("../error/ApiError");
 
 const { User } = require("../models/models");
-const createImgName = require("../helpers/createImgName");
 const userService = require("../services/user-service");
 
 class UserController {
@@ -18,7 +17,7 @@ class UserController {
       );
 
       res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: (30 * (3600 * 24)) * 1000,
+        maxAge: 30 * (3600 * 24) * 1000,
         httpOnly: true,
       });
 
@@ -35,7 +34,7 @@ class UserController {
       const userData = await userService.login(email, password);
 
       res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: (30 * (3600 * 24)) * 1000,
+        maxAge: 30 * (3600 * 24) * 1000,
         httpOnly: true,
       });
 
@@ -62,18 +61,30 @@ class UserController {
       const userData = await userService.refresh(refreshToken);
 
       res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: (30 * (3600 * 24)) * 1000,
+        maxAge: 30 * (3600 * 24) * 1000,
         httpOnly: true,
       });
 
       return res.json(userData);
     } catch (error) {
+      console.log('errorororor', error);
+      
       return next(error);
     }
   }
 
-  async testFuncGetUsers(req, res, next) {
+  async testUploading(req, res, next) {
     try {
+      const { user, files } = req;
+      // let { avatar } = req.files;
+      // if (req.file) {
+      //   img = req.file;
+      // }
+
+      console.log("=============testing==============");
+      console.log(req);
+      console.log("====================================");
+
       const users = await User.findAndCountAll();
 
       return res.json(users);
@@ -88,7 +99,7 @@ class UserController {
       const userData = await userService.checkAuth(user);
 
       res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: (30 * (3600 * 24)) * 1000,
+        maxAge: 30 * (3600 * 24) * 1000,
         httpOnly: true,
       });
 
@@ -120,41 +131,21 @@ class UserController {
     }
   }
 
-  // later--------
   async update(req, res, next) {
     try {
-      let fileName;
-      const { id } = req.params;
-      const { email, password, name, mobile, address, bonus } = req.body;
 
-      if (req.files) {
-        const { img } = req.files;
-        fileName = createImgName(img, "STRING");
-      }
+      const { user, files, body } = req;
+      const userData = await userService.updateData(user.id, files, body);
+      
 
-      const user = await User.findOne({ where: { id } });
-      if (!user) {
-        return next(
-          ApiError.badRequest(
-            "The user is not defined",
-            UserController.errorSource
-          )
-        );
-      }
-
-      user.update({
-        email,
-        password,
-        name,
-        mobile,
-        address,
-        bonus,
-        img: fileName,
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * (3600 * 24) * 1000,
+        httpOnly: true,
       });
 
-      return res.json(user);
+      return res.json(userData);
     } catch (error) {
-      return next(ApiError.unexpectedError(error, UserController.errorSource));
+      return next(error);
     }
   }
 

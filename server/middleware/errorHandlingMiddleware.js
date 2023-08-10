@@ -3,7 +3,7 @@ const ApiError = require("../error/ApiError");
 module.exports = function (err, req, res, next) {
   if (err instanceof ApiError) {
     console.log('====================================');
-    console.log('before error instacs');
+    console.log('before error instacs', err);
     console.log('====================================');
     return res.status(err.status).json({
       _source: err.source_error,

@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
-const { Token } = require("../models/models");
+const { Token, User } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
 class TokenService {
   static errorSource = "token service";
 
   generateTokens(payload) {
+    console.log("suka blya", payload);
     try {
       const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET_KEY, {
         expiresIn: "30m",
@@ -28,7 +29,7 @@ class TokenService {
     }
   }
 
-   generateSimpleToken(payload, expiresIn = '24h') {
+  generateSimpleToken(payload, expiresIn = "24h") {
     try {
       const token = jwt.sign(payload, process.env.JWT_SIMPLE_SECRET_KEY, {
         expiresIn,
@@ -41,12 +42,28 @@ class TokenService {
   }
 
   async saveToken(userId, refreshToken) {
-    const tokenData = await Token.findOne({ where: { userId } });
-    if (tokenData) {
-      return tokenData.update({ refreshToken });
+    const tokenDataByUserId = await Token.findOne({ where: { userId } });
+    if (tokenDataByUserId) {
+      return tokenDataByUserId.update({ refreshToken });
     }
 
-    const token = await Token.create({ userId, refreshToken });
+    const tokenDataByAdminId = await Token.findOne({
+      where: { adminId: userId },
+    });
+    if (tokenDataByAdminId) {
+      return tokenDataByAdminId.update({ refreshToken });
+    }
+
+    const user = await User.findOne({ where: { id: userId } });
+
+    const tokenCreateConfig = {
+      refreshToken,
+      userId: user ? userId : null,
+      adminId: !user ? userId : null,
+    };
+
+    const token = await Token.create(tokenCreateConfig);
+
     return token;
   }
 
@@ -56,7 +73,7 @@ class TokenService {
       const tokenData = await Token.destroy({ where: { refreshToken } });
       return tokenData;
     } catch (error) {
-      throw ApiError.unexpectedError(error, errorSource);
+      throw ApiError.unexpectedError(error, TokenService.errorSource);
     }
   }
 
@@ -65,7 +82,7 @@ class TokenService {
       const tokenData = await Token.findOne({ where: { refreshToken } });
       return tokenData;
     } catch (error) {
-      throw ApiError.unexpectedError(error, errorSource);
+      throw ApiError.unexpectedError(error, TokenService.errorSource);
     }
   }
 

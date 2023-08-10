@@ -7,7 +7,7 @@ const createUserResponse = async (user) => {
 
   if (!userBasket) {
     userBasket = await Basket.create({ userId: user.id });
-  }
+  } 
 
   const dtoConfig = { ...user.dataValues, basketId: userBasket.id };
   const userDto = new UserDTO(dtoConfig);

@@ -4,6 +4,7 @@ const router = new Router();
 
 const userRouter = require("./userRouter");
 const typeRouter = require("./typeRouter");
+const adminRouter = require("./adminRouter");
 const guestRouter = require("./guestRouter");
 const ratingRouter = require("./ratingRouter");
 const reviewRouter = require("./reviewRouter");
@@ -20,6 +21,7 @@ const basketFurnitureRouter = require("./basketFurnitureRouter");
 
 router.use("/user", userRouter);
 router.use("/type", typeRouter);
+router.use("/admin", adminRouter);
 router.use("/guest", guestRouter);
 router.use("/rating", ratingRouter);
 router.use("/review", reviewRouter);

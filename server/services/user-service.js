@@ -1,12 +1,15 @@
 const bcrypt = require("bcrypt");
 
 const ApiError = require("../error/ApiError");
-const { User, ResetPasswordToken } = require("../models/models");
+const { User, ResetPasswordToken, Admin } = require("../models/models");
 
 const mailService = require("./mail-service");
 const tokenService = require("./token-service");
 
 const createUserResponse = require("../helpers/createUserResponse");
+const createImgName = require("../helpers/createImgName");
+const adminService = require("./admin-service");
+const createAdminResponse = require("../helpers/createAdminResponse");
 
 class UserService {
   static errorSource = "user service";
@@ -31,6 +34,12 @@ class UserService {
   }
 
   async login(email, password) {
+    const isAdmin = await adminService.login(email, password);
+
+    if (isAdmin) {
+      return isAdmin;
+    }
+
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
@@ -58,6 +67,10 @@ class UserService {
   }
 
   async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.notAuthorized(UserService.errorSource);
+    }
+
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDB = await tokenService.findToken(refreshToken);
 
@@ -65,13 +78,26 @@ class UserService {
       throw ApiError.notAuthorized(UserService.errorSource);
     }
 
+    const admin = await Admin.findOne({ where: { id: userData.id } });
     const user = await User.findOne({ where: { id: userData.id } });
+
+    if (admin) {
+      const adminResponse = await createAdminResponse(admin);
+      return adminResponse;
+    }
 
     const response = await createUserResponse(user);
     return response;
   }
 
   async checkAuth(userData) {
+    const admin = await Admin.findOne({ where: { id: userData.id } });
+
+    if (admin) {
+      const adminResponse = await createAdminResponse(admin);
+      return adminResponse;
+    }
+
     const user = await User.findOne({ where: { id: userData.id } });
     if (!user) {
       throw ApiError.notAuthorized(UserService.errorSource);
@@ -152,6 +178,41 @@ class UserService {
     await user.update({ password: hashPassword });
 
     return true;
+  }
+
+  async updateData(userId, files, requestBody) {
+    const { email, name, lastname, mobile, address, bonus } = requestBody;
+    let fileName;
+
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw ApiError.badRequest(
+        "The user is not defined",
+        UserService.errorSource
+      );
+    }
+
+    if (files) {
+      const { avatar } = files;
+      fileName = createImgName(avatar, "STRING");
+    } else {
+      // when the user wanted to delete the old avatar
+      fileName = null;
+    }
+
+    await user.update({
+      email,
+      name,
+      lastname,
+      mobile,
+      address,
+      bonus,
+      img: fileName,
+    });
+
+    const response = await createUserResponse(user);
+    return response;
   }
 }
 

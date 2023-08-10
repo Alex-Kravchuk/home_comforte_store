@@ -28,7 +28,7 @@ module.exports = function (req, res, next) {
 
     req.user = userData;
     next();
-  } catch (error) {
+  } catch (error) {    
     return next(ApiError.unexpectedError(error, errorSource));
   }
 };

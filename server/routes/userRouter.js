@@ -4,32 +4,22 @@ const router = new Router();
 const userController = require("../controllers/userController");
 
 const authMiddleware = require("../middleware/user/authMiddleware");
-const checkUserMiddleware = require("../middleware/user/checkUserMiddleware");
-const signUpUserMiddleware = require("../middleware/user/signUpUserMiddleware");
 
-const checkCorrectIDMiddleware = require("../middleware/checkCorrectIdMiddleware");
+const signUpUserMiddleware = require("../middleware/user/signUpUserMiddleware");
 
 router.post("/login", userController.logIn);
 router.get("/logout", userController.logOut);
 router.get("/refresh", userController.refresh);
 router.post("/reset-password", userController.resetPassword);
+router.put("/update", authMiddleware, userController.update);
 router.get("/auth", authMiddleware, userController.checkAuth);
 router.post("/forgot-password", userController.forgotPassword);
 router.post("/signup", signUpUserMiddleware, userController.signUp);
 
+router.post("/test", authMiddleware, userController.testUploading);
 
+// router.get("/:id", checkCorrectIDMiddleware("user"), userController.getOne);
 
-
-
-
-
-router.get("/:id", checkCorrectIDMiddleware("user"), userController.getOne);
-router.put(
-  "/:id",
-  checkCorrectIDMiddleware("user"),
-  signUpUserMiddleware,
-  userController.update
-);
-router.delete("/:id", checkCorrectIDMiddleware("user"), userController.delete);
+// router.delete("/:id", checkCorrectIDMiddleware("user"), userController.delete);
 
 module.exports = router;
