@@ -8,6 +8,7 @@ import PageLoader from "../components/loader/pageLoader/PageLoader";
 import { notAuthorized, updateUser } from "../redux/user/userSlice";
 
 import {
+  ADMIN_OVERVIEW,
   ADMIN_ROUTE,
   LOGIN_ROUTE,
   PROFILE_ROUTE,
@@ -20,8 +21,13 @@ const RequireAuth = ({ children }) => {
 
   const isGuest = localStorage.getItem("guest_token");
 
+
+  
   useEffect(() => {
+    console.log('guest 1');
+    
     if (!isGuest) {
+      console.log('guest 2');
       checkAuth();
     }
   }, []);
@@ -35,7 +41,8 @@ const RequireAuth = ({ children }) => {
       console.log("check auth data", data);
 
       setEndOfLoading(true);
-      return navigate(isAdmin ? "../" + ADMIN_ROUTE : PROFILE_ROUTE);
+      const routeIfAdmin = ADMIN_ROUTE + "/" + ADMIN_OVERVIEW;
+      return navigate(isAdmin ? "../" + routeIfAdmin : PROFILE_ROUTE);
     } catch (error) {
       console.log("error", error);
 

@@ -6,7 +6,7 @@ export const sizes = {
     searchFieldHeight: 50,
     sideMenuSize: 380,
     sideMenuSizeMobile: "85vw",
-
+    contentContainerWidth: 90,
     imgWidth: 12.5,
     imgHeight: 8.5,
     thumbSize: 60,

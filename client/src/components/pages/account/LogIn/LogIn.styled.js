@@ -7,11 +7,11 @@ import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 const { l } = viewport_sizes;
 
 export const LogInWrapper = styled.div`
-  padding: 70px 0;
+  padding: 40px 0;
 
 
   @media (max-width: ${l}px) {
-    padding: 50px 0;
+    padding: 20px 0;
   }
 `;
 export const LogInContainer = styled.div`

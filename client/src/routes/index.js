@@ -36,6 +36,16 @@ import {
   PERSONAL_SETTINGS,
   CONTACTS_SETTINGS,
   PAYMENT_SETTINGS,
+  ADMIN_OVERVIEW,
+  ADMIN_PRODUCTS,
+  ADMIN_ORDERS,
+  ADMIN_NOTIFICATIONS,
+  ADMIN_SETTINGS,
+  ADD_NEW_CATEGORY,
+  ADD_NEW_TYPE,
+  ADD_NEW_PRODUCT,
+  ADMIN_PRODUCTS_CATEGORY,
+  ADMIN_PRODUCTS_EDIT,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -56,6 +66,14 @@ import Order from "../components/pages/user/userPages/order/Order";
 import Payment from "../components/pages/user/userPages/settings/Tabs/Payment/Payment";
 import Personal from "../components/pages/user/userPages/settings/Tabs/Personal/Personal";
 import Contacts from "../components/pages/user/userPages/settings/Tabs/Contacts/Contacts";
+
+import AdminSettings from "../components/pages/admin/adminPages/adminSettings/AdminSettings";
+import AdminOrders from "../components/pages/admin/adminPages/adminOrders/AdminOrders";
+import Overview from "../components/pages/admin/adminPages/overview/Overview";
+import AdminProducts from "../components/pages/admin/adminPages/adminProducts/AdminProducts";
+import AdminNotifications from "../components/pages/admin/adminPages/adminNotification/AdminNotification";
+import AddNewCategory from "../components/pages/admin/adminPages/adminProducts/CategoriesAndTypes/CategoriesAndTypes";
+import AddNewProduct from "../components/pages/admin/adminPages/adminProducts/EditProducts/EditProducts";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -94,7 +112,16 @@ export const router = createBrowserRouter(
             <Route path={PAYMENT_SETTINGS} element={<Payment />} />
           </Route>
         </Route>
-        <Route path={ADMIN_ROUTE} element={<Admin />} />
+        <Route path={ADMIN_ROUTE} element={<Admin />}>
+          <Route path={ADMIN_OVERVIEW} element={<Overview />} />
+          <Route path={ADMIN_PRODUCTS} element={<AdminProducts />}>
+            <Route path={ADMIN_PRODUCTS_CATEGORY} element={<AddNewCategory />} />
+            <Route path={ADMIN_PRODUCTS_EDIT} element={<AddNewProduct />} />
+          </Route>
+          <Route path={ADMIN_ORDERS} element={<AdminOrders />} />
+          <Route path={ADMIN_NOTIFICATIONS} element={<AdminNotifications />} />
+          <Route path={ADMIN_SETTINGS} element={<AdminSettings />} />
+        </Route>
       </Route>
 
       <Route path={BASKET_ROUTE} element={<Basket />} />

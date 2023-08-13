@@ -21,6 +21,10 @@ const DropDownMenu = ({
   const scroll = useScrollObserver();
 
   const dataAreExist = menuCategories[currentHover];
+  const typesOfProducts = dataAreExist?.types ? dataAreExist.types : [];
+  const subTypesOfProducts = typesOfProducts?.subTypes ? typesOfProducts.subTypes : [];
+
+  // debugger
 
   const closeDropDown = () => {
     closeDropDownHandler();
@@ -30,14 +34,14 @@ const DropDownMenu = ({
     <DropdownMenuWrapper scrollDown={scroll} currentHover={currentHover}>
       {dataAreExist && (
         <DropdownMenuContainer>
-          {dataAreExist.types.map((type) => (
+          {typesOfProducts.map((type) => (
             <TypeColumn>
               <TypeTitleContainer>
                 <TypeTitleImg src={process.env.REACT_APP_API_URL + type.img} />
                 <TypeTitleName>{type.name}</TypeTitleName>
               </TypeTitleContainer>
               <SubTypeContainer>
-                {type.subTypes.map((subtype) => (
+                {subTypesOfProducts.map((subtype) => (
                   // LINK here is for temprorary test
                   <SubTypeName onClick={closeDropDown}>
                     <Link to={ADMIN_ROUTE}>{subtype.name}</Link>

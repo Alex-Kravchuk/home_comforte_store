@@ -12,6 +12,7 @@ import { AuthService } from "../../../../api/user/authService";
 import { deleteGuest } from "../../../../redux/guest/guestSlice";
 
 import {
+  ADMIN_OVERVIEW,
   ADMIN_ROUTE,
   PROFILE_ROUTE,
   USER_ROUTE,
@@ -56,9 +57,9 @@ const LogIn = () => {
       form.resetFields();
 
       const route = userData.role.includes("ADMIN")
-        ? ADMIN_ROUTE
+        ? ADMIN_ROUTE + "/" + ADMIN_OVERVIEW
         : USER_ROUTE + "/" + PROFILE_ROUTE;
-
+        
       return navigate("../" + route, {
         state: { from: pathname },
       });

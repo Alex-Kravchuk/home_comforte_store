@@ -66,6 +66,13 @@ export const formRules = {
     },
   ],
 
+  selectInput: (labelName) => [
+    {
+      required: true,
+      message: `Please select ${labelName}`,
+    },
+  ],
+
   cvvInput: [
     {
       type: "string",

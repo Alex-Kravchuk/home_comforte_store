@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
 
-import {  useNavigate } from "react-router-dom";
-import { HOME_ROUTE } from "../../../utils/routes_consts";
-import { AdminPageWrapper } from "./Admin.styled";
+import { Outlet, useNavigate } from "react-router-dom";
+import { ADMIN_OVERVIEW, HOME_ROUTE } from "../../../utils/routes_consts";
+import {
+  AdminPageContainer,
+  AdminPageWrapper,
+  AdminSubPageContainer,
+} from "./Admin.styled";
+import AdminMenu from "./adminMenu/AdminMenu";
 
 const Admin = () => {
-  const [auth, setAuth] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!auth) {
-      navigate(HOME_ROUTE);
-    }
+    navigate(ADMIN_OVERVIEW);
   }, []);
 
-  return <AdminPageWrapper>Admin page</AdminPageWrapper>;
+  return (
+    <AdminPageWrapper>
+      <AdminPageContainer>
+        <AdminMenu />
+        <AdminSubPageContainer>
+          <Outlet />
+        </AdminSubPageContainer>
+      </AdminPageContainer>
+    </AdminPageWrapper>
+  );
 };
 
 export default Admin;

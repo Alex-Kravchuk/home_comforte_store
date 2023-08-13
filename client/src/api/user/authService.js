@@ -27,7 +27,6 @@ export class AuthService {
 
   static login = async ({ email, password }) => {
     const response = await $host.post("api/user/login/", { email, password });
-    // const response = await $adminHost.post("api/user/login/", { email, password });
     localStorage.setItem("user_token", response.data.accessToken);
 
     return response.data.user ?? response.data.admin;

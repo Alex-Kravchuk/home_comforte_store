@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const UserLogOutContainer = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 30px;
+  top: 15px;
   right: 0;
   transition: all 0.2s ease;
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { viewport_sizes } from "../utils/viewport_size_consts";
 import { textColors } from "./globalStyles";
 import { getResponsiveFontSize } from "../helpers/getResponsiveFontSize";
-import { Button, DatePicker, Form, Input } from "antd";
+import { Button, DatePicker, Form, Input, Select } from "antd";
 
 const { xl, l, m, s } = viewport_sizes;
 
@@ -10,11 +10,11 @@ export const FormComponentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 70px 0 35px 0;
+  margin: 40px 0 35px 0;
 
   @media (max-width: ${m}px) {
     display: block;
-    margin: 40px 0 35px 0;
+    margin: 10px 0 35px 0;
   }
 `;
 
@@ -95,6 +95,16 @@ export const FormPasswordInput = styled(Input.Password)`
   }
 `;
 
+export const FormSelect = styled(Select)`
+  height: 50px;
+  font-size: 16px;
+  color: ${textColors.main};
+
+  @media (max-width: ${s}px) {
+    height: 45px;
+  }
+`;
+
 export const FromSubmitButton = styled(Button)`
   margin-top: 10px;
 `;
@@ -108,4 +118,12 @@ export const FormItemInOneLineRight = styled(Form.Item)`
   display: inline-block;
   margin-left: 8px;
   width: calc(50% - 8px);
+`;
+
+export const FormInputWithTipWrapper = styled.div``;
+
+export const FormInputTip = styled.div`
+  font-size: 14px;
+  color: ${textColors.plain};
+  margin-top: 10px;
 `;

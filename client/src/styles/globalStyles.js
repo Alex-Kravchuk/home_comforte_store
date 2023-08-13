@@ -75,7 +75,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 80%;
+  width: ${sizes.global.contentContainerWidth}%;
   margin: 0 auto;
 
   @media (max-width: ${xxl}px) {

@@ -4,15 +4,14 @@ import { viewport_sizes } from "../../../utils/viewport_size_consts";
 
 const { l, xxl, xl } = viewport_sizes;
 
-
 export const NavContainerWrapper = styled.div`
+  width: ${sizes.global.contentContainerWidth}%;
   height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  width: 80%;
 
   @media (max-width: ${xxl}px) {
     width: ${sizes.xxl.contentContainerWidth}%;

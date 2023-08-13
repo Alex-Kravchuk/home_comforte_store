@@ -16,7 +16,6 @@ export const UserWrapper = styled.div`
   }
 `;
 export const UserContainer = styled.div`
-  padding: 15px 0 0 0;
   position: relative;
 `;
 
