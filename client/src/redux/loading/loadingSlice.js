@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllCategories } from "../../api/product/productAPI";
+import { ProductService } from "../../api/product/productService";
+
 
 const initialState = {
   loadingIsActive: false,
@@ -10,7 +11,7 @@ const initialState = {
 export const getMenuData = createAsyncThunk(
   "products/getMenuData",
   async () => {
-    const response = await getAllCategories();
+    const response = await ProductService.getAllCategories();
     return response;
   }
 );

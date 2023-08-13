@@ -2,7 +2,7 @@ import React from "react";
 
 import { Form } from "antd";
 
-import UploadAvatar from "../UploadAvatar/UploadAvatar";
+import UploadImg from "../UploadAvatar/UploadImg";
 
 import { formRules } from "../../../../../../../../helpers/formRules";
 
@@ -33,7 +33,7 @@ const PersonalForm = ({
         initialValues={{ name, lastname }}
       >
         <Form.Item label={<FormLabel>Upload avatar</FormLabel>} name="avatar">
-          <UploadAvatar saveFileHandler={saveFileHandler} />
+          <UploadImg saveFileHandler={saveFileHandler} />
         </Form.Item>
         <Form.Item
           name="name"

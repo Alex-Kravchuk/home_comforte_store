@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { SubTypesContainer, SubTypesWrapper } from "./SubTypes.styled";
 import SearchField from "../../../../../searchField/SearchField";
-import { CategoryContainer, CategoryWrapper } from "./Categories.styled";
-import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
-import { message } from "antd";
+import AddNewSubTypeForm from "./AddNewSubTypeForm/AddNewSubTypeForm";
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
+import { message } from "antd";
 
-const Categories = () => {
+const SubTypes = () => {
+  const [categories, setCategories] = useState([]);
+  const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const categories = await ProductService.getAllCategories();
+
+        setCategories(categories);
+      } catch (error) {
+        setError(error.response.data);
+      }
+    };
+
+    getCategories();
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -24,9 +40,12 @@ const Categories = () => {
 
   const onSubmitHandler = async (values) => {
     try {
+
+		console.log('subtypes', values);
+		
       setLoading(true);
-      const { category } = values;
-      const response = await ProductService.createCategory(category);
+      const { name, typeId } = values;
+      const response = await ProductService.createSubType(name, typeId);
 
       messageApi.open({
         type: "success",
@@ -41,17 +60,19 @@ const Categories = () => {
     }
   };
   return (
-    <CategoryWrapper>
+    <SubTypesWrapper>
       <SearchField />
-      {contextHolder}
-      <CategoryContainer>
-        <AddNewCategoryForm
-          onSubmitHandler={onSubmitHandler}
+	  {contextHolder}
+      <SubTypesContainer>
+        <AddNewSubTypeForm
+          categories={categories}
+          types={types}
           loading={loading}
+          onSubmitHandler={onSubmitHandler}
         />
-      </CategoryContainer>
-    </CategoryWrapper>
+      </SubTypesContainer>
+    </SubTypesWrapper>
   );
 };
 
-export default Categories;
+export default SubTypes;

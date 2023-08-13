@@ -22,7 +22,6 @@ const DropDownMenu = ({
 
   const dataAreExist = menuCategories[currentHover];
   const typesOfProducts = dataAreExist?.types ? dataAreExist.types : [];
-  const subTypesOfProducts = typesOfProducts?.subTypes ? typesOfProducts.subTypes : [];
 
   // debugger
 
@@ -35,15 +34,15 @@ const DropDownMenu = ({
       {dataAreExist && (
         <DropdownMenuContainer>
           {typesOfProducts.map((type) => (
-            <TypeColumn>
+            <TypeColumn key={type.id}>
               <TypeTitleContainer>
                 <TypeTitleImg src={process.env.REACT_APP_API_URL + type.img} />
                 <TypeTitleName>{type.name}</TypeTitleName>
               </TypeTitleContainer>
               <SubTypeContainer>
-                {subTypesOfProducts.map((subtype) => (
+                {type.subTypes?.map((subtype) => (
                   // LINK here is for temprorary test
-                  <SubTypeName onClick={closeDropDown}>
+                  <SubTypeName onClick={closeDropDown} key={subtype.id}>
                     <Link to={ADMIN_ROUTE}>{subtype.name}</Link>
                   </SubTypeName>
                 ))}

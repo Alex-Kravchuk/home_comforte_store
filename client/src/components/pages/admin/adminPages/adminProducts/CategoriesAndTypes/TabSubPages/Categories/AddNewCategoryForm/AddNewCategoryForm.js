@@ -22,7 +22,7 @@ const AddNewCategoryForm = ({ loading, onSubmitHandler }) => {
         <FormInputWithTipWrapper>
           <FormInput placeholder="Enter category name" />
           <FormInputTip>
-            Do not exceed 20 characters when entering the product name.
+            Do not exceed 20 characters when entering the product category name.
           </FormInputTip>
         </FormInputWithTipWrapper>
       </Form.Item>

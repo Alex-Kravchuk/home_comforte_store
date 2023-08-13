@@ -7,10 +7,10 @@ import { PlusOutlined } from "@ant-design/icons";
 import { getBase64 } from "../../../../../../../../helpers/getBase64";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
-import { UploadButtonWrapper } from "./UploadAvatar.styled";
+import { UploadButtonWrapper } from "./UploadImg.styled";
 import PreviewModal from "./PreviewModal/PreviewModal";
 
-const UploadAvatar = ({ saveFileHandler }) => {
+const UploadImg = ({ saveFileHandler }) => {
   const { id, img } = useSelector((state) => state.user.userData);
   const [imageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -79,7 +79,7 @@ const UploadAvatar = ({ saveFileHandler }) => {
         maxCount={1}
         showUploadList={true}
         listType="picture-card"
-        accept="image/png, image/jpg, image/jpeg"
+        accept="image/png, image/jpg, image/jpeg, image/webp"
         defaultFileList={defaultFileList}
         onChange={handleChange}
         onRemove={onRemoveHandler}
@@ -98,4 +98,4 @@ const UploadAvatar = ({ saveFileHandler }) => {
   );
 };
 
-export default UploadAvatar;
+export default UploadImg;

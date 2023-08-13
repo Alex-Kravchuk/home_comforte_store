@@ -4,12 +4,29 @@ import { TypeContainer, TypeWrapper } from "./Types.styled";
 import { message } from "antd";
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import AddNewTypeForm from "./AddNewTypeForm/AddNewTypeForm";
+import { ProductService, getAllCategories } from "../../../../../../../../api/product/productService";
 
 const Types = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [typeImg, setTypeImg] = useState();
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const categories = await ProductService.getAllCategories();
+
+        setCategories(categories);
+      } catch (error) {
+        setError(error.response.data);
+      }
+    };
+
+    getCategories();
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -24,7 +41,19 @@ const Types = () => {
   const onSubmitHandler = async (values) => {
     try {
       setLoading(true);
-      const { category } = values;
+      console.log('values', values);
+      
+      const combinedData = { ...values, img: typeImg };
+      const formdata = new FormData();
+
+      for (const key in combinedData) {
+        const element = combinedData[key];
+        formdata.append(key, element);
+      }
+
+      const response = await ProductService.createType(formdata)
+
+      // console.log("onSubmit type", { category, type, img: typeImg });
       // const response = await createCategory(category);
 
       messageApi.open({
@@ -44,7 +73,12 @@ const Types = () => {
       <SearchField loading={loading} />
       {contextHolder}
       <TypeContainer>
-        <AddNewTypeForm onSubmitHandler={onSubmitHandler} loading={loading} />
+        <AddNewTypeForm
+          onSubmitHandler={onSubmitHandler}
+          loading={loading}
+          categories={categories}
+          saveFileHandler={setTypeImg}
+        />
       </TypeContainer>
     </TypeWrapper>
   );

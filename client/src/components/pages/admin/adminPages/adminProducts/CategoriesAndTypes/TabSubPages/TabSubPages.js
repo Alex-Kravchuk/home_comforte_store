@@ -9,6 +9,7 @@ import Categories from "../TabSubPages/Categories/Categories";
 import Types from "./Types/Types";
 
 import { TabLabel, TabLabelText } from "../TabSubPages/TabSubPages.styled";
+import SubTypes from "./SubTypes/SubTypes";
 
 const tabItems = [
   {
@@ -31,11 +32,22 @@ const tabItems = [
     label: (
       <TabLabel>
         <AddOutlinedIcon />
-		<TabLabelText>Add type</TabLabelText>
+        <TabLabelText>Add type</TabLabelText>
       </TabLabel>
     ),
 
     children: <Types />,
+  },
+  {
+    key: "4",
+    label: (
+      <TabLabel>
+        <AddOutlinedIcon />
+        <TabLabelText>Add subtype</TabLabelText>
+      </TabLabel>
+    ),
+
+    children: <SubTypes />,
   },
 ];
 
