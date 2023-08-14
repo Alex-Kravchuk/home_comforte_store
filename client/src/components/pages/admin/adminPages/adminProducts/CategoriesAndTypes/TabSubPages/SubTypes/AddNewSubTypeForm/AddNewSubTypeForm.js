@@ -1,24 +1,24 @@
-import { Form, Select } from "antd";
 import React, { useState } from "react";
+
+import { Form, Select } from "antd";
+
+import { formRules } from "../../../../../../../../../helpers/formRules";
+
 import {
   FormInput,
-  FormInputTip,
-  FormInputWithTipWrapper,
   FormLabel,
+  FormInputTip,
   FromSubmitButton,
+  FormInputWithTipWrapper,
 } from "../../../../../../../../../styles/formComponentStyles";
-import { formRules } from "../../../../../../../../../helpers/formRules";
 
 const AddNewSubTypeForm = ({ categories, loading, onSubmitHandler }) => {
   const [types, setTypes] = useState([]);
+
   const handleTypesByCategoryId = (categoryId) => {
-    console.log("category sub type");
     const currentCategoryTypes = categories.filter(
       (category) => category.id === categoryId
     );
-
-    // debugger;
-    console.log("asdsad", currentCategoryTypes);
 
     setTypes(currentCategoryTypes[0].types);
   };
@@ -65,11 +65,11 @@ const AddNewSubTypeForm = ({ categories, loading, onSubmitHandler }) => {
       </Form.Item>
       <Form.Item
         name="name"
-        label={<FormLabel>Type name </FormLabel>}
-        rules={formRules.normalInputField("type")}
+        label={<FormLabel>Subtype name</FormLabel>}
+        rules={formRules.normalInputField("subtype name")}
       >
         <FormInputWithTipWrapper>
-          <FormInput placeholder="Enter type of products name" />
+          <FormInput placeholder="Enter subtype of products name" />
           <FormInputTip>
             Do not exceed 20 characters when entering the product subtype name.
           </FormInputTip>

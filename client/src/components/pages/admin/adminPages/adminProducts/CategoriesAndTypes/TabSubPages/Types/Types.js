@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import SearchField from "../../../../../searchField/SearchField";
-import { TypeContainer, TypeWrapper } from "./Types.styled";
+
 import { message } from "antd";
-import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
+
 import AddNewTypeForm from "./AddNewTypeForm/AddNewTypeForm";
-import { ProductService, getAllCategories } from "../../../../../../../../api/product/productService";
+import SearchField from "../../../../../searchField/SearchField";
+
+import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
+import { ProductService } from "../../../../../../../../api/product/productService";
+
+import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
 
 const Types = () => {
   const [loading, setLoading] = useState(false);
@@ -41,8 +45,8 @@ const Types = () => {
   const onSubmitHandler = async (values) => {
     try {
       setLoading(true);
-      console.log('values', values);
-      
+      console.log("values", values);
+
       const combinedData = { ...values, img: typeImg };
       const formdata = new FormData();
 
@@ -51,10 +55,7 @@ const Types = () => {
         formdata.append(key, element);
       }
 
-      const response = await ProductService.createType(formdata)
-
-      // console.log("onSubmit type", { category, type, img: typeImg });
-      // const response = await createCategory(category);
+      await ProductService.createType(formdata);
 
       messageApi.open({
         type: "success",
@@ -69,18 +70,18 @@ const Types = () => {
     }
   };
   return (
-    <TypeWrapper>
+    <SubPageWrapper>
       <SearchField loading={loading} />
       {contextHolder}
-      <TypeContainer>
+      <SubPageContainer>
         <AddNewTypeForm
           onSubmitHandler={onSubmitHandler}
           loading={loading}
           categories={categories}
           saveFileHandler={setTypeImg}
         />
-      </TypeContainer>
-    </TypeWrapper>
+      </SubPageContainer>
+    </SubPageWrapper>
   );
 };
 

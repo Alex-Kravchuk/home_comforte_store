@@ -1,19 +1,20 @@
-import { Form, Select, Upload, message } from "antd";
 import React from "react";
-import {
-  FormInput,
-  FormInputTip,
-  FormInputWithTipWrapper,
-  FormLabel,
-  FormSelect,
-  FromSubmitButton,
-} from "../../../../../../../../../styles/formComponentStyles";
+import { Form, Select } from "antd";
+
 import { formRules } from "../../../../../../../../../helpers/formRules";
 import UploadAvatar from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
 
+import {
+  FormInput,
+  FormLabel,
+  FormInputTip,
+  FromSubmitButton,
+  FormInputWithTipWrapper,
+} from "../../../../../../../../../styles/formComponentStyles";
+
 const AddNewTypeForm = ({
-  categories,
   loading,
+  categories,
   onSubmitHandler,
   saveFileHandler,
 }) => {

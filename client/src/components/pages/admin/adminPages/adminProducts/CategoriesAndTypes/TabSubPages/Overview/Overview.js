@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import SearchField from "../../../../../searchField/SearchField";
+import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
 
 const Overview = () => {
   const [loading, setLoading] = useState(false);
   return (
-    <div>
+    <SubPageWrapper>
       <SearchField loading={loading} />
-      Overview tub
-    </div>
+      <SubPageContainer>Overview tub</SubPageContainer>
+    </SubPageWrapper>
   );
 };
 

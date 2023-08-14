@@ -1,8 +1,10 @@
 import React from "react";
+
+import TabSubPages from "./TabSubPages/TabSubPages";
+
+import { AdminTitlesGroupe } from "../AdminProducts.styled";
 import { CATContainer, CATWrapper } from "./CategoriesAndTypes.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
-import { AdminTitlesGroupe } from "../AdminProducts.styled";
-import TabSubPages from "./TabSubPages/TabSubPages";
 
 const CategoriesAndTypes = () => {
   return (

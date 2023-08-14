@@ -4,12 +4,12 @@ import { Tabs } from "antd";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
+import Types from "./Types/Types";
+import SubTypes from "./SubTypes/SubTypes";
 import Overview from "../TabSubPages/Overview/Overview";
 import Categories from "../TabSubPages/Categories/Categories";
-import Types from "./Types/Types";
 
 import { TabLabel, TabLabelText } from "../TabSubPages/TabSubPages.styled";
-import SubTypes from "./SubTypes/SubTypes";
 
 const tabItems = [
   {

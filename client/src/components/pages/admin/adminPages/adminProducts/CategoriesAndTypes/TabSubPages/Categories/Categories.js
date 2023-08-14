@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import SearchField from "../../../../../searchField/SearchField";
-import { CategoryContainer, CategoryWrapper } from "./Categories.styled";
-import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
+
 import { message } from "antd";
+
+import SearchField from "../../../../../searchField/SearchField";
+import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
+
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
+
+import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
 
 const Categories = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +30,7 @@ const Categories = () => {
     try {
       setLoading(true);
       const { category } = values;
-      const response = await ProductService.createCategory(category);
+      await ProductService.createCategory(category);
 
       messageApi.open({
         type: "success",
@@ -41,16 +45,16 @@ const Categories = () => {
     }
   };
   return (
-    <CategoryWrapper>
+    <SubPageWrapper>
       <SearchField />
       {contextHolder}
-      <CategoryContainer>
+      <SubPageContainer>
         <AddNewCategoryForm
           onSubmitHandler={onSubmitHandler}
           loading={loading}
         />
-      </CategoryContainer>
-    </CategoryWrapper>
+      </SubPageContainer>
+    </SubPageWrapper>
   );
 };
 
