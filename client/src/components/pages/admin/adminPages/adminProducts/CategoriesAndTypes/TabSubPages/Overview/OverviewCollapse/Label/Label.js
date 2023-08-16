@@ -1,15 +1,33 @@
 import React from "react";
-import { LabelButtonGroupe, LabelContainer, LabelName, LabelWraper, LableButton } from "./Label.styled";
 
-const Label = ({children}) => {
+import { Button, Tooltip } from "antd";
+
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import {
+  LabelName,
+  LabelWraper,
+  LabelContainer,
+  LabelButtonGroupe,
+} from "./Label.styled";
+
+const Label = ({ children }) => {
   return (
     <LabelWraper>
       <LabelContainer>
         <LabelName>{children}</LabelName>
-		<LabelButtonGroupe>
-			<LableButton>Edit</LableButton>
-			<LableButton>Delete</LableButton>
-		</LabelButtonGroupe>
+        <LabelButtonGroupe>
+          <Tooltip title="Edit" placement="left">
+            <Button>
+              <ModeEditOutlineOutlinedIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Delete" placement="right">
+            <Button>
+              <DeleteOutlineOutlinedIcon />
+            </Button>
+          </Tooltip>
+        </LabelButtonGroupe>
       </LabelContainer>
     </LabelWraper>
   );
