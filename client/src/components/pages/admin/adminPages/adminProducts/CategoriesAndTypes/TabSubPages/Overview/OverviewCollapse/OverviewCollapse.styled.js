@@ -5,7 +5,7 @@ import { getResponsiveFontSize } from "../../../../../../../../../helpers/getRes
 export const OverviewCollapseWrapper = styled.div``;
 
 export const OverviewCollapseContainer = styled.div`
-  display: ${({ loading }) => (loading ? "flex" : "block")};
+  display: ${({ loading }) => (loading === true ? "flex" : "block")};
   align-items: center;
   justify-content: center;
 `;

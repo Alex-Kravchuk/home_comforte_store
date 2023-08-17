@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { Button, Input, Popconfirm, Tooltip } from "antd";
 
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import {
@@ -12,14 +13,24 @@ import {
   LabelEditInputWrapper,
 } from "./Label.styled";
 
-const Label = ({ confirm, cancel, children }) => {
+const Label = ({ item, confirmDelete, confirmSave }) => {
   const [showEditFiled, setShowEditField] = useState(false);
+  //   const [newItemName, setNewItemName] = useState()
+
+  const newItemNameRef = useRef();
+
+  const { name, id } = item;
 
   const stopPropagationHandler = (e) => e.stopPropagation();
+
+  const onConfirmEditHandler = () => {
+    confirmSave(id, name, newItemNameRef.current.input.value);
+    setShowEditField(false);
+  };
   return (
     <LabelWraper>
       <LabelContainer>
-        <LabelName>{children}</LabelName>
+        <LabelName>{name}</LabelName>
 
         <LabelButtonGroupe>
           <LabelEditInputWrapper
@@ -28,13 +39,13 @@ const Label = ({ confirm, cancel, children }) => {
           >
             <Input
               placeholder="Please input a new name"
-              defaultValue={children}
+              defaultValue={name}
+              ref={newItemNameRef}
             />
             <Popconfirm
               title="Save"
               description={`Are you sure to save a new name?`}
-              onConfirm={confirm}
-              onCancel={cancel}
+              onConfirm={onConfirmEditHandler}
               okText="Yes"
               cancelText="No"
             >
@@ -42,12 +53,16 @@ const Label = ({ confirm, cancel, children }) => {
             </Popconfirm>
           </LabelEditInputWrapper>
           <Tooltip
-            title="Edit"
+            title={showEditFiled ? "Cancel" : "Edit"}
             placement="left"
             onClick={stopPropagationHandler}
           >
             <Button onClick={() => setShowEditField((state) => !state)}>
-              <ModeEditOutlineOutlinedIcon />
+              {showEditFiled ? (
+                <CancelOutlinedIcon />
+              ) : (
+                <ModeEditOutlineOutlinedIcon />
+              )}
             </Button>
           </Tooltip>
           <Tooltip
@@ -60,11 +75,10 @@ const Label = ({ confirm, cancel, children }) => {
               description={
                 <div>
                   Are you sure to delete
-                  <strong> {children}</strong>?
+                  <strong> {name}</strong>?
                 </div>
               }
-              onConfirm={confirm}
-              onCancel={cancel}
+              onConfirm={confirmDelete}
               okText="Yes"
               cancelText="No"
             >

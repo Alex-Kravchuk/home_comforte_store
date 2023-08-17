@@ -35,50 +35,91 @@ const OverviewCollapse = () => {
     getCategories();
   }, []);
 
-  useEffect(() => {
-    separateCategoriesFromTypes();
-  }, [categories]);
+  const saveChanges = (id, oldName, newName) => {
+    const copyCategories = categories.map((element) => {
+      const coincidence = element.id === id && element.name === oldName;
+
+      if (coincidence) {
+        element.name = newName;
+
+        // return;
+      }
+
+      return element;
+    });
+
+    console.log("new data", id, newName, oldName, copyCategories);
+
+    setCategories(copyCategories);
+  };
+  const deleteCategory = () => {};
 
   const separateCategoriesFromTypes = () => {
+    console.log("from zalupa", categories);
+
     const nestedPanels = categories.map((category) => {
-      // const subChildren = '';
       return {
         key: category.id,
-        label: <Label>{category.name}</Label>,
-        children: (
-          <Collapse
-            ghost
-            items={category?.types.map(({ id, name, subTypes }) => ({
-              key: id,
-              label: <Label>{name}</Label>,
-              children:
-                subTypes.length > 0 ? (
-                  subTypes.map((subtype) => (
-                    <SubTypePanelName key={subtype.name}>
-                      {subtype.name}
-                    </SubTypePanelName>
-                  ))
-                ) : (
-                  <Empty
-                    imageStyle={{
-                      height: 60,
-                    }}
-                  />
-                ),
-            }))}
+        label: (
+          <Label
+            confirmDelete={deleteCategory}
+            confirmSave={saveChanges}
+            item={category}
           />
         ),
+        children:
+          category.types.length > 0 ? (
+            <Collapse
+              ghost
+              items={category?.types.map((type) => ({
+                key: type.id,
+                label: (
+                  <Label
+                    confirmDelete={deleteCategory}
+                    confirmSave={saveChanges}
+                    item={type}
+                  />
+                ),
+                children:
+                  type.subTypes.length > 0 ? (
+                    type.subTypes.map((subtype) => (
+                      <SubTypePanelName key={subtype.name}>
+                        {subtype.name}
+                      </SubTypePanelName>
+                    ))
+                  ) : (
+                    <Empty
+                      imageStyle={{
+                        height: 60,
+                      }}
+                    />
+                  ),
+              }))}
+            />
+          ) : (
+            <Empty
+              imageStyle={{
+                height: 60,
+              }}
+            />
+          ),
       };
     });
 
     setCollapseItems(nestedPanels);
   };
 
-  console.log("suka separ", collapseItems);
+  useEffect(() => {
+    console.log("ahuel");
+
+    separateCategoriesFromTypes();
+  }, [categories]);
+
+  console.log("Collapse render", categories);
 
   return (
     <OverviewCollapseWrapper>
-      <OverviewCollapseContainer loading={loading}>
+      <OverviewCollapseContainer loading={loading.toString()}>
         {loading ? <Spin /> : <Collapse items={collapseItems} />}
       </OverviewCollapseContainer>
     </OverviewCollapseWrapper>
