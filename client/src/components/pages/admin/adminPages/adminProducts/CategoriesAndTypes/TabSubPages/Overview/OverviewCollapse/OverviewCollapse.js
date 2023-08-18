@@ -4,18 +4,57 @@ import { Collapse, Empty, Spin } from "antd";
 
 import { ProductService } from "../../../../../../../../../api/product/productService";
 
-import {
-  OverviewCollapseContainer,
-  OverviewCollapseWrapper,
-  SubTypePanelName,
-} from "./OverviewCollapse.styled";
 import Label from "./Label/Label";
 
+import {
+  SubTypePanelName,
+  OverviewCollapseWrapper,
+  OverviewCollapseContainer,
+} from "./OverviewCollapse.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { saveUpdatedMenuData } from "../../../../../../../../../redux/loading/loadingSlice";
+
 const OverviewCollapse = () => {
-  const [collapseItems, setCollapseItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [collapseItems, setCollapseItems] = useState([]);
+  const { data: menuData } = useSelector((state) => state.menuData);
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
+  const categoriesDataAreExist = categories?.length > 0;
+
+  /**
+   * @function prepareDataToRequest
+   * I separate each category from the general categories object
+   * and must make a request to the api for each route (category, type and subtype)
+   */
+  const prepareDataToRequest = async () => {
+    try {
+      const typesForRequest = [];
+      const subtypesForRequest = [];
+
+      categories.forEach((category) => {
+        category.types.forEach((type) => {
+          typesForRequest.push(type);
+        });
+      });
+
+      typesForRequest.forEach((type) => {
+        type.subTypes.forEach((subtype) => {
+          subtypesForRequest.push(subtype);
+        });
+      });
+
+      const response = await ProductService.updateCategories(categories);
+      const updatedData = response.data.length === 0 ? menuData : response.data;
+      dispatch(saveUpdatedMenuData(updatedData));
+    } catch (error) {
+      dispatch(saveUpdatedMenuData(menuData));
+    }
+  };
 
   useEffect(() => {
     const getCategories = async () => {
@@ -23,16 +62,18 @@ const OverviewCollapse = () => {
         setLoading(true);
         const categories = await ProductService.getAllCategories();
 
+        // debugger
         setCategories(categories);
       } catch (error) {
         setLoading(false);
-        setError(error.response.data);
+        setError(error.response.data || error);
       } finally {
         setLoading(false);
       }
     };
 
     getCategories();
+    console.log("in useEffect func", categories);
   }, []);
 
   /**
@@ -184,14 +225,22 @@ const OverviewCollapse = () => {
 
   useEffect(() => {
     separateCategoriesFromTypes();
-  }, [categories]);
 
-  console.log("Collapse render", categories);
+    return () => {
+      prepareDataToRequest(categories);
+    };
+  }, [categories]);
 
   return (
     <OverviewCollapseWrapper>
       <OverviewCollapseContainer loading={loading.toString()}>
-        {loading ? <Spin /> : <Collapse items={collapseItems} />}
+        {!categoriesDataAreExist ? (
+          <Empty />
+        ) : loading ? (
+          <Spin />
+        ) : (
+          <Collapse items={collapseItems} />
+        )}
       </OverviewCollapseContainer>
     </OverviewCollapseWrapper>
   );

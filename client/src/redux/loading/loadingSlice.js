@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ProductService } from "../../api/product/productService";
 
-
 const initialState = {
   loadingIsActive: false,
   // menu data
@@ -19,7 +18,11 @@ export const getMenuData = createAsyncThunk(
 export const menuDataSlice = createSlice({
   name: "menu data",
   initialState,
-  reducers: {},
+  reducers: {
+    saveUpdatedMenuData: (state, action) => {
+      state.data = action.payload ?? [];
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(getMenuData.pending, (state, action) => {
@@ -34,5 +37,6 @@ export const menuDataSlice = createSlice({
   },
 });
 
+export const { saveUpdatedMenuData } = menuDataSlice.actions;
 
 export default menuDataSlice.reducer;

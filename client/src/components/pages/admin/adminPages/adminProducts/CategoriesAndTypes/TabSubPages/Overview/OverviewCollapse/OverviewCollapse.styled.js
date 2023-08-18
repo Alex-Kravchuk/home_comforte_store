@@ -2,7 +2,14 @@ import styled from "styled-components";
 import { SubTypeName } from "../../../../../../../../navbar/menu/dropdown/DropDownMenu.styled";
 import { getResponsiveFontSize } from "../../../../../../../../../helpers/getResponsiveFontSize";
 
-export const OverviewCollapseWrapper = styled.div``;
+export const OverviewCollapseWrapper = styled.div`
+  .ant-collapse
+    > .ant-collapse-item
+    > .ant-collapse-header
+    .ant-collapse-expand-icon {
+    height: 34px;
+  }
+`;
 
 export const OverviewCollapseContainer = styled.div`
   display: ${({ loading }) => (loading === true ? "flex" : "block")};

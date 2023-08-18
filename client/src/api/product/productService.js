@@ -74,7 +74,8 @@ export class ProductService {
     return response;
   };
 
-  // static getAllTypes = async () => {
-
-  // }
+  static updateCategories = async (data) => {
+    const response = await $host.put("api/category/update", { data });
+    return response;
+  };
 }

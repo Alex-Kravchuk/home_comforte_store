@@ -5,7 +5,10 @@ export const LabelContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const LabelName = styled.div``;
+export const LabelName = styled.div`
+  display: flex;
+  align-items: center;
+`;
 export const LabelButtonGroupe = styled.div`
   display: flex;
   justify-content: space-between;

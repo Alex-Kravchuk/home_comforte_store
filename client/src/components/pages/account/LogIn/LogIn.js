@@ -59,7 +59,7 @@ const LogIn = () => {
       const route = userData.role.includes("ADMIN")
         ? ADMIN_ROUTE + "/" + ADMIN_OVERVIEW
         : USER_ROUTE + "/" + PROFILE_ROUTE;
-        
+
       return navigate("../" + route, {
         state: { from: pathname },
       });
@@ -72,7 +72,10 @@ const LogIn = () => {
       const response = await AuthService.login(values);
       dispatch(login(response));
     } catch (er) {
-      setError(er.response.data);
+      console.log(er.message);
+    
+      // debugger
+      setError(er.response?.data || er);
     } finally {
       setLoading(false);
     }
