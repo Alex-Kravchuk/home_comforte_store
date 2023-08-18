@@ -26,7 +26,7 @@ router.use("/guest", guestRouter);
 router.use("/rating", ratingRouter);
 router.use("/review", reviewRouter);
 router.use("/basket", basketRouter);
-router.use("/subType", subTypeRouter);
+router.use("/subtype", subTypeRouter);
 router.use("/preview", previewRouter);
 router.use("/category", categoryRouter);
 router.use("/modifier", modifierRouter);

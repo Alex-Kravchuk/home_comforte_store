@@ -1,5 +1,6 @@
 const ApiError = require("../error/ApiError");
 const { Category } = require("../models/models");
+const categoryService = require("../services/category-service");
 
 class CategoryController {
   static errorSource = "category controller";
@@ -11,12 +12,26 @@ class CategoryController {
       const alreadyExists = await Category.findOne({ where: { name } });
 
       if (alreadyExists) {
-        return next(ApiError.duplicateName(CategoryController.errorSource));
+        return next(ApiError.duplicate("name", CategoryController.errorSource));
       }
 
       const category = await Category.create({ name });
-      res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+
       return res.json(category);
+    } catch (error) {
+      return next(
+        ApiError.unexpectedError(error, CategoryController.errorSource)
+      );
+    }
+  }
+
+  async update(req, res, next) {
+    try {
+      const { data } = req.body;
+
+      console.log(data);
+      const response = await categoryService.updateCategory(data);
+      return res.json(response);
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, CategoryController.errorSource)
@@ -26,7 +41,7 @@ class CategoryController {
 
   async getAll(req, res, next) {
     try {
-      const categorys = await Category.findAll();
+      const categorys = await Category.findAll({ order: ["id"] });
       return res.json(categorys);
     } catch (error) {
       return next(

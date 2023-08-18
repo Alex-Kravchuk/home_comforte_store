@@ -8,6 +8,8 @@ const incReqCategoryDataMiddleware = require("../middleware/category/incReqCateg
 
 router.post("/", incReqCategoryDataMiddleware, categoryController.create);
 
+router.put("/update", categoryController.update);
+
 router.get("/", categoryController.getAll);
 
 router.get(
