@@ -35,83 +35,154 @@ const OverviewCollapse = () => {
     getCategories();
   }, []);
 
+  /**
+   * @function saveChanges
+   * I make a nested loop of category and subcategory
+   * and search for a match between the ID and the old name.
+   * If an item has the same ID and name, I will give it a new name
+   */
+
   const saveChanges = (id, oldName, newName) => {
-    const copyCategories = categories.map((element) => {
-      const coincidence = element.id === id && element.name === oldName;
+    const copyCategories = categories.map((category) => {
+      const categoryCoincidence =
+        category.id === id && category.name === oldName;
 
-      if (coincidence) {
-        element.name = newName;
-
-        // return;
+      if (categoryCoincidence) {
+        category.name = newName;
+        return category;
       }
 
-      return element;
+      category.types.map((type) => {
+        const typeCoincidence = type.id === id && type.name === oldName;
+
+        if (typeCoincidence) {
+          type.name = newName;
+          return type;
+        }
+
+        type.subTypes.map((subtype) => {
+          const subtypeCoincidence =
+            subtype.id === id && subtype.name === oldName;
+
+          if (subtypeCoincidence) {
+            subtype.name = newName;
+            return subtype;
+          }
+
+          return subtype;
+        });
+
+        return type;
+      });
+      return category;
     });
 
-    console.log("new data", id, newName, oldName, copyCategories);
+    // console.log("new data", id, newName, oldName, copyCategories);
 
     setCategories(copyCategories);
   };
-  const deleteCategory = () => {};
 
+  /**
+   * @function deleteCategory
+   * I'm filtering each category and subcategory
+   * and remove the item if its name matches the one that was clicked
+   */
+  const deleteCategory = (name) => {
+    const filteredCategories = categories.filter(
+      (category) => category.name !== name
+    );
+
+    const filteredData = filteredCategories.map((category) => {
+      const filtredTypes = category.types.filter((type) => type.name !== name);
+
+      const filtredSubTypes = filtredTypes.map((type) => {
+        type.subTypes = type.subTypes.filter(
+          (subtype) => subtype.name !== name
+        );
+        return type;
+      });
+
+      category.types = filtredSubTypes;
+      return category;
+    });
+
+    setCategories(filteredData);
+  };
+
+  /**
+   * @function separateCategoriesFromTypes
+   *  Each category has a types field, and each type has a subtypes field.
+   *  They may not have any elements.
+   * ----------------------------------------------------------------------------------------
+   *  I do nested nested looping of elements in this function;
+   *  depending on whether the categories have corresponding subcategories,
+   *  I form a child field of the items object. If some category has not a subtypes,
+   *  I render <Empty /> component form ANT design to nested panel of <Collapse /> ANT design;
+   *  ----------------------------------------------------------------------------------------
+   *  I am using the <Label>{children}</Label> component to label the elements
+   *  to display the edit and delete interface of each category and subcategory.
+   */
   const separateCategoriesFromTypes = () => {
-    console.log("from zalupa", categories);
-
-    const nestedPanels = categories.map((category) => {
-      return {
-        key: category.id,
-        label: (
-          <Label
-            confirmDelete={deleteCategory}
-            confirmSave={saveChanges}
-            item={category}
-          />
-        ),
-        children:
-          category.types.length > 0 ? (
-            <Collapse
-              ghost
-              items={category?.types.map((type) => ({
-                key: type.id,
-                label: (
-                  <Label
-                    confirmDelete={deleteCategory}
-                    confirmSave={saveChanges}
-                    item={type}
+    const nestedPanels = categories.map((category) => ({
+      key: category.id,
+      label: (
+        <Label
+          confirmDelete={deleteCategory}
+          confirmSave={saveChanges}
+          item={category}
+        >
+          {category.name}
+        </Label>
+      ),
+      children:
+        category.types.length > 0 ? (
+          <Collapse
+            ghost
+            items={category?.types.map((type) => ({
+              key: type.id,
+              label: (
+                <Label
+                  confirmDelete={deleteCategory}
+                  confirmSave={saveChanges}
+                  item={type}
+                >
+                  {type.name}
+                </Label>
+              ),
+              children:
+                type.subTypes.length > 0 ? (
+                  type.subTypes.map((subtype) => (
+                    <Label
+                      key={subtype.name}
+                      item={subtype}
+                      confirmDelete={deleteCategory}
+                      confirmSave={saveChanges}
+                    >
+                      <SubTypePanelName>{subtype.name}</SubTypePanelName>
+                    </Label>
+                  ))
+                ) : (
+                  <Empty
+                    imageStyle={{
+                      height: 60,
+                    }}
                   />
                 ),
-                children:
-                  type.subTypes.length > 0 ? (
-                    type.subTypes.map((subtype) => (
-                      <SubTypePanelName key={subtype.name}>
-                        {subtype.name}
-                      </SubTypePanelName>
-                    ))
-                  ) : (
-                    <Empty
-                      imageStyle={{
-                        height: 60,
-                      }}
-                    />
-                  ),
-              }))}
-            />
-          ) : (
-            <Empty
-              imageStyle={{
-                height: 60,
-              }}
-            />
-          ),
-      };
-    });
+            }))}
+          />
+        ) : (
+          <Empty
+            imageStyle={{
+              height: 60,
+            }}
+          />
+        ),
+    }));
 
     setCollapseItems(nestedPanels);
   };
 
   useEffect(() => {
-    console.log("ahuel");
-
     separateCategoriesFromTypes();
   }, [categories]);
 

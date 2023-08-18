@@ -5,6 +5,7 @@ import { Button, Input, Popconfirm, Tooltip } from "antd";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+
 import {
   LabelName,
   LabelWraper,
@@ -13,9 +14,8 @@ import {
   LabelEditInputWrapper,
 } from "./Label.styled";
 
-const Label = ({ item, confirmDelete, confirmSave }) => {
+const Label = ({ item, children, confirmDelete, confirmSave }) => {
   const [showEditFiled, setShowEditField] = useState(false);
-  //   const [newItemName, setNewItemName] = useState()
 
   const newItemNameRef = useRef();
 
@@ -23,14 +23,19 @@ const Label = ({ item, confirmDelete, confirmSave }) => {
 
   const stopPropagationHandler = (e) => e.stopPropagation();
 
-  const onConfirmEditHandler = () => {
+  const confirmDeleteHandler = (e) => {
+    e.stopPropagation();
+    confirmDelete(name);
+  };
+
+  const onConfirmEditHandler = (e) => {
     confirmSave(id, name, newItemNameRef.current.input.value);
     setShowEditField(false);
   };
   return (
     <LabelWraper>
       <LabelContainer>
-        <LabelName>{name}</LabelName>
+        <LabelName>{children}</LabelName>
 
         <LabelButtonGroupe>
           <LabelEditInputWrapper
@@ -78,7 +83,8 @@ const Label = ({ item, confirmDelete, confirmSave }) => {
                   <strong> {name}</strong>?
                 </div>
               }
-              onConfirm={confirmDelete}
+              onConfirm={confirmDeleteHandler}
+              onCancel={stopPropagationHandler}
               okText="Yes"
               cancelText="No"
             >
