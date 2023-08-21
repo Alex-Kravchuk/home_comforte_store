@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Menu } from "antd";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
+
+import {  Menu } from "antd";
 import { adminMenuItems } from "./adminMenuItems";
-import { AdminMenuWrapper } from "./AdminMenu.styled";
+import { AdminMenuToggleBtn, AdminMenuWrapper } from "./AdminMenu.styled";
 
 const AdminMenu = () => {
+  const [isCollapsed, setCollapset] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapset(!isCollapsed);
+  };
   return (
     <AdminMenuWrapper>
-      <Menu items={adminMenuItems} defaultSelectedKeys={["1"]} mode="inline" />
+      <AdminMenuToggleBtn onClick={toggleCollapsed}>
+        {isCollapsed ? <MenuOutlinedIcon /> : <MenuOpenOutlinedIcon />}
+      </AdminMenuToggleBtn>
+      <Menu
+        items={adminMenuItems}
+        defaultSelectedKeys={["1"]}
+        mode="inline"
+        inlineCollapsed={isCollapsed}
+      />
     </AdminMenuWrapper>
   );
 };

@@ -1,8 +1,10 @@
 import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import BurstModeOutlinedIcon from "@mui/icons-material/BurstModeOutlined";
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+
 
 import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
 import { Link } from "react-router-dom";
@@ -23,6 +25,7 @@ export const adminMenuItems = [
   {
     key: "1",
     label: <Link to={ADMIN_OVERVIEW}>Overview</Link>,
+    icon: <RemoveRedEyeOutlinedIcon />,
   },
 
   {
