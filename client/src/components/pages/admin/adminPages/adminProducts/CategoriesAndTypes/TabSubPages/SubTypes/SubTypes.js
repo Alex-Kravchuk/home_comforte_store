@@ -61,7 +61,7 @@ const SubTypes = () => {
 
   return (
     <SubPageWrapper>
-      <SearchField />
+      {/* <SearchField /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewSubTypeForm

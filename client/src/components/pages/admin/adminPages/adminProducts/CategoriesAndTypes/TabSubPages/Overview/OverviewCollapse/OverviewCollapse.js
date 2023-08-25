@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Collapse, Empty, Spin } from "antd";
-
-import { ProductService } from "../../../../../../../../../api/product/productService";
+import { useSelector } from "react-redux";
+import { Collapse, Empty } from "antd";
 
 import Label from "./Label/Label";
 
@@ -11,70 +10,28 @@ import {
   OverviewCollapseWrapper,
   OverviewCollapseContainer,
 } from "./OverviewCollapse.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { saveUpdatedMenuData } from "../../../../../../../../../redux/loading/loadingSlice";
 
-const OverviewCollapse = () => {
-  const [categories, setCategories] = useState([]);
-  const [collapseItems, setCollapseItems] = useState([]);
+const OverviewCollapse = ({
+  dataSought,
+  searchNoMatches,
+  changeDataHandler,
+}) => {
   const { data: menuData } = useSelector((state) => state.menuData);
 
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
+  console.log('=============dataSought=============');
+  console.log(dataSought);
+  console.log('====================================');
+  const dataToDisplay = dataSought.length > 0 ? dataSought : menuData;
 
-  const categoriesDataAreExist = categories?.length > 0;
-
-  /**
-   * @function prepareDataToRequest
-   * I separate each category from the general categories object
-   * and must make a request to the api for each route (category, type and subtype)
-   */
-  const prepareDataToRequest = async () => {
-    try {
-      const typesForRequest = [];
-      const subtypesForRequest = [];
-
-      categories.forEach((category) => {
-        category.types.forEach((type) => {
-          typesForRequest.push(type);
-        });
-      });
-
-      typesForRequest.forEach((type) => {
-        type.subTypes.forEach((subtype) => {
-          subtypesForRequest.push(subtype);
-        });
-      });
-
-      const response = await ProductService.updateCategories(categories);
-      const updatedData = response.data.length === 0 ? menuData : response.data;
-      dispatch(saveUpdatedMenuData(updatedData));
-    } catch (error) {
-      dispatch(saveUpdatedMenuData(menuData));
-    }
-  };
+  const [categories, setCategories] = useState([]);
+  const [collapseItems, setCollapseItems] = useState([]);
 
   useEffect(() => {
-    const getCategories = async () => {
-      try {
-        setLoading(true);
-        const categories = await ProductService.getAllCategories();
+    setCategories(dataToDisplay);
+  }, [dataSought]);
 
-        // debugger
-        setCategories(categories);
-      } catch (error) {
-        setLoading(false);
-        setError(error.response.data || error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCategories();
-    console.log("in useEffect func", categories);
-  }, []);
+  const categoriesDataAreExist = dataToDisplay?.length > 0 && !searchNoMatches;
 
   /**
    * @function saveChanges
@@ -84,7 +41,9 @@ const OverviewCollapse = () => {
    */
 
   const saveChanges = (id, oldName, newName) => {
-    const copyCategories = categories.map((category) => {
+    const copyData = JSON.parse(JSON.stringify(menuData));
+
+    const copyCategories = copyData.map((category) => {
       const categoryCoincidence =
         category.id === id && category.name === oldName;
 
@@ -118,8 +77,7 @@ const OverviewCollapse = () => {
       return category;
     });
 
-    // console.log("new data", id, newName, oldName, copyCategories);
-
+    changeDataHandler(copyCategories);
     setCategories(copyCategories);
   };
 
@@ -129,7 +87,8 @@ const OverviewCollapse = () => {
    * and remove the item if its name matches the one that was clicked
    */
   const deleteCategory = (name) => {
-    const filteredCategories = categories.filter(
+    const copyData = JSON.parse(JSON.stringify(menuData));
+    const filteredCategories = copyData.filter(
       (category) => category.name !== name
     );
 
@@ -146,7 +105,7 @@ const OverviewCollapse = () => {
       category.types = filtredSubTypes;
       return category;
     });
-
+    changeDataHandler(filteredData);
     setCategories(filteredData);
   };
 
@@ -225,19 +184,17 @@ const OverviewCollapse = () => {
 
   useEffect(() => {
     separateCategoriesFromTypes();
-
-    return () => {
-      prepareDataToRequest(categories);
-    };
   }, [categories]);
+
+  console.log('=============categories=============');
+  console.log(categories);
+  console.log('====================================');
 
   return (
     <OverviewCollapseWrapper>
-      <OverviewCollapseContainer loading={loading.toString()}>
+      <OverviewCollapseContainer>
         {!categoriesDataAreExist ? (
-          <Empty />
-        ) : loading ? (
-          <Spin />
+          <Empty description="No data found" />
         ) : (
           <Collapse items={collapseItems} />
         )}

@@ -24,10 +24,10 @@ const RequireAuth = ({ children }) => {
 
   
   useEffect(() => {
-    console.log('guest 1');
+    // console.log('guest 1');
     
     if (!isGuest) {
-      console.log('guest 2');
+      // console.log('guest 2');
       checkAuth();
     }
   }, []);
@@ -38,7 +38,7 @@ const RequireAuth = ({ children }) => {
       const { data } = await $authHost.get("api/user/auth/");
       const isAdmin = data?.admin;
       dispatch(updateUser(isAdmin ? data.admin : data.user));
-      console.log("check auth data", data);
+      // console.log("check auth data", data);
 
       setEndOfLoading(true);
       const routeIfAdmin = ADMIN_ROUTE + "/" + ADMIN_OVERVIEW;

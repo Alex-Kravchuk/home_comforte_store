@@ -45,7 +45,7 @@ const Types = () => {
   const onSubmitHandler = async (values) => {
     try {
       setLoading(true);
-      console.log("values", values);
+      // console.log("values", values);
 
       const combinedData = { ...values, img: typeImg };
       const formdata = new FormData();
@@ -55,7 +55,7 @@ const Types = () => {
         formdata.append(key, element);
       }
 
-      await ProductService.createType(formdata);
+    await ProductService.createType(formdata);
 
       messageApi.open({
         type: "success",
@@ -69,9 +69,12 @@ const Types = () => {
       setLoading(false);
     }
   };
+
+  console.log('TYPES RENDER');
+  
   return (
     <SubPageWrapper>
-      <SearchField loading={loading} />
+      {/* <SearchField loading={loading} /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewTypeForm

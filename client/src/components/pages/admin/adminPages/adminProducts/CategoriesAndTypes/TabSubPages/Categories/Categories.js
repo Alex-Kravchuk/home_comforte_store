@@ -46,7 +46,7 @@ const Categories = () => {
   };
   return (
     <SubPageWrapper>
-      <SearchField />
+      {/* <SearchField /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewCategoryForm

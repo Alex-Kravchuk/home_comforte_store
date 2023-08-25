@@ -9,9 +9,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
 import { Link } from "react-router-dom";
 import {
-  ADD_NEW_CATEGORY,
-  ADD_NEW_PRODUCT,
-  ADD_NEW_TYPE,
+
   ADMIN_NOTIFICATIONS,
   ADMIN_ORDERS,
   ADMIN_OVERVIEW,

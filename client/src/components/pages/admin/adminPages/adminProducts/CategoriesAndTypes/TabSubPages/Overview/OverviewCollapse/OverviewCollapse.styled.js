@@ -12,14 +12,12 @@ export const OverviewCollapseWrapper = styled.div`
 `;
 
 export const OverviewCollapseContainer = styled.div`
-  display: ${({ loading }) => (loading === true ? "flex" : "block")};
-  align-items: center;
-  justify-content: center;
+  display: block;
   margin-bottom: 35px;
 `;
 
 export const SubTypePanelName = styled(SubTypeName)`
-  margin: 10px 25px;
+  margin: 0 0 10px 25px;
   display: block;
   width: fit-content;
   font-size: ${getResponsiveFontSize(14, 14, 1024)};
