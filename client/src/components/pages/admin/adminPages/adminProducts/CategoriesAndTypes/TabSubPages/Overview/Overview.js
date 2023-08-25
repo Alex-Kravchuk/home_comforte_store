@@ -64,9 +64,40 @@ const Overview = () => {
         return;
       }
 
-      const filteredData = menuData.filter((item) =>
-        item.name.toLowerCase().includes(searchInputValue.toLowerCase())
-      );
+      // category.name.toLowerCase().includes(searchInputValue.toLowerCase())
+
+      const copyData = JSON.parse(JSON.stringify(menuData));
+      const filteredData = copyData.filter((category) => {
+        const filtredTypes = category.types;
+        const filtredSubTypes = filtredTypes.filter((type) => {
+          type.subTypes = type.subTypes.filter((subtype) =>
+            subtype.name.toLowerCase().includes(searchInputValue.toLowerCase())
+          );
+
+          if (type.subTypes.length > 0) {
+            return type;
+          } else {
+            return type.name
+              .toLowerCase()
+              .includes(searchInputValue.toLowerCase())
+              ? type
+              : false;
+          }
+        });
+
+        category.types = filtredSubTypes;
+
+        if (category.types.length > 0) {
+          return category;
+        } else {
+          return category.name
+            .toLowerCase()
+            .includes(searchInputValue.toLowerCase())
+            ? category
+            : false;
+        }
+      });
+
       // debugger
       if (filteredData.length === 0 && searchInputValue) {
         setSearchNoMatches(true);
@@ -80,8 +111,6 @@ const Overview = () => {
 
     dataSoughtHandler();
   }, [searchInputValue]);
-
-  // console.log("categories", categories);
 
   return (
     <SubPageWrapper>

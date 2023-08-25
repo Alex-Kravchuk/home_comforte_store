@@ -17,11 +17,6 @@ const OverviewCollapse = ({
   changeDataHandler,
 }) => {
   const { data: menuData } = useSelector((state) => state.menuData);
-
-
-  console.log('=============dataSought=============');
-  console.log(dataSought);
-  console.log('====================================');
   const dataToDisplay = dataSought.length > 0 ? dataSought : menuData;
 
   const [categories, setCategories] = useState([]);
@@ -124,7 +119,7 @@ const OverviewCollapse = ({
    */
   const separateCategoriesFromTypes = () => {
     const nestedPanels = categories.map((category) => ({
-      key: category.id,
+      key: category.id.toString(),
       label: (
         <Label
           confirmDelete={deleteCategory}
@@ -137,6 +132,7 @@ const OverviewCollapse = ({
       children:
         category.types.length > 0 ? (
           <Collapse
+            // defaultActiveKey={["1", "2", "3", "4", "5"]}
             ghost
             items={category?.types.map((type) => ({
               key: type.id,
@@ -186,17 +182,13 @@ const OverviewCollapse = ({
     separateCategoriesFromTypes();
   }, [categories]);
 
-  console.log('=============categories=============');
-  console.log(categories);
-  console.log('====================================');
-
   return (
     <OverviewCollapseWrapper>
       <OverviewCollapseContainer>
         {!categoriesDataAreExist ? (
           <Empty description="No data found" />
         ) : (
-          <Collapse items={collapseItems} />
+          <Collapse items={collapseItems}  />
         )}
       </OverviewCollapseContainer>
     </OverviewCollapseWrapper>
