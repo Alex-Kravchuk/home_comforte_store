@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
 import { Collapse, Empty } from "antd";
+import { useSelector } from "react-redux";
 
 import Label from "./Label/Label";
 
@@ -11,22 +11,17 @@ import {
   OverviewCollapseContainer,
 } from "./OverviewCollapse.styled";
 
-const OverviewCollapse = ({
-  dataSought,
-  searchNoMatches,
-  changeDataHandler,
-}) => {
+const OverviewCollapse = ({ changeDataHandler }) => {
   const { data: menuData } = useSelector((state) => state.menuData);
-  const dataToDisplay = dataSought.length > 0 ? dataSought : menuData;
 
   const [categories, setCategories] = useState([]);
   const [collapseItems, setCollapseItems] = useState([]);
 
   useEffect(() => {
-    setCategories(dataToDisplay);
-  }, [dataSought]);
+    setCategories(menuData);
+  }, [menuData]);
 
-  const categoriesDataAreExist = dataToDisplay?.length > 0 && !searchNoMatches;
+  const categoriesDataAreExist = menuData?.length > 0;
 
   /**
    * @function saveChanges
@@ -132,10 +127,9 @@ const OverviewCollapse = ({
       children:
         category.types.length > 0 ? (
           <Collapse
-            // defaultActiveKey={["1", "2", "3", "4", "5"]}
             ghost
             items={category?.types.map((type) => ({
-              key: type.id,
+              key: type.id.toString(),
               label: (
                 <Label
                   confirmDelete={deleteCategory}
@@ -188,7 +182,7 @@ const OverviewCollapse = ({
         {!categoriesDataAreExist ? (
           <Empty description="No data found" />
         ) : (
-          <Collapse items={collapseItems}  />
+          <Collapse items={collapseItems} />
         )}
       </OverviewCollapseContainer>
     </OverviewCollapseWrapper>

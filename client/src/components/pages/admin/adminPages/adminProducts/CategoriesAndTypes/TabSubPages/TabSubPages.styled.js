@@ -25,6 +25,4 @@ export const SubPageWrapper = styled.div`
     line-height: 45px;
   }
 `;
-export const SubPageContainer = styled.div`
-  margin-top: 50px;
-`;
+export const SubPageContainer = styled.div``;

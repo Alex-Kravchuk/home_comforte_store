@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { message } from "antd";
 
-import SearchField from "../../../../../searchField/SearchField";
 import AddNewSubTypeForm from "./AddNewSubTypeForm/AddNewSubTypeForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
@@ -61,7 +60,6 @@ const SubTypes = () => {
 
   return (
     <SubPageWrapper>
-      {/* <SearchField /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewSubTypeForm

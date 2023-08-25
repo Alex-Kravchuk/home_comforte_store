@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { message } from "antd";
 
 import AddNewTypeForm from "./AddNewTypeForm/AddNewTypeForm";
-import SearchField from "../../../../../searchField/SearchField";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
@@ -55,7 +54,7 @@ const Types = () => {
         formdata.append(key, element);
       }
 
-    await ProductService.createType(formdata);
+      await ProductService.createType(formdata);
 
       messageApi.open({
         type: "success",
@@ -70,11 +69,10 @@ const Types = () => {
     }
   };
 
-  console.log('TYPES RENDER');
-  
+  console.log("TYPES RENDER");
+
   return (
     <SubPageWrapper>
-      {/* <SearchField loading={loading} /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewTypeForm

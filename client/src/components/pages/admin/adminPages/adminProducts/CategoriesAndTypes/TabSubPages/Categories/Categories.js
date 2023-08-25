@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { message } from "antd";
 
-import SearchField from "../../../../../searchField/SearchField";
+
 import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
@@ -46,7 +46,6 @@ const Categories = () => {
   };
   return (
     <SubPageWrapper>
-      {/* <SearchField /> */}
       {contextHolder}
       <SubPageContainer>
         <AddNewCategoryForm
