@@ -13,7 +13,6 @@ export const OverviewCollapseWrapper = styled.div`
 
 export const OverviewCollapseContainer = styled.div`
   display: block;
-  margin-bottom: 35px;
 `;
 
 export const SubTypePanelName = styled(SubTypeName)`

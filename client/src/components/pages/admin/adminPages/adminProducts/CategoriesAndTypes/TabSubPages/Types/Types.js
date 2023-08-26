@@ -6,8 +6,8 @@ import AddNewTypeForm from "./AddNewTypeForm/AddNewTypeForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
+import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
 
-import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
 
 const Types = () => {
   const [loading, setLoading] = useState(false);

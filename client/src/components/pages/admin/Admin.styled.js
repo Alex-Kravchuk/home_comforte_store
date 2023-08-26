@@ -19,6 +19,6 @@ export const AdminPagesTitle = styled.div`
 
 export const AdminPagesSubTitle = styled.div`
   margin: 25px 0;
-  width: 70%;
+  width: 80%;
   color: ${textColors.plain};
 `;

@@ -1,15 +1,19 @@
 import React from "react";
 
-import TabSubPages from "./TabSubPages/TabSubPages";
+import TabSubPages from "./TabSubPages/CategoriesAndTypesSubPages";
 
-import { AdminTitlesGroupe } from "../AdminProducts.styled";
-import { CATContainer, CATWrapper } from "./CategoriesAndTypes.styled";
+import {
+  AdminProductsContainer,
+  AdminProductsWrapper,
+  AdminTitlesGroupe,
+} from "../AdminProducts.styled";
+
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 
 const CategoriesAndTypes = () => {
   return (
-    <CATWrapper>
-      <CATContainer>
+    <AdminProductsWrapper>
+      <AdminProductsContainer>
         <AdminTitlesGroupe>
           <AdminPagesTitle>Categories and types of products</AdminPagesTitle>
           <AdminPagesSubTitle>
@@ -19,8 +23,8 @@ const CategoriesAndTypes = () => {
           </AdminPagesSubTitle>
         </AdminTitlesGroupe>
         <TabSubPages />
-      </CATContainer>
-    </CATWrapper>
+      </AdminProductsContainer>
+    </AdminProductsWrapper>
   );
 };
 

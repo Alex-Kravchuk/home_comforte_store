@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { message } from "antd";
 
-
 import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
-
-import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
+import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
 
 const Categories = () => {
   const [loading, setLoading] = useState(false);

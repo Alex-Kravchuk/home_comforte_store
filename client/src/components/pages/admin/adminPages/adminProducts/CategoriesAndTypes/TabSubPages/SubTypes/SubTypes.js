@@ -6,8 +6,7 @@ import AddNewSubTypeForm from "./AddNewSubTypeForm/AddNewSubTypeForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
-
-import { SubPageContainer, SubPageWrapper } from "../TabSubPages.styled";
+import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
 
 const SubTypes = () => {
   const [categories, setCategories] = useState([]);
