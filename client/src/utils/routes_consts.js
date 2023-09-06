@@ -26,7 +26,7 @@ export const ADMIN_SETTINGS = "settings"
 export const ADMIN_PRODUCTS_CATEGORY = 'categories'
 export const ADMIN_PRODUCTS_EDIT = 'edit'
 
-export const PRODUCT_ROUTE = "/product/:id";
+export const PRODUCT_ROUTE = "product/:id";
 
 export const BRAND_ROUTE = "/brands";
 export const BASKET_ROUTE = "basket";

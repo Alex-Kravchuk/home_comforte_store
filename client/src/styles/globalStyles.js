@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #408003;
     font-size: 18px;
   }
+
 `;
 
 export const Wrapper = styled.div`
@@ -58,6 +59,23 @@ export const Wrapper = styled.div`
     justify-content: center;
     font-size: 17px;
   }
+
+  
+  // these selectors must be written like this to work correctly
+  .ant-select-single.ant-select-lg .ant-select-selector {
+    height: 50px;
+    line-height: 45px;
+  }
+
+  .ant-select-single.ant-select-lg .ant-select-selection-placeholder {
+    line-height: 45px;
+  }
+
+  .ant-select-single.ant-select-lg.ant-select-show-arrow
+    .ant-select-selection-item {
+    line-height: 45px;
+  }
+
 
   @media (max-width: ${s}px) {
     .ant-btn-primary {

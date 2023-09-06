@@ -16,6 +16,7 @@ const SubTypes = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
+    // TODO remove this request
     const getCategories = async () => {
       try {
         const categories = await ProductService.getAllCategories();

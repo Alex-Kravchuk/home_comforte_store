@@ -96,13 +96,13 @@ export const FormPasswordInput = styled(Input.Password)`
 `;
 
 export const FormSelect = styled(Select)`
-  height: 50px;
-  font-size: 16px;
-  color: ${textColors.main};
+  // height: 50px;
+  // font-size: 16px;
+  // color: ${textColors.main};
 
-  @media (max-width: ${s}px) {
-    height: 45px;
-  }
+  // @media (max-width: ${s}px) {
+  //   height: 45px;
+  // }
 `;
 
 export const FromSubmitButton = styled(Button)`

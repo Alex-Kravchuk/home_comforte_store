@@ -28,7 +28,6 @@ app.use(
       "http://localhost:3000",
       "http://192.168.31.84:3000",
     ],
-    // origin: '*',
     credentials: true,
   })
 );
@@ -47,6 +46,8 @@ const start = async () => {
     app.listen(PORT, () => {
       console.log(`Server start on port ${PORT}`);
       adminService.initialization();
+
+   
     });
   } catch (error) {
     console.log(error);

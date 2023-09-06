@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { textColors } from "../../../styles/globalStyles";
 
-export const AdminPageWrapper = styled.div``;
+export const AdminPageWrapper = styled.div`
+  // .spin-canvas-container {
+  //   width: 200px !important;
+  //   height: 200px !important;
+  // }
+`;
 export const AdminPageContainer = styled.div`
   display: flex;
   align-items: start;

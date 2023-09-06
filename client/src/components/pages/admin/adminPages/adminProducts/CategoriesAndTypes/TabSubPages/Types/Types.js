@@ -18,6 +18,7 @@ const Types = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
+    // TODO remove this request and get data from redux
     const getCategories = async () => {
       try {
         const categories = await ProductService.getAllCategories();

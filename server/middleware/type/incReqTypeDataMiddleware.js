@@ -18,12 +18,7 @@ module.exports = async (req, res, next) => {
       const alreadyExists = await Type.findOne({ where: { name, categoryId } });
 
       if (alreadyExists) {
-        return next(
-          ApiError.requestDataAreNotDefined(
-            "A type with that name already exists for the current category",
-            errorSource
-          )
-        );
+        return next(ApiError.duplicate("name", errorSource));
       }
     }
 

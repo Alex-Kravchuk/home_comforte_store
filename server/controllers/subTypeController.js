@@ -9,7 +9,7 @@ class SubTypeController {
 
       const alreadyExists = await SubType.findOne({ where: { name } });
       if (alreadyExists) {
-        return next(ApiError.duplicateName(SubTypeController.errorSource));
+        return next(ApiError.duplicate("name", SubTypeController.errorSource));
       }
 
       const subType = await SubType.create({ name, typeId });
