@@ -34,6 +34,12 @@ export const PVPreviewImagesContainer = styled.div`
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px 70px;
+
+  @media (max-width: 425px) {
+    padding: 0;
+    margin: 0px 10px;
+    border: none;
+  }
 `;
 
 export const PVPreviewImgContainer = styled.div`
@@ -44,7 +50,7 @@ export const PVPreviewImgContainer = styled.div`
   opacity: 0.9;
   border: ${({ selected }) =>
     selected ? "1px solid black" : "1px solid transparent"};
-  border-radius: 10px;
+  border-radius: 5px;
   box-sizing: border-box;
   transition: all 0.2s ease;
 
@@ -58,9 +64,13 @@ export const PVPreviewImgContainer = styled.div`
     right: 0;
     background: #000;
     box-sizing: border-box;
-    border-radius: 10px;
-
+    border-radius: 5px;
     opacity: 0.03;
+  }
+
+  @media (max-width: 425px) {
+    padding: 10px 5px;
+    // border: none;
   }
 `;
 
@@ -69,7 +79,9 @@ export const testSuka = styled.div``;
 export const PVPreviewImg = styled.img`
   width: 100px;
 
-  margin: 5px;
+  @media (max-width: 425px) {
+    width: 40px;
+  }
 `;
 
 export const ViewerField = styled.div`
