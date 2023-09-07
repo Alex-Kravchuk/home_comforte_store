@@ -20,11 +20,55 @@ export const PVCurrentImg = styled.img`
   width: 100%;
 `;
 
-export const PVPreviewImgContainer = styled.div``;
+export const PVPreviewImagesWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PVPreviewImagesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 20px 70px;
+`;
+
+export const PVPreviewImgContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+  padding: 20px 0;
+  margin: 0 5px;
+  opacity: 0.9;
+  border: ${({ selected }) =>
+    selected ? "1px solid black" : "1px solid transparent"};
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+
+  &::after {
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    opacity: 0.03;
+  }
+`;
+
+export const testSuka = styled.div``;
 
 export const PVPreviewImg = styled.img`
-  width: 200px;
-  border: 1px solid lightgray;
+  width: 100px;
+
   margin: 5px;
 `;
 
@@ -36,8 +80,6 @@ export const ViewerField = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  background: rgba(0, 0, 0, 0.3);
 
   display: flex;
   align-items: center;
