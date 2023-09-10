@@ -9,6 +9,7 @@ export const ProudctInfoSection = styled.div`
   display: flex;
   align-items: scratch;
   justify-content: space-between;
+  margin-bottom: 50px;
 
   @media (max-width: ${xl}px) {
     flex-direction: column;

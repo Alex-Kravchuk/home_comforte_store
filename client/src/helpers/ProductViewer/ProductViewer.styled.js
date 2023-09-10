@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { viewport_sizes } from "../../utils/viewport_size_consts";
 
 // PV = ProductViewer
 
+const { xxl, xl, l, ml, m, s, xs } = viewport_sizes;
+
 export const PVWrapper = styled.div``;
 
-export const PVContainer = styled.div``;
+export const PVContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const PVMainImgContainer = styled.div`
   position: relative;
@@ -24,6 +31,11 @@ export const PVPreviewImagesWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 70%;
+
+  @media (max-width: ${xl}px) {
+    width: 100%;
+  }
 `;
 
 export const PVPreviewImagesContainer = styled.div`
@@ -35,17 +47,28 @@ export const PVPreviewImagesContainer = styled.div`
   border-radius: 10px;
   padding: 20px 70px;
 
-  @media (max-width: 425px) {
+  @media (max-width: ${xxl}px) {
+    padding: 20px 35px;
+  }
+
+  @media (max-width: 1200px) {
+    padding: 15px 30px;
+  }
+
+  @media (max-width: ${l}px) {
+    border: none;
+  }
+
+  @media (max-width: ${m}px) {
     padding: 0;
     margin: 0px 10px;
-    border: none;
   }
 `;
 
 export const PVPreviewImgContainer = styled.div`
   position: relative;
   cursor: pointer;
-  padding: 20px 0;
+  padding: 10px 0;
   margin: 0 5px;
   opacity: 0.9;
   border: ${({ selected }) =>
@@ -68,20 +91,27 @@ export const PVPreviewImgContainer = styled.div`
     opacity: 0.03;
   }
 
-  @media (max-width: 425px) {
-    padding: 10px 5px;
-    // border: none;
+  @media (max-width: ${xl}px) {
+    width: 80px;
+  }
+
+  @media (max-width: ${l}px) {
+    width: 70px;
+    margin: 0 5px;
+  }
+
+  @media (max-width: ${ml}px) {
+    width: 60px;
+  }
+
+  @media (max-width: ${m}px) {
+    padding: 5px 0px;
+    width: 50px;
   }
 `;
 
-export const testSuka = styled.div``;
-
 export const PVPreviewImg = styled.img`
-  width: 100px;
-
-  @media (max-width: 425px) {
-    width: 40px;
-  }
+  width: 100%;
 `;
 
 export const ViewerField = styled.div`
