@@ -23,6 +23,11 @@ export const GlobalStyle = createGlobalStyle`
     color: #555759;
   }
 
+   body:fullscreen::backdrop {
+    background-color: #fff;
+  }
+
+
 
   // loading spinner styles
   .ant-spin .ant-spin-dot-item {
@@ -60,7 +65,6 @@ export const Wrapper = styled.div`
     font-size: 17px;
   }
 
-  
   // these selectors must be written like this to work correctly
   .ant-select-single.ant-select-lg .ant-select-selector {
     height: 50px;
@@ -75,7 +79,6 @@ export const Wrapper = styled.div`
     .ant-select-selection-item {
     line-height: 45px;
   }
-
 
   @media (max-width: ${s}px) {
     .ant-btn-primary {

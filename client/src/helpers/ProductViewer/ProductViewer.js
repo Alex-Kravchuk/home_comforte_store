@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from "react";
 
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+
 import {
   PVWrapper,
   PVContainer,
   ViewerField,
-  PVPreviewImg,
   PVCurrentImg,
   PVMainImgContainer,
-  PVPreviewImgContainer,
   PVCurrentImgContainer,
-  PVPreviewImagesWrapper,
-  PVPreviewImagesContainer,
+  // FullScreenIcon,
+  FullScreenWrapper,
+  FullScreenContainer,
+  FullScreenIconContainer,
 } from "./ProductViewer.styled";
+import ProductViewerThumbnails from "./ProductViewerThumbnails";
 
 const ProductViewer = ({ images }) => {
   const [drag, setDrag] = useState(false);
   const [currentImg, setCurrentImg] = useState(1);
   const [thumbnails, setThumbnails] = useState([]);
+  const [fullScreenOpen, setFullScreenOpen] = useState(false);
   const [selectedPreviewID, setSelectedPreviewID] = useState(1);
 
   useEffect(() => {
     createThumbnails();
+  }, []);
+
+  useEffect(() => {
+    const onFullScreenChange = () => {
+      setFullScreenOpen(Boolean(document.fullscreenElement));
+    };
+
+    document.addEventListener("fullscreenchange", onFullScreenChange);
+
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullScreenChange);
   }, []);
 
   /**
@@ -168,6 +184,28 @@ const ProductViewer = ({ images }) => {
     setThumbnails(minis);
   };
 
+  const fullScreenHandler = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+      return;
+    }
+
+    document.body.requestFullscreen();
+  };
+
+  const viewerFiledProps = {
+    onMouseUp: () => setDrag(false),
+    onTouchEnd: () => setDrag(false),
+    onTouchStart: () => setDrag(true),
+    onMouseDown: (e) => {
+      e.preventDefault();
+      setDrag(true);
+    },
+
+    onTouchMove: touchHandler,
+    onMouseMove: mouseMoveHandler,
+  };
+
   return (
     <PVWrapper>
       <PVContainer>
@@ -175,32 +213,37 @@ const ProductViewer = ({ images }) => {
           <PVCurrentImgContainer>
             <PVCurrentImg src={images[currentImg - 1].src} />
           </PVCurrentImgContainer>
-          <ViewerField
-            onTouchStart={() => setDrag(true)}
-            onTouchEnd={() => setDrag(false)}
-            onTouchMove={touchHandler}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              setDrag(true);
-            }}
-            onMouseUp={() => setDrag(false)}
-            onMouseMove={mouseMoveHandler}
-          ></ViewerField>
+          <ViewerField {...viewerFiledProps} />
+          <FullScreenIconContainer onClick={fullScreenHandler}>
+            <FullscreenIcon />
+            Full Screen
+          </FullScreenIconContainer>
         </PVMainImgContainer>
-        <PVPreviewImagesWrapper>
-          <PVPreviewImagesContainer>
-            {thumbnails.map((img) => (
-              <PVPreviewImgContainer
-                key={img.id}
-                selected={img.id === selectedPreviewID}
-                onClick={() => selectPreviewHandlerByClick(img.id)}
-              >
-                <PVPreviewImg src={img.src} selected={images} />
-              </PVPreviewImgContainer>
-            ))}
-          </PVPreviewImagesContainer>
-        </PVPreviewImagesWrapper>
+        <ProductViewerThumbnails
+          thumbnails={thumbnails}
+          selectedPreviewID={selectedPreviewID}
+          selectPreviewHandlerByClick={selectPreviewHandlerByClick}
+        />
       </PVContainer>
+      {fullScreenOpen && (
+        <FullScreenWrapper>
+          <FullScreenContainer>
+            <PVMainImgContainer fullscreen={fullScreenOpen}>
+              <PVCurrentImgContainer>
+                <PVCurrentImg src={images[currentImg - 1].src} />
+              </PVCurrentImgContainer>
+              <ViewerField {...viewerFiledProps} />
+              <FullScreenIconContainer
+                onClick={fullScreenHandler}
+                fullscreen={fullScreenOpen}
+              >
+                <FullscreenExitIcon />
+                Exit Full Screen
+              </FullScreenIconContainer>
+            </PVMainImgContainer>
+          </FullScreenContainer>
+        </FullScreenWrapper>
+      )}
     </PVWrapper>
   );
 };

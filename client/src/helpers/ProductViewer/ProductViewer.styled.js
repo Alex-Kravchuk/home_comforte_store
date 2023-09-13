@@ -3,7 +3,7 @@ import { viewport_sizes } from "../../utils/viewport_size_consts";
 
 // PV = ProductViewer
 
-const { xxl, xl, l, ml, m, s, xs } = viewport_sizes;
+const { xxl, xl, l, ml, m } = viewport_sizes;
 
 export const PVWrapper = styled.div``;
 
@@ -14,13 +14,14 @@ export const PVContainer = styled.div`
 `;
 
 export const PVMainImgContainer = styled.div`
-  position: relative;
+  position: ${({ fullscreen }) => (fullscreen ? "static" : "relative")};
 `;
 
 export const PVCurrentImgContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 30px;
 `;
 
 export const PVCurrentImg = styled.img`
@@ -126,4 +127,60 @@ export const ViewerField = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const FullScreenIconContainer = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: ${({ fullscreen }) => (fullscreen ? "10%" : "15%")};
+  left: ${({ fullscreen }) => (fullscreen ? "5%" : 0)};
+
+  display: flex;
+  align-items: center;
+  width: 40px;
+  overflow: hidden;
+
+  border: 1px solid lightgray;
+  border-radius: 8px;
+
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  svg {
+    color: lightgray;
+    font-size: 2.5rem;
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    color: gray;
+    width: ${({ fullscreen }) => (fullscreen ? "150px" : "125px")};
+    border: 1px solid gray;
+
+    svg {
+      color: gray;
+    }
+  }
+
+  @media (max-width: ${l}px) {
+    display: none;
+  }
+`;
+
+export const FullScreenWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 99;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const FullScreenContainer = styled.div`
+  width: 60%;
 `;
