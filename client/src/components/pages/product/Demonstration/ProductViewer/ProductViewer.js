@@ -206,12 +206,15 @@ const ProductViewer = ({ images }) => {
     onMouseMove: mouseMoveHandler,
   };
 
+
+  const currentImgIndex = currentImg <= 0 ? 0 : currentImg - 1;
+
   return (
     <PVWrapper>
       <PVContainer>
         <PVMainImgContainer>
           <PVCurrentImgContainer>
-            <PVCurrentImg src={images[currentImg - 1].src} />
+            <PVCurrentImg src={images[currentImgIndex].src} />
           </PVCurrentImgContainer>
           <ViewerField {...viewerFiledProps} />
           <FullScreenIconContainer onClick={fullScreenHandler}>
