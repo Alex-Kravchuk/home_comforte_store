@@ -6,7 +6,7 @@ const { xl } = viewport_sizes;
 
 export const DemonstrationWrapper = styled.div`
   flex: 1 1 70%;
-  position: relative;
+  // position: relative;
   height: auto;
 
   @media (max-width: ${xl}px) {
@@ -34,21 +34,13 @@ export const ViewerModeButtonContainer = styled.div`
   margin-top: 10px;
   position: relative;
   left: 50%;
+  bottom: ${({ zoomOn }) => (zoomOn ? "80px" : "unset")};
   transform: translate(-50%, 0);
 
   svg {
     color: rgba(0, 0, 0, 0.4);
     font-size: 22px;
   }
-
-  ${({ zoomOn }) =>
-    zoomOn &&
-    `
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, 0);
-`}
 `;
 
 export const ViewerModeIcon = styled.div`

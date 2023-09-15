@@ -206,7 +206,6 @@ const ProductViewer = ({ images }) => {
     onMouseMove: mouseMoveHandler,
   };
 
-
   const currentImgIndex = currentImg <= 0 ? 0 : currentImg - 1;
 
   return (
