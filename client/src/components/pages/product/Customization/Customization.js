@@ -1,14 +1,18 @@
-import React from 'react';
-import { CustomizationContainer, CustomizationWrapper } from './Customization.styled';
+import React from "react";
+
+import {
+  CustomizationWrapper,
+  CustomizationContainer,
+} from "./Customization.styled";
 
 const Customization = () => {
-	return (
-	  <CustomizationWrapper>
-		<CustomizationContainer>
-			custom <button>click</button>
-		</CustomizationContainer>
-	  </CustomizationWrapper>
-	)
- }
+  return (
+    <CustomizationWrapper>
+      <CustomizationContainer>
+        custom <button>click</button>
+      </CustomizationContainer>
+    </CustomizationWrapper>
+  );
+};
 
 export default Customization;

@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import { viewport_sizes } from "../../utils/viewport_size_consts";
+
+import { sizes } from "../../../../../utils/css_size_consts";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 
 // PV = ProductViewer
 
 const { xxl, xl, l, ml, m } = viewport_sizes;
 
-export const PVWrapper = styled.div``;
+export const PVWrapper = styled.div`
+  @media (max-width: ${l}px) {
+    width: ${sizes.l.contentContainerWidth}%;
+    margin: 0 auto;
+  }
+`;
 
 export const PVContainer = styled.div`
   display: flex;
@@ -15,6 +22,7 @@ export const PVContainer = styled.div`
 
 export const PVMainImgContainer = styled.div`
   position: ${({ fullscreen }) => (fullscreen ? "static" : "relative")};
+  width: 100%;
 `;
 
 export const PVCurrentImgContainer = styled.div`
@@ -140,14 +148,14 @@ export const FullScreenIconContainer = styled.div`
   width: 40px;
   overflow: hidden;
 
-  border: 1px solid lightgray;
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 8px;
 
   transition: all 0.2s ease;
   white-space: nowrap;
 
   svg {
-    color: lightgray;
+    color: rgba(0, 0, 0, 0.4);
     font-size: 2.5rem;
     transition: all 0.2s ease;
   }

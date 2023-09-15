@@ -13,16 +13,14 @@ import Reviews from "./Reviews/Reviews";
 const Product = () => {
   return (
     <ProductWrapper>
-      <Container>
-        <Breadcrumb />
-        <ProductContainer>
-          <ProudctInfoSection>
-            <Demonstration />
-            <Customization />
-          </ProudctInfoSection>
-          <Reviews />
-        </ProductContainer>
-      </Container>
+      <Breadcrumb />
+      <ProductContainer>
+        <ProudctInfoSection>
+          <Demonstration />
+          <Customization />
+        </ProudctInfoSection>
+        <Reviews />
+      </ProductContainer>
     </ProductWrapper>
   );
 };

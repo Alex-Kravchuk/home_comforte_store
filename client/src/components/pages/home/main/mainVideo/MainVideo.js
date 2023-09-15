@@ -10,13 +10,19 @@ const MainVideo = () => {
   const videoRef = useRef();
 
   useEffect(() => {
-    if (videoRef.current) {
-      if (!playing) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-    }
+    const playFunc = async () => {
+      try {
+        if (videoRef.current) {
+          if (!playing) {
+            await videoRef.current.pause();
+          } else {
+            await videoRef.current.play();
+          }
+        }
+      } catch (error) {}
+    };
+
+    playFunc();
   }, [playing]);
 
   const stopClickVideoHandler = () => setPlaying((state) => !state);

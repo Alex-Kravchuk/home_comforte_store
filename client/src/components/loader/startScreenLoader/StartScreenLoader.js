@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FullScreenLoaderWrapper } from "./StartScreenLoader.styled";
-import { Spin } from "antd";
+import { Space, Spin } from "antd";
 
 const StartScreenLoader = ({ loading }) => {
   return (
     <>
       {loading && (
         <FullScreenLoaderWrapper>
-          <Spin size="large" tip="Just one second..." />
+          <Space>
+            <Spin size="large" />
+          </Space>
         </FullScreenLoaderWrapper>
       )}
     </>

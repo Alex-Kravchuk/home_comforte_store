@@ -3,19 +3,19 @@ import React, { useEffect, useState } from "react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
+import ProductViewerThumbnails from "./ProductViewerThumbnails";
+
 import {
   PVWrapper,
   PVContainer,
   ViewerField,
   PVCurrentImg,
-  PVMainImgContainer,
-  PVCurrentImgContainer,
-  // FullScreenIcon,
   FullScreenWrapper,
+  PVMainImgContainer,
   FullScreenContainer,
+  PVCurrentImgContainer,
   FullScreenIconContainer,
 } from "./ProductViewer.styled";
-import ProductViewerThumbnails from "./ProductViewerThumbnails";
 
 const ProductViewer = ({ images }) => {
   const [drag, setDrag] = useState(false);

@@ -1,13 +1,7 @@
 import React from "react";
-import ProductViewer from "../../../../../helpers/ProductViewer/ProductViewer";
 
 const AdminOrders = () => {
-  return (
-    <div>
-      Admin Orders
-      <ProductViewer />
-    </div>
-  );
+  return <div>Admin Orders</div>;
 };
 
 export default AdminOrders;
