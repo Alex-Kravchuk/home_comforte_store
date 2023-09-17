@@ -39,7 +39,7 @@ const Demonstration = () => {
         )}
       </DemonstrationContainer>
       {tabletScreen && (
-        <ViewerModeButtonContainer onClick={zoomHandler} zoomOn={zoomOn}>
+        <ViewerModeButtonContainer onClick={zoomHandler}>
           <ViewerModeIcon>
             {zoomOn ? <span>360&deg;</span> : <ZoomInIcon />}
           </ViewerModeIcon>

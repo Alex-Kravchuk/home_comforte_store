@@ -9,7 +9,7 @@ export const DemonstrationWrapper = styled.div`
   height: auto;
 
   @media (max-width: ${xl}px) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 export const DemonstrationContainer = styled.div``;
@@ -33,7 +33,6 @@ export const ViewerModeButtonContainer = styled.div`
   margin-top: 10px;
   position: relative;
   left: 50%;
-  bottom: ${({ zoomOn }) => (zoomOn ? "80px" : "unset")};
   transform: translate(-50%, 0);
 
   svg {

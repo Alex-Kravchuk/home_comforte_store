@@ -19,7 +19,8 @@ export const ProductWrapper = styled.div`
   }
 
   @media (max-width: ${xl}px) {
-    width: ${sizes.xl.contentContainerWidth}%;
+    // width: ${sizes.xl.contentContainerWidth}%;
+    width: 100%;
   }
 
   @media (max-width: ${l}px) {
@@ -36,5 +37,7 @@ export const ProudctInfoSection = styled.div`
 
   @media (max-width: ${xl}px) {
     flex-direction: column;
+    align-items: stretch;
+    height: auto;
   }
 `;

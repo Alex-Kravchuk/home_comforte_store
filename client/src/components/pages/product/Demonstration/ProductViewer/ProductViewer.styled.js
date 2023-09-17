@@ -8,9 +8,10 @@ import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 const { xxl, xl, l, ml, m } = viewport_sizes;
 
 export const PVWrapper = styled.div`
-  @media (max-width: ${l}px) {
-    width: ${sizes.l.contentContainerWidth}%;
-    margin: 0 auto;
+  margin: 0 auto;
+
+  @media (max-width: ${xl}px) {
+    width: ${sizes.xl.contentContainerWidth}%;
   }
 `;
 

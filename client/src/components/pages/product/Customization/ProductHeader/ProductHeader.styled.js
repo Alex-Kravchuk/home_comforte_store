@@ -1,21 +1,25 @@
 import styled from "styled-components";
 
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
+import { sizes } from "../../../../../utils/css_size_consts";
+const { xl, m } = viewport_sizes;
 
 export const ProductHeaderWrapper = styled.div`
-  @media (max-width: 760px) {
-    width: 92%;
-    margin: 0 auto;
+  margin: 0 auto;
+
+  @media (max-width: ${xl}px) {
+    width: ${sizes.xl.contentContainerWidth}%;
   }
 `;
 export const ProductHeaderContainer = styled.div`
-  @media (max-width: 1024px) {
+  @media (max-width: ${xl}px) {
     margin-top: 50px;
     margin-bottom: 20px;
   }
 
-  @media (max-width: 430px) {
-    margin-top: 40px;
+  @media (max-width: ${m}px) {
+    margin-top: 30px;
     margin-bottom: 20px;
   }
 `;

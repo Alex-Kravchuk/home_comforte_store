@@ -7,6 +7,7 @@ import {
 import ProductHeader from "./ProductHeader/ProductHeader";
 import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../../utils/viewport_size_consts";
+import Modifiers from "./Modifiers/Modifiers";
 
 const Customization = () => {
   const viewport = useGetWindowSize();
@@ -15,6 +16,7 @@ const Customization = () => {
     <CustomizationWrapper>
       <CustomizationContainer>
         {bigScreen && <ProductHeader />}
+        <Modifiers />
       </CustomizationContainer>
     </CustomizationWrapper>
   );
