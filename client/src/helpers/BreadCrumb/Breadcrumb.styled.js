@@ -5,7 +5,7 @@ import { viewport_sizes } from "../../utils/viewport_size_consts";
 const { l } = viewport_sizes;
 
 export const BreadCrumbWrapper = styled.div`
-  padding-top: 25px;
+  padding: 25px 0;
 
   a {
     text-decoration: none;
@@ -13,4 +13,23 @@ export const BreadCrumbWrapper = styled.div`
   }
 `;
 
-export const BreadCrumbItem = styled.span``;
+export const BreadcrumbContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const BreadCrumbItem = styled.span`
+  padding: 4px;
+  border-radius: 8px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.035);
+  }
+
+  @media (max-width: 430px) {
+    font-size: 14px;
+  }
+`;
+
+

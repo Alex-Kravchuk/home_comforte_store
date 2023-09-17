@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { HOME_ROUTE } from "../../utils/routes_consts";
 
+
 const Breadcrumb = () => {
   const { pathname } = useLocation();
   const [breadcrumbItems, setBreadcrumbItems] = useState([]);

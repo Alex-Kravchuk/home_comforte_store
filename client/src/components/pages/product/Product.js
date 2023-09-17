@@ -1,20 +1,19 @@
 import React from "react";
-import {
-  ProductContainer,
-  ProductWrapper,
-  ProudctInfoSection,
-} from "./Product.styled";
-import { Container } from "../../../styles/globalStyles";
-import Breadcrumb from "../../../helpers/BreadCrumb/BreadCrumb";
+
+import Reviews from "./Reviews/Reviews";
 import Demonstration from "./Demonstration/Demonstration";
 import Customization from "./Customization/Customization";
-import Reviews from "./Reviews/Reviews";
+
+import {
+  ProductWrapper,
+  ProductContainer,
+  ProudctInfoSection,
+} from "./Product.styled";
 
 const Product = () => {
   return (
     <ProductWrapper>
-      {/* <Breadcrumb /> */}
-      <ProductContainer> 
+      <ProductContainer>
         <ProudctInfoSection>
           <Demonstration />
           <Customization />
