@@ -17,6 +17,7 @@ import {
   DemonstrationContainer,
   ViewerModeButtonContainer,
 } from "./Demonstration.styled";
+import ProductHeader from "../Customization/ProductHeader/ProductHeader";
 
 const Demonstration = () => {
   const [zoomOn, setZoomOn] = useState(false);
@@ -24,18 +25,20 @@ const Demonstration = () => {
 
   const viewport = useGetWindowSize();
 
-  const smallScreen = viewport.width < viewport_sizes.l;
+  const tabletScreen = viewport.width < viewport_sizes.l;
+  const smallLaptopScreen = viewport.width < viewport_sizes.xl;
 
   return (
     <DemonstrationWrapper>
       <DemonstrationContainer>
+        {smallLaptopScreen && <ProductHeader />}
         {zoomOn ? (
           <ZoomBox />
         ) : (
           <ProductViewer images={images} zoomHandler={zoomHandler} />
         )}
       </DemonstrationContainer>
-      {smallScreen && (
+      {tabletScreen && (
         <ViewerModeButtonContainer onClick={zoomHandler} zoomOn={zoomOn}>
           <ViewerModeIcon>
             {zoomOn ? <span>360&deg;</span> : <ZoomInIcon />}

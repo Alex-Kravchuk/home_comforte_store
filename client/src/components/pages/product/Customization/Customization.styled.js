@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { sizes } from "../../../../utils/css_size_consts";
 import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 
-const {  l } = viewport_sizes;
-
-
+const { l } = viewport_sizes;
 
 export const CustomizationWrapper = styled.div`
-  background: orange;
+  background: rgba(0, 0, 0, 0.04);
+  // padding: 60px;
+  // box-sizing: border-box;
   flex: 0 1 500px;
 
   @media (max-width: 1024px) {

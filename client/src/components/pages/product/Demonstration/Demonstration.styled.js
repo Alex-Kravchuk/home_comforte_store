@@ -6,7 +6,6 @@ const { xl } = viewport_sizes;
 
 export const DemonstrationWrapper = styled.div`
   flex: 1 1 70%;
-  // position: relative;
   height: auto;
 
   @media (max-width: ${xl}px) {

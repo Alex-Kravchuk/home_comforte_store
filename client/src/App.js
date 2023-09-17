@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import { ConfigProvider } from "antd";
-import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Footer from "./components/footer/Footer";
@@ -14,6 +13,8 @@ import { getMenuData } from "./redux/loading/loadingSlice";
 
 import { GlobalStyle, Wrapper } from "./styles/globalStyles";
 import { customTheme } from "./utils/custom_theme_styles_ANTD";
+
+import Page from "./components/pages/Page";
 
 function App() {
   const { loadingIsActive } = useSelector((state) => state.menuData);
@@ -33,7 +34,7 @@ function App() {
         ) : (
           <Wrapper>
             <NavBar />
-            <Outlet />
+            <Page />
             <Footer />
           </Wrapper>
         )}

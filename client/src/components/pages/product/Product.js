@@ -13,8 +13,8 @@ import Reviews from "./Reviews/Reviews";
 const Product = () => {
   return (
     <ProductWrapper>
-      <Breadcrumb />
-      <ProductContainer>
+      {/* <Breadcrumb /> */}
+      <ProductContainer> 
         <ProudctInfoSection>
           <Demonstration />
           <Customization />
