@@ -6,6 +6,9 @@ const { xl } = viewport_sizes;
 export const ModifiersWrapper = styled.div`
   margin-top: 30px;
 
+  .ant-collapse {
+    background: #fff;
+  }
 
   @media (max-width: ${xl}px) {
     margin: 0;

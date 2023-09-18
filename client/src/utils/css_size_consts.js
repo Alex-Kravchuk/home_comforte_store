@@ -22,7 +22,7 @@ export const sizes = {
     contentContainerWidth: 90,
   },
   xxl: {
-    contentContainerWidth: 85,
+    contentContainerWidth: 90,
   },
   xxxl: {},
 };
