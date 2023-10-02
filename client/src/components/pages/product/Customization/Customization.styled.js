@@ -8,12 +8,12 @@ const { xxl, xl } = viewport_sizes;
 export const CustomizationWrapper = styled.div`
   position: sticky;
   top: 50px;
-  height: 100vh;
 
   background: rgba(0, 0, 0, 0.04);
   padding: 30px 40px 40px 40px;
   box-sizing: border-box;
   flex: 0 0 500px;
+  margin-left: 25px;
 
   box-shadow: 0px -100px 0px 0px rgba(0, 0, 0, 0.04);
 

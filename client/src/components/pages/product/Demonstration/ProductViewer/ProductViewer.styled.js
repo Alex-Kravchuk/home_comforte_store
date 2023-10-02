@@ -8,9 +8,15 @@ import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 const { xxl, xl, l, ml, m } = viewport_sizes;
 
 export const PVWrapper = styled.div`
-  margin: 0 auto;
+  // width: ${sizes.global.contentContainerWidth}%;
+  // margin: 0 auto;
 
+  // @media (max-width: ${xxl}px) {
+  //   width: ${sizes.xxl.contentContainerWidth}%;
+  //   margin: 0 auto;
+  // }
   @media (max-width: ${xl}px) {
+    margin: 0 auto;
     width: ${sizes.xl.contentContainerWidth}%;
   }
 `;
@@ -41,10 +47,16 @@ export const PVPreviewImagesWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 100%;
+  max-width: 683px;
+  margin-bottom: 50px;
 
   @media (max-width: ${xl}px) {
-    width: 100%;
+    margin-bottom: 35px;
+  }
+
+  @media (max-width: ${l}px) {
+    margin-bottom: 0;
   }
 `;
 
@@ -56,6 +68,9 @@ export const PVPreviewImagesContainer = styled.div`
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px 70px;
+  // margin: 0 25px;
+  max-width: 683px;
+  width: 100%;
 
   @media (max-width: ${xxl}px) {
     padding: 20px 35px;
@@ -65,8 +80,12 @@ export const PVPreviewImagesContainer = styled.div`
     padding: 15px 30px;
   }
 
+  // @media (max-width: ${xl}px) {
+  //   margin: 0;
+  // }
   @media (max-width: ${l}px) {
     border: none;
+    padding: 0;
   }
 
   @media (max-width: ${m}px) {
@@ -79,7 +98,7 @@ export const PVPreviewImgContainer = styled.div`
   position: relative;
   cursor: pointer;
   padding: 10px 0;
-  margin: 0 5px;
+  margin: 0 15px;
   opacity: 0.9;
   border: ${({ selected }) =>
     selected ? "1px solid black" : "1px solid transparent"};

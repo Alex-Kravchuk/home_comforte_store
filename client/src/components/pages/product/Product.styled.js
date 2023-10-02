@@ -18,18 +18,17 @@ export const ProductWrapper = styled.div`
     width: ${sizes.xxl.contentContainerWidth}%;
   }
 
-  @media (max-width: ${xl}px) {
-    // width: ${sizes.xl.contentContainerWidth}%;
-    width: 100%;
-  }
+  // @media (max-width: ${xl}px) {
+  //   width: ${sizes.xl.contentContainerWidth}%;
+  // }
 
-  @media (max-width: ${l}px) {
+  @media (max-width: ${xl}px) {
     width: 100%;
   }
 `;
 export const ProductContainer = styled.div``;
 export const ProudctInfoSection = styled.div`
-  height: 2000px;
+  // height: 2000px;
   display: flex;
   align-items: start;
   justify-content: space-between;

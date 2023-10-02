@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 import { marginConsts, swiperStyles } from "../../../../../styles/globalStyles";
 
-const { xl, xs } = viewport_sizes;
+const { xl} = viewport_sizes;
 
 export const ProductListWrapper = styled.div`
   ${swiperStyles}

@@ -3,14 +3,26 @@ import styled from "styled-components";
 import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
 import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 import { sizes } from "../../../../../utils/css_size_consts";
-const { xl, m } = viewport_sizes;
+const { xl, l, m } = viewport_sizes;
+
+export const ProductHeaderCenterWrapper = styled.div`
+  @media (max-width: ${xl}px) {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+  }
+`;
 
 export const ProductHeaderWrapper = styled.div`
-  margin: 0 auto;
-
   @media (max-width: ${xl}px) {
     width: ${sizes.xl.contentContainerWidth}%;
   }
+
+  // @media (max-width: ${l}px) {
+  //   margin: 0 auto;
+  //   width: ${sizes.l.contentContainerWidth}%;
+  // }
 `;
 export const ProductHeaderContainer = styled.div`
   @media (max-width: ${xl}px) {

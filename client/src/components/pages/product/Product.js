@@ -9,14 +9,18 @@ import {
   ProductContainer,
   ProudctInfoSection,
 } from "./Product.styled";
+import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
 
 const Product = () => {
+  const vieport = useGetWindowSize();
+  const bigScreen = vieport.width >= viewport_sizes.xl;
   return (
     <ProductWrapper>
       <ProductContainer>
         <ProudctInfoSection>
           <Demonstration />
-          <Customization />
+          {bigScreen && <Customization />}
         </ProudctInfoSection>
         <Reviews />
       </ProductContainer>
