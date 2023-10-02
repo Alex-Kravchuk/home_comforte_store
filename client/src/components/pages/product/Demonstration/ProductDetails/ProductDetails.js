@@ -5,6 +5,7 @@ import {
 } from "./ProductDetails.styled";
 
 import { Collapse } from "antd";
+import ExpandIcon from "../../../../../helpers/ExpandIcon/ExpandIcon";
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -13,17 +14,17 @@ const text = `
 const items = [
   {
     key: "1",
-    label: "This is panel header 1",
+    label: "How it sits",
     children: <p>{text}</p>,
   },
   {
     key: "2",
-    label: "This is panel header 2",
+    label: "Description",
     children: <p>{text}</p>,
   },
   {
     key: "3",
-    label: "This is panel header 3",
+    label: "Dimensions",
     children: <p>{text}</p>,
   },
 ];
@@ -32,7 +33,12 @@ const ProductDetails = () => {
   return (
     <ProductDetailsWrapper>
       <ProductDetailsContainer>
-        <Collapse items={items} defaultActiveKey={["1"]} />;
+        <Collapse
+          items={items}
+          defaultActiveKey={["1"]}
+          expandIconPosition="end"
+          expandIcon={({ isActive }) => <ExpandIcon open={isActive} />}
+        />
       </ProductDetailsContainer>
     </ProductDetailsWrapper>
   );

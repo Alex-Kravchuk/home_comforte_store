@@ -68,7 +68,6 @@ export const PVPreviewImagesContainer = styled.div`
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px 70px;
-  // margin: 0 25px;
   max-width: 683px;
   width: 100%;
 
@@ -80,9 +79,6 @@ export const PVPreviewImagesContainer = styled.div`
     padding: 15px 30px;
   }
 
-  // @media (max-width: ${xl}px) {
-  //   margin: 0;
-  // }
   @media (max-width: ${l}px) {
     border: none;
     padding: 0;

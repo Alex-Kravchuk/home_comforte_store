@@ -49,11 +49,11 @@ export const ProductPreviewWrapper = styled.div`
 `;
 export const ProductPreviewContainer = styled.div`
   height: 100%;
-  // margin: 0 25px;
 
-  // @media (max-width: 1024px) {
-  //   margin: 0;
-  // }
+
+  @media (max-width: 1024px) {
+    margin-top: 50px;
+  }
 `;
 
 export const SliderImg = styled.img``;
