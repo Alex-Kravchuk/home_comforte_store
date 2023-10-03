@@ -30,9 +30,7 @@ export const ProductPreviewWrapper = styled.div`
 
   .swiper-slide {
     /* Center slide text vertically */
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+
     flex-shrink: 0;
     width: 100%;
     height: 100%;
@@ -49,7 +47,6 @@ export const ProductPreviewWrapper = styled.div`
 `;
 export const ProductPreviewContainer = styled.div`
   height: 100%;
-
 
   @media (max-width: 1024px) {
     margin-top: 50px;

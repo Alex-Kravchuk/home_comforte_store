@@ -50,6 +50,7 @@ export const ProductDetailsWrapper = styled.div`
   justify-content: center;
   margin-top: 50px;
   width: 100%;
+  
 
   @media (max-width: ${xl}px) {
     width: ${sizes.xl.contentContainerWidth}%;

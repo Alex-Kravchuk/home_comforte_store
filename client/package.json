@@ -22,7 +22,7 @@
     "react-scripts": "5.0.1",
     "react-zoom-pan-pinch": "^3.1.0",
     "styled-components": "^5.3.11",
-    "swiper": "^9.4.1",
+    "swiper": "^10.3.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
