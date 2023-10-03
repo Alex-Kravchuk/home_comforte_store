@@ -8,6 +8,8 @@ import { Collapse } from "antd";
 import ExpandIcon from "../../../../../helpers/ExpandIcon/ExpandIcon";
 import SeatSize from "./SeatSize/SeatSize";
 import Description from "./Description/Description";
+import Dimensions from "./Dimensions/Dimensions";
+import WhyHomeComfort from "./WhyHomeComfort/WhyHomeComfort";
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -27,7 +29,12 @@ const items = [
   {
     key: "3",
     label: "Dimensions",
-    children: <p>{text}</p>,
+    children: <Dimensions />,
+  },
+  {
+    key: "4",
+    label: "Why Home Comfort",
+    children: <WhyHomeComfort />,
   },
 ];
 
