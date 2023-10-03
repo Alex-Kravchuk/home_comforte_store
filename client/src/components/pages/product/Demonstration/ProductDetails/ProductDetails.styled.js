@@ -34,6 +34,18 @@ export const ProductDetailsWrapper = styled.div`
     font-size: 16px;
   }
 
+  .ant-collapse .ant-collapse-content > .ant-collapse-content-box {
+    padding: 10px 0;
+  }
+
+  .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 20px 0;
+  }
+
+  .ant-collapse .ant-collapse-content {
+    border-top: none;
+  }
+
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -42,9 +54,9 @@ export const ProductDetailsWrapper = styled.div`
   @media (max-width: ${xl}px) {
     width: ${sizes.xl.contentContainerWidth}%;
 
-	.ant-collapse .ant-collapse-content > .ant-collapse-content-box {
-		font-size: 14px;
-	  }
+    .ant-collapse .ant-collapse-content > .ant-collapse-content-box {
+      font-size: 14px;
+    }
   }
 `;
 export const ProductDetailsContainer = styled.div`
