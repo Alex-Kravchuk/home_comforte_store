@@ -7,6 +7,7 @@ import {
 import { Collapse } from "antd";
 import ExpandIcon from "../../../../../helpers/ExpandIcon/ExpandIcon";
 import SeatSize from "./SeatSize/SeatSize";
+import Description from "./Description/Description";
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -21,7 +22,7 @@ const items = [
   {
     key: "2",
     label: "Description",
-    children: <p>{text}</p>,
+    children: <Description />,
   },
   {
     key: "3",
