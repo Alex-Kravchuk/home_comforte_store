@@ -28,7 +28,6 @@ export const ProductWrapper = styled.div`
 `;
 export const ProductContainer = styled.div``;
 export const ProudctInfoSection = styled.div`
-  // height: 2000px;
   display: flex;
   align-items: start;
   justify-content: space-between;

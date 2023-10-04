@@ -5,13 +5,14 @@ import { Tabs } from "antd";
 import { WidgetWrapper } from "../Widget.styled";
 import { AIWContainer, AIWWrapper } from "./AdditionalInfoWidget.styled";
 
-import ReviewsLeft from "./reviewsLeft/ReviewsLeft";
+
+import ReviewsList from "../../../../product/Reviews/ReviewsList/ReviewsList";
 
 const items = [
   {
     key: "1",
     label: "Reviews left",
-    children: <ReviewsLeft />,
+    children: <ReviewsList />,
   },
 ];
 

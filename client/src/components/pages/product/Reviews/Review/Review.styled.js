@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { getResponsiveFontSize } from "../../../../helpers/getResponsiveFontSize";
+import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
 
-import { viewport_sizes } from "../../../../utils/viewport_size_consts";
+import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 const { l, ml } = viewport_sizes;
 
 export const ReviewWrapper = styled.div`
@@ -40,6 +40,10 @@ export const ReviewImgNameContainer = styled.div`
 `;
 export const ReviewProductName = styled.div`
   font-weight: 500;
+
+  @media (max-width: ${l}px) {
+    margin-top: 5px;
+  }
 `;
 export const ReviewImg = styled.img`
   width: 200px;
@@ -53,7 +57,11 @@ export const ReviewImg = styled.img`
     width: 140px;
   }
 `;
-export const ReviewRating = styled.div``;
+export const ReviewRating = styled.div`
+  @media (max-width: ${l}px) {
+    margin-top: 5px;
+  }
+`;
 
 export const ReviewBodyWrapper = styled.div``;
 export const ReviewDate = styled.div`
@@ -85,4 +93,21 @@ export const ReviewImages = styled.div`
   img {
     margin-right: 15px;
   }
+`;
+
+export const ReviewUserAvatarContainer = styled.div`
+  margin-right: 25px;
+
+  @media (max-width: ${l}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+`;
+export const ReviewUserImg = styled.img`
+  width: 64px;
+  height: auto;
+  border-radius: 50px;
 `;

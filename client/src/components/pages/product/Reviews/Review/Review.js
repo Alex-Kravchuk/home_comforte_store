@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 import {
   ReviewImg,
   ReviewRating,
@@ -10,14 +11,26 @@ import {
   ReviewImgNameContainer,
 } from "./Review.styled";
 
-import { Rate } from "antd";
+import { Avatar, Rate } from "antd";
+
 import ReviewBody from "./ReviewBody";
+import ReviewHeader from "./ReviewHeader";
 
 const Review = ({ review }) => {
   const [showMore, setShowMore] = useState(false);
 
-  const { date, body, raiting, body_img, product_img, product_name } =
-    review;
+  const {
+    date,
+    body,
+    raiting,
+    body_img,
+    // user_img,
+    // user_name,
+    // product_img,
+    product_name,
+  } = review;
+
+  console.log("s", Boolean(product_name));
 
   const showMoreHandler = () => {
     setShowMore((state) => !state);
@@ -28,8 +41,10 @@ const Review = ({ review }) => {
       <ReviewContainer>
         <ReviewProduct>
           <ReviewImgNameContainer>
-            <ReviewImg src={product_img} />
-            <ReviewProductName>{product_name}</ReviewProductName>
+            <ReviewHeader
+              review={review}
+              standartReview={Boolean(product_name)}
+            />
           </ReviewImgNameContainer>
           <ReviewRating>
             <Rate defaultValue={raiting} disabled />

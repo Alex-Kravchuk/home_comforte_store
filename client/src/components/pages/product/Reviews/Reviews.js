@@ -1,11 +1,19 @@
 import React from "react";
+
+import Filter from "./Filter/Filter";
+import ReviewsList from "./ReviewsList/ReviewsList";
+import ReviewsHeader from "./ReviewsHeader/ReviewsHeader";
+
 import { ReviewsContainer, ReviewsWrapper } from "./Reviews.styled";
-import { Container } from "../../../../styles/globalStyles";
 
 const Reviews = () => {
   return (
     <ReviewsWrapper>
-      <ReviewsContainer>Reviews block</ReviewsContainer>
+      <ReviewsContainer>
+        <ReviewsHeader />
+        <Filter />
+        <ReviewsList />
+      </ReviewsContainer>
     </ReviewsWrapper>
   );
 };
