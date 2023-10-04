@@ -74,5 +74,14 @@ export const SPHeaderRedirectButton = styled.div`
 export const SPOffers = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  height: 200px;
+  padding: 0 20px;
+
+  box-shadow: inset 0 0 2px 0.5px rgba(21, 21, 21, 0.05),
+    inset 0 0 5px 0 rgba(21, 21, 21, 0.15);
+
+  @media (max-width: ${m}px) {
+    padding: 0;
+    border: unset;
+    box-shadow: unset;
+  }
 `;

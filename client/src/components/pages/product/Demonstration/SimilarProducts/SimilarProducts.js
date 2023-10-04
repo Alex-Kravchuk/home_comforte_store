@@ -1,17 +1,21 @@
 import React from "react";
-import {
-  SPContainer,
-  SPHeader,
-  SPHeaderRedirectButton,
-  SPHeaderTitle,
-  SPOffers,
-  SPWrapper,
-} from "./SimilarProducts.styled";
 
 import SimilarProductsSwiper from "./SimilarProductsSwiper/SimilarProductsSwiper";
 
+import { mockSimilarData } from "./mockData";
+
+import {
+  SPHeader,
+  SPOffers,
+  SPWrapper,
+  SPContainer,
+  SPHeaderTitle,
+  SPHeaderRedirectButton,
+} from "./SimilarProducts.styled";
+
 const SimilarProducts = () => {
   const currentProductCategory = "living";
+  
   return (
     <SPWrapper>
       <SPContainer>
@@ -22,7 +26,7 @@ const SimilarProducts = () => {
           </SPHeaderRedirectButton>
         </SPHeader>
         <SPOffers>
-          <SimilarProductsSwiper />
+          <SimilarProductsSwiper products={mockSimilarData} />
         </SPOffers>
       </SPContainer>
     </SPWrapper>

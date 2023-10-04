@@ -8,6 +8,9 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
+import SimilarProductCard from "../SimilarProductCard/SimilarProductCard";
+import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 // import "./styles.css";
 
@@ -15,31 +18,30 @@ import "swiper/css/scrollbar";
 // import { Pagination } from "swiper/modules";
 
 const SimilarProductsSwiper = ({ products }) => {
-//   const [swiper, setSwiper] = useState();
-  //   const swiper = useSwiper();
+  const { width } = useGetWindowSize();
+  const laptopScreen =
+    width <= viewport_sizes.xxl && width >= viewport_sizes.xl;
+
+  const mobileScreen = width <= viewport_sizes.ml;
+  const tabletScreen = width <= viewport_sizes.l;
+
+  const swiperConfig = {
+    slidesPerView: laptopScreen || mobileScreen ? 1.5 : 2.5,
+    spaceBetween: 15,
+    scrollbar: {
+      hide: true,
+    },
+    navigation: !tabletScreen,
+    modules: [Scrollbar, Navigation],
+  };
   return (
     <>
-      <Swiper
-        slidesPerView={"2"}
-        spaceBetween={30}
-        scrollbar={{
-          hide: true,
-        }}
-        navigation={true}
-        modules={[Scrollbar, Navigation]}
-        // onSwiper={(s) => setSwiper(s)}
-      >
-        <SwiperSlide style={{ height: 100, background: "lightblue" }}>
-          Slide 1
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+      <Swiper {...swiperConfig}>
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
+            <SimilarProductCard similarProduct={product} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
