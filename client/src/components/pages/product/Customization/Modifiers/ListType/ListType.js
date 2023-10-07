@@ -1,5 +1,15 @@
 import React from "react";
 
+import { Scrollbar, Navigation, FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/scrollbar";
+
+import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
+
 import {
   ListTypeContainer,
   ListTypeModifierContainer,
@@ -7,25 +17,76 @@ import {
   ModifieTitle,
   ModifierDescr,
   ModifierImg,
+  ModifierImgBorderContainer,
   ModifierImgContainer,
 } from "./ListType.styled";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 const ListType = ({ data }) => {
   console.log("====================================");
   console.log(data);
   console.log("====================================");
+
+  const viewport = useGetWindowSize();
+
+  const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
+
+  const swiperConfig = {
+    // slidesPerView: laptopScreen || mobileScreen ? 1.5 : 2.5,
+    slidesPerView: 4,
+    spaceBetween: 15,
+    scrollbar: {
+      hide: true,
+    },
+    freemode: true,
+    // navigation: !tabletScreen,
+    modules: [Scrollbar, FreeMode],
+    breakpoints: {
+      490: {
+        slidesPerView: 5,
+      },
+      590: {
+        slidesPerView: 6,
+      },
+      690: {
+        slidesPerView: 8,
+      },
+    },
+  };
+
   return (
     <ListTypeWrapper>
       <ListTypeContainer>
-        {data.map((item) => (
-          <ListTypeModifierContainer key={item.id}>
-            <ModifierImgContainer>
-              <ModifierImg src={item.img} alt={item.title} />
-            </ModifierImgContainer>
-            <ModifieTitle>{item.title}</ModifieTitle>
-            <ModifierDescr>{item.descr}</ModifierDescr>
-          </ListTypeModifierContainer>
-        ))}
+        {!smallLaptopScreen &&
+          data.map((item) => (
+            <ListTypeModifierContainer key={item.id}>
+              <ModifierImgContainer>
+                <ModifierImg src={item.img} alt={item.title} />
+                <ModifierImgBorderContainer />
+              </ModifierImgContainer>
+
+              <ModifieTitle>{item.title}</ModifieTitle>
+              <ModifierDescr>{item.descr}</ModifierDescr>
+            </ListTypeModifierContainer>
+          ))}
+
+        {smallLaptopScreen && (
+          <Swiper {...swiperConfig}>
+            {data.map((item) => (
+              <SwiperSlide key={item.id}>
+                <ListTypeModifierContainer>
+                  <ModifierImgContainer>
+                    <ModifierImg src={item.img} alt={item.title} />{" "}
+                    <ModifierImgBorderContainer />
+                  </ModifierImgContainer>
+
+                  <ModifieTitle>{item.title}</ModifieTitle>
+                  <ModifierDescr>{item.descr}</ModifierDescr>
+                </ListTypeModifierContainer>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </ListTypeContainer>
     </ListTypeWrapper>
   );

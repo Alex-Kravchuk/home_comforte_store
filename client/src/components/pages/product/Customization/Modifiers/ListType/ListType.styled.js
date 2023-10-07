@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
+import { swiperStyles } from "../../../../../../styles/globalStyles";
+
+const { xl } = viewport_sizes;
 
 export const ListTypeWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -10,6 +14,8 @@ export const ListTypeWrapper = styled.div`
 
   overflow: auto;
   max-height: 250px;
+
+  ${swiperStyles};
 
   ::-webkit-scrollbar {
     width: 6px;
@@ -27,10 +33,18 @@ export const ListTypeWrapper = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.65);
   }
+
+  @media (max-width: ${xl}px) {
+    overflow: unset;
+  }
 `;
 export const ListTypeContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  @media (max-width: ${xl}px) {
+    display: block;
+  }
 `;
 export const ListTypeModifierContainer = styled.div`
   cursor: pointer;
@@ -40,18 +54,35 @@ export const ListTypeModifierContainer = styled.div`
 
   &:hover {
     div:nth-child(1) {
-      border: 4px solid rgba(192, 192, 192, 1);
+      div {
+        border: 4px solid rgba(192, 192, 192, 1);
+      }
     }
+  }
+
+  @media (max-width: ${xl}px) {
+    padding-bottom: 15px;
   }
 `;
 
 export const ModifierImgContainer = styled.div`
-  box-sizing: border-box;
+  position: relative;
+  width: 75px;
+  height: 75px;
+`;
+
+export const ModifierImgBorderContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 71px;
+  height: 71px;
+  transform: translate(-50%, -50%);
   border: 4px solid rgba(0, 0, 0, 0);
   transition: all 0.2s ease;
 `;
 export const ModifierImg = styled.img`
-  width: 75px;
+  width: 100%;
   height: 100%;
   box-sizing: border-box;
 `;

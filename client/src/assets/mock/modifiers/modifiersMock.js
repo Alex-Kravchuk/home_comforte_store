@@ -43,11 +43,39 @@ export const modifiersMock = [
         descr: "Perfomance Antimicrobial Chenille",
       },
       {
-        id: 2,
+        id: 6,
         img: list_2,
         title: "Harbour",
         descr: "Perfomance Velvet",
       },
+      {
+        id: 7,
+        img: list_1,
+        title: "Cement",
+        descr: "Perfomance Antimicrobial Chenille",
+      },
+
+      {
+        id: 8,
+        img: list_2,
+        title: "Harbour",
+        descr: "Perfomance Velvet",
+      },
+
+      {
+        id: 9,
+        img: list_1,
+        title: "Cement",
+        descr: "Perfomance Antimicrobial Chenille",
+      },
+
+      {
+        id: 10,
+        img: list_2,
+        title: "Harbour",
+        descr: "Perfomance Velvet",
+      },
+
     ],
   },
 
