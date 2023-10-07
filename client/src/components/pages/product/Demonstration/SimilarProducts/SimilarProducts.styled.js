@@ -78,6 +78,7 @@ export const SPOffers = styled.div`
 
   box-shadow: inset 0 0 2px 0.5px rgba(21, 21, 21, 0.05),
     inset 0 0 5px 0 rgba(21, 21, 21, 0.15);
+    
 
   @media (max-width: ${m}px) {
     padding: 0;

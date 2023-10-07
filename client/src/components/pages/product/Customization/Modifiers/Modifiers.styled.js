@@ -10,6 +10,13 @@ export const ModifiersWrapper = styled.div`
     background: #fff;
   }
 
+  .ant-collapse-large
+  > .ant-collapse-item
+  > .ant-collapse-content
+  > .ant-collapse-content-box {
+  padding: 14px;
+}
+
   @media (max-width: ${xl}px) {
     margin: 0;
 

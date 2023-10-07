@@ -22,6 +22,23 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;    
     font-family: 'Lato', sans-serif;
     color: #555759;
+
+    ::-webkit-scrollbar{
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.65);
+    }
   }
 
    body:fullscreen::backdrop {

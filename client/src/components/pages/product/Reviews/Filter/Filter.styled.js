@@ -4,7 +4,7 @@ import { viewport_sizes } from "../../../../../utils/viewport_size_consts";
 const { m } = viewport_sizes;
 
 export const FilterWrapper = styled.div`
-  padding: 15px 0;
+  padding: 15px 0 30px 0;
 `;
 export const FilterContainer = styled.div`
   display: flex;
