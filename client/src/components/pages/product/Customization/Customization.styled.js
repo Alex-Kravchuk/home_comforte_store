@@ -18,7 +18,7 @@ export const CustomizationWrapper = styled.div`
   box-shadow: 0px -100px 0px 0px rgba(0, 0, 0, 0.04);
 
   @media (max-width: ${xxl}px) {
-    flex: 0 0 450px;
+    // flex: 0 0 450px;
   }
 
   @media (max-width: ${xl}px) {

@@ -2,6 +2,9 @@ import list_1 from "../../img/modifiers/list/list_1.jpg";
 import list_2 from "../../img/modifiers/list/list_2.jpg";
 import list_3 from "../../img/modifiers/list/list_3.webp";
 
+import tile1 from "../../img/modifiers/tile/tile1.svg";
+import tile2 from "../../img/modifiers/tile/tile2.svg";
+
 export const modifiersMock = [
   {
     id: 1,
@@ -142,6 +145,7 @@ export const modifiersMock = [
         id: 1,
         title: "Standart down blend",
         price: "Included",
+        img: tile1,
         descr:
           "A non-reversible cushion with a firmer sit.Multi-layer foam base with rounded down blend top; requires periodic cushion fluffing.",
       },
@@ -150,16 +154,18 @@ export const modifiersMock = [
         id: 2,
         title: "Double down blend",
         price: "+$225",
+        img: tile2,
         descr:
           "A plush reversible cushion with the softest sit.Multi-layer foam core wrapped in a down blend; requires frequent cushion fluffing",
       },
-      {
-        id: 3,
-        title: "Down alternative",
-        price: "+$200",
-        descr:
-          "A level reversible cushion with a soft and supportive sit.Multi-layer reversible foam seat; requires minimal cushion fluffing.",
-      },
+      // {
+      //   id: 3,
+      //   title: "Down alternative",
+      //   price: "+$200",
+      //   img: tile2,
+      //   descr:
+      //     "A level reversible cushion with a soft and supportive sit.Multi-layer reversible foam seat; requires minimal cushion fluffing.",
+      // },
     ],
   },
 ];
