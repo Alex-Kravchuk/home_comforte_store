@@ -26,16 +26,16 @@ export const modifiersMock = [
         id: 3,
         img: list_3,
         title: "Terracote",
-        descr: "Perfomance Antimicrobial Chenille",
+        descr: null,
       },
-      
+
       {
         id: 4,
         img: list_3,
         title: "Terracote",
         descr: "Perfomance Antimicrobial Chenille",
       },
-      
+
       {
         id: 5,
         img: list_3,
@@ -75,7 +75,6 @@ export const modifiersMock = [
         title: "Harbour",
         descr: "Perfomance Velvet",
       },
-
     ],
   },
 
@@ -100,19 +99,37 @@ export const modifiersMock = [
       {
         id: 1,
         title: "75''",
-        descr: "+$100",
+        price: "Included",
       },
-
       {
         id: 2,
         title: "79''",
-        descr: "+$200",
+        price: "+$100",
       },
-
       {
         id: 3,
-        title: "85''",
-        descr: "+$300",
+        title: "83''",
+        price: "+$200",
+      },
+      {
+        id: 4,
+        title: "87''",
+        price: "+$300",
+      },
+      {
+        id: 5,
+        title: "91''",
+        price: "+$400",
+      },
+      {
+        id: 6,
+        title: "79''",
+        price: "+$100",
+      },
+      {
+        id: 7,
+        title: "83''",
+        price: "+$200",
       },
     ],
   },

@@ -23,23 +23,17 @@ import {
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 const ListType = ({ data }) => {
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
-
   const viewport = useGetWindowSize();
 
   const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
 
   const swiperConfig = {
-    // slidesPerView: laptopScreen || mobileScreen ? 1.5 : 2.5,
     slidesPerView: 4,
     spaceBetween: 15,
     scrollbar: {
       hide: true,
     },
     freemode: true,
-    // navigation: !tabletScreen,
     modules: [Scrollbar, FreeMode],
     breakpoints: {
       490: {

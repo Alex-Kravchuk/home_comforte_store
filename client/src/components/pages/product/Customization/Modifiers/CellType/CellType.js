@@ -1,12 +1,26 @@
-import React from 'react';
-import { CellTypeContainer, CellTypeWrapper } from './CellType.styled';
+import React from "react";
 
-const CellType = () => {
-	return (
-	  <CellTypeWrapper>
-		<CellTypeContainer>Cell type of modifier</CellTypeContainer>
-	  </CellTypeWrapper>
-	)
- }
+import {
+  Cell,
+  CellPrice,
+  CellTitle,
+  CellTypeWrapper,
+  CellTypeContainer,
+} from "./CellType.styled";
+
+const CellType = ({ data }) => {
+  return (
+    <CellTypeWrapper>
+      <CellTypeContainer>
+        {data.map((item) => (
+          <Cell key={item.id}>
+            <CellTitle>{item.title}</CellTitle>
+            <CellPrice>{item.price}</CellPrice>
+          </Cell>
+        ))}
+      </CellTypeContainer>
+    </CellTypeWrapper>
+  );
+};
 
 export default CellType;
