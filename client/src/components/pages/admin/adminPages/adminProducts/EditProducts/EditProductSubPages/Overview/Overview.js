@@ -15,7 +15,7 @@ const Overview = () => {
         <SearchField />
         <List
           size="large"
-		  bordered
+          bordered
           dataSource={adminProductListMOCK}
           renderItem={(item) => (
             <List.Item>

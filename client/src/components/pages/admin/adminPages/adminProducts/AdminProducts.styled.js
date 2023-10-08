@@ -1,18 +1,40 @@
 import styled from "styled-components";
+import { getResponsiveFontSize } from "../../../../../helpers/getResponsiveFontSize";
 
 export const AdminProductsWrapper = styled.div`
   .ant-tabs,
   .ant-tabs-tab,
   .ant-tabs-tab-active,
   .ant-tabs-tab-btn {
-    font-size: 18px;
+    font-size: ${getResponsiveFontSize(18, 16)};
+  }
+
+  .ant-list-bordered.ant-list-lg .ant-list-item {
+    @media (max-width: 760px) {
+      padding: 12px 20px;
+    }
+
+    @media (max-width: 425px) {
+      padding: 8px 16px;
+    }
   }
 `;
 export const AdminProductsContainer = styled.div``;
 export const AdminTitlesGroupe = styled.div``;
+export const AdminTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (min-width: 760px) {
+    svg:last-child {
+      visibility: hidden;
+    }
+  }
+`;
 
 export const TabLabel = styled.div`
-  display: flex; 
+  display: flex;
   align-items: center;
 `;
 

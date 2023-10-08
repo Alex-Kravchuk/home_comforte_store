@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 import { swiperStyles } from "../../../../../../styles/globalStyles";
 
@@ -75,8 +76,8 @@ export const ModifierImgBorderContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 71px;
-  height: 71px;
+  width: 68px;
+  height: 68px;
   transform: translate(-50%, -50%);
   border: 4px solid rgba(0, 0, 0, 0);
   transition: all 0.2s ease;

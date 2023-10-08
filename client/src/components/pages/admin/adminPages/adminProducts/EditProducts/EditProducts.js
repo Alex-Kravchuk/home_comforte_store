@@ -1,18 +1,35 @@
 import React from "react";
-import {
-  AdminProductsContainer,
-  AdminProductsWrapper,
-  AdminTitlesGroupe,
-} from "../AdminProducts.styled";
-import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
+
+import { Tooltip } from "antd";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+
 import EditProductsSubPages from "./EditProductSubPages/EditProductSubPages";
+
+import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
+
+import {
+  AdminTitlesGroupe,
+  AdminTitleContainer,
+  AdminProductsWrapper,
+  AdminProductsContainer,
+} from "../AdminProducts.styled";
 
 const EditProducts = () => {
   return (
     <AdminProductsWrapper>
       <AdminProductsContainer>
         <AdminTitlesGroupe>
-          <AdminPagesTitle>Edit products</AdminPagesTitle>
+          <AdminTitleContainer>
+            <AdminPagesTitle>Edit products</AdminPagesTitle>
+
+            <Tooltip
+              title="To be able to edit certain elements on this page, please use a device with a large screen"
+              placement="bottomLeft"
+            >
+              <InfoOutlinedIcon />
+            </Tooltip>
+          </AdminTitleContainer>
+
           <AdminPagesSubTitle>
             The most important feature in the product editing section is the
             product adding part. When adding products here, do not ignore to

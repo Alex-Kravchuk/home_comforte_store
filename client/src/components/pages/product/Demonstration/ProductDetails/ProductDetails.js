@@ -44,7 +44,7 @@ const ProductDetails = () => {
       <ProductDetailsContainer>
         <Collapse
           items={items}
-          defaultActiveKey={["1"]}
+          defaultActiveKey={["1", '2', '3']}
           expandIconPosition="end"
           expandIcon={({ isActive }) => <ExpandIcon open={isActive} />}
         />

@@ -2,21 +2,22 @@ import React from "react";
 
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
+import { Tooltip } from "antd";
+
 import {
   PLIImg,
   PLIName,
   PLIWrapper,
   PLIContainer,
   PLIInterface,
+  PLIImgContainer,
   PLIAdditionalInfo,
   PLIInterfaceContainer,
   PLIAdditionalInfoBlock,
   PLIAdditionalInfoContainer,
   PLIAdditionalInfoBlockLable,
   PLIAdditionalInfoBlockContent,
-  PLIImgContainer,
 } from "./ProductListItem.styled";
-import { Tooltip } from "antd";
 
 const ProductListItem = ({ name, category, type, subtype, img }) => {
   return (
@@ -25,10 +26,9 @@ const ProductListItem = ({ name, category, type, subtype, img }) => {
         <PLIInterfaceContainer>
           <PLIName>{name}</PLIName>
           <PLIInterface>
-			<Tooltip title="Edit" placement="left">
-			<ModeEditOutlineOutlinedIcon />
-			</Tooltip>
-      
+            <Tooltip title="Edit" placement="left">
+              <ModeEditOutlineOutlinedIcon />
+            </Tooltip>
           </PLIInterface>
         </PLIInterfaceContainer>
         <PLIAdditionalInfoContainer>

@@ -24,7 +24,6 @@ export const TileTitleContainer = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 70px;
-
   box-sizing: border-box;
 `;
 export const TileDescrContainer = styled.div`

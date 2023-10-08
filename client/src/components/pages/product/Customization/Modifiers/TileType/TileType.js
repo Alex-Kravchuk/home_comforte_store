@@ -2,14 +2,14 @@ import React from "react";
 
 import {
   Tile,
-  TileDescr,
-  TileDescrContainer,
   TileImg,
+  TileDescr,
   TilePrice,
   TileTitle,
-  TileTitleContainer,
-  TileTypeContainer,
   TileTypeWrapper,
+  TileTypeContainer,
+  TileDescrContainer,
+  TileTitleContainer,
 } from "./TileType.styled";
 
 const TileType = ({ data }) => {

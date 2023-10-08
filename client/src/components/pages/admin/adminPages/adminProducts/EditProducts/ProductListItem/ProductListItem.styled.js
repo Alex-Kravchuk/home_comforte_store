@@ -19,6 +19,10 @@ export const PLIName = styled.div`
 `;
 export const PLIInterface = styled.div`
   cursor: pointer;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 
 export const PLIAdditionalInfoContainer = styled.div`

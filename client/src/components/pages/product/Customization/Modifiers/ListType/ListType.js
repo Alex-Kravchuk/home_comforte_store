@@ -1,26 +1,27 @@
 import React from "react";
 
-import { Scrollbar, Navigation, FreeMode } from "swiper/modules";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Scrollbar, FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
+
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
+
+import {
+  ModifierImg,
+  ModifieTitle,
+  ModifierDescr,
+  ListTypeWrapper,
+  ListTypeContainer,
+  ModifierImgContainer,
+  ListTypeModifierContainer,
+  ModifierImgBorderContainer,
+} from "./ListType.styled";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
-
-import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
-
-import {
-  ListTypeContainer,
-  ListTypeModifierContainer,
-  ListTypeWrapper,
-  ModifieTitle,
-  ModifierDescr,
-  ModifierImg,
-  ModifierImgBorderContainer,
-  ModifierImgContainer,
-} from "./ListType.styled";
-import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 const ListType = ({ data }) => {
   const viewport = useGetWindowSize();
@@ -33,7 +34,7 @@ const ListType = ({ data }) => {
     scrollbar: {
       hide: true,
     },
-    freemode: true,
+    freemode: "true",
     modules: [Scrollbar, FreeMode],
     breakpoints: {
       490: {
