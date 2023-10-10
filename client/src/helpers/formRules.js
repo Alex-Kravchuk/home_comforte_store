@@ -21,6 +21,15 @@ export const formRules = {
       },
     }),
   ],
+
+  numberInput: [
+    {
+      type: "number",
+      min: 0,
+      max: 99,
+      required: true,
+    },
+  ],
   confirmPaswordInput: [
     { required: true, message: "Please confirm your password" },
     ({ getFieldValue }) => ({

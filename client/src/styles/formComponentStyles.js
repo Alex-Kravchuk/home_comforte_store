@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { viewport_sizes } from "../utils/viewport_size_consts";
 import { textColors } from "./globalStyles";
 import { getResponsiveFontSize } from "../helpers/getResponsiveFontSize";
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
 
 const { xl, l, m, s } = viewport_sizes;
 
@@ -68,6 +68,16 @@ export const FormSubTitle = styled.div`
 `;
 
 export const FormInput = styled(Input)`
+  height: 50px;
+  font-size: 16px;
+  color: ${textColors.main};
+
+  @media (max-width: ${s}px) {
+    height: 45px;
+  }
+`;
+
+export const FormInputNumber = styled(InputNumber)`
   height: 50px;
   font-size: 16px;
   color: ${textColors.main};
