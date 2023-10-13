@@ -26,7 +26,7 @@ export const formRules = {
     {
       type: "number",
       min: 0,
-      max: 99,
+      max: 999999,
       required: true,
     },
   ],
@@ -75,7 +75,7 @@ export const formRules = {
     },
   ],
 
-  selectInput: (labelName) => [
+  selectInput: (labelName = "") => [
     {
       required: true,
       message: `Please select ${labelName}`,

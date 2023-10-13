@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
-import {  Upload } from "antd";
+import { Upload } from "antd";
 import { useSelector } from "react-redux";
 
 import { PlusOutlined } from "@ant-design/icons";
 import { getBase64 } from "../../../../../../../../helpers/getBase64";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
-import { UploadButtonWrapper } from "./UploadImg.styled";
+import {
+  SeparateLargeImg,
+  SeparateLargeImgContainer,
+  UploadButtonWrapper,
+} from "./UploadImg.styled";
 import PreviewModal from "./PreviewModal/PreviewModal";
 
-const UploadImg = ({ saveFileHandler }) => {
+const UploadImg = ({ separateLargeImg = false, saveFileHandler }) => {
   const { id, img } = useSelector((state) => state.user.userData);
   const [imageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -76,8 +80,8 @@ const UploadImg = ({ saveFileHandler }) => {
     <>
       <Upload
         name="avatar"
-        maxCount={1}
-        showUploadList={true}
+        maxCount={0}
+        showUploadList={!separateLargeImg}
         listType="picture-card"
         accept="image/png, image/jpg, image/jpeg, image/webp"
         defaultFileList={defaultFileList}
@@ -94,6 +98,12 @@ const UploadImg = ({ saveFileHandler }) => {
         avatar={img}
         imageURL={imageURL}
       />
+      {separateLargeImg && (
+        <SeparateLargeImgContainer>
+          <SeparateLargeImg src={imageURL} />
+        </SeparateLargeImgContainer>
+      )}
+      
     </>
   );
 };

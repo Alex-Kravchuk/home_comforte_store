@@ -2,22 +2,18 @@ import styled from "styled-components";
 import { textColors } from "../../../../../../styles/globalStyles";
 
 export const SeatSizeWrapper = styled.div``;
-export const SeatSizeContainer = styled.div``;
-
-export const SeatSizeHeader = styled.div``;
-
-export const SeatSizeInfo = styled.div``;
+export const SeatSizeContainer = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
 export const SeatSizeInfoBlock = styled.div`
   display: flex;
   align-items: strech;
   justify-content: space-between;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
 
-  &:nth-child(2) {
-    border-top: none;
+  &:last-child {
     border-bottom: none;
   }
 `;
@@ -25,6 +21,10 @@ export const SeatSizeInfoBlock = styled.div`
 export const SeatSizeInfoBlockLeft = styled.div`
   width: 50%;
   padding: 10px 0;
+
+  input:last-child {
+    margin-top: 5px;
+  }
 `;
 
 export const SeatSizeInfoBlockRight = styled.div`

@@ -10,6 +10,10 @@ export const GeneralInfoWrapper = styled.div`
   .ant-input-number .ant-input-number-input {
     height: 100%;
   }
+
+  .ant-upload-wrapper.ant-upload-picture-card-wrapper {
+    text-align: center;
+  }
 `;
 export const GeneralInfoContainer = styled.div``;
 
@@ -19,6 +23,11 @@ export const InfoBlock = styled.div`
 
   &:nth-child(2n) {
     padding: 24px 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    box-shadow: none;
   }
 `;
 export const InfoBlockTitle = styled.div`

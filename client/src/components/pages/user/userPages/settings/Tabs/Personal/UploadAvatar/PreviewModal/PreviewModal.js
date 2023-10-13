@@ -9,6 +9,7 @@ const PreviewModal = ({
   previewOpenHandler,
   cancelHandler,
 }) => {
+
   return (
     <Modal
       open={previewOpenHandler}
