@@ -21,6 +21,7 @@ import {
   AddProductFormContainer,
 } from "./AddProduct.styled";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
+import ProductImages from "./ProductImages/ProductImages";
 
 const text = `
   A dog is a type of domesticated animal.
@@ -36,7 +37,7 @@ const items = [
   {
     key: "2",
     label: "Images",
-    children: <p>{text}</p>,
+    children: <ProductImages />,
   },
   {
     key: "3",

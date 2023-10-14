@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InfoBlock, InfoBlockTitle } from "../GeneralInfo.styled";
+
 import { Form, Select } from "antd";
 import { FormLabel } from "@mui/material";
 import { formRules } from "../../../../../../../../../../helpers/formRules";
@@ -7,6 +7,7 @@ import {
   FormInput,
   FormInputNumber,
 } from "../../../../../../../../../../styles/formComponentStyles";
+import { InfoBlock } from "../../AddProduct.styled";
 
 const SubGeneralInfo = ({ categories }) => {
   const [types, setTypes] = useState([]);
@@ -36,7 +37,6 @@ const SubGeneralInfo = ({ categories }) => {
     }));
   return (
     <InfoBlock>
-      <InfoBlockTitle>General</InfoBlockTitle>
       <Form.Item
         name="name"
         label={<FormLabel>Product name:</FormLabel>}
@@ -49,7 +49,7 @@ const SubGeneralInfo = ({ categories }) => {
         label={<FormLabel>Price:</FormLabel>}
         rules={formRules.numberInput}
       >
-        <FormInputNumber min={0}/>
+        <FormInputNumber min={0} />
       </Form.Item>
 
       <Form.Item>

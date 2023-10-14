@@ -5,8 +5,8 @@ import DimensionInfoHeader from "./DimensionInfoHeader";
 import DimensionSeatSizeItem from "./DimensionSeatSizeItem";
 
 import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
-import { InfoBlock, InfoBlockTitle } from "../GeneralInfo.styled";
 import UploadImg from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
+import { InfoBlock } from "../../AddProduct.styled";
 
 const DimensionInfo = () => {
   const [dimensionsData, setDimensionsData] = useState([
@@ -58,7 +58,6 @@ const DimensionInfo = () => {
 
   return (
     <InfoBlock>
-      <InfoBlockTitle>Dimensions</InfoBlockTitle>
       <DimensionInfoHeader />
       <DISeatSizeContainer>
         {dimensionsData.map((item) => (
