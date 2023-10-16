@@ -1,27 +1,29 @@
 import React from "react";
-import { Modal } from "antd";
 
-import { ModalImg } from "./PreviewModal.styled";
+import { Modal } from "antd";
+import { ModalImg, ModalWrapper } from "./PreviewModal.styled";
 
 const PreviewModal = ({
-  avatar,
-  imageURL,
+  img,
+  localImageURL,
   previewOpenHandler,
   cancelHandler,
 }) => {
 
   return (
-    <Modal
-      open={previewOpenHandler}
-      onCancel={cancelHandler}
-      footer={null}
-      title="Your avatar"
-    >
-      <ModalImg
-        alt="modalimage"
-        src={avatar ? process.env.REACT_APP_API_URL + avatar : imageURL}
-      />
-    </Modal>
+    <ModalWrapper>
+      <Modal
+        open={previewOpenHandler}
+        onCancel={cancelHandler}
+        footer={null}
+        title="Your image"
+      >
+        <ModalImg
+          alt="modalimage"
+          src={img ? process.env.REACT_APP_API_URL + img : localImageURL}
+        />
+      </Modal>
+    </ModalWrapper>
   );
 };
 

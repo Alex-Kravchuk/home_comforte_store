@@ -2,22 +2,28 @@ import React, { useState } from "react";
 
 import { Upload } from "antd";
 import { useSelector } from "react-redux";
-
 import { PlusOutlined } from "@ant-design/icons";
-import { getBase64 } from "../../../../../../../../helpers/getBase64";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
+import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
+
+import ModalUploading from "./ModalUploading/ModalUploading";
 import {
   SeparateLargeImg,
-  SeparateLargeImgContainer,
   UploadButtonWrapper,
-} from "./UploadImg.styled";
-import PreviewModal from "./PreviewModal/PreviewModal";
+  SeparateLargeImgContainer,
+} from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
 
-const UploadImg = ({ saveFileHandler }) => {
+const ProductImagesUploading = ({
+  moreThanOne = false,
+  separateLargeImg = false,
+  saveFileHandler,
+}) => {
   const { id, img } = useSelector((state) => state.user.userData);
-  const [localImageURL, setImageURL] = useState(img);
+  const [imageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [fileList, setFileList] = useState([]);
+  const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
 
   const defaultFileList = img
     ? [
@@ -54,6 +60,7 @@ const UploadImg = ({ saveFileHandler }) => {
 
     getBase64(info.file, (url) => {
       setImageURL(url);
+      setFileList((state) => [...state, { name: info.file.name, url }]);
     });
 
     saveFileHandler(info.file);
@@ -61,8 +68,15 @@ const UploadImg = ({ saveFileHandler }) => {
 
   const handleCancel = () => setPreviewOpen(false);
 
-  const onPreviewHandler = () => {
+  const onPreviewHandler = (ddd) => {
     setPreviewOpen(true);
+    let index;
+    fileList.forEach((file, ind) => {
+      if (file.name === ddd.name) {
+        index = ind;
+      }
+    });
+    setCurrentPreviewIndex(index);
   };
 
   const onRemoveHandler = () => {
@@ -72,7 +86,7 @@ const UploadImg = ({ saveFileHandler }) => {
 
   const uploadButton = (
     <UploadButtonWrapper>
-      {localImageURL ? <AutorenewOutlinedIcon /> : <PlusOutlined />}
+      {imageURL ? <AutorenewOutlinedIcon /> : <PlusOutlined />}
     </UploadButtonWrapper>
   );
 
@@ -80,8 +94,8 @@ const UploadImg = ({ saveFileHandler }) => {
     <>
       <Upload
         name="avatar"
-        maxCount={1}
-        showUploadList={true}
+        maxCount={moreThanOne ? 32 : 1}
+        showUploadList={!separateLargeImg}
         listType="picture-card"
         accept="image/png, image/jpg, image/jpeg, image/webp"
         defaultFileList={defaultFileList}
@@ -89,17 +103,25 @@ const UploadImg = ({ saveFileHandler }) => {
         onRemove={onRemoveHandler}
         beforeUpload={beforeUpload}
         onPreview={onPreviewHandler}
+        multiple={true}
       >
-        {uploadButton}
+        {moreThanOne ? <PlusOutlined /> : uploadButton}
       </Upload>
-      <PreviewModal
+      <ModalUploading
         previewOpenHandler={previewOpen}
         cancelHandler={handleCancel}
-        img={img === localImageURL ? img : false}
-        localImageURL={localImageURL}
+        avatar={img}
+        imageURL={imageURL}
+        files={fileList}
+        currentPreviewIndex={currentPreviewIndex}
       />
+      {separateLargeImg && (
+        <SeparateLargeImgContainer>
+          <SeparateLargeImg src={imageURL} />
+        </SeparateLargeImgContainer>
+      )}
     </>
   );
 };
 
-export default UploadImg;
+export default ProductImagesUploading;

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 import AddRemoveInterface from "./AddRemoveInterface";
-import DimensionInfoHeader from "./DimensionInfoHeader";
+
 import DimensionSeatSizeItem from "./DimensionSeatSizeItem";
 
 import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
 import UploadImg from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
 import { InfoBlock } from "../../AddProduct.styled";
+import InfoHeader from "../../InfoHeader/InfoHeader";
 
 const DimensionInfo = () => {
   const [dimensionsData, setDimensionsData] = useState([
@@ -58,7 +59,7 @@ const DimensionInfo = () => {
 
   return (
     <InfoBlock>
-      <DimensionInfoHeader />
+      <InfoHeader tooltipText="Here you can add information about the dimensions of the product. This will look like a name-value pair. You can also add a description to each label" />
       <DISeatSizeContainer>
         {dimensionsData.map((item) => (
           <DimensionSeatSizeItem
@@ -75,7 +76,7 @@ const DimensionInfo = () => {
         />
       </DISeatSizeContainer>
       <DIImageContainer>
-        <DimensionInfoHeader aboutImgInfo={true} />
+        <InfoHeader tooltipText="Here you must upload the image in the following format: the image must be shown in profile and front with as many dimensions as possible (eg width, seat depth, height from the floor, etc.). This will help the client better understand how exactly a certain product works." />
         <UploadImg separateLargeImg={true} saveFileHandler={saveFileHandler} />
       </DIImageContainer>
     </InfoBlock>

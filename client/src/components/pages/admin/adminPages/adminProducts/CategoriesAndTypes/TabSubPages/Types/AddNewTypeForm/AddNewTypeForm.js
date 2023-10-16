@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Select } from "antd";
 
 import { formRules } from "../../../../../../../../../helpers/formRules";
-import UploadAvatar from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
+import UploadImg from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
 
 import {
   FormInput,
@@ -52,7 +52,7 @@ const AddNewTypeForm = ({
         </FormInputWithTipWrapper>
       </Form.Item>
       <Form.Item label={<FormLabel>Upload image</FormLabel>}>
-        <UploadAvatar saveFileHandler={saveFileHandler} />
+        <UploadImg saveFileHandler={saveFileHandler} />
       </Form.Item>
       <Form.Item>
         <FromSubmitButton

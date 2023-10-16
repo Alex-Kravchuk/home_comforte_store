@@ -95,6 +95,9 @@ const OverviewCollapse = ({ changeDataHandler }) => {
       category.types = filtredSubTypes;
       return category;
     });
+
+    debugger
+
     changeDataHandler(filteredData);
     setCategories(filteredData);
   };

@@ -6,8 +6,10 @@ import OverviewCollapse from "./OverviewCollapse/OverviewCollapse";
 
 import { ProductService } from "../../../../../../../../api/product/productService";
 import { saveUpdatedMenuData } from "../../../../../../../../redux/loading/loadingSlice";
-import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
-
+import {
+  SubPageContainer,
+  SubPageWrapper,
+} from "../../../AdminProducts.styled";
 
 const Overview = () => {
   const { data: menuData } = useSelector((state) => state.menuData);

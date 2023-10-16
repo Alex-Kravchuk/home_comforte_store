@@ -4,9 +4,6 @@ import { Collapse, Result } from "antd";
 
 import ExpandIcon from "../../../../../../../../helpers/ExpandIcon/ExpandIcon";
 
-import MainContentForm from "./AddProductForms/MainContentForm/MainContentForm";
-import ImageContentForm from "./AddProductForms/ImageContentForm/ImageContentForm";
-
 import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
 
 import {

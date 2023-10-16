@@ -29,8 +29,6 @@ export const ProductPreviewWrapper = styled.div`
   }
 
   .swiper-slide {
-    /* Center slide text vertically */
-
     flex-shrink: 0;
     width: 100%;
     height: 100%;

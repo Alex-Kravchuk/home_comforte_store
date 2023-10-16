@@ -75,6 +75,8 @@ export class ProductService {
   };
 
   static updateCategories = async (data) => {
+    console.log('product service client', data);
+    
     const response = await $host.put("api/category/update", { data });
     return response;
   };
