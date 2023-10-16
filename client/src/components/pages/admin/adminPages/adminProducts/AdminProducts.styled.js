@@ -45,4 +45,8 @@ export const TabLabelText = styled.div`
 export const SubPageWrapper = styled.div`
   margin-bottom: 16px;
 `;
-export const SubPageContainer = styled.div``;
+export const SubPageContainer = styled.div`
+  .ant-select-single.ant-select-lg {
+    height: 100%;
+  }
+`;

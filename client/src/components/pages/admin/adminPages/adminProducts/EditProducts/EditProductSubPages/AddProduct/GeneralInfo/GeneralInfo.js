@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Collapse, Form } from "antd";
+import { Button, Collapse, Form } from "antd";
 import { useSelector } from "react-redux";
 
 import {
@@ -40,6 +40,7 @@ const GeneralInfo = () => {
             size="large"
             expandIconPosition="start"
           />
+          <Button htmlType="submit"> submit</Button>
         </Form>
       </GeneralInfoContainer>
     </GeneralInfoWrapper>
