@@ -8,11 +8,13 @@ import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
 
 import ModalUploading from "./ModalUploading/ModalUploading";
+
 import {
   SeparateLargeImg,
-  UploadButtonWrapper,
   SeparateLargeImgContainer,
-} from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
+} from "./ProductImagesUploading.styled";
+
+import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
 
 const ProductImagesUploading = ({
   moreThanOne = false,
@@ -20,7 +22,7 @@ const ProductImagesUploading = ({
   saveFileHandler,
 }) => {
   const { id, img } = useSelector((state) => state.user.userData);
-  const [imageURL, setImageURL] = useState(img);
+  const [localImageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [fileList, setFileList] = useState([]);
   const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
@@ -52,7 +54,7 @@ const ProductImagesUploading = ({
   };
 
   const handleChange = (info) => {
-    console.log("start loading", info);
+    console.log("start loading", info.file.uid);
 
     if (info.file.status === "removed") {
       return;
@@ -60,7 +62,10 @@ const ProductImagesUploading = ({
 
     getBase64(info.file, (url) => {
       setImageURL(url);
-      setFileList((state) => [...state, { name: info.file.name, url }]);
+      setFileList((state) => [
+        ...state,
+        { uid: info.file.uid, name: info.file.name, url },
+      ]);
     });
 
     saveFileHandler(info.file);
@@ -68,25 +73,31 @@ const ProductImagesUploading = ({
 
   const handleCancel = () => setPreviewOpen(false);
 
-  const onPreviewHandler = (ddd) => {
+  const onPreviewHandler = (previewItem) => {
     setPreviewOpen(true);
-    let index;
-    fileList.forEach((file, ind) => {
-      if (file.name === ddd.name) {
-        index = ind;
+
+    let selectedFileIndex;
+    fileList.forEach((file, index) => {
+      if (file.uid === previewItem.uid) {
+        selectedFileIndex = index;
       }
     });
-    setCurrentPreviewIndex(index);
+    setCurrentPreviewIndex(selectedFileIndex);
   };
 
-  const onRemoveHandler = () => {
+  const onRemoveHandler = (removedItem) => {
+    console.log("removed item", removedItem);
+
     setImageURL(null);
     saveFileHandler(null);
+    setFileList((state) =>
+      state.filter((file) => file.uid !== removedItem.uid)
+    );
   };
 
   const uploadButton = (
     <UploadButtonWrapper>
-      {imageURL ? <AutorenewOutlinedIcon /> : <PlusOutlined />}
+      {localImageURL ? <AutorenewOutlinedIcon /> : <PlusOutlined />}
     </UploadButtonWrapper>
   );
 
@@ -110,14 +121,13 @@ const ProductImagesUploading = ({
       <ModalUploading
         previewOpenHandler={previewOpen}
         cancelHandler={handleCancel}
-        avatar={img}
-        imageURL={imageURL}
+        // imageURL={localImageURL}
         files={fileList}
         currentPreviewIndex={currentPreviewIndex}
       />
       {separateLargeImg && (
         <SeparateLargeImgContainer>
-          <SeparateLargeImg src={imageURL} />
+          <SeparateLargeImg src={localImageURL} />
         </SeparateLargeImgContainer>
       )}
     </>

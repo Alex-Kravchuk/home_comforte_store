@@ -19,8 +19,8 @@ const ProductViewerImages = () => {
             <div>
               Here you must upload a minimum of 16 images to view the product.
               The product viewer works in 360, so your images should be such
-              that each image rotates around its own axis (you can
-              <a>click here</a> to see an example). All images should have a
+              that each image rotates around its own axis (you can 
+               <a> click here</a> to see an example). All images should have a
               single color background, shadows, etc., so that when scrolling the
               image, it appears as if the user is rotating a 3D shape around its
               axis.

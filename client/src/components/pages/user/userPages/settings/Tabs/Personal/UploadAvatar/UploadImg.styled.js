@@ -10,7 +10,7 @@ export const UploadButtonWrapper = styled.div`
 `;
 export const UploadButtonContainer = styled.div``;
 
-export const SeparateLargeImgContainer = styled.div``;
-export const SeparateLargeImg = styled.img`
-  width: 100%;
-`;
+// export const SeparateLargeImgContainer = styled.div``;
+// export const SeparateLargeImg = styled.img`
+//   width: 100%;
+// `;

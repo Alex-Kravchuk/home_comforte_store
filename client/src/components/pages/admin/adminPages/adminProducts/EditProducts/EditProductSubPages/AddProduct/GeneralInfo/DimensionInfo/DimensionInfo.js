@@ -5,9 +5,10 @@ import AddRemoveInterface from "./AddRemoveInterface";
 import DimensionSeatSizeItem from "./DimensionSeatSizeItem";
 
 import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
-import UploadImg from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg";
+
 import { InfoBlock } from "../../AddProduct.styled";
 import InfoHeader from "../../InfoHeader/InfoHeader";
+import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/ProductImagesUploading";
 
 const DimensionInfo = () => {
   const [dimensionsData, setDimensionsData] = useState([
@@ -77,7 +78,10 @@ const DimensionInfo = () => {
       </DISeatSizeContainer>
       <DIImageContainer>
         <InfoHeader tooltipText="Here you must upload the image in the following format: the image must be shown in profile and front with as many dimensions as possible (eg width, seat depth, height from the floor, etc.). This will help the client better understand how exactly a certain product works." />
-        <UploadImg separateLargeImg={true} saveFileHandler={saveFileHandler} />
+        <ProductImagesUploading
+          separateLargeImg={true}
+          saveFileHandler={saveFileHandler}
+        />
       </DIImageContainer>
     </InfoBlock>
   );

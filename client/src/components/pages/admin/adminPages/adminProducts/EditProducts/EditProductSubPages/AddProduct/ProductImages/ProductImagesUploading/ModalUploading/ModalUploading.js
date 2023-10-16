@@ -29,7 +29,7 @@ const ModalUploading = ({
   cancelHandler,
 }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  // console.log("log log", currentPreviewIndex);
+  console.log("log log", files);
   // console.log("oyi", files[activeSlideIndex]);
 
   return (
