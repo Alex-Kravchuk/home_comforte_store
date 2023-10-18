@@ -6,6 +6,7 @@ import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
 
 import ViewerUpload from "../ProductViewerImages/ViewerUpload";
 import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
+import PreviewImagesUpload from "../ProductPreviewImages/PreviewImagesUpload/PreviewImagesUpload";
 
 const ProductImagesUploading = ({
   uploadType,
@@ -93,8 +94,9 @@ const ProductImagesUploading = ({
     );
   };
 
-  const dimensionTypeUpload = uploadType === "dimension";
   const viewerTypeUpload = uploadType === "viewer";
+  const previewTypeUpload = uploadType === "preview";
+  const dimensionTypeUpload = uploadType === "dimension";
 
   const dimensionUploadConfig = {
     maxCount: 1,
@@ -128,12 +130,28 @@ const ProductImagesUploading = ({
     currentPreviewIndex,
   };
 
+  const previewConfig = {
+    maxCount: 5,
+    multiple: true,
+    showUploadList: false,
+    listType: "picture-card",
+    accept: "image/png, image/jpg, image/jpeg, image/webp",
+    onChange: handleChange,
+    onRemove: onRemoveHandler,
+    onPreview: onPreviewHandler,
+    fileList,
+    beforeUpload,
+    // localImageURL,
+    defaultFileList,
+  };
+
   return (
     <>
       {viewerTypeUpload && <ViewerUpload config={viewerUploadConfig} />}
       {dimensionTypeUpload && (
         <DimensionUpload config={dimensionUploadConfig} />
       )}
+      {previewTypeUpload && <PreviewImagesUpload config={previewConfig} />}
     </>
   );
 };
