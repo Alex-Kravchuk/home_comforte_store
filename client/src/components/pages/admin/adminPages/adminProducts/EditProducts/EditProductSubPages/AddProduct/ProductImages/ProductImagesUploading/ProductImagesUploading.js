@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Upload } from "antd";
+import { Button, Form, Upload } from "antd";
 import { useSelector } from "react-redux";
 import { PlusOutlined } from "@ant-design/icons";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
@@ -15,17 +15,27 @@ import {
 } from "./ProductImagesUploading.styled";
 
 import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
+import Hint from "./Hint/Hint";
 
 const ProductImagesUploading = ({
   moreThanOne = false,
   separateLargeImg = false,
   saveFileHandler,
+  clearFileListflag = null,
+  clearFileListHandler,
 }) => {
   const { id, img } = useSelector((state) => state.user.userData);
   const [localImageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [fileList, setFileList] = useState([]);
   const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
+
+  useEffect(() => {
+    if (clearFileListflag !== null) {
+      setFileList([]);
+      clearFileListHandler(true);
+    }
+  }, [clearFileListflag]);
 
   const defaultFileList = img
     ? [
@@ -39,10 +49,13 @@ const ProductImagesUploading = ({
 
   const beforeUpload = (file) => {
     return new Promise((resolve, reject) => {
+      console.log("file type", file.type);
+
       const isValidFormat =
         file.type === "image/jpeg" ||
         file.type === "image/jpg" ||
-        file.type === "image/png";
+        file.type === "image/png" ||
+        file.type === "image/webp";
 
       if (!isValidFormat) {
         reject(console.log("Invalid image type"));
@@ -54,7 +67,7 @@ const ProductImagesUploading = ({
   };
 
   const handleChange = (info) => {
-    console.log("start loading", info.file.uid);
+    // console.log("start loading", info.file.uid);
 
     if (info.file.status === "removed") {
       return;
@@ -62,9 +75,12 @@ const ProductImagesUploading = ({
 
     getBase64(info.file, (url) => {
       setImageURL(url);
+
+      console.log("SPECIAL LOG", info.file, url);
+
       setFileList((state) => [
         ...state,
-        { uid: info.file.uid, name: info.file.name, url },
+        { ...info.file, name: info.file.name, url },
       ]);
     });
 
@@ -86,7 +102,7 @@ const ProductImagesUploading = ({
   };
 
   const onRemoveHandler = (removedItem) => {
-    console.log("removed item", removedItem);
+    // console.log("removed item", removedItem);
 
     setImageURL(null);
     saveFileHandler(null);
@@ -115,13 +131,16 @@ const ProductImagesUploading = ({
         beforeUpload={beforeUpload}
         onPreview={onPreviewHandler}
         multiple={true}
+        fileList={fileList}
       >
-        {moreThanOne ? <PlusOutlined /> : uploadButton}
+        {fileList.length !== 32 && (
+          <>{moreThanOne ? <PlusOutlined /> : uploadButton}</>
+        )}
       </Upload>
+      {!separateLargeImg && <Hint length={fileList.length} />}
       <ModalUploading
         previewOpenHandler={previewOpen}
         cancelHandler={handleCancel}
-        // imageURL={localImageURL}
         files={fileList}
         currentPreviewIndex={currentPreviewIndex}
       />

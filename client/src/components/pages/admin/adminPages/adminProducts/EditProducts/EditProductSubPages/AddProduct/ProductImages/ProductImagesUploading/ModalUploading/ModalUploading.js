@@ -30,7 +30,7 @@ const ModalUploading = ({
 }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   console.log("log log", files);
-  // console.log("oyi", files[activeSlideIndex]);
+  console.log("oyi", files[activeSlideIndex]);
 
   return (
     <ModalWrapper>
