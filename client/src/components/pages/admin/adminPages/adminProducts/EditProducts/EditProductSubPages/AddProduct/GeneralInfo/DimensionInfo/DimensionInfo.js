@@ -79,7 +79,7 @@ const DimensionInfo = () => {
       <DIImageContainer>
         <InfoHeader tooltipText="Here you must upload the image in the following format: the image must be shown in profile and front with as many dimensions as possible (eg width, seat depth, height from the floor, etc.). This will help the client better understand how exactly a certain product works." />
         <ProductImagesUploading
-          separateLargeImg={true}
+          uploadType="dimension"
           saveFileHandler={saveFileHandler}
         />
       </DIImageContainer>

@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Form, Upload } from "antd";
 import { useSelector } from "react-redux";
-import { PlusOutlined } from "@ant-design/icons";
-import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
 import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
 
-import ModalUploading from "./ModalUploading/ModalUploading";
-
-import {
-  SeparateLargeImg,
-  SeparateLargeImgContainer,
-} from "./ProductImagesUploading.styled";
-
-import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
-import Hint from "./Hint/Hint";
+import ViewerUpload from "../ProductViewerImages/ViewerUpload";
+import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
 
 const ProductImagesUploading = ({
-  moreThanOne = false,
-  separateLargeImg = false,
+  uploadType,
   saveFileHandler,
   clearFileListflag = null,
   clearFileListHandler,
@@ -67,17 +56,12 @@ const ProductImagesUploading = ({
   };
 
   const handleChange = (info) => {
-    // console.log("start loading", info.file.uid);
-
     if (info.file.status === "removed") {
       return;
     }
 
     getBase64(info.file, (url) => {
       setImageURL(url);
-
-      console.log("SPECIAL LOG", info.file, url);
-
       setFileList((state) => [
         ...state,
         { ...info.file, name: info.file.name, url },
@@ -102,8 +86,6 @@ const ProductImagesUploading = ({
   };
 
   const onRemoveHandler = (removedItem) => {
-    // console.log("removed item", removedItem);
-
     setImageURL(null);
     saveFileHandler(null);
     setFileList((state) =>
@@ -111,43 +93,46 @@ const ProductImagesUploading = ({
     );
   };
 
-  const uploadButton = (
-    <UploadButtonWrapper>
-      {localImageURL ? <AutorenewOutlinedIcon /> : <PlusOutlined />}
-    </UploadButtonWrapper>
-  );
+  const dimensionTypeUpload = uploadType === "dimension";
+  const viewerTypeUpload = uploadType === "viewer";
+
+  const dimensionUploadConfig = {
+    maxCount: 1,
+    multiple: false,
+    showUploadList: false,
+    listType: "picture-card",
+    accept: "image/png, image/jpg, image/jpeg, image/webp",
+    onChange: handleChange,
+    onRemove: onRemoveHandler,
+    onPreview: onPreviewHandler,
+    fileList,
+    beforeUpload,
+    localImageURL,
+    defaultFileList,
+  };
+
+  const viewerUploadConfig = {
+    maxCount: 32,
+    multiple: true,
+    showUploadList: true,
+    listType: "picture-card",
+    accept: "image/png, image/jpg, image/jpeg, image/webp",
+    onChange: handleChange,
+    onRemove: onRemoveHandler,
+    onPreview: onPreviewHandler,
+    cancelHandler: handleCancel,
+    previewOpenHandler: previewOpen,
+    fileList,
+    beforeUpload,
+    defaultFileList,
+    currentPreviewIndex,
+  };
 
   return (
     <>
-      <Upload
-        name="avatar"
-        maxCount={moreThanOne ? 32 : 1}
-        showUploadList={!separateLargeImg}
-        listType="picture-card"
-        accept="image/png, image/jpg, image/jpeg, image/webp"
-        defaultFileList={defaultFileList}
-        onChange={handleChange}
-        onRemove={onRemoveHandler}
-        beforeUpload={beforeUpload}
-        onPreview={onPreviewHandler}
-        multiple={true}
-        fileList={fileList}
-      >
-        {fileList.length !== 32 && (
-          <>{moreThanOne ? <PlusOutlined /> : uploadButton}</>
-        )}
-      </Upload>
-      {!separateLargeImg && <Hint length={fileList.length} />}
-      <ModalUploading
-        previewOpenHandler={previewOpen}
-        cancelHandler={handleCancel}
-        files={fileList}
-        currentPreviewIndex={currentPreviewIndex}
-      />
-      {separateLargeImg && (
-        <SeparateLargeImgContainer>
-          <SeparateLargeImg src={localImageURL} />
-        </SeparateLargeImgContainer>
+      {viewerTypeUpload && <ViewerUpload config={viewerUploadConfig} />}
+      {dimensionTypeUpload && (
+        <DimensionUpload config={dimensionUploadConfig} />
       )}
     </>
   );

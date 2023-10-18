@@ -23,14 +23,14 @@ const DisplayedPreview = ({ currentPreviewIndex, children }) => {
 };
 
 const ModalUploading = ({
-  files = [],
+  fileList = [],
   currentPreviewIndex,
   previewOpenHandler,
   cancelHandler,
 }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  console.log("log log", files);
-  console.log("oyi", files[activeSlideIndex]);
+//   console.log("log log", fileList);
+//   console.log("oyi", fileList[activeSlideIndex]);
 
   return (
     <ModalWrapper>
@@ -38,7 +38,7 @@ const ModalUploading = ({
         open={previewOpenHandler}
         onCancel={cancelHandler}
         footer={null}
-        title={files[activeSlideIndex]?.name}
+        title={fileList[activeSlideIndex]?.name}
       >
         <Swiper
           initialSlide={currentPreviewIndex}
@@ -47,7 +47,7 @@ const ModalUploading = ({
           onSlideChange={(slide) => setActiveSlideIndex(slide.activeIndex)}
         >
           <DisplayedPreview currentPreviewIndex={currentPreviewIndex} />
-          {files.map((file) => (
+          {fileList.map((file) => (
             <SwiperSlide key={file.url}>
               <ModalImg alt="modalimage" src={file.url} />
             </SwiperSlide>

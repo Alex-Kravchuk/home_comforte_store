@@ -49,7 +49,7 @@ const ProductViewerImages = () => {
           </PVIClearFileListContainer>
         </PVIHeaderContainer>
         <ProductImagesUploading
-          moreThanOne={true}
+          uploadType="viewer"
           saveFileHandler={saveFileHandler}
           clearFileListflag={clearFileListflag}
           clearFileListHandler={setClearFileList}
