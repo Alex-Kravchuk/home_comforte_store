@@ -1,13 +1,22 @@
 import React, { useEffect } from "react";
+
+import { Input, Tooltip } from "antd";
 import { useSwiper } from "swiper/react";
-import { DescriptionContainer, PIUploadSwiperImg, SlideContainer } from "../ProductPreviewImages.styled";
-import { Input } from "antd";
+
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
+import {
+  SlideContainer,
+  PIUploadSwiperImg,
+  DescriptionContainer,
+  CustomSlideDeleteIconContainer,
+} from "../ProductPreviewImages.styled";
 
 const CustomSwiperSlide = ({ file, fileList }) => {
   const swiper = useSwiper();
 
   useEffect(() => {
-    swiper.slideTo(fileList.length - 1, 100);
+    swiper.slideTo(fileList.length - 1, 500);
   }, [fileList]);
 
   return (
@@ -16,6 +25,11 @@ const CustomSwiperSlide = ({ file, fileList }) => {
       <DescriptionContainer>
         <Input size="small" placeholder="Write here..." maxLength={100} />
       </DescriptionContainer>
+      <CustomSlideDeleteIconContainer>
+        <Tooltip title="Delete">
+          <DeleteForeverIcon />
+        </Tooltip>
+      </CustomSlideDeleteIconContainer>
     </SlideContainer>
   );
 };
