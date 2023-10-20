@@ -7,11 +7,13 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-
 // import required modules
 import { Navigation } from "swiper/modules";
 
-import { ModalImg, ModalWrapper } from "../../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/PreviewModal/PreviewModal.styled";
+import {
+  ModalImg,
+  ModalWrapper,
+} from "../../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/PreviewModal/PreviewModal.styled";
 
 const DisplayedPreview = ({ currentPreviewIndex, children }) => {
   const swiper = useSwiper();
@@ -29,8 +31,9 @@ const ModalUploading = ({
   cancelHandler,
 }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-//   console.log("log log", fileList);
-//   console.log("oyi", fileList[activeSlideIndex]);
+  const activeSlideFileName = fileList[activeSlideIndex]?.originalFileObj.name;
+  //   console.log("log log", fileList);
+    // console.log("oyi", activeSlideFileName);
 
   return (
     <ModalWrapper>
@@ -38,7 +41,7 @@ const ModalUploading = ({
         open={previewOpenHandler}
         onCancel={cancelHandler}
         footer={null}
-        title={fileList[activeSlideIndex]?.name}
+        title={activeSlideFileName}
       >
         <Swiper
           initialSlide={currentPreviewIndex}

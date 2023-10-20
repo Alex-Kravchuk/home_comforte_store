@@ -12,22 +12,37 @@ import {
   CustomSlideDeleteIconContainer,
 } from "../ProductPreviewImages.styled";
 
-const CustomSwiperSlide = ({ file, fileList }) => {
+const CustomSwiperSlide = ({
+  file,
+  fileList,
+  changeFileListHandler,
+  saveDescriptionHandler,
+}) => {
   const swiper = useSwiper();
 
   useEffect(() => {
     swiper.slideTo(fileList.length - 1, 500);
   }, [fileList]);
 
+  const onRemoveItem = () => {
+    changeFileListHandler(file.originalFileObj.uid);
+  };
+  
+
   return (
     <SlideContainer>
       <PIUploadSwiperImg src={file.url} />
       <DescriptionContainer>
-        <Input size="small" placeholder="Write here..." maxLength={100} />
+        <Input
+          size="small"
+          placeholder="Write here..."
+          maxLength={100}
+          onBlur={(e) => saveDescriptionHandler(file.originalFileObj.uid, e.target.value)}
+        />
       </DescriptionContainer>
       <CustomSlideDeleteIconContainer>
         <Tooltip title="Delete">
-          <DeleteForeverIcon />
+          <DeleteForeverIcon onClick={onRemoveItem} />
         </Tooltip>
       </CustomSlideDeleteIconContainer>
     </SlideContainer>

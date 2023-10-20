@@ -16,6 +16,7 @@ import {
   DescriptionContainer,
   PIUploadContainer,
   PIUploadSwiperImg,
+  PIUploadWrapper,
   SlideContainer,
 } from "../ProductPreviewImages.styled";
 import CustomSwiperSlide from "./CustomSwiperSlide";
@@ -29,11 +30,12 @@ const PreviewImagesUpload = ({ config }) => {
     </UploadButtonWrapper>
   );
 
-  console.log("from preview uploda-----------------------", config);
-
   return (
     <>
-      <Upload {...config}>{uploadButton}</Upload>
+      <PIUploadWrapper>
+        <Upload {...config}>{uploadButton}</Upload>
+      </PIUploadWrapper>
+
       <PIUploadContainer>
         <Swiper
           initialSlide={activeSlideIndex}
@@ -42,18 +44,13 @@ const PreviewImagesUpload = ({ config }) => {
           modules={[Navigation]}
         >
           {config.fileList.map((file) => (
-            <SwiperSlide key={file.uid}>
-              {/* <SlideContainer>
-                <PIUploadSwiperImg src={file.url} />
-                <DescriptionContainer>
-                  <Input
-                    size="small"
-                    placeholder="Write here..."
-                    maxLength={100}
-                  />
-                </DescriptionContainer>
-              </SlideContainer> */}
-              <CustomSwiperSlide file={file} fileList={config.fileList} />
+            <SwiperSlide key={file.originalFileObj.uid}>
+              <CustomSwiperSlide
+                file={file}
+                fileList={config.fileList}
+                changeFileListHandler={config.changeFileListHandler}
+                saveDescriptionHandler={config.saveDescriptionHandler}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

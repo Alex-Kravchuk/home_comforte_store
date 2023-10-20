@@ -6,6 +6,11 @@ export const PPIWrapper = styled.div``;
 
 export const PPIContainer = styled.div``;
 
+export const PIUploadWrapper = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
 export const PIUploadContainer = styled.div`
   .swiper {
     max-width: 683px;

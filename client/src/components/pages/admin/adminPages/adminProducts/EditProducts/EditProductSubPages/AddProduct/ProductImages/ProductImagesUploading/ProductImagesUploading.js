@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
 
@@ -9,16 +9,22 @@ import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
 import PreviewImagesUpload from "../ProductPreviewImages/PreviewImagesUpload/PreviewImagesUpload";
 
 const ProductImagesUploading = ({
+  images,
   uploadType,
   saveFileHandler,
   clearFileListflag = null,
   clearFileListHandler,
 }) => {
   const { id, img } = useSelector((state) => state.user.userData);
+
+  const [fileList, setFileList] = useState([]);
   const [localImageURL, setImageURL] = useState(img);
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [fileList, setFileList] = useState([]);
   const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
+
+  const viewerTypeUpload = uploadType === "viewer";
+  const previewTypeUpload = uploadType === "preview";
+  const dimensionTypeUpload = uploadType === "dimension";
 
   useEffect(() => {
     if (clearFileListflag !== null) {
@@ -63,13 +69,12 @@ const ProductImagesUploading = ({
 
     getBase64(info.file, (url) => {
       setImageURL(url);
-      setFileList((state) => [
-        ...state,
-        { ...info.file, name: info.file.name, url },
-      ]);
+      setFileList((state) => [...state, { originalFileObj: info.file, url }]);
     });
 
-    saveFileHandler(info.file);
+    previewTypeUpload
+      ? saveFileHandler({ originalFileObj: info.file, description: "" })
+      : saveFileHandler(info.file);
   };
 
   const handleCancel = () => setPreviewOpen(false);
@@ -94,9 +99,42 @@ const ProductImagesUploading = ({
     );
   };
 
-  const viewerTypeUpload = uploadType === "viewer";
-  const previewTypeUpload = uploadType === "preview";
-  const dimensionTypeUpload = uploadType === "dimension";
+  const onDeletePrevHandler = (uid) => {
+    const fileListWithoutRemovedItemWithDescr = images.filter(
+      (file) => file.originalFileObj.uid !== uid
+    );
+
+    const fileListWithoutRemovedItem = fileList.filter(
+      (file) => file.originalFileObj.uid !== uid
+    );
+
+    /**
+     * 1. for saving images in parrnet component with description we use images array
+     * 2. for correct display in swiper we use fileList array with localUrl and etc.
+     */
+
+    saveFileHandler(fileListWithoutRemovedItemWithDescr);
+
+    setFileList(fileListWithoutRemovedItem);
+  };
+
+  const onBlurAndSaveDescriptionHandler = (uid, description) => {
+    const filesMatch = images.map((file) => {
+      if (file.originalFileObj.uid === uid) {
+        return {
+          originalFileObj: file.originalFileObj,
+          description,
+        };
+      }
+
+      return {
+        originalFileObj: file.originalFileObj,
+        description: file.description,
+      };
+    });
+
+    saveFileHandler(filesMatch);
+  };
 
   const dimensionUploadConfig = {
     maxCount: 1,
@@ -141,8 +179,9 @@ const ProductImagesUploading = ({
     onPreview: onPreviewHandler,
     fileList,
     beforeUpload,
-    // localImageURL,
     defaultFileList,
+    changeFileListHandler: onDeletePrevHandler,
+    saveDescriptionHandler: onBlurAndSaveDescriptionHandler,
   };
 
   return (
