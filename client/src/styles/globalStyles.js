@@ -66,6 +66,7 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 10px;
   }
 
+
 `;
 
 export const Wrapper = styled.div`

@@ -19,8 +19,6 @@ const AdminMenu = () => {
     setCollapsed(!isCollapsed);
   };
 
-  console.log("togle", isCollapsed);
-
   return (
     <AdminMenuWrapper>
       {!smallLaptopScreen && (

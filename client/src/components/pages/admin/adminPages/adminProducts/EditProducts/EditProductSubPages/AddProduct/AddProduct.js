@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Collapse, Form, Result } from "antd";
+import {  Collapse, Result } from "antd";
 
 import ExpandIcon from "../../../../../../../../helpers/ExpandIcon/ExpandIcon";
 
@@ -13,18 +13,10 @@ import {
 
 import { viewport_sizes } from "../../../../../../../../utils/viewport_size_consts";
 
-import {
-  AddProductContent,
-  AddProductFormContainer,
-} from "./AddProduct.styled";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
+import ProductCustomization from "./ProductCustomization/ProductCustomization";
 
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
 const items = [
   {
     key: "1",
@@ -39,7 +31,7 @@ const items = [
   {
     key: "3",
     label: "Product customization options",
-    children: <p>{text}</p>,
+    children: <ProductCustomization />,
   },
 ];
 
