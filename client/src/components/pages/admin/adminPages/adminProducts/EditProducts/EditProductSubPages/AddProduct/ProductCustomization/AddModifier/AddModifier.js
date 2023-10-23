@@ -8,7 +8,7 @@ import {
   AMIconContainer,
   AMList,
 } from "./AddModifier.styled";
-import { Collapse, Form, Modal, Tooltip } from "antd";
+import { Collapse, Empty, Form, Modal, Tooltip } from "antd";
 import CreateNewModifierForm from "./CreateNewModifierForm/CreateNewModifierForm";
 import ModifierTitle from "./ModifierTitle/ModifierTitle";
 import ListTypeModifier from "./ListTypeModifier/ListTypeModifier";
@@ -21,6 +21,9 @@ const AddModifier = () => {
 
   const [form] = Form.useForm();
 
+  const onDeleteModifier = (key) => {
+    setModifiers((state) => state.filter((modifier) => modifier.key !== key));
+  };
   const onCreateModifier = ({ name, displaymethod }) => {
     const child =
       displaymethod === "list" ? (
@@ -33,18 +36,24 @@ const AddModifier = () => {
 
     const newModifier = {
       key: String(modifiers.length + 1),
-      label: <ModifierTitle name={name} displaymethod={displaymethod} />,
+      label: (
+        <ModifierTitle
+          id={String(modifiers.length + 1)}
+          name={name}
+          displaymethod={displaymethod}
+          deleteHandler={onDeleteModifier}
+        />
+      ),
       children: child,
     };
 
     setModifiers((state) => [...state, newModifier]);
+    setIsModalOpen(false);
   };
 
   const showModalHandler = () => setIsModalOpen(true);
   const handleCancel = () => setIsModalOpen(false);
   const handleOk = () => {
-    setIsModalOpen(false);
-
     form
       .validateFields()
       .then((values) => {
@@ -54,35 +63,18 @@ const AddModifier = () => {
       .catch((info) => console.log("Something went wrong:", info));
   };
 
-  const items = [
-    {
-      key: "1",
-      label: "This is panel header 1",
-      children: <p>text1</p>,
-    },
-    {
-      key: "2",
-      label: "This is panel header 2",
-      children: <p>text2</p>,
-    },
-    {
-      key: "3",
-      label: "This is panel header 3",
-      children: <p>text3</p>,
-    },
-  ];
+  const modifiersAreExist = modifiers.length > 0;
 
   return (
     <AMWrapper>
       <AMContainer>
-        <AMList>
-          <Collapse
-            items={modifiers}
-            defaultActiveKey={["1"]}
-            size="large"
-            expandIconPosition="end"
-          />
-        </AMList>
+        {modifiersAreExist ? (
+          <AMList>
+            <Collapse items={modifiers} size="large" expandIconPosition="end" />
+          </AMList>
+        ) : (
+          <Empty description="There are no customization modifiers" />
+        )}
 
         <Modal
           title="Add a new modifier"
