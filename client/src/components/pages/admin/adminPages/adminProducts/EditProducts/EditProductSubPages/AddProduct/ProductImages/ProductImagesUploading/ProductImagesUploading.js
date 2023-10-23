@@ -7,11 +7,13 @@ import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
 import ViewerUpload from "../ProductViewerImages/ViewerUpload";
 import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
 import PreviewImagesUpload from "../ProductPreviewImages/PreviewImagesUpload/PreviewImagesUpload";
+import ModifierUpload from "../../ProductCustomization/AddModifier/ModifierUpload/ModifierUpload";
 
 const ProductImagesUploading = ({
   images,
   uploadType,
   saveFileHandler,
+  editModeOn = false,
   clearFileListflag = null,
   clearFileListHandler,
 }) => {
@@ -24,6 +26,7 @@ const ProductImagesUploading = ({
 
   const viewerTypeUpload = uploadType === "viewer";
   const previewTypeUpload = uploadType === "preview";
+  const modifierTypeUpload = uploadType === "modifier";
   const dimensionTypeUpload = uploadType === "dimension";
 
   useEffect(() => {
@@ -184,6 +187,21 @@ const ProductImagesUploading = ({
     saveDescriptionHandler: onBlurAndSaveDescriptionHandler,
   };
 
+  const modifierConfig = {
+    maxCount: 1,
+    multiple: false,
+    showUploadList: false,
+    listType: "picture-card",
+    accept: "image/png, image/jpg, image/jpeg, image/webp",
+    onChange: handleChange,
+    onRemove: onRemoveHandler,
+    fileList,
+    editModeOn,
+    beforeUpload,
+    localImageURL,
+    defaultFileList,
+  };
+
   return (
     <>
       {viewerTypeUpload && <ViewerUpload config={viewerUploadConfig} />}
@@ -191,6 +209,7 @@ const ProductImagesUploading = ({
         <DimensionUpload config={dimensionUploadConfig} />
       )}
       {previewTypeUpload && <PreviewImagesUpload config={previewConfig} />}
+      {modifierTypeUpload && <ModifierUpload config={modifierConfig} />}
     </>
   );
 };
