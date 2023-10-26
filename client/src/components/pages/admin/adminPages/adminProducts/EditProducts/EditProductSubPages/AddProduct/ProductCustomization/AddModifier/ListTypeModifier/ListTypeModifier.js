@@ -48,6 +48,11 @@ const ListTypeModifier = () => {
     setModifiers((state) => [...state, newEmptyModifier]);
   };
 
+  const removeModifierHandler = (removedItemID) => {
+    setCantAddNewModifier(false);
+    setModifiers((state) => state.filter((item) => item.id !== removedItemID));
+  };
+
   console.log("modifiers", modifiers);
 
   return (
@@ -62,6 +67,7 @@ const ListTypeModifier = () => {
               index={index}
               cantAddNewModifier={cantAddNewModifier}
               saveModifierHandler={saveModifierHandler}
+              removeModifierHandler={removeModifierHandler}
             />
           ))}
 

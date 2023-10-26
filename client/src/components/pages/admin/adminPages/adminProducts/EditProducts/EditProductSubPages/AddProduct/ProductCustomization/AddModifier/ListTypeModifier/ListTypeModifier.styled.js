@@ -14,11 +14,12 @@ export const LTMList = styled.div`
 export const LTMAddNewWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 0 10px 10px 0;
 `;
 
 export const LTMAddNewContainer = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
   position: relative;
   display: inline-flex;

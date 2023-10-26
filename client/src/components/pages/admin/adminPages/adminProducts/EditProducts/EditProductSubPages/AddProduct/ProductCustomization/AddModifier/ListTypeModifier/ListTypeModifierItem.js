@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { Input } from "antd";
+
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
+import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
+
 import {
-  ErrorContainer,
-  LTMInterfaceIcons,
   LTMListItem,
   ModifieTitle,
   ModifierDescr,
+  ErrorContainer,
+  LTMInterfaceIcons,
 } from "./ListTypeModifier.styled";
-import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
-import { Input } from "antd";
 
 const ListTypeModifierItem = ({
   data,
@@ -19,6 +22,7 @@ const ListTypeModifierItem = ({
   modifiers,
   cantAddNewModifier,
   saveModifierHandler,
+  removeModifierHandler,
 }) => {
   const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
@@ -84,7 +88,9 @@ const ListTypeModifierItem = ({
           <EditOutlinedIcon onClick={editModeHandler} />
         )}
 
-        <DeleteOutlineOutlinedIcon />
+        <DeleteOutlineOutlinedIcon
+          onClick={() => removeModifierHandler(data.id)}
+        />
       </LTMInterfaceIcons>
       <ProductImagesUploading
         uploadType="modifier"
