@@ -13,14 +13,23 @@ import {
 import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
 import { Input } from "antd";
 
-const ListTypeModifierItem = ({ data, saveModifierHandler }) => {
+const ListTypeModifierItem = ({
+  data,
+  index,
+  modifiers,
+  cantAddNewModifier,
+  saveModifierHandler,
+}) => {
   const [file, setFile] = useState(null);
-  const [titleIsEmpty, setErrorTitle] = useState(false);
-  const [fileIsEmpty, setErrorFile] = useState(false);
-
   const [editModeOn, setEditMode] = useState(true);
+  const [fileIsEmpty, setErrorFile] = useState(false);
+  const [titleIsEmpty, setErrorTitle] = useState(false);
+
   const titleInputRef = useRef();
   const descriptionInputRef = useRef();
+
+  const canotBeAddedNewModifierError =
+    index === modifiers.length - 1 && cantAddNewModifier;
 
   useEffect(() => {
     if (file) {
@@ -66,10 +75,8 @@ const ListTypeModifierItem = ({ data, saveModifierHandler }) => {
     setErrorTitle(false);
   };
 
-  console.log("File is empty", fileIsEmpty);
-
   return (
-    <LTMListItem>
+    <LTMListItem error={canotBeAddedNewModifierError}>
       <LTMInterfaceIcons>
         {editModeOn ? (
           <BookmarkAddedOutlinedIcon onClick={saveModifierChanges} />
@@ -96,7 +103,7 @@ const ListTypeModifierItem = ({ data, saveModifierHandler }) => {
           defaultValue={data.title}
         />
       ) : (
-        <ModifieTitle>{titleInputRef.current.input.value}</ModifieTitle>
+        <ModifieTitle>{data.title}</ModifieTitle>
       )}
 
       {editModeOn ? (
@@ -107,7 +114,7 @@ const ListTypeModifierItem = ({ data, saveModifierHandler }) => {
           defaultValue={data.description}
         />
       ) : (
-        <ModifierDescr>{descriptionInputRef.current.input.value}</ModifierDescr>
+        <ModifierDescr>{data.description}</ModifierDescr>
       )}
     </LTMListItem>
   );
