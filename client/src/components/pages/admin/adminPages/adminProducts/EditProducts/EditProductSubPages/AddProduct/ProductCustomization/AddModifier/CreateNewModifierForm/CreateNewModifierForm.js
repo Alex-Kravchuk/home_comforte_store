@@ -16,7 +16,7 @@ const CreateNewModifierForm = ({ form }) => {
         <Input size="large" />
       </Form.Item>
       <Form.Item
-        name="displaymethod"
+        name="displayMethod"
         label={<FormLabel>Modifier display method:</FormLabel>}
 		rules={formRules.selectInput('display method')}
       >

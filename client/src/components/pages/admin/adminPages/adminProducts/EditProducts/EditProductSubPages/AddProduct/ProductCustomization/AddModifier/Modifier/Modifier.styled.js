@@ -1,23 +1,20 @@
 import styled from "styled-components";
 
-// LTM = ListTypeModifier
+export const ModifierWrapper = styled.div``;
+export const ModifierContainer = styled.div``;
 
-export const LTMWrapper = styled.div``;
-
-export const LTMContainer = styled.div``;
-
-export const LTMList = styled.div`
+export const ModifierList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
 `;
-export const LTMAddNewWrapper = styled.div`
+export const AddNewModifierWrapper = styled.div`
   display: flex;
   align-items: center;
   margin: 0 10px 10px 0;
 `;
 
-export const LTMAddNewContainer = styled.div`
+export const AddNewModifierContainer = styled.div`
   width: 100px;
   height: 100px;
   cursor: pointer;
@@ -44,7 +41,7 @@ export const LTMAddNewContainer = styled.div`
     top: 2px;
   }
 `;
-export const LTMListItem = styled.div`
+export const ModifierListItem = styled.div`
   position: relative;
   width: 150px;
   padding: 10px;
@@ -80,7 +77,7 @@ export const LTMListItem = styled.div`
  	 `}
 `;
 
-export const LTMInterfaceIcons = styled.div`
+export const ModifierInterfaceIcons = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -116,7 +113,7 @@ export const ErrorContainer = styled.p`
   color: red;
 `;
 
-export const ModifieTitle = styled.div`
+export const ModifierTitle = styled.div`
   text-align: center;
   font-size: 14px;
 `;
@@ -124,5 +121,3 @@ export const ModifierDescr = styled.div`
   text-align: center;
   font-size: 12px;
 `;
-
-export const InputsContainer = styled.div``;

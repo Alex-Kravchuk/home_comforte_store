@@ -1,6 +1,6 @@
 import React from "react";
 
-import {  Collapse, Result } from "antd";
+import { Collapse, Result } from "antd";
 
 import ExpandIcon from "../../../../../../../../helpers/ExpandIcon/ExpandIcon";
 
@@ -17,27 +17,28 @@ import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
 import ProductCustomization from "./ProductCustomization/ProductCustomization";
 
-const items = [
-  {
-    key: "1",
-    label: "General information about the product",
-    children: <GeneralInfo />,
-  },
-  {
-    key: "2",
-    label: "Images",
-    children: <ProductImages />,
-  },
-  {
-    key: "3",
-    label: "Product customization options",
-    children: <ProductCustomization />,
-  },
-];
-
 const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
+
+  const items = [
+    {
+      key: "1",
+      label: "General information about the product",
+      children: <GeneralInfo />,
+    },
+    {
+      key: "2",
+      label: "Images",
+      children: <ProductImages />,
+    },
+    {
+      key: "3",
+      label: "Product customization options",
+      children: <ProductCustomization />,
+    },
+  ];
+
   return (
     <SubPageWrapper>
       <SubPageContainer>

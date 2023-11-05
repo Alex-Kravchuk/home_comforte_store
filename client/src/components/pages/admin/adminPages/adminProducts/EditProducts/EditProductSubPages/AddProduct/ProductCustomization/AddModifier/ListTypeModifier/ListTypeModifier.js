@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
@@ -12,9 +12,17 @@ import {
 } from "./ListTypeModifier.styled";
 import ListTypeModifierItem from "./ListTypeModifierItem";
 
-const ListTypeModifier = () => {
-  const [modifiers, setModifiers] = useState([]);
-  const [cantAddNewModifier, setCantAddNewModifier] = useState(false);
+const ListTypeModifier = ({
+  list,
+  removeHandler,
+  cantAddNewModifier,
+  saveChangesHandler,
+}) => {
+  const [modifiers, setModifiers] = useState(list);
+
+  useEffect(() => {
+    setModifiers(list);
+  }, [list]);
 
   const saveModifierHandler = (newModifier) => {
     const editedModifierIndex = modifiers.findIndex(
@@ -25,35 +33,16 @@ const ListTypeModifier = () => {
     modifiersCopy.splice(editedModifierIndex, 1, newModifier);
 
     setModifiers(modifiersCopy);
-    setCantAddNewModifier(false);
-  };
-
-  const adNewModifierHandler = () => {
-    const lastModifier = modifiers[modifiers.length - 1];
-
-    // if the last of one modifier (active) has no img or title
-    // it means we can't add a new modifier, so we throw error flag
-    // in current modifier in list
-    if (lastModifier?.img === null || lastModifier?.title === null) {
-      setCantAddNewModifier(true);
-      return;
-    }
-
-    const newEmptyModifier = {
-      id: modifiers.length + 1,
-      img: null,
-      title: null,
-      description: null,
-    };
-    setModifiers((state) => [...state, newEmptyModifier]);
+    saveChangesHandler(modifiersCopy);
   };
 
   const removeModifierHandler = (removedItemID) => {
-    setCantAddNewModifier(false);
-    setModifiers((state) => state.filter((item) => item.id !== removedItemID));
+    const filteredItems = modifiers.filter((item) => item.id !== removedItemID);
+    removeHandler(filteredItems);
+    setModifiers(filteredItems);
   };
 
-  console.log("modifiers", modifiers);
+  console.log("modifiers", modifiers, "list", list);
 
   return (
     <LTMWrapper>
@@ -70,12 +59,6 @@ const ListTypeModifier = () => {
               removeModifierHandler={removeModifierHandler}
             />
           ))}
-
-          <LTMAddNewWrapper onClick={adNewModifierHandler}>
-            <LTMAddNewContainer>
-              <AddOutlinedIcon />
-            </LTMAddNewContainer>
-          </LTMAddNewWrapper>
         </LTMList>
       </LTMContainer>
     </LTMWrapper>

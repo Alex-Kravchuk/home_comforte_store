@@ -1,23 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import { Input } from "antd";
+import React, { useRef, useState } from "react";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
-
 import {
-  LTMListItem,
-  ModifieTitle,
-  ModifierDescr,
-  ErrorContainer,
-  LTMInterfaceIcons,
-  InputsContainer,
-} from "./ListTypeModifier.styled";
+  CTMInterfaceIcons,
+  CTMListItem,
+  CTMText,
+} from "./CellTypeModifier.styled";
+import { Input } from "antd";
+import { InputsContainer } from "../ListTypeModifier/ListTypeModifier.styled";
 
-const ListTypeModifierItem = ({
+const CellTypeModifierItem = ({
   data,
   index,
   modifiers,
@@ -25,33 +20,26 @@ const ListTypeModifierItem = ({
   saveModifierHandler,
   removeModifierHandler,
 }) => {
-  const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
-  const [fileIsEmpty, setErrorFile] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
+  const [priceIsEmpty, setErrorPrice] = useState(false);
 
   const titleInputRef = useRef();
-  const descriptionInputRef = useRef();
+  const priceInputRef = useRef();
 
   const canotBeAddedNewModifierError =
     index === modifiers.length - 1 && cantAddNewModifier;
 
-  useEffect(() => {
-    if (file) {
-      setErrorFile(false);
-    }
-  }, [file]);
-
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
+    const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (!titleInputIsEmpty && file) {
+    if (!titleInputIsEmpty && !priceInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
-        img: file,
         title: titleInputRef.current.input.value,
-        description: descriptionInputRef.current.input.value,
+        price: priceInputRef.current.input.value,
       };
 
       saveModifierHandler(newModifierData);
@@ -62,8 +50,8 @@ const ListTypeModifierItem = ({
       setErrorTitle(true);
     }
 
-    if (!file) {
-      setErrorFile(true);
+    if (priceInputIsEmpty) {
+      setErrorPrice(true);
     }
   };
 
@@ -71,7 +59,7 @@ const ListTypeModifierItem = ({
     setEditMode(true);
   };
 
-  const inputOnChangeHandler = (e) => {
+  const titleInputOnChangeHandler = (e) => {
     if (e.target.value.length === 0) {
       setErrorTitle(true);
       return;
@@ -80,9 +68,16 @@ const ListTypeModifierItem = ({
     setErrorTitle(false);
   };
 
+  const priceInputOnChangeHanlder = (e) => {
+    if (e.target.value.length === 0) {
+      setErrorPrice(true);
+      return;
+    }
+    setErrorPrice(false);
+  };
   return (
-    <LTMListItem error={canotBeAddedNewModifierError} editModeOn={editModeOn}>
-      <LTMInterfaceIcons>
+    <CTMListItem error={canotBeAddedNewModifierError} editModeOn={true}>
+      <CTMInterfaceIcons>
         {editModeOn ? (
           <BookmarkAddedOutlinedIcon onClick={saveModifierChanges} />
         ) : (
@@ -92,13 +87,7 @@ const ListTypeModifierItem = ({
         <DeleteOutlineOutlinedIcon
           onClick={() => removeModifierHandler(data.id)}
         />
-      </LTMInterfaceIcons>
-      <ProductImagesUploading
-        uploadType="modifier"
-        saveFileHandler={setFile}
-        editModeOn={editModeOn}
-      />
-      {fileIsEmpty && <ErrorContainer>You must upload an image</ErrorContainer>}
+      </CTMInterfaceIcons>
       <InputsContainer>
         {editModeOn ? (
           <Input
@@ -106,26 +95,28 @@ const ListTypeModifierItem = ({
             placeholder="Title"
             ref={titleInputRef}
             status={titleIsEmpty && "error"}
-            onChange={inputOnChangeHandler}
+            onChange={titleInputOnChangeHandler}
             defaultValue={data.title}
           />
         ) : (
-          <ModifieTitle>{data.title}</ModifieTitle>
+          <CTMText>{data.title}</CTMText>
         )}
 
         {editModeOn ? (
           <Input
-            ref={descriptionInputRef}
-            placeholder="Description"
+            ref={priceInputRef}
+            placeholder="Price"
             size="small"
-            defaultValue={data.description}
+            status={priceIsEmpty && "error"}
+            defaultValue={data.price}
+            onChange={priceInputOnChangeHanlder}
           />
         ) : (
-          <ModifierDescr>{data.description}</ModifierDescr>
+          <CTMText>{data.price}</CTMText>
         )}
       </InputsContainer>
-    </LTMListItem>
+    </CTMListItem>
   );
 };
 
-export default ListTypeModifierItem;
+export default CellTypeModifierItem;

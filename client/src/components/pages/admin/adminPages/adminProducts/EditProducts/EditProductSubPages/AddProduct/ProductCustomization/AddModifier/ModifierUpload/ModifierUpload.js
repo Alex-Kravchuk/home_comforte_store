@@ -5,14 +5,14 @@ import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
 import {
+  ModifierUploadWrapper,
+  ModifierUploadButtonWrapper,
+} from "./ModifierUpload.styled";
+
+import {
   SeparateLargeImg,
   SeparateLargeImgContainer,
 } from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading.styled";
-
-import {
-  ModifierUploadButtonWrapper,
-  ModifierUploadWrapper,
-} from "./ModifierUpload.styled";
 
 const ModifierUpload = ({ config }) => {
   const uploadButton = (
