@@ -29,15 +29,28 @@ const Modifier = ({ id, data, displayMethod, saveChangesHandler }) => {
   const addNewModifierHandler = () => {
     const lastModifier = data[data.length - 1];
 
-    // if the last of one modifier (active) has no img or title
+    // if the last of one modifier (active) has no values specific to current type of modifier
     // it means we can't add a new modifier, so we throw error flag
-    // in current modifier in list
     if (listType) {
       if (lastModifier?.img === null || lastModifier?.title === null) {
         setCantAddNewModifier(true);
         return;
       }
     }
+
+    if (cellType || tileType) {
+      if (lastModifier?.title === null || lastModifier?.price === null) {
+        setCantAddNewModifier(true);
+        return;
+      }
+    }
+
+    // if (tileType) {
+    //   if (lastModifier?.title === null || lastModifier?.price === null) {
+    //     setCantAddNewModifier(true);
+    //     return;
+    //   }
+    // }
 
     const newEmptyListTypeModifier = {
       id: data.length + 1,
@@ -86,8 +99,22 @@ const Modifier = ({ id, data, displayMethod, saveChangesHandler }) => {
               saveChangesHandler={saveModifierHandler}
             />
           )}
-          {cellType && <CellTypeModifier list={data} />}
-          {tileType && <TileTypeModifier list={data} />}
+          {cellType && (
+            <CellTypeModifier
+              list={data}
+              removeHandler={removeModifierHandler}
+              cantAddNewModifier={cantAddNewModifier}
+              saveChangesHandler={saveModifierHandler}
+            />
+          )}
+          {tileType && (
+            <TileTypeModifier
+              list={data}
+              removeHandler={removeModifierHandler}
+              cantAddNewModifier={cantAddNewModifier}
+              saveChangesHandler={saveModifierHandler}
+            />
+          )}
           <AddNewModifierWrapper onClick={addNewModifierHandler}>
             <AddNewModifierContainer>
               <AddOutlinedIcon />

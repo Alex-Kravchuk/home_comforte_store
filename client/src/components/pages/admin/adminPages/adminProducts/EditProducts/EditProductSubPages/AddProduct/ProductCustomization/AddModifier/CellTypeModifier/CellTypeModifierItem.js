@@ -1,16 +1,18 @@
 import React, { useRef, useState } from "react";
 
+import { Input } from "antd";
+
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
+import { CTMText } from "./CellTypeModifier.styled";
+
 import {
-  CTMInterfaceIcons,
-  CTMListItem,
-  CTMText,
-} from "./CellTypeModifier.styled";
-import { Input } from "antd";
-import { InputsContainer } from "../ListTypeModifier/ListTypeModifier.styled";
+  InputsContainer,
+  ModifierListItem,
+  ModifierInterfaceIcons,
+} from "../Modifier/Modifier.styled";
 
 const CellTypeModifierItem = ({
   data,
@@ -76,8 +78,8 @@ const CellTypeModifierItem = ({
     setErrorPrice(false);
   };
   return (
-    <CTMListItem error={canotBeAddedNewModifierError} editModeOn={true}>
-      <CTMInterfaceIcons>
+    <ModifierListItem error={canotBeAddedNewModifierError} editModeOn={true}>
+      <ModifierInterfaceIcons>
         {editModeOn ? (
           <BookmarkAddedOutlinedIcon onClick={saveModifierChanges} />
         ) : (
@@ -87,7 +89,7 @@ const CellTypeModifierItem = ({
         <DeleteOutlineOutlinedIcon
           onClick={() => removeModifierHandler(data.id)}
         />
-      </CTMInterfaceIcons>
+      </ModifierInterfaceIcons>
       <InputsContainer>
         {editModeOn ? (
           <Input
@@ -115,7 +117,7 @@ const CellTypeModifierItem = ({
           <CTMText>{data.price}</CTMText>
         )}
       </InputsContainer>
-    </CTMListItem>
+    </ModifierListItem>
   );
 };
 

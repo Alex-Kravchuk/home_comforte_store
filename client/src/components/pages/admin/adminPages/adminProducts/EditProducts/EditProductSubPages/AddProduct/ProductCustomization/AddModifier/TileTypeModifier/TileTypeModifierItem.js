@@ -1,23 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Input } from "antd";
-
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
-
 import {
-  ModifierDescr,
-  ModifierTitle,
   ErrorContainer,
-  ModifierListItem,
   ModifierInterfaceIcons,
-  InputsContainer,
+  ModifierListItem,
+  ModifierTitle,
 } from "../Modifier/Modifier.styled";
+import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
+import { Input } from "antd";
+import {
+  ModifierBodyWrapper,
+  TileModifierDescr,
+  TileModifierTitle,
+  TileUploadImgWrapper,
+} from "./TileTypeModifier.styled";
 
-const ListTypeModifierItem = ({
+const TileTypeModifierItem = ({
   data,
   index,
   modifiers,
@@ -28,8 +30,10 @@ const ListTypeModifierItem = ({
   const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
   const [fileIsEmpty, setErrorFile] = useState(false);
+  const [priceIsEmpty, setErrorPrice] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
 
+  const priceInputRef = useRef();
   const titleInputRef = useRef();
   const descriptionInputRef = useRef();
 
@@ -44,26 +48,33 @@ const ListTypeModifierItem = ({
 
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
+    const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (!titleInputIsEmpty && file) {
+    if (file && !priceInputIsEmpty && !titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
         img: file,
+        price: priceInputRef.current.input.value,
         title: titleInputRef.current.input.value,
-        description: descriptionInputRef.current.input.value,
+        description:
+          descriptionInputRef.current.resizableTextArea.textArea.value,
       };
 
       saveModifierHandler(newModifierData);
       return;
     }
 
+    if (!file) {
+      setErrorFile(true);
+    }
+
     if (titleInputIsEmpty) {
       setErrorTitle(true);
     }
 
-    if (!file) {
-      setErrorFile(true);
+    if (priceInputIsEmpty) {
+      setErrorPrice(true);
     }
   };
 
@@ -71,13 +82,21 @@ const ListTypeModifierItem = ({
     setEditMode(true);
   };
 
-  const inputOnChangeHandler = (e) => {
+  const titleInputOnChangeHandler = (e) => {
     if (e.target.value.length === 0) {
       setErrorTitle(true);
       return;
     }
 
     setErrorTitle(false);
+  };
+
+  const priceInputOnChangeHanlder = (e) => {
+    if (e.target.value.length === 0) {
+      setErrorPrice(true);
+      return;
+    }
+    setErrorPrice(false);
   };
 
   return (
@@ -96,39 +115,56 @@ const ListTypeModifierItem = ({
           onClick={() => removeModifierHandler(data.id)}
         />
       </ModifierInterfaceIcons>
-      <ProductImagesUploading
-        uploadType="modifier"
-        saveFileHandler={setFile}
-        editModeOn={editModeOn}
-      />
-      {fileIsEmpty && <ErrorContainer>You must upload an image</ErrorContainer>}
-      <InputsContainer>
+
+      <ModifierBodyWrapper>
         {editModeOn ? (
           <Input
             size="small"
             placeholder="Title"
             ref={titleInputRef}
-            status={titleIsEmpty && "error"}
-            onChange={inputOnChangeHandler}
             defaultValue={data.title}
+            status={titleIsEmpty && "error"}
+            onChange={titleInputOnChangeHandler}
           />
         ) : (
-          <ModifierTitle>{data.title}</ModifierTitle>
+          <TileModifierTitle>{data.title}</TileModifierTitle>
         )}
-
         {editModeOn ? (
           <Input
+            size="small"
+            placeholder="Price"
+            ref={priceInputRef}
+            defaultValue={data.price}
+            status={priceIsEmpty && "error"}
+            onChange={priceInputOnChangeHanlder}
+          />
+        ) : (
+          <ModifierTitle>{data.price}</ModifierTitle>
+        )}
+        <TileUploadImgWrapper file={file}>
+          <ProductImagesUploading
+            uploadType="modifier"
+            saveFileHandler={setFile}
+            editModeOn={editModeOn}
+          />
+          {fileIsEmpty && (
+            <ErrorContainer>You must upload an image</ErrorContainer>
+          )}
+        </TileUploadImgWrapper>
+
+        {editModeOn ? (
+          <Input.TextArea
+            size="small"
             ref={descriptionInputRef}
             placeholder="Description"
-            size="small"
             defaultValue={data.description}
           />
         ) : (
-          <ModifierDescr>{data.description}</ModifierDescr>
+          <TileModifierDescr>{data.description}</TileModifierDescr>
         )}
-      </InputsContainer>
+      </ModifierBodyWrapper>
     </ModifierListItem>
   );
 };
 
-export default ListTypeModifierItem;
+export default TileTypeModifierItem;

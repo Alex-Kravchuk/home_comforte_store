@@ -1,31 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-
-import {
-  CTMAddNewContainer,
-  CTMAddNewWrapper,
-  CTMContainer,
-  CTMList,
-  CTMWrapper,
-} from "./CellTypeModifier.styled";
 import CellTypeModifierItem from "./CellTypeModifierItem";
 
-const CellTypeModifier = () => {
-  const [modifiers, setModifiers] = useState([
-    // {
-    //   id: 1,
-    //   title: null,
-    //   price: null,
-    // },
-    // {
-    //   id: 2,
-    //   title: null,
-    //   price: null,
-    // },
-  ]);
+import {
+  ModifierList,
+  ModifierWrapper,
+  ModifierContainer,
+} from "../Modifier/Modifier.styled";
 
-  const [cantAddNewModifier, setCantAddNewModifier] = useState(false);
+const CellTypeModifier = ({
+  list,
+  removeHandler,
+  cantAddNewModifier,
+  saveChangesHandler,
+}) => {
+  const [modifiers, setModifiers] = useState([]);
+
+  useEffect(() => {
+    setModifiers(list);
+  }, [list]);
 
   const saveModifierHandler = (newModifier) => {
     const editedModifierIndex = modifiers.findIndex(
@@ -36,36 +29,19 @@ const CellTypeModifier = () => {
     modifiersCopy.splice(editedModifierIndex, 1, newModifier);
 
     setModifiers(modifiersCopy);
-    setCantAddNewModifier(false);
+    saveChangesHandler(modifiersCopy);
   };
 
-  const addNewModifierHandler = () => {
-    const lastModifier = modifiers[modifiers.length - 1];
-
-    // if the last of one modifier (active) has no price or title
-    // it means we can't add a new modifier, so we throw error flag
-    // in current modifier in list
-    if (lastModifier?.price === null || lastModifier?.title === null) {
-      setCantAddNewModifier(true);
-      return;
-    }
-
-    const newEmptyModifier = {
-      id: modifiers.length + 1,
-      price: null,
-      title: null,
-    };
-    setModifiers((state) => [...state, newEmptyModifier]);
-  };
   const removeModifierHandler = (removedItemID) => {
-    setCantAddNewModifier(false);
-    setModifiers((state) => state.filter((item) => item.id !== removedItemID));
+    const filteredItems = modifiers.filter((item) => item.id !== removedItemID);
+    removeHandler(filteredItems);
+    setModifiers(filteredItems);
   };
-  
+
   return (
-    <CTMWrapper>
-      <CTMContainer>
-        <CTMList>
+    <ModifierWrapper>
+      <ModifierContainer>
+        <ModifierList>
           {modifiers.map((modifier, index) => (
             <CellTypeModifierItem
               index={index}
@@ -77,14 +53,9 @@ const CellTypeModifier = () => {
               cantAddNewModifier={cantAddNewModifier}
             />
           ))}
-          <CTMAddNewWrapper onClick={addNewModifierHandler}>
-            <CTMAddNewContainer>
-              <AddOutlinedIcon />
-            </CTMAddNewContainer>
-          </CTMAddNewWrapper>
-        </CTMList>
-      </CTMContainer>
-    </CTMWrapper>
+        </ModifierList>
+      </ModifierContainer>
+    </ModifierWrapper>
   );
 };
 

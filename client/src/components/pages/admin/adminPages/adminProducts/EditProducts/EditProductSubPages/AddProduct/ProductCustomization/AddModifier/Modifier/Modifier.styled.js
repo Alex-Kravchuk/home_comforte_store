@@ -87,6 +87,7 @@ export const ModifierInterfaceIcons = styled.div`
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s ease;
+  z-index: 2;
 
   svg {
     color: rgba(0, 0, 0, 0.5);
@@ -121,3 +122,5 @@ export const ModifierDescr = styled.div`
   text-align: center;
   font-size: 12px;
 `;
+
+export const InputsContainer = styled.div``;

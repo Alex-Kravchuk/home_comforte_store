@@ -54,7 +54,8 @@ const ProductImagesUploading = ({
         file.type === "image/jpeg" ||
         file.type === "image/jpg" ||
         file.type === "image/png" ||
-        file.type === "image/webp";
+        file.type === "image/webp" ||
+        file.type === "image/svg+xml";
 
       if (!isValidFormat) {
         reject(console.log("Invalid image type"));
@@ -192,7 +193,7 @@ const ProductImagesUploading = ({
     multiple: false,
     showUploadList: false,
     listType: "picture-card",
-    accept: "image/png, image/jpg, image/jpeg, image/webp",
+    accept: "image/png, image/jpg, image/jpeg, image/webp, image/svg+xml",
     onChange: handleChange,
     onRemove: onRemoveHandler,
     fileList,

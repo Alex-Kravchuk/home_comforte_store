@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-
-import {
-  LTMList,
-  LTMAddNew,
-  LTMWrapper,
-  LTMContainer,
-  LTMAddNewWrapper,
-  LTMAddNewContainer,
-} from "./ListTypeModifier.styled";
 import ListTypeModifierItem from "./ListTypeModifierItem";
+
+import { ModifierContainer, ModifierList, ModifierWrapper } from "../Modifier/Modifier.styled";
 
 const ListTypeModifier = ({
   list,
@@ -42,12 +34,12 @@ const ListTypeModifier = ({
     setModifiers(filteredItems);
   };
 
-  console.log("modifiers", modifiers, "list", list);
+  // console.log("modifiers", modifiers, "list", list);
 
   return (
-    <LTMWrapper>
-      <LTMContainer>
-        <LTMList>
+    <ModifierWrapper>
+      <ModifierContainer>
+        <ModifierList>
           {modifiers.map((modifier, index) => (
             <ListTypeModifierItem
               key={modifier.id}
@@ -59,9 +51,9 @@ const ListTypeModifier = ({
               removeModifierHandler={removeModifierHandler}
             />
           ))}
-        </LTMList>
-      </LTMContainer>
-    </LTMWrapper>
+        </ModifierList>
+      </ModifierContainer>
+    </ModifierWrapper>
   );
 };
 
