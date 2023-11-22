@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 import {
@@ -11,11 +13,17 @@ import {
 import { DIInput, DILabelContainer } from "./DimensionInfo.styled";
 import { Tooltip } from "antd";
 
-const DimensionSeatSizeItem = ({ dimensionsData, setDataHandler, item }) => {
-  const [details, setDetails] = useState(Boolean(item.details));
+const DimensionSeatSizeItem = ({ item, setDataHandler, dimensionsData }) => {
   const [modifiedItem, setItem] = useState({});
+  const [details, setDetails] = useState(Boolean(item.details));
 
-  const [detailsInputValue, setDetailsInputValue] = useState("");
+  const [saved, setSaved] = useState(false);
+  const [labelError, setLabelError] = useState(false);
+  const [valueError, setValueError] = useState(false);
+
+  useEffect(() => {
+    setSaved(false);
+  }, [modifiedItem]);
 
   useEffect(() => {
     const copyItem = Object.assign(item, {});
@@ -24,20 +32,64 @@ const DimensionSeatSizeItem = ({ dimensionsData, setDataHandler, item }) => {
   }, []);
 
   const addDetailsHandler = () => {
-    modifiedItem.details = detailsInputValue;
     setDetails(true);
   };
 
   const removeDetailsHandler = () => {
-    modifiedItem.details = null;
+    setItem((state) => ({ ...state, details: "" }));
     setDetails(false);
+  };
+
+  const labelInputOnChange = (e) => {
+    setItem((state) => ({ ...state, label: e.target.value }));
+    setLabelError(false);
+  };
+  const detailsInputOnChange = (e) => {
+    setItem((state) => ({ ...state, details: e.target.value }));
+  };
+  const valueInputOnChange = (e) => {
+    setItem((state) => ({ ...state, value: e.target.value }));
+    setValueError(false);
+  };
+
+  const saveItemHandler = () => {
+    if (modifiedItem.value && modifiedItem.label) {
+      setSaved(true);
+      setValueError(false);
+      setLabelError(false);
+
+      const suchItemIsExist = dimensionsData.findIndex(
+        (item) => item.id === modifiedItem.id
+      );
+      const dataCopy = Object.assign([], dimensionsData);
+
+      if (suchItemIsExist >= 0) {
+        dataCopy.splice(suchItemIsExist, 1, modifiedItem);
+        setDataHandler(dataCopy);
+      } else {
+        setDataHandler((state) => [...state, modifiedItem]);
+      }
+      return;
+    }
+
+    if (!modifiedItem.value) {
+      setValueError(true);
+    }
+    if (!modifiedItem.label) {
+      setLabelError(true);
+    }
   };
 
   return (
     <SeatSizeInfoBlock>
       <SeatSizeInfoBlockLeft>
         <DILabelContainer>
-          <DIInput placeholder="Dimension label" defaultValue={item.label} />
+          <DIInput
+            onChange={labelInputOnChange}
+            placeholder="Dimension label"
+            defaultValue={item.label}
+            status={labelError && "error"}
+          />
 
           <Tooltip
             title={details ? "Remove the details" : "Add the details"}
@@ -54,13 +106,23 @@ const DimensionSeatSizeItem = ({ dimensionsData, setDataHandler, item }) => {
         {details && (
           <DIInput
             placeholder="Label details"
-            defaultValue={item.details ?? detailsInputValue}
-            onChange={(e) => setDetailsInputValue(e.target.value)}
+            defaultValue={item.details}
+            onChange={detailsInputOnChange}
           />
         )}
       </SeatSizeInfoBlockLeft>
-      <SeatSizeInfoBlockRight>
-        <DIInput placeholder="Dimension value" defaultValue={item.value} />
+      <SeatSizeInfoBlockRight saved={saved}>
+        <DIInput
+          onChange={valueInputOnChange}
+          placeholder="Dimension value"
+          defaultValue={item.value}
+          status={valueError && "error"}
+        />
+        {saved ? (
+          <CheckCircleOutlineOutlinedIcon />
+        ) : (
+          <AddTaskOutlinedIcon onClick={saveItemHandler} />
+        )}
       </SeatSizeInfoBlockRight>
     </SeatSizeInfoBlock>
   );

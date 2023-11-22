@@ -5,8 +5,6 @@ import { SeatSizeContainer } from "../../../../../../../../product/Demonstration
 // DI
 
 export const DILabelContainer = styled.div`
-
-
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddRemoveInterface from "./AddRemoveInterface";
 
@@ -9,26 +9,30 @@ import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
 import { InfoBlock } from "../../AddProduct.styled";
 import InfoHeader from "../../InfoHeader/InfoHeader";
 import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/ProductImagesUploading";
+import { Empty } from "antd";
 
-const DimensionInfo = () => {
-  const [dimensionsData, setDimensionsData] = useState([
-    {
-      id: 1,
-      label: "Seat comfort",
-      details: "",
-      value: "Soft seat",
-    },
-    {
-      id: 2,
-      label: "Seat height",
-      details: "(floor to the highest point of the seat cushion)",
-      value: "Medium height at 19”",
-    },
-  ]);
+const DimensionInfo = ({
+  dimensionsData = [],
+  // temporarilySaved,
+  dimensionInfoHandler,
+  dimensionImgHandler,
+}) => {
+  // const [start, setDimensionsData] = useState([
+  //   {
+  //     id: 1,
+  //     label: "Seat comfort",
+  //     details: "",
+  //     value: "Soft seat",
+  //   },
+  //   {
+  //     id: 2,
+  //     label: "Seat height",
+  //     details: "(floor to the highest point of the seat cushion)",
+  //     value: "Medium height at 19”",
+  //   },
+  // ]);
 
-  const [dimensionImg, setDimensionImg] = useState(null);
-
-  console.log("lll", dimensionsData);
+  // useEffect(() => {}, [temporarilySaved]);
 
   const addNewLabelLineHandler = () => {
     const newLine = {
@@ -38,7 +42,7 @@ const DimensionInfo = () => {
       value: "",
     };
 
-    setDimensionsData((state) => [...state, newLine]);
+    dimensionInfoHandler([...dimensionsData, newLine]);
   };
 
   const removeTheLastOneLabelLine = () => {
@@ -49,27 +53,31 @@ const DimensionInfo = () => {
       (item) => item.id !== dimensionsData[dimensionsData.length - 1].id
     );
 
-    setDimensionsData(newLines);
+    dimensionInfoHandler(newLines);
   };
 
   const saveFileHandler = (file) => {
-    setDimensionImg(file);
+    dimensionImgHandler(file);
+    // setDimensionImg(file);
   };
-
-  console.log("diemsnion file", dimensionImg);
 
   return (
     <InfoBlock>
       <InfoHeader tooltipText="Here you can add information about the dimensions of the product. This will look like a name-value pair. You can also add a description to each label" />
       <DISeatSizeContainer>
-        {dimensionsData.map((item) => (
-          <DimensionSeatSizeItem
-            dimensionsData={dimensionsData}
-            setDataHandler={setDimensionsData}
-            key={item.id}
-            item={item}
-          />
-        ))}
+        {dimensionsData.length === 0 ? (
+          <Empty description="No size information available" />
+        ) : (
+          dimensionsData.map((item) => (
+            <DimensionSeatSizeItem
+              item={item}
+              key={item.id}
+              dimensionsData={dimensionsData}
+              setDataHandler={dimensionInfoHandler}
+            />
+          ))
+        )}
+
         <AddRemoveInterface
           lineIsNotTheLast={dimensionsData.length > 1}
           addNewLabelLineHandler={addNewLabelLineHandler}

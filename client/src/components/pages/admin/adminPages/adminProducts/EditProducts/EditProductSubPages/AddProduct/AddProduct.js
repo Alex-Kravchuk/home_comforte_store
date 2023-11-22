@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Collapse, Result } from "antd";
 
@@ -17,6 +17,8 @@ import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
 import ProductCustomization from "./ProductCustomization/ProductCustomization";
 
+// TODO if something will go wrong commit was 07.11.2023
+
 const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
@@ -29,13 +31,13 @@ const AddProduct = () => {
     },
     {
       key: "2",
-      label: "Images",
-      children: <ProductImages />,
+      label: "Product customization options",
+      children: <ProductCustomization />,
     },
     {
       key: "3",
-      label: "Product customization options",
-      children: <ProductCustomization />,
+      label: "Images",
+      children: <ProductImages />,
     },
   ];
 

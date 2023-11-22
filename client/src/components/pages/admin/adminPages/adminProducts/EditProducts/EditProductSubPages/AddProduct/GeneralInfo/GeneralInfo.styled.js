@@ -20,5 +20,3 @@ export const GeneralInfoWrapper = styled.div`
   }
 `;
 export const GeneralInfoContainer = styled.div``;
-
-

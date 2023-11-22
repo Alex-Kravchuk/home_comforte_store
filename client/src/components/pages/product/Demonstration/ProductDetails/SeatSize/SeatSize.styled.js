@@ -13,7 +13,7 @@ export const SeatSizeInfoBlock = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
 
-  &:last-child {
+  &:nth-last-child(2) {
     border-bottom: none;
   }
 `;
@@ -30,12 +30,28 @@ export const SeatSizeInfoBlockLeft = styled.div`
 export const SeatSizeInfoBlockRight = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.65);
   padding: 10px 0;
 
   width: 50%;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+  svg {
+    margin-right: 10px;
+    cursor: pointer;
+    color: ${({ saved }) => (saved ? "#60a360" : "rgba(0, 0, 0, 0.3))")};
+    transition: all 0.2s ease;
+  }
+
+  svg:hover {
+    color: ${({ saved }) => (saved ? "#84e684" : "rgba(0, 0, 0, 0.8)")};
+  }
+
+  svg:active {
+    color: rgba(0, 0, 0, 1);
+  }
 `;
 
 export const SeatSizeInfoLabel = styled.div`

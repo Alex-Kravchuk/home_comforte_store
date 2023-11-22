@@ -87,7 +87,7 @@ const ProductCustomization = () => {
     setCollapseItems(items);
   };
 
-  console.log("modifiers length", modifiers.length, modifiers);
+  // console.log("modifiers length", modifiers.length, modifiers);
 
   return (
     <PCWrapper>

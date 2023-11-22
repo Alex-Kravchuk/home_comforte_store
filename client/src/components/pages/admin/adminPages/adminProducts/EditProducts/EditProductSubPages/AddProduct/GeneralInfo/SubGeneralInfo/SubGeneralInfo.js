@@ -9,6 +9,7 @@ import {
 } from "../../../../../../../../../../styles/formComponentStyles";
 import { InfoBlock } from "../../AddProduct.styled";
 
+
 const SubGeneralInfo = ({ categories }) => {
   const [types, setTypes] = useState([]);
   const [subtypes, setSubtypes] = useState([]);
