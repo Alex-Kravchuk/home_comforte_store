@@ -12,6 +12,7 @@ import ModifierUpload from "../../ProductCustomization/AddModifier/ModifierUploa
 const ProductImagesUploading = ({
   images,
   uploadType,
+  existingImage = null,
   saveFileHandler,
   editModeOn = false,
   clearFileListflag = null,

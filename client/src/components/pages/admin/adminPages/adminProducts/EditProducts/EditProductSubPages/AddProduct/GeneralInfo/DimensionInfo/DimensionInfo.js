@@ -13,26 +13,10 @@ import { Empty } from "antd";
 
 const DimensionInfo = ({
   dimensionsData = [],
-  // temporarilySaved,
   dimensionInfoHandler,
   dimensionImgHandler,
 }) => {
-  // const [start, setDimensionsData] = useState([
-  //   {
-  //     id: 1,
-  //     label: "Seat comfort",
-  //     details: "",
-  //     value: "Soft seat",
-  //   },
-  //   {
-  //     id: 2,
-  //     label: "Seat height",
-  //     details: "(floor to the highest point of the seat cushion)",
-  //     value: "Medium height at 19”",
-  //   },
-  // ]);
 
-  // useEffect(() => {}, [temporarilySaved]);
 
   const addNewLabelLineHandler = () => {
     const newLine = {

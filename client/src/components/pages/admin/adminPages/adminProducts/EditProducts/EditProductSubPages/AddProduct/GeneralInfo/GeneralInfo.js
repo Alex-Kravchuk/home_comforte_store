@@ -17,7 +17,7 @@ const GeneralInfo = () => {
   const dispatch = useDispatch();
   const { data: categories } = useSelector((state) => state.menuData);
 
-  const [dimensionImg, setDimensionImg] = useState();
+  const [dimensionImg, setDimensionImg] = useState(null);
   const [dimensionInfo, setDimensionInfo] = useState([]);
 
   const [dimensionError, setDimensionError] = useState(false);
@@ -38,6 +38,11 @@ const GeneralInfo = () => {
       setTemporarilySaved(true);
       setDimensionError(false);
     } catch (error) {}
+  };
+
+  const resetDimensionValues = () => {
+    setDimensionImg(null);
+    setDimensionInfo([]);
   };
 
   const generalSubTabs = [
@@ -62,8 +67,6 @@ const GeneralInfo = () => {
 
   console.log("dimesniosn info", dimensionInfo);
 
-  // TODO Добавити помилку при збережні, якщо немає інформації в Dimension block
-
   return (
     <GeneralInfoWrapper>
       <GeneralInfoContainer>
@@ -73,6 +76,7 @@ const GeneralInfo = () => {
             form={form}
             temporarySaveFlag={temporarilySaved}
             temporarilySaveHandler={setTemporarilySaved}
+            resetDimensionHandler={resetDimensionValues}
           />
           <Collapse
             items={generalSubTabs}

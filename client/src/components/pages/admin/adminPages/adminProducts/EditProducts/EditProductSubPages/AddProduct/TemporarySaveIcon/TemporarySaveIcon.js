@@ -19,6 +19,7 @@ const TemporarySaveIcon = ({
   form,
   error,
   temporarySaveFlag,
+  resetDimensionHandler,
   temporarilySaveHandler,
 }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const TemporarySaveIcon = ({
     dispatch(resetGeneralInfoFields());
     temporarilySaveHandler(false);
     form.resetFields();
+    resetDimensionHandler();
   };
 
   // console.log("error dimenison", error);
