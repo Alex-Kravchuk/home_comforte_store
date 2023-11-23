@@ -56,6 +56,7 @@ const GeneralInfo = () => {
       label: <InfoBlockTitle>Dimension</InfoBlockTitle>,
       children: (
         <DimensionInfo
+        dimensionImg={dimensionImg}
           dimensionsData={dimensionInfo}
           temporarilySaved={temporarilySaved}
           dimensionImgHandler={setDimensionImg}

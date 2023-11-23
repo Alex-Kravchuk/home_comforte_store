@@ -31,6 +31,12 @@ const ProductImagesUploading = ({
   const dimensionTypeUpload = uploadType === "dimension";
 
   useEffect(() => {
+    if (!existingImage) {
+      setImageURL(null);
+    }
+  }, [existingImage]);
+
+  useEffect(() => {
     if (clearFileListflag !== null) {
       setFileList([]);
       clearFileListHandler(true);

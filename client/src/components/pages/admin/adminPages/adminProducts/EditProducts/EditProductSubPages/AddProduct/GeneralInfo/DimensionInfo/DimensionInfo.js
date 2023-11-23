@@ -12,12 +12,11 @@ import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/P
 import { Empty } from "antd";
 
 const DimensionInfo = ({
+  dimensionImg,
   dimensionsData = [],
   dimensionInfoHandler,
   dimensionImgHandler,
 }) => {
-
-
   const addNewLabelLineHandler = () => {
     const newLine = {
       id: dimensionsData.length + 1,
@@ -42,7 +41,6 @@ const DimensionInfo = ({
 
   const saveFileHandler = (file) => {
     dimensionImgHandler(file);
-    // setDimensionImg(file);
   };
 
   return (
@@ -72,6 +70,7 @@ const DimensionInfo = ({
         <InfoHeader tooltipText="Here you must upload the image in the following format: the image must be shown in profile and front with as many dimensions as possible (eg width, seat depth, height from the floor, etc.). This will help the client better understand how exactly a certain product works." />
         <ProductImagesUploading
           uploadType="dimension"
+          existingImage={dimensionImg}
           saveFileHandler={saveFileHandler}
         />
       </DIImageContainer>
