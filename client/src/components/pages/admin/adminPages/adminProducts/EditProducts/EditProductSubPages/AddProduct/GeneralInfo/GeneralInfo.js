@@ -59,7 +59,7 @@ const GeneralInfo = ({ setDataHandler }) => {
             form={form}
             temporarySaveFlag={temporarilySaved}
             temporarilySaveHandler={setTemporarilySaved}
-            resetDimensionHandler={resetDimensionValues}
+          resetDataHandler={resetDimensionValues}
           />
           <SubGeneralInfo categories={categories} />
           <DimensionInfo

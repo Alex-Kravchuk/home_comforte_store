@@ -14,21 +14,23 @@ import {
   TSIErrorContainer,
 } from "./TemporarySaveIcon.styled";
 
-
 const TemporarySaveIcon = ({
-  form,
+  form = null,
   error,
+  saveDataHandler = null,
+  resetDataHandler,
   temporarySaveFlag,
-  resetDimensionHandler,
   temporarilySaveHandler,
 }) => {
-  
-
   const buttonText = temporarySaveFlag
     ? "Temporarily saved"
     : "Temporarily save the entered values";
 
   const onClickHandler = () => {
+    if (!form) {
+      saveDataHandler();
+    }
+
     if (temporarySaveFlag) {
       temporarilySaveHandler(false);
     }
@@ -36,8 +38,11 @@ const TemporarySaveIcon = ({
 
   const resetFieldsHandler = () => {
     temporarilySaveHandler(false);
-    form.resetFields();
-    resetDimensionHandler();
+    resetDataHandler();
+
+    if (form) {
+      form.resetFields();
+    }
   };
 
   return (

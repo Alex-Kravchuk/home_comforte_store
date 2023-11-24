@@ -5,29 +5,18 @@ import { Collapse, Empty } from "antd";
 import AddModifier from "./AddModifier/AddModifier";
 import Modifier from "./AddModifier/Modifier/Modifier";
 import ModifierTitle from "./AddModifier/ModifierTitle/ModifierTitle";
+import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 
 import { AMList } from "./AddModifier/AddModifier.styled";
 import { PCContainer, PCWrapper } from "./ProductCustomization.styled";
 
-const ProductCustomization = () => {
-  const [modifiers, setModifiers] = useState([
-    {
-      id: 1,
-      name: "Choose Fabric",
-      displayMethod: "list",
-      furnitureId: 1,
-      items: [
-        {
-          id: 1,
-          img: null,
-          title: null,
-          description: null,
-        },
-      ],
-    },
-  ]);
+const ProductCustomization = ({ setDataHandler }) => {
+  const [modifiers, setModifiers] = useState([]);
 
   const [collapseItems, setCollapseItems] = useState([]);
+
+  const [customizationError, setCustomizationError] = useState(false);
+  const [temporarilySaved, setTemporarilySaved] = useState(false);
 
   useEffect(() => {
     createModifierCollapseItem();
@@ -39,7 +28,7 @@ const ProductCustomization = () => {
     );
   };
 
-  const onAddModifier = ({name, displayMethod}) => {
+  const onAddModifier = ({ name, displayMethod }) => {
     const newModifier = {
       id: modifiers.length + 1,
       name,
@@ -87,11 +76,32 @@ const ProductCustomization = () => {
     setCollapseItems(items);
   };
 
-  // console.log("modifiers length", modifiers.length, modifiers);
+  const saveCustomizationDataHandler = () => {
+    if (modifiers.length < 1) {
+      setCustomizationError(true);
+      return;
+    }
+
+    setDataHandler(modifiers);
+    setTemporarilySaved(true);
+    setCustomizationError(false);
+  };
+
+  const resetCustomizationDataHandler = () => {
+    setModifiers([]);
+    setDataHandler([]);
+  };
 
   return (
     <PCWrapper>
       <PCContainer>
+        <TemporarySaveIcon
+          error={customizationError}
+          temporarySaveFlag={temporarilySaved}
+          temporarilySaveHandler={setTemporarilySaved}
+          saveDataHandler={saveCustomizationDataHandler}
+          resetDataHandler={resetCustomizationDataHandler}
+        />
         {collapseItems.length !== 0 ? (
           <AMList>
             <Collapse

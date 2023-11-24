@@ -25,10 +25,6 @@ const ModifierUpload = ({ config }) => {
     </ModifierUploadButtonWrapper>
   );
 
-  console.log("=================asdasdasdasd===================");
-  console.log(config.localImageURL);
-  console.log("====================================");
-
   return (
     <ModifierUploadWrapper>
       <SeparateLargeImgContainer>
