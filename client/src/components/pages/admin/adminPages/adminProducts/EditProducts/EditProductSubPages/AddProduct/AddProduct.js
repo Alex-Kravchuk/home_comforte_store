@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Result, Tabs } from "antd";
+import { Button, Result, Tabs } from "antd";
 
 import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
 
@@ -22,13 +22,16 @@ const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
+  const [generalData, setGeneralData] = useState();
+  const [customizationData, setCustomizationData] = useState();
+
   const items = [
     {
       key: "1",
       label: "General information about the product",
       children: (
         <TabWrapper>
-          <GeneralInfo />
+          <GeneralInfo setDataHandler={setGeneralData} />
         </TabWrapper>
       ),
     },
@@ -37,7 +40,7 @@ const AddProduct = () => {
       label: "Product customization options",
       children: (
         <TabWrapper>
-          <ProductCustomization />
+          <ProductCustomization setDataHandler={setCustomizationData} />
         </TabWrapper>
       ),
     },
@@ -52,6 +55,10 @@ const AddProduct = () => {
     },
   ];
 
+  console.log("====================================");
+  console.log(generalData, customizationData);
+  console.log("====================================");
+
   return (
     <SubPageWrapper>
       <SubPageContainer>
@@ -63,9 +70,12 @@ const AddProduct = () => {
             defaultActiveKey={["1"]}
             size="small"
             type="card"
-            expandIconPosition="end"
           />
         )}
+
+        <Button type="primary" size="large">
+          Create a new product
+        </Button>
       </SubPageContainer>
     </SubPageWrapper>
   );

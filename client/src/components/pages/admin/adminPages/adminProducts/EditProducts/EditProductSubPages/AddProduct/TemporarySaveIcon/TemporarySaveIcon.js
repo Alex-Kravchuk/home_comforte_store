@@ -1,19 +1,19 @@
 import React from "react";
 
+import { Tooltip } from "antd";
+
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 import {
   TSIButton,
-  TSIContainer,
-  TSIErrorContainer,
-  TSIErrorText,
   TSIWrapper,
+  TSIContainer,
+  TSIErrorText,
+  TSIErrorContainer,
 } from "./TemporarySaveIcon.styled";
-import { Tooltip } from "antd";
-import { useDispatch } from "react-redux";
-import { resetGeneralInfoFields } from "../../../../../../../../../redux/productAdding/productAddingSlice";
+
 
 const TemporarySaveIcon = ({
   form,
@@ -22,7 +22,7 @@ const TemporarySaveIcon = ({
   resetDimensionHandler,
   temporarilySaveHandler,
 }) => {
-  const dispatch = useDispatch();
+  
 
   const buttonText = temporarySaveFlag
     ? "Temporarily saved"
@@ -35,13 +35,11 @@ const TemporarySaveIcon = ({
   };
 
   const resetFieldsHandler = () => {
-    dispatch(resetGeneralInfoFields());
     temporarilySaveHandler(false);
     form.resetFields();
     resetDimensionHandler();
   };
 
-  // console.log("error dimenison", error);
   return (
     <TSIWrapper>
       <TSIErrorContainer error={error}>

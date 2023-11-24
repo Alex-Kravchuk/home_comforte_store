@@ -46,7 +46,7 @@ const DimensionInfo = ({
   return (
     <InfoBlock>
       <InfoHeader tooltipText="Here you can add information about the dimensions of the product. This will look like a name-value pair. You can also add a description to each label" />
-      <DISeatSizeContainer>
+      <DISeatSizeContainer isEmpty={dimensionsData.length === 0}>
         {dimensionsData.length === 0 ? (
           <Empty description="No size information available" />
         ) : (

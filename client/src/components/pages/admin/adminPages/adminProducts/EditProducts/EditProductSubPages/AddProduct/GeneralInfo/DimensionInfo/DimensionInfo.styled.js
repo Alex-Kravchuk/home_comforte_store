@@ -25,6 +25,7 @@ export const DIInput = styled(Input)`
 export const DISeatSizeContainer = styled(SeatSizeContainer)`
   position: relative;
   margin-bottom: 20px;
+  padding: ${({ isEmpty }) => (isEmpty ? "20px" : "0")};
 
   &:hover {
     & > div:last-child {
