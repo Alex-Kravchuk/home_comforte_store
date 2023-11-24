@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import {  Result, Tabs } from "antd";
-
+import { Result, Tabs } from "antd";
 
 import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
 
@@ -15,6 +14,7 @@ import { viewport_sizes } from "../../../../../../../../utils/viewport_size_cons
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
 import ProductCustomization from "./ProductCustomization/ProductCustomization";
+import { TabWrapper } from "./AddProduct.styled";
 
 // TODO if something will go wrong commit was 07.11.2023
 
@@ -26,17 +26,29 @@ const AddProduct = () => {
     {
       key: "1",
       label: "General information about the product",
-      children: <GeneralInfo />,
+      children: (
+        <TabWrapper>
+          <GeneralInfo />
+        </TabWrapper>
+      ),
     },
     {
       key: "2",
       label: "Product customization options",
-      children: <ProductCustomization />,
+      children: (
+        <TabWrapper>
+          <ProductCustomization />
+        </TabWrapper>
+      ),
     },
     {
       key: "3",
       label: "Images",
-      children: <ProductImages />,
+      children: (
+        <TabWrapper>
+          <ProductImages />
+        </TabWrapper>
+      ),
     },
   ];
 

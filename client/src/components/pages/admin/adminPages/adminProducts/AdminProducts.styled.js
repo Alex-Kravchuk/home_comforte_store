@@ -44,6 +44,15 @@ export const TabLabelText = styled.div`
 
 export const SubPageWrapper = styled.div`
   margin-bottom: 16px;
+
+  .ant-tabs-bottom,
+  .ant-tabs-nav {
+    margin: 0;
+  }
+
+  .ant-tabs-tab-btn {
+    font-size: ${getResponsiveFontSize(16, 14)};
+  }
 `;
 export const SubPageContainer = styled.div`
   .ant-select-single.ant-select-lg {

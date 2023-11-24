@@ -11,6 +11,7 @@ export const PCWrapper = styled.div`
   .ant-collapse-large > .ant-collapse-item > .ant-collapse-header {
     background: rgb(222, 233, 255, 0.45);
   }
+
 `;
 
 export const PCContainer = styled.div``;

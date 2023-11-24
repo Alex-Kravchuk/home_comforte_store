@@ -38,7 +38,7 @@ const GeneralInfo = () => {
       }
 
       // FOR TEST
-      // TODO 
+      // TODO
       // If I wont to save image to redux store and use it for request to server,
       // I need to make this manipulation with file (see below)
 
@@ -106,11 +106,19 @@ const GeneralInfo = () => {
             temporarilySaveHandler={setTemporarilySaved}
             resetDimensionHandler={resetDimensionValues}
           />
-          <Collapse
+          {/* <Collapse
             items={generalSubTabs}
             defaultActiveKey={["1"]}
             size="large"
             expandIconPosition="start"
+          /> */}
+          <SubGeneralInfo categories={categories} />
+          <DimensionInfo
+            dimensionImg={dimensionImg}
+            dimensionsData={dimensionInfo}
+            temporarilySaved={temporarilySaved}
+            dimensionImgHandler={setDimensionImg}
+            dimensionInfoHandler={setDimensionInfo}
           />
         </Form>
       </GeneralInfoContainer>

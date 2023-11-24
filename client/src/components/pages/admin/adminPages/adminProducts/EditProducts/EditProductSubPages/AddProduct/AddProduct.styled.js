@@ -5,6 +5,7 @@ export const AddProductContent = styled.div`
   align-items: stretch;
   justify-content: space-between;
 `;
+
 export const AddProductFormContainer = styled.div`
   height: auto;
   flex: 1 1 50%;
@@ -31,22 +32,23 @@ export const AddProductFormBlockTitle = styled.div`
   margin-bottom: 20px;
 `;
 
-export const InfoBlock = styled.div`
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 4px 4px -6px #111;
-
-  &:nth-child(2n) {
-    padding: 24px 0;
-  }
-
-  &:last-child {
-    border-bottom: none;
-    box-shadow: none;
-  }
-`;
+export const InfoBlock = styled.div``;
 export const InfoBlockTitle = styled.div`
   text-align: end;
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.45);
+
+
+  border-bottom: 1px solid lightgray;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
+export const TabWrapper = styled.div`
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  border-radius: 0 0 6px 6px;
+  padding: 24px;
 `;
