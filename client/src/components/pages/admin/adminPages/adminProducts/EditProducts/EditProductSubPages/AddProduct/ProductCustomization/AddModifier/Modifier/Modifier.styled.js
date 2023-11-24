@@ -75,6 +75,14 @@ export const ModifierListItem = styled.div`
   box-shadow: 0 0 3px 0.5px red,
   0 1px 10px 0 rgba(21, 21, 21, 0.1);
  	 `}
+
+  ${({ cellType }) =>
+    cellType &&
+    `
+      height: 100px;
+      box-sizing: border-box;
+      justify-content: center;
+    `}
 `;
 
 export const ModifierInterfaceIcons = styled.div`
@@ -123,4 +131,10 @@ export const ModifierDescr = styled.div`
   font-size: 12px;
 `;
 
-export const InputsContainer = styled.div``;
+export const InputsContainer = styled.div`
+  ${({ cellType }) =>
+    cellType &&
+    `input:first-child {
+      margin-top: 25px;
+}`}
+`;

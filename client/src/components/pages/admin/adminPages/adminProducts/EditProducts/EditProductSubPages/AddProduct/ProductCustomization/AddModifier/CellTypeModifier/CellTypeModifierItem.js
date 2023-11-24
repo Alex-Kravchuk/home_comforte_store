@@ -78,7 +78,11 @@ const CellTypeModifierItem = ({
     setErrorPrice(false);
   };
   return (
-    <ModifierListItem error={canotBeAddedNewModifierError} editModeOn={true}>
+    <ModifierListItem
+      error={canotBeAddedNewModifierError}
+      editModeOn={true}
+      cellType={true}
+    >
       <ModifierInterfaceIcons>
         {editModeOn ? (
           <BookmarkAddedOutlinedIcon onClick={saveModifierChanges} />
@@ -90,7 +94,7 @@ const CellTypeModifierItem = ({
           onClick={() => removeModifierHandler(data.id)}
         />
       </ModifierInterfaceIcons>
-      <InputsContainer>
+      <InputsContainer cellType={true}>
         {editModeOn ? (
           <Input
             size="small"

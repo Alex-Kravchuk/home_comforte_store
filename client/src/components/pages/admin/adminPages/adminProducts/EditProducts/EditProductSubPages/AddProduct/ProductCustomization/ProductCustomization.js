@@ -22,6 +22,10 @@ const ProductCustomization = ({ setDataHandler }) => {
     createModifierCollapseItem();
   }, [modifiers]);
 
+  useEffect(() => {
+    setTemporarilySaved(false);
+  }, [modifiers]);
+
   const onDeleteModifier = (modifierID) => {
     setModifiers((state) =>
       state.filter((modifier) => modifier.id !== modifierID)

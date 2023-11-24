@@ -10,6 +10,7 @@ export const CellTypeContainer = styled.ul`
 `;
 
 export const Cell = styled.li`
+  height: 100px;
   box-sizing: border-box;
   display: inline-block;
   margin: -1px -1px 0 0;
@@ -41,6 +42,7 @@ export const Cell = styled.li`
 
 export const CellTitle = styled.div`
   text-align: center;
+  margin-top: 25px;
 `;
 export const CellPrice = styled.div`
   text-align: center;
