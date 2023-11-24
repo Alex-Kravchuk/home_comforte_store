@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-import { Collapse, Result } from "antd";
+import {  Result, Tabs } from "antd";
 
-import ExpandIcon from "../../../../../../../../helpers/ExpandIcon/ExpandIcon";
 
 import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
 
@@ -47,12 +46,12 @@ const AddProduct = () => {
         {smallerThanTableScreen ? (
           <Result title="For the correct operation of this page, use a device with a large screen" />
         ) : (
-          <Collapse
+          <Tabs
             items={items}
             defaultActiveKey={["1"]}
-            size="large"
+            size="small"
+            type="card"
             expandIconPosition="end"
-            expandIcon={({ isActive }) => <ExpandIcon open={isActive} />}
           />
         )}
       </SubPageContainer>

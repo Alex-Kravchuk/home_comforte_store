@@ -10,7 +10,10 @@ import DimensionInfo from "./DimensionInfo/DimensionInfo";
 
 import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 import { InfoBlockTitle } from "../AddProduct.styled";
-import { saveGeneralInfo } from "../../../../../../../../../redux/productAdding/productAddingSlice";
+import {
+  saveDimensionInfo,
+  saveSubGeneralInfo,
+} from "../../../../../../../../../redux/productAdding/productAddingSlice";
 
 const GeneralInfo = () => {
   const [form] = Form.useForm();
@@ -23,7 +26,7 @@ const GeneralInfo = () => {
   const [dimensionError, setDimensionError] = useState(false);
   const [temporarilySaved, setTemporarilySaved] = useState(false);
 
-  const onFinishForm = (values) => {
+  const onFinishForm = async (values) => {
     console.log("onFinishForm", values, dimensionInfo, dimensionImg);
 
     try {
@@ -34,7 +37,31 @@ const GeneralInfo = () => {
         return;
       }
 
-      dispatch(saveGeneralInfo(values));
+      // FOR TEST
+      // TODO 
+      // If I wont to save image to redux store and use it for request to server,
+      // I need to make this manipulation with file (see below)
+
+      const testBlob = URL.createObjectURL(dimensionImg);
+
+      console.log("TestBlob", testBlob);
+
+      await fetch(testBlob).then((result) =>
+        result.blob().then((blobFile) => {
+          const newFile = new File([blobFile], "dimensionImg", {
+            type: "image/webp",
+          });
+          console.log("new file", newFile);
+        })
+      );
+
+      dispatch(saveSubGeneralInfo(values));
+      dispatch(
+        saveDimensionInfo({
+          info: dimensionInfo,
+          img: URL.createObjectURL(dimensionImg),
+        })
+      );
       setTemporarilySaved(true);
       setDimensionError(false);
     } catch (error) {}
@@ -56,7 +83,7 @@ const GeneralInfo = () => {
       label: <InfoBlockTitle>Dimension</InfoBlockTitle>,
       children: (
         <DimensionInfo
-        dimensionImg={dimensionImg}
+          dimensionImg={dimensionImg}
           dimensionsData={dimensionInfo}
           temporarilySaved={temporarilySaved}
           dimensionImgHandler={setDimensionImg}
