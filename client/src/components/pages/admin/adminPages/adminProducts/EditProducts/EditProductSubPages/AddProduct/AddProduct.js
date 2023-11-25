@@ -22,8 +22,10 @@ const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
-  const [generalData, setGeneralData] = useState();
-  const [customizationData, setCustomizationData] = useState();
+  const [generalData, setGeneralData] = useState([]);
+  const [viewerImages, setViewerImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const [customizationData, setCustomizationData] = useState([]);
 
   const items = [
     {
@@ -49,7 +51,12 @@ const AddProduct = () => {
       label: "Images",
       children: (
         <TabWrapper>
-          <ProductImages />
+          <ProductImages
+            // data={{ viewer: viewerImages, preview: previewImages }}
+            customizationData={customizationData}
+            setDataHandlerViewer={setViewerImages}
+            setDataHandlerPreview={setPreviewImages}
+          />
         </TabWrapper>
       ),
     },

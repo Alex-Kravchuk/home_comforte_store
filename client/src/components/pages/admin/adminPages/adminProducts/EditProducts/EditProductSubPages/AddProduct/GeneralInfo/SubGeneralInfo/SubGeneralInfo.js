@@ -36,6 +36,7 @@ const SubGeneralInfo = ({ categories }) => {
       value: category.id,
       label: category.name,
     }));
+    
   return (
     <InfoBlock>
       <Form.Item

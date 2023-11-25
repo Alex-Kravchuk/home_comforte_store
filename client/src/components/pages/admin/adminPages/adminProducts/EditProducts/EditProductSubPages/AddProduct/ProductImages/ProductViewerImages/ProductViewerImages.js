@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 
+import { Tooltip } from "antd";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 
 import InfoHeader from "../../InfoHeader/InfoHeader";
+import CustomizationSelectBlock from "./CustomizationSelectBlock";
 import ProductImagesUploading from "../ProductImagesUploading/ProductImagesUploading";
 
 import {
-  PVIClearFileListContainer,
+  PVIWrapper,
   PVIContainer,
   PVIHeaderContainer,
-  PVIWrapper,
+  PVISelectContainer,
+  PVIClearFileListContainer,
 } from "./ProductViewerImages.styled";
-import { Button, Form, Tooltip, Upload } from "antd";
 
-const ProductViewerImages = () => {
+const ProductViewerImages = ({ customizationData }) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionItem, setSelectedOptionItem] = useState(null);
+
+  const [saveCustomOption, setSaveCustomOption] = useState(false);
 
   const saveFileHandler = (file) => {
     setImages((state) => [...state, file]);
@@ -24,6 +31,28 @@ const ProductViewerImages = () => {
   const clearFileList = (wasCleared = false) => {
     setClearFileList(!wasCleared);
   };
+
+  const selectOnChangeHandler = (value) => {
+    setSaveCustomOption(false);
+    setSelectedOption(customizationData[value - 1]);
+    setSelectedOptionItem(null);
+  };
+
+  const selectOptionItemHandler = (value) => {
+    setSaveCustomOption(false);
+    setSelectedOptionItem(selectedOption.items[value - 1]);
+  };
+
+  const saveCustomizationValues = () => {
+    setSaveCustomOption(true);
+  };
+
+  console.log(
+    "selected option:",
+    selectedOption,
+    "selected option item:",
+    selectedOptionItem
+  );
 
   return (
     <PVIWrapper>
@@ -48,6 +77,16 @@ const ProductViewerImages = () => {
             </Tooltip>
           </PVIClearFileListContainer>
         </PVIHeaderContainer>
+
+        <CustomizationSelectBlock
+          saved={saveCustomOption}
+          selectedOption={selectedOption}
+          customizationData={customizationData}
+          saveHandler={saveCustomizationValues}
+          selectedOptionItem={selectedOptionItem}
+          selectOnChangeHandler={selectOnChangeHandler}
+          selectOptionItemHandler={selectOptionItemHandler}
+        />
         <ProductImagesUploading
           uploadType="viewer"
           saveFileHandler={saveFileHandler}

@@ -55,7 +55,7 @@ const TemporarySaveIcon = ({
       <TSIContainer>
         <Tooltip
           title="You can temporarily save the entered values for the next part of the new product setup. You can reset it at any time"
-          placement="top"
+          placement="bottom"
         >
           <TSIButton
             onClick={onClickHandler}

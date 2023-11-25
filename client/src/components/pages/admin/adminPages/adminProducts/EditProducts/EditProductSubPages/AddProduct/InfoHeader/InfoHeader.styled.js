@@ -3,8 +3,9 @@ import styled from "@emotion/styled";
 export const InfoHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
 
   svg {
     cursor: pointer;
