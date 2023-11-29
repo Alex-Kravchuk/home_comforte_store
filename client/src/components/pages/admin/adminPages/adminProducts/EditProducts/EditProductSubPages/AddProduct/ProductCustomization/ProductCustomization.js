@@ -9,21 +9,23 @@ import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 
 import { AMList } from "./AddModifier/AddModifier.styled";
 import { PCContainer, PCWrapper } from "./ProductCustomization.styled";
+import { errorHandlingHelper } from "./errorHandlingHelper";
 
 const ProductCustomization = ({ setDataHandler }) => {
   const [modifiers, setModifiers] = useState([]);
 
   const [collapseItems, setCollapseItems] = useState([]);
 
-  const [customizationError, setCustomizationError] = useState(false);
   const [temporarilySaved, setTemporarilySaved] = useState(false);
+  const [customizationError, setCustomizationError] = useState(false);
+  // const [modifiersWithoutChildrenError, setModifiersWithoutChildrenError] =
+  //   useState(false);
 
   useEffect(() => {
     createModifierCollapseItem();
-  }, [modifiers]);
-
-  useEffect(() => {
     setTemporarilySaved(false);
+    setCustomizationError(false);
+    // setModifiersWithoutChildrenError(false);
   }, [modifiers]);
 
   const onDeleteModifier = (modifierID) => {
@@ -81,8 +83,9 @@ const ProductCustomization = ({ setDataHandler }) => {
   };
 
   const saveCustomizationDataHandler = () => {
-    if (modifiers.length < 1) {
-      setCustomizationError(true);
+    const error = errorHandlingHelper(modifiers);
+    if (error) {
+      setCustomizationError(error);
       return;
     }
 
@@ -94,6 +97,7 @@ const ProductCustomization = ({ setDataHandler }) => {
   const resetCustomizationDataHandler = () => {
     setModifiers([]);
     setDataHandler([]);
+    // setModifiersWithoutChildrenError(false);
   };
 
   return (
@@ -102,6 +106,10 @@ const ProductCustomization = ({ setDataHandler }) => {
         <TemporarySaveIcon
           error={customizationError}
           temporarySaveFlag={temporarilySaved}
+          // errorText={
+          //   modifiersWithoutChildrenError &&
+          //   "You cannot add a customization option without option elements"
+          // }
           temporarilySaveHandler={setTemporarilySaved}
           saveDataHandler={saveCustomizationDataHandler}
           resetDataHandler={resetCustomizationDataHandler}

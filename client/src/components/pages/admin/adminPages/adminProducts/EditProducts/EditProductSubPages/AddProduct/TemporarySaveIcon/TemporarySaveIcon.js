@@ -15,8 +15,8 @@ import {
 } from "./TemporarySaveIcon.styled";
 
 const TemporarySaveIcon = ({
-  form = null,
   error,
+  form = null,
   saveDataHandler = null,
   resetDataHandler,
   temporarySaveFlag,
@@ -28,6 +28,8 @@ const TemporarySaveIcon = ({
 
   const onClickHandler = () => {
     if (!form) {
+      console.log("pic");
+
       saveDataHandler();
     }
 
@@ -44,13 +46,12 @@ const TemporarySaveIcon = ({
       form.resetFields();
     }
   };
+  
 
   return (
     <TSIWrapper>
       <TSIErrorContainer error={error}>
-        <TSIErrorText>
-          You have not filled in all the information in this block
-        </TSIErrorText>
+        <TSIErrorText>{error}</TSIErrorText>
       </TSIErrorContainer>
       <TSIContainer>
         <Tooltip

@@ -45,13 +45,6 @@ const Modifier = ({ id, data, displayMethod, saveChangesHandler }) => {
       }
     }
 
-    // if (tileType) {
-    //   if (lastModifier?.title === null || lastModifier?.price === null) {
-    //     setCantAddNewModifier(true);
-    //     return;
-    //   }
-    // }
-
     const newEmptyListTypeModifier = {
       id: data.length + 1,
       img: null,
