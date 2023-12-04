@@ -23,9 +23,23 @@ const AddProduct = () => {
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
   const [generalData, setGeneralData] = useState([]);
-  const [viewerImages, setViewerImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-  const [customizationData, setCustomizationData] = useState([]);
+
+  // customization data has data about different modifiers and images for product viewer
+  const [customizationData, setCustomizationData] = useState([
+    // {
+    //   id: 1,
+    //   name: "Choose Fabric",
+    //   displayMethod: "list",
+    //   items: [
+    //     {
+    //       id: 1,
+    //       title: "Cement",
+    //       description: "",
+    //     },
+    //   ],
+    // },
+  ]);
 
   const items = [
     {
@@ -52,10 +66,9 @@ const AddProduct = () => {
       children: (
         <TabWrapper>
           <ProductImages
-            // data={{ viewer: viewerImages, preview: previewImages }}
             customizationData={customizationData}
-            setDataHandlerViewer={setViewerImages}
             setDataHandlerPreview={setPreviewImages}
+            setDataHandlerViewer={setCustomizationData}
           />
         </TabWrapper>
       ),
@@ -63,7 +76,11 @@ const AddProduct = () => {
   ];
 
   console.log("====================================");
-  console.log(generalData, customizationData);
+  console.log("general data:", generalData);
+  console.log("====================================");
+
+  console.log("====================================");
+  console.log("customization data:", customizationData);
   console.log("====================================");
 
   return (
@@ -72,12 +89,7 @@ const AddProduct = () => {
         {smallerThanTableScreen ? (
           <Result title="For the correct operation of this page, use a device with a large screen" />
         ) : (
-          <Tabs
-            items={items}
-            defaultActiveKey={["1"]}
-            size="small"
-            type="card"
-          />
+          <Tabs type="card" size="small" items={items} defaultActiveKey="1" />
         )}
 
         <Button type="primary" size="large">

@@ -9,15 +9,21 @@ import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
 import PreviewImagesUpload from "../ProductPreviewImages/PreviewImagesUpload/PreviewImagesUpload";
 import ModifierUpload from "../../ProductCustomization/AddModifier/ModifierUpload/ModifierUpload";
 
-const ProductImagesUploading = ({
-  images,
-  uploadType,
-  existingImage = null,
-  saveFileHandler,
-  editModeOn = false,
-  clearFileListflag = null,
-  clearFileListHandler,
-}) => {
+const ProductImagesUploading = (
+  {
+    images,
+    uploadType,
+    saveFileHandler,
+    uploadedFileList,
+    selectOptionsWasChanged,
+    existingImage = null,
+    editModeOn = false,
+    clearFileListflag = null,
+    clearFileListHandler,
+    checkFileListChanges,
+  },
+  props
+) => {
   const { id, img } = useSelector((state) => state.user.userData);
 
   const [fileList, setFileList] = useState([]);
@@ -29,6 +35,33 @@ const ProductImagesUploading = ({
   const previewTypeUpload = uploadType === "preview";
   const modifierTypeUpload = uploadType === "modifier";
   const dimensionTypeUpload = uploadType === "dimension";
+
+  console.log("upload file list", uploadedFileList);
+
+  useEffect(() => {
+    if (selectOptionsWasChanged) {
+      setFileList([]);
+    }
+
+    if (uploadedFileList && selectOptionsWasChanged) {
+      uploadedFileList.forEach((item) => {
+        getBase64(item, (url) => {
+          setImageURL(url);
+          setFileList((state) => [...state, { originalFileObj: item, url }]);
+        });
+      });
+    }
+
+
+  }, [selectOptionsWasChanged]);
+
+  useEffect(() => {
+    if (checkFileListChanges) {
+      console.log('file list suka', fileList);
+
+      checkFileListChanges(fileList);
+    }
+  }, [fileList]);
 
   useEffect(() => {
     if (!existingImage) {
@@ -104,7 +137,7 @@ const ProductImagesUploading = ({
 
   const onRemoveHandler = (removedItem) => {
     setImageURL(null);
-    saveFileHandler(null);
+    // saveFileHandler(null);
     setFileList((state) =>
       state.filter((file) => file.uid !== removedItem.uid)
     );
@@ -175,7 +208,6 @@ const ProductImagesUploading = ({
     previewOpenHandler: previewOpen,
     fileList,
     beforeUpload,
-    defaultFileList,
     currentPreviewIndex,
   };
 

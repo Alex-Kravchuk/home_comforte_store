@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Tooltip } from "antd";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
@@ -15,14 +15,29 @@ import {
   PVIClearFileListContainer,
 } from "./ProductViewerImages.styled";
 
-const ProductViewerImages = ({ customizationData }) => {
+const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionItem, setSelectedOptionItem] = useState(null);
 
-  const [saveCustomOption, setSaveCustomOption] = useState(false);
+  const [savedCustomOption, setSavedCustomOption] = useState(false);
+  const [selectError, setSelectError] = useState({
+    option: false,
+    optionItem: false,
+  });
+
+  useEffect(() => {
+    if (selectedOptionItem) {
+      const selectedOptionItemHasViewerImages =
+        selectedOptionItem.viewerImages?.length > 0;
+
+      setSavedCustomOption(selectedOptionItemHasViewerImages);
+
+      setImages(selectedOptionItem.viewerImages ?? []);
+    }
+  }, [selectedOptionItem]);
 
   const saveFileHandler = (file) => {
     setImages((state) => [...state, file]);
@@ -30,29 +45,84 @@ const ProductViewerImages = ({ customizationData }) => {
 
   const clearFileList = (wasCleared = false) => {
     setClearFileList(!wasCleared);
+    setSelectedOption(null);
+    setSelectedOptionItem(null);
   };
 
   const selectOnChangeHandler = (value) => {
-    setSaveCustomOption(false);
+    // setSavedCustomOption(false);
     setSelectedOption(customizationData[value - 1]);
     setSelectedOptionItem(null);
   };
 
   const selectOptionItemHandler = (value) => {
-    setSaveCustomOption(false);
     setSelectedOptionItem(selectedOption.items[value - 1]);
+
+    const selectOptionItemHasViewerImages =
+      selectedOptionItem?.viewerImages?.length > 0 ? true : false;
+
+    // console.log("suka mk", selectedOption, 'selected subItem:', selectedOption.items[value - 1]);
+    // console.log("suka mk", 'current subItem:', selectedOptionItem);
+
+    // // debugger
+    // setSavedCustomOption(selectOptionItemHasViewerImages);
   };
 
   const saveCustomizationValues = () => {
-    setSaveCustomOption(true);
+    if (!selectedOption) {
+      setSelectError((state) => ({ ...state, option: true }));
+      return;
+    }
+
+    if (!selectedOptionItem) {
+      setSelectError((state) => ({ ...state, optionItem: true }));
+      return;
+    }
+
+    const selectedOptionItemIndex = selectedOption.items.findIndex(
+      (item) => item.id === selectedOptionItem.id
+    );
+
+    const selectedOptionItemWithImages = {
+      ...selectedOptionItem,
+      viewerImages: images,
+    };
+
+    selectedOption.items.splice(
+      selectedOptionItemIndex,
+      1,
+      selectedOptionItemWithImages
+    );
+
+    const customizationModifier = {
+      ...selectedOption,
+      items: selectedOption.items,
+    };
+
+    console.log("check ifff", customizationModifier);
+
+    setSavedCustomOption(true);
+    saveDataHandler(customizationModifier);
+    setSelectError({ option: false, optionItem: false });
   };
 
-  console.log(
-    "selected option:",
-    selectedOption,
-    "selected option item:",
-    selectedOptionItem
-  );
+  const checkFileListChanges = (fileList) => {
+    console.log("loggg", fileList, images);
+
+    const differentLength =
+      fileList.length !== selectedOptionItem?.viewerImages?.length;
+
+    if (differentLength && fileList.length !== 0) {
+      console.log("sushiy pes");
+      setSavedCustomOption(false);
+
+      if (fileList.length > 0) {
+        setImages(fileList.map((item) => item.originalFileObj));
+      }
+    }
+  };
+  // console.log("selected images:", images);
+  // console.log("saved flag", savedCustomOption, selectedOptionItem);
 
   return (
     <PVIWrapper>
@@ -72,14 +142,15 @@ const ProductViewerImages = ({ customizationData }) => {
             }
           />
           <PVIClearFileListContainer onClick={clearFileList}>
-            <Tooltip title="Clear the file list" placement="left">
+            <Tooltip title="Clear the data" placement="left">
               <DeleteSweepOutlinedIcon />
             </Tooltip>
           </PVIClearFileListContainer>
         </PVIHeaderContainer>
 
         <CustomizationSelectBlock
-          saved={saveCustomOption}
+          error={selectError}
+          saved={savedCustomOption}
           selectedOption={selectedOption}
           customizationData={customizationData}
           saveHandler={saveCustomizationValues}
@@ -87,11 +158,17 @@ const ProductViewerImages = ({ customizationData }) => {
           selectOnChangeHandler={selectOnChangeHandler}
           selectOptionItemHandler={selectOptionItemHandler}
         />
+
         <ProductImagesUploading
           uploadType="viewer"
           saveFileHandler={saveFileHandler}
           clearFileListflag={clearFileListflag}
           clearFileListHandler={setClearFileList}
+          checkFileListChanges={checkFileListChanges}
+          selectOptionsWasChanged={selectedOptionItem}
+          uploadedFileList={
+            selectedOptionItem ? selectedOptionItem.viewerImages : null
+          }
         />
       </PVIContainer>
     </PVIWrapper>

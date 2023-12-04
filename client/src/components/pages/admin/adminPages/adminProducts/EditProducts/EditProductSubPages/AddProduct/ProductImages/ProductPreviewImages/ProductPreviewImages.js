@@ -24,7 +24,7 @@ const ProductPreviewImages = () => {
     setImages((state) => [...state, file]);
   };
 
-  console.log("images PREV", images);
+  // console.log("images PREV", images);
 
   return (
     <PPIWrapper>
