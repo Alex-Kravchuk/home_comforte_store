@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 
-import {  Form } from "antd";
-import {  useSelector } from "react-redux";
-
-import { GeneralInfoContainer, GeneralInfoWrapper } from "./GeneralInfo.styled";
+import { Form } from "antd";
+import { useSelector } from "react-redux";
 
 import DimensionInfo from "./DimensionInfo/DimensionInfo";
 import SubGeneralInfo from "./SubGeneralInfo/SubGeneralInfo";
-
 import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
+
+import { GeneralInfoContainer, GeneralInfoWrapper } from "./GeneralInfo.styled";
 
 const GeneralInfo = ({ setDataHandler }) => {
   const [form] = Form.useForm();
-  
+
   const { data: categories } = useSelector((state) => state.menuData);
 
   const [dimensionImg, setDimensionImg] = useState(null);
   const [dimensionInfo, setDimensionInfo] = useState([]);
 
   const [dimensionError, setDimensionError] = useState(false);
+  
+  // this state handler is used to indicate that some product information
+  // has been stored in the state of the parent component
   const [temporarilySaved, setTemporarilySaved] = useState(false);
 
   const onFinishForm = async (values) => {
     try {
       if (!dimensionImg || !dimensionInfo) {
-        console.log("dimenisonasdasdasd", dimensionError);
-
         setDimensionError(true);
         return;
       }
 
+      // I get the general product data from the form values
       setDataHandler({
         subGeneral: values,
         dimension: {
@@ -59,7 +60,7 @@ const GeneralInfo = ({ setDataHandler }) => {
             form={form}
             temporarySaveFlag={temporarilySaved}
             temporarilySaveHandler={setTemporarilySaved}
-          resetDataHandler={resetDimensionValues}
+            resetDataHandler={resetDimensionValues}
           />
           <SubGeneralInfo categories={categories} />
           <DimensionInfo

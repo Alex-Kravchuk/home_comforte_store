@@ -4,12 +4,11 @@ import { Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 
-import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
-
 import {
   SeparateLargeImg,
   SeparateLargeImgContainer,
 } from "../../ProductImages/ProductImagesUploading/ProductImagesUploading.styled";
+import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
 
 const DimensionUpload = ({ config }) => {
   const uploadButton = (

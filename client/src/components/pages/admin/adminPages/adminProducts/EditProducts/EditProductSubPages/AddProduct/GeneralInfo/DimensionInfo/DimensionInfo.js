@@ -1,21 +1,20 @@
 import React from "react";
 
+import { Empty } from "antd";
+
+import InfoHeader from "../../InfoHeader/InfoHeader";
 import AddRemoveInterface from "./AddRemoveInterface";
-
 import DimensionSeatSizeItem from "./DimensionSeatSizeItem";
-
-import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
+import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/ProductImagesUploading";
 
 import { InfoBlock } from "../../AddProduct.styled";
-import InfoHeader from "../../InfoHeader/InfoHeader";
-import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/ProductImagesUploading";
-import { Empty } from "antd";
+import { DIImageContainer, DISeatSizeContainer } from "./DimensionInfo.styled";
 
 const DimensionInfo = ({
   dimensionImg,
   dimensionsData = [],
-  dimensionInfoHandler,
   dimensionImgHandler,
+  dimensionInfoHandler,
 }) => {
   const addNewLabelLineHandler = () => {
     const newLine = {
@@ -32,6 +31,8 @@ const DimensionInfo = ({
     if (dimensionsData.length === 1) {
       return;
     }
+
+    // remove the last one line of items
     const newLines = dimensionsData.filter(
       (item) => item.id !== dimensionsData[dimensionsData.length - 1].id
     );
@@ -65,6 +66,7 @@ const DimensionInfo = ({
           addNewLabelLineHandler={addNewLabelLineHandler}
           removeTheLastOneLabelLine={removeTheLastOneLabelLine}
         />
+
       </DISeatSizeContainer>
       <DIImageContainer>
         <InfoHeader tooltipText="Here you must upload the image in the following format: the image must be shown in profile and front with as many dimensions as possible (eg width, seat depth, height from the floor, etc.). This will help the client better understand how exactly a certain product works." />

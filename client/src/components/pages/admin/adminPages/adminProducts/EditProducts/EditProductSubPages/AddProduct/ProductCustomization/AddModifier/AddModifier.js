@@ -13,7 +13,12 @@ const AddModifier = ({ onAddModifier }) => {
   const [form] = Form.useForm();
 
   const showModalHandler = () => setIsModalOpen(true);
-  const handleCancel = () => setIsModalOpen(false);
+  
+  const handleCancel = () => {
+    form.resetFields();
+    setIsModalOpen(false);
+  };
+
   const handleOk = () => {
     form
       .validateFields()

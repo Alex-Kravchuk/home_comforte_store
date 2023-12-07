@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import ListTypeModifierItem from "./ListTypeModifierItem";
 
-import { ModifierContainer, ModifierList, ModifierWrapper } from "../Modifier/Modifier.styled";
+import {
+  ModifierContainer,
+  ModifierList,
+  ModifierWrapper,
+} from "../Modifier/Modifier.styled";
 
 const ListTypeModifier = ({
   list,
@@ -33,8 +37,6 @@ const ListTypeModifier = ({
     removeHandler(filteredItems);
     setModifiers(filteredItems);
   };
-
-  // console.log("modifiers", modifiers, "list", list);
 
   return (
     <ModifierWrapper>

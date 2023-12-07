@@ -9,6 +9,8 @@ import {
 } from "../../../../../../../../../../styles/formComponentStyles";
 import { InfoBlock } from "../../AddProduct.styled";
 
+// TODO
+// the price should depend on the selected customization option
 
 const SubGeneralInfo = ({ categories }) => {
   const [types, setTypes] = useState([]);
@@ -36,7 +38,7 @@ const SubGeneralInfo = ({ categories }) => {
       value: category.id,
       label: category.name,
     }));
-    
+
   return (
     <InfoBlock>
       <Form.Item

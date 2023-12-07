@@ -17,9 +17,9 @@ import {
 const TemporarySaveIcon = ({
   error,
   form = null,
-  saveDataHandler = null,
   resetDataHandler,
   temporarySaveFlag,
+  saveDataHandler = null,
   temporarilySaveHandler,
 }) => {
   const buttonText = temporarySaveFlag
@@ -27,9 +27,8 @@ const TemporarySaveIcon = ({
     : "Temporarily save the entered values";
 
   const onClickHandler = () => {
+    // when we save data on the tab without form
     if (!form) {
-      console.log("pic");
-
       saveDataHandler();
     }
 
@@ -46,7 +45,6 @@ const TemporarySaveIcon = ({
       form.resetFields();
     }
   };
-  
 
   return (
     <TSIWrapper>

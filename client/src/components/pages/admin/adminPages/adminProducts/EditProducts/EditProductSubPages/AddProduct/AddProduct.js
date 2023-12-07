@@ -2,44 +2,30 @@ import React, { useState } from "react";
 
 import { Button, Result, Tabs } from "antd";
 
+import GeneralInfo from "./GeneralInfo/GeneralInfo";
+import ProductImages from "./ProductImages/ProductImages";
+import ProductCustomization from "./ProductCustomization/ProductCustomization";
+
 import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../../../../utils/viewport_size_consts";
 
 import {
   SubPageWrapper,
   SubPageContainer,
 } from "../../../AdminProducts.styled";
 
-import { viewport_sizes } from "../../../../../../../../utils/viewport_size_consts";
-
-import GeneralInfo from "./GeneralInfo/GeneralInfo";
-import ProductImages from "./ProductImages/ProductImages";
-import ProductCustomization from "./ProductCustomization/ProductCustomization";
 import { TabWrapper } from "./AddProduct.styled";
-
-// TODO if something will go wrong commit was 07.11.2023
 
 const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
+  // generalData contains information about the general data of the product and its dimensions
   const [generalData, setGeneralData] = useState([]);
+  // previewImages contains images from the real world
   const [previewImages, setPreviewImages] = useState([]);
-
-  // customization data has data about different modifiers and images for product viewer
-  const [customizationData, setCustomizationData] = useState([
-    // {
-    //   id: 1,
-    //   name: "Choose Fabric",
-    //   displayMethod: "list",
-    //   items: [
-    //     {
-    //       id: 1,
-    //       title: "Cement",
-    //       description: "",
-    //     },
-    //   ],
-    // },
-  ]);
+  // customizationData contains different modifiers and images for product viewer
+  const [customizationData, setCustomizationData] = useState([]);
 
   const items = [
     {
@@ -82,6 +68,8 @@ const AddProduct = () => {
   console.log("====================================");
   console.log("customization data:", customizationData);
   console.log("====================================");
+
+  // TODO Create a great comments for all difficult part of code
 
   return (
     <SubPageWrapper>

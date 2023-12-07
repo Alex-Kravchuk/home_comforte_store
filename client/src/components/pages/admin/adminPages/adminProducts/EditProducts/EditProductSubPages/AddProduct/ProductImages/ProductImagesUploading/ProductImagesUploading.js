@@ -9,21 +9,18 @@ import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
 import PreviewImagesUpload from "../ProductPreviewImages/PreviewImagesUpload/PreviewImagesUpload";
 import ModifierUpload from "../../ProductCustomization/AddModifier/ModifierUpload/ModifierUpload";
 
-const ProductImagesUploading = (
-  {
-    images,
-    uploadType,
-    saveFileHandler,
-    uploadedFileList,
-    selectOptionsWasChanged,
-    existingImage = null,
-    editModeOn = false,
-    clearFileListflag = null,
-    clearFileListHandler,
-    checkFileListChanges,
-  },
-  props
-) => {
+const ProductImagesUploading = ({
+  images,
+  uploadType,
+  saveFileHandler,
+  uploadedFileList,
+  editModeOn = false,
+  existingImage = null,
+  clearFileListHandler,
+  checkFileListChanges,
+  selectOptionsWasChanged,
+  clearFileListflag = null,
+}) => {
   const { id, img } = useSelector((state) => state.user.userData);
 
   const [fileList, setFileList] = useState([]);
@@ -39,10 +36,12 @@ const ProductImagesUploading = (
   console.log("upload file list", uploadedFileList);
 
   useEffect(() => {
+    // clear file list when item of customization option was change by Select (in admin tools, adding of product images)
     if (selectOptionsWasChanged) {
       setFileList([]);
     }
 
+    // if product contains images by current selected customization option we use those data for display in fileList (in admin tools, adding of product images)
     if (uploadedFileList && selectOptionsWasChanged) {
       uploadedFileList.forEach((item) => {
         getBase64(item, (url) => {
@@ -51,14 +50,12 @@ const ProductImagesUploading = (
         });
       });
     }
-
-
   }, [selectOptionsWasChanged]);
 
   useEffect(() => {
+    // when something changes in fileList we change the state in the parent component indicating the changes,
+    // so we need to save it again (in admin tools, adding of product images)
     if (checkFileListChanges) {
-      console.log('file list suka', fileList);
-
       checkFileListChanges(fileList);
     }
   }, [fileList]);

@@ -6,19 +6,19 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 import {
-  DIAddRemoveInterfaceContainer,
   IterfaceContainerItem,
+  DIAddRemoveInterfaceContainer,
 } from "./DimensionInfo.styled";
 
 const AddRemoveInterface = ({
+  lineIsNotTheLast,
   addNewLabelLineHandler,
   removeTheLastOneLabelLine,
-  lineIsNotTheLast,
 }) => {
   const removeIconTooltipText = lineIsNotTheLast
     ? "Remove the last one label"
     : "You cannot delete the last line";
-	
+
   return (
     <DIAddRemoveInterfaceContainer>
       <Tooltip title="Add a new label" placement="left">

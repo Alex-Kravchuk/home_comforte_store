@@ -1,17 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { Tooltip } from "antd";
 
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
+import { DIInput, DILabelContainer } from "./DimensionInfo.styled";
 import {
   SeatSizeInfoBlock,
   SeatSizeInfoBlockLeft,
   SeatSizeInfoBlockRight,
 } from "../../../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
-import { DIInput, DILabelContainer } from "./DimensionInfo.styled";
-import { Tooltip } from "antd";
 
 const DimensionSeatSizeItem = ({ item, setDataHandler, dimensionsData }) => {
   const [modifiedItem, setItem] = useState({});
@@ -27,7 +28,6 @@ const DimensionSeatSizeItem = ({ item, setDataHandler, dimensionsData }) => {
 
   useEffect(() => {
     const copyItem = Object.assign(item, {});
-
     setItem(copyItem);
   }, []);
 
@@ -58,6 +58,9 @@ const DimensionSeatSizeItem = ({ item, setDataHandler, dimensionsData }) => {
       setValueError(false);
       setLabelError(false);
 
+      // in code below we find element with the same ID
+      // it can be beacuse we add a new empty modifier in another component
+      // so here we find and change it item for corret item with data and id
       const suchItemIsExist = dimensionsData.findIndex(
         (item) => item.id === modifiedItem.id
       );

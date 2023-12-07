@@ -11,7 +11,6 @@ import {
   PVIWrapper,
   PVIContainer,
   PVIHeaderContainer,
-  PVISelectContainer,
   PVIClearFileListContainer,
 } from "./ProductViewerImages.styled";
 
@@ -30,12 +29,13 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
 
   useEffect(() => {
     if (selectedOptionItem) {
+      // if selected option item contains viewerImages we save it to this component state
+      // and to show the icon that indicate about savign it in parrent state
       const selectedOptionItemHasViewerImages =
         selectedOptionItem.viewerImages?.length > 0;
 
-      setSavedCustomOption(selectedOptionItemHasViewerImages);
-
       setImages(selectedOptionItem.viewerImages ?? []);
+      setSavedCustomOption(selectedOptionItemHasViewerImages);
     }
   }, [selectedOptionItem]);
 
@@ -50,22 +50,12 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
   };
 
   const selectOnChangeHandler = (value) => {
-    // setSavedCustomOption(false);
     setSelectedOption(customizationData[value - 1]);
     setSelectedOptionItem(null);
   };
 
   const selectOptionItemHandler = (value) => {
     setSelectedOptionItem(selectedOption.items[value - 1]);
-
-    const selectOptionItemHasViewerImages =
-      selectedOptionItem?.viewerImages?.length > 0 ? true : false;
-
-    // console.log("suka mk", selectedOption, 'selected subItem:', selectedOption.items[value - 1]);
-    // console.log("suka mk", 'current subItem:', selectedOptionItem);
-
-    // // debugger
-    // setSavedCustomOption(selectOptionItemHasViewerImages);
   };
 
   const saveCustomizationValues = () => {
@@ -88,6 +78,7 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
       viewerImages: images,
     };
 
+    // remove tha save option without images and add with it
     selectedOption.items.splice(
       selectedOptionItemIndex,
       1,
@@ -99,21 +90,17 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
       items: selectedOption.items,
     };
 
-    console.log("check ifff", customizationModifier);
-
     setSavedCustomOption(true);
     saveDataHandler(customizationModifier);
     setSelectError({ option: false, optionItem: false });
   };
 
+  // check fileList changes handler
   const checkFileListChanges = (fileList) => {
-    console.log("loggg", fileList, images);
-
     const differentLength =
       fileList.length !== selectedOptionItem?.viewerImages?.length;
 
     if (differentLength && fileList.length !== 0) {
-      console.log("sushiy pes");
       setSavedCustomOption(false);
 
       if (fileList.length > 0) {
