@@ -14,7 +14,11 @@ import {
   PVIClearFileListContainer,
 } from "./ProductViewerImages.styled";
 
-const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
+const ProductViewerImages = ({
+  clearAllFlag,
+  customizationData,
+  saveDataHandler,
+}) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
 
@@ -39,6 +43,16 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
     }
   }, [selectedOptionItem]);
 
+  useEffect(() => {
+    if (clearAllFlag) {
+      setImages([]);
+      setClearFileList(true);
+      setSelectedOption(null);
+      setSavedCustomOption(false);
+      setSelectedOptionItem(null);
+    }
+  }, [clearAllFlag]);
+
   const saveFileHandler = (file) => {
     setImages((state) => [...state, file]);
   };
@@ -52,6 +66,7 @@ const ProductViewerImages = ({ customizationData, saveDataHandler }) => {
   const selectOnChangeHandler = (value) => {
     setSelectedOption(customizationData[value - 1]);
     setSelectedOptionItem(null);
+    setSavedCustomOption(false);
   };
 
   const selectOptionItemHandler = (value) => {

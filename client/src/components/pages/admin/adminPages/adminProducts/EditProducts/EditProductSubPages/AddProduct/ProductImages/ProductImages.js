@@ -11,17 +11,19 @@ const ProductImages = ({
   setDataHandlerViewer,
   setDataHandlerPreview,
 }) => {
+  const [localCustomOptions, setLocalCustomOptions] = useState([]);
+
   const [imagesError, setImagesError] = useState(false);
+  const [clearAllFlag, setClearAllFlag] = useState(false);
   const [temporarilySaved, setTemporarilySaved] = useState(false);
 
-  const [localCustomOptions, setLocalCustomOption] = useState([]);
-
   useEffect(() => {
-    setLocalCustomOption(customizationData.concat());
+    setLocalCustomOptions(customizationData.concat());
   }, []);
 
   const saveDataHandler = () => {
     setDataHandlerViewer(localCustomOptions);
+    setTemporarilySaved(true);
   };
 
   const localSaveDataHandler = (newModifier) => {
@@ -29,17 +31,25 @@ const ProductImages = ({
       (option) => option.id === newModifier.id
     );
 
-    console.log('suk', newModifier);
-    
-    const newLocalCustomOptions = localCustomOptions
-      .concat()
-      .splice(changedModifierIndex, 1, newModifier);
-
-    setLocalCustomOption(newLocalCustomOptions);
+    localCustomOptions.splice(changedModifierIndex, 1, newModifier);
+    setLocalCustomOptions(localCustomOptions);
   };
-  const resetImagesDataHandler = () => {};
+  const resetImagesDataHandler = () => {
+    setClearAllFlag(true);
 
-  console.log("local state modifiers:", localCustomOptions);
+    // we remove only viewerImages from it
+    const localStateWithoutImages = localCustomOptions.map((customOption) => {
+      customOption.items.forEach((element) => {
+        if (Object.hasOwn(element, "viewerImages")) {
+          delete element.viewerImages;
+        }
+      });
+
+      return customOption;
+    });
+
+    setDataHandlerViewer(localStateWithoutImages);
+  };
 
   return (
     <PIWrapper>
@@ -54,6 +64,7 @@ const ProductImages = ({
         <PIBlock>
           <InfoBlockTitle>Product images to view</InfoBlockTitle>
           <ProductViewerImages
+            clearAllFlag={clearAllFlag}
             customizationData={customizationData}
             saveDataHandler={localSaveDataHandler}
           />

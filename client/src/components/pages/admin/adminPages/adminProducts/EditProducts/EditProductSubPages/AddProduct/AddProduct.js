@@ -33,7 +33,11 @@ const AddProduct = () => {
       label: "General information about the product",
       children: (
         <TabWrapper>
-          <GeneralInfo setDataHandler={setGeneralData} />
+          <GeneralInfo
+            setDataHandler={setGeneralData}
+            customizationData={customizationData}
+            setCustomizationDataHandler={setCustomizationData}
+          />
         </TabWrapper>
       ),
     },
@@ -69,7 +73,6 @@ const AddProduct = () => {
   console.log("customization data:", customizationData);
   console.log("====================================");
 
-  // TODO Create a great comments for all difficult part of code
 
   return (
     <SubPageWrapper>

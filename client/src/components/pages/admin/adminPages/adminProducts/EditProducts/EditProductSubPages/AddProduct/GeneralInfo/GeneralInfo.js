@@ -9,7 +9,11 @@ import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 
 import { GeneralInfoContainer, GeneralInfoWrapper } from "./GeneralInfo.styled";
 
-const GeneralInfo = ({ setDataHandler }) => {
+const GeneralInfo = ({
+  setDataHandler,
+  customizationData,
+  setCustomizationDataHandler,
+}) => {
   const [form] = Form.useForm();
 
   const { data: categories } = useSelector((state) => state.menuData);
@@ -18,10 +22,13 @@ const GeneralInfo = ({ setDataHandler }) => {
   const [dimensionInfo, setDimensionInfo] = useState([]);
 
   const [dimensionError, setDimensionError] = useState(false);
-  
+
   // this state handler is used to indicate that some product information
   // has been stored in the state of the parent component
   const [temporarilySaved, setTemporarilySaved] = useState(false);
+
+  // in this state we save the customization data with the price for each item, if it needed
+  const [localCustomizationState, setLocalCustomizationState] = useState([]);
 
   const onFinishForm = async (values) => {
     try {
@@ -49,7 +56,7 @@ const GeneralInfo = ({ setDataHandler }) => {
     setDimensionInfo([]);
   };
 
-  console.log("dimesniosn info", dimensionInfo);
+  console.log("local state with prices", localCustomizationState);
 
   return (
     <GeneralInfoWrapper>
@@ -62,7 +69,11 @@ const GeneralInfo = ({ setDataHandler }) => {
             temporarilySaveHandler={setTemporarilySaved}
             resetDataHandler={resetDimensionValues}
           />
-          <SubGeneralInfo categories={categories} />
+          <SubGeneralInfo
+            categories={categories}
+            customizationData={customizationData}
+            customDataHandler={setLocalCustomizationState}
+          />
           <DimensionInfo
             dimensionImg={dimensionImg}
             dimensionsData={dimensionInfo}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Form, Select } from "antd";
 import { FormLabel } from "@mui/material";
@@ -8,13 +8,91 @@ import {
   FormInputNumber,
 } from "../../../../../../../../../../styles/formComponentStyles";
 import { InfoBlock } from "../../AddProduct.styled";
+import CustomizationSelectBlock from "../../ProductImages/ProductViewerImages/CustomizationSelectBlock";
 
 // TODO
 // the price should depend on the selected customization option
 
-const SubGeneralInfo = ({ categories }) => {
+const SubGeneralInfo = ({
+  customizationData,
+  categories,
+  customDataHandler,
+}) => {
   const [types, setTypes] = useState([]);
   const [subtypes, setSubtypes] = useState([]);
+
+  // these states for select component
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionItem, setSelectedOptionItem] = useState(null);
+
+  const [savedCustomOption, setSavedCustomOption] = useState(false);
+  const [selectError, setSelectError] = useState({
+    option: false,
+    optionItem: false,
+  });
+
+  const priceRef = useRef();
+
+  // useEffect(() => {
+  //   if (selectedOptionItem) {
+  //     // if selected option item contains viewerImages we save it to this component state
+  //     // and to show the icon that indicate about savign it in parrent state
+
+  //     setImages(selectedOptionItem.viewerImages ?? []);
+  //     setSavedCustomOption(selectedOptionItemHasViewerImages);
+  //   }
+  // }, [selectedOptionItem]);
+
+  const selectOnChangeHandler = (value) => {
+    setSelectedOption(customizationData[value - 1]);
+    setSelectedOptionItem(null);
+  };
+
+  const selectOptionItemHandler = (value) => {
+    setSelectedOptionItem(selectedOption.items[value - 1]);
+  };
+
+  const saveCustomizationValues = () => {
+    if (!selectedOption) {
+      setSelectError((state) => ({ ...state, option: true }));
+      return;
+    }
+
+    if (!selectedOptionItem) {
+      setSelectError((state) => ({ ...state, optionItem: true }));
+      return;
+    }
+
+    const selectedOptionItemIndex = selectedOption.items.findIndex(
+      (item) => item.id === selectedOptionItem.id
+    );
+
+    console.log("====PRICE================================");
+    console.log(priceRef.current.value);
+    console.log("====================================");
+
+    const selectedOptionItemWithPrice = {
+      ...selectedOptionItem,
+      price: priceRef.current.value,
+    };
+
+    // remove tha save option without images and add with it
+    selectedOption.items.splice(
+      selectedOptionItemIndex,
+      1,
+      selectedOptionItemWithPrice
+    );
+
+    const customizationModifier = {
+      ...selectedOption,
+      items: selectedOption.items,
+    };
+
+    // debugger
+    setSavedCustomOption(true);
+    customDataHandler((state) => [...state, customizationModifier]);
+    setSelectError({ option: false, optionItem: false });
+  };
 
   const typesByCategoryIdHandler = (categoryId) => {
     const currentCategoryTypes = categories.filter(
@@ -39,6 +117,9 @@ const SubGeneralInfo = ({ categories }) => {
       label: category.name,
     }));
 
+  // TODO
+  // Зробити так щоб тимчаосове збереження вимикалось коли вибираєш в селекті і модифікатора і його підпунктів
+
   return (
     <InfoBlock>
       <Form.Item
@@ -48,12 +129,23 @@ const SubGeneralInfo = ({ categories }) => {
       >
         <FormInput placeholder="Please input the product name" />
       </Form.Item>
+      <CustomizationSelectBlock
+        error={selectError}
+        saved={savedCustomOption}
+        selectedOption={selectedOption}
+        customizationData={customizationData}
+        saveHandler={saveCustomizationValues}
+        selectedOptionItem={selectedOptionItem}
+        selectOnChangeHandler={selectOnChangeHandler}
+        selectOptionItemHandler={selectOptionItemHandler}
+      />
+
       <Form.Item
         name="price"
         label={<FormLabel>Price:</FormLabel>}
         rules={formRules.numberInput}
       >
-        <FormInputNumber min={0} />
+        <FormInputNumber min={0} ref={priceRef} />
       </Form.Item>
 
       <Form.Item>
