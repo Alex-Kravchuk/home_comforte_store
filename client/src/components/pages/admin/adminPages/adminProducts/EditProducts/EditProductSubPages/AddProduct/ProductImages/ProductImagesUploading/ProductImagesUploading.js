@@ -37,9 +37,7 @@ const ProductImagesUploading = ({
 
   useEffect(() => {
     // clear file list when item of customization option was change by Select (in admin tools, adding of product images)
-    // if (selectOptionsWasChanged) {
     setFileList([]);
-    // }
 
     // if product contains images by current selected customization option we use those data for display in fileList (in admin tools, adding of product images)
     if (uploadedFileList && selectOptionsWasChanged) {

@@ -19,7 +19,12 @@ const ProductImages = ({
 
   useEffect(() => {
     setLocalCustomOptions(customizationData.concat());
-  }, []);
+  }, [customizationData]);
+
+  useEffect(() => {
+    console.log("Local options was changed:", localCustomOptions);
+  }, [localCustomOptions]);
+
 
   const saveDataHandler = () => {
     setDataHandlerViewer(localCustomOptions);
@@ -31,8 +36,15 @@ const ProductImages = ({
       (option) => option.id === newModifier.id
     );
 
-    localCustomOptions.splice(changedModifierIndex, 1, newModifier);
+    if (changedModifierIndex) {
+      localCustomOptions.splice(changedModifierIndex, 1, newModifier);
+    }
+
     setLocalCustomOptions(localCustomOptions);
+
+    if (temporarilySaved) {
+      setTemporarilySaved(false);
+    }
   };
   const resetImagesDataHandler = () => {
     setClearAllFlag(true);
@@ -56,8 +68,8 @@ const ProductImages = ({
       <PIContainer>
         <TemporarySaveIcon
           error={imagesError}
-          temporarySaveFlag={temporarilySaved}
           saveDataHandler={saveDataHandler}
+          temporarySaveFlag={temporarilySaved}
           resetDataHandler={resetImagesDataHandler}
           temporarilySaveHandler={setTemporarilySaved}
         />
@@ -67,6 +79,7 @@ const ProductImages = ({
             clearAllFlag={clearAllFlag}
             customizationData={customizationData}
             saveDataHandler={localSaveDataHandler}
+            // temporarilySavedHandler={setTemporarilySaved}
           />
         </PIBlock>
         <PIBlock>

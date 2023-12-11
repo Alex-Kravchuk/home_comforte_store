@@ -12,12 +12,14 @@ import {
   PVIContainer,
   PVIHeaderContainer,
   PVIClearFileListContainer,
+  NoImagesErrorText,
 } from "./ProductViewerImages.styled";
 
 const ProductViewerImages = ({
   clearAllFlag,
-  customizationData,
   saveDataHandler,
+  customizationData,
+  // temporarilySavedHandler,
 }) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
@@ -31,6 +33,16 @@ const ProductViewerImages = ({
     optionItem: false,
   });
 
+  const [noImagesError, setNoImagesError] = useState(false);
+
+  useEffect(() => {
+    // set the selected parameter and the parameter element as the first item of each list
+    if (customizationData.length > 0) {
+      setSelectedOption(customizationData[0]);
+      setSelectedOptionItem(customizationData[0].items[0]);
+    }
+  }, []);
+
   useEffect(() => {
     if (selectedOptionItem) {
       // if selected option item contains viewerImages we save it to this component state
@@ -42,6 +54,7 @@ const ProductViewerImages = ({
       setSavedCustomOption(selectedOptionItemHasViewerImages);
     }
   }, [selectedOptionItem]);
+
 
   useEffect(() => {
     if (clearAllFlag) {
@@ -61,16 +74,19 @@ const ProductViewerImages = ({
     setClearFileList(!wasCleared);
     setSelectedOption(null);
     setSelectedOptionItem(null);
+    setSavedCustomOption(false);
   };
 
   const selectOnChangeHandler = (value) => {
     setSelectedOption(customizationData[value - 1]);
     setSelectedOptionItem(null);
     setSavedCustomOption(false);
+    setSelectError({ option: false, optionItem: false });
   };
 
   const selectOptionItemHandler = (value) => {
     setSelectedOptionItem(selectedOption.items[value - 1]);
+    setSelectError({ option: false, optionItem: false });
   };
 
   const saveCustomizationValues = () => {
@@ -81,6 +97,16 @@ const ProductViewerImages = ({
 
     if (!selectedOptionItem) {
       setSelectError((state) => ({ ...state, optionItem: true }));
+      return;
+    }
+
+    if (images.length === 0) {
+      setNoImagesError(true);
+      return;
+    }
+
+    // block the save action when a small number of images error is seen
+    if (images.length < 16) {
       return;
     }
 
@@ -116,6 +142,7 @@ const ProductViewerImages = ({
       fileList.length !== selectedOptionItem?.viewerImages?.length;
 
     if (differentLength && fileList.length !== 0) {
+      setNoImagesError(false);
       setSavedCustomOption(false);
 
       if (fileList.length > 0) {
@@ -143,6 +170,7 @@ const ProductViewerImages = ({
               </div>
             }
           />
+
           <PVIClearFileListContainer onClick={clearFileList}>
             <Tooltip title="Clear the data" placement="left">
               <DeleteSweepOutlinedIcon />
@@ -160,6 +188,11 @@ const ProductViewerImages = ({
           selectOnChangeHandler={selectOnChangeHandler}
           selectOptionItemHandler={selectOptionItemHandler}
         />
+        {noImagesError && (
+          <NoImagesErrorText>
+            You must upload a minimum of 16 images
+          </NoImagesErrorText>
+        )}
 
         <ProductImagesUploading
           uploadType="viewer"

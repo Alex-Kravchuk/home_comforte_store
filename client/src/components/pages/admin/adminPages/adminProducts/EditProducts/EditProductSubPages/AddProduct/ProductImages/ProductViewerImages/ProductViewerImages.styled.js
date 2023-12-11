@@ -54,3 +54,9 @@ export const PVISelectContainer = styled.div`
     color: rgba(0, 0, 0, 1);
   }
 `;
+
+export const NoImagesErrorText = styled.div`
+  font-size: 14px;
+  color: red;
+  margin: -12px 0 12px 0;
+`;
