@@ -170,7 +170,9 @@ const ProductViewerImages = ({
                 <a> click here</a> to see an example). All images should have a
                 single color background, shadows, etc., so that when scrolling
                 the image, it appears as if the user is rotating a 3D shape
-                around its axis.
+                around its axis. You must load the image into at least the first
+                settings modifier used by default (the first list item in each
+                selector)
               </div>
             }
           />

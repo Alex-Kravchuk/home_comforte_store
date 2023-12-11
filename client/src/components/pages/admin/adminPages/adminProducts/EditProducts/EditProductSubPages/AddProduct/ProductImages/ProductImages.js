@@ -5,17 +5,19 @@ import ProductViewerImages from "./ProductViewerImages/ProductViewerImages";
 import ProductPreviewImages from "./ProductPreviewImages/ProductPreviewImages";
 import { Collapse } from "antd";
 import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
+import { errorHandlingHelper } from "./errorHandlingHelper";
 
 const ProductImages = ({
   customizationData,
   setDataHandlerViewer,
   setDataHandlerPreview,
 }) => {
-  const [localCustomOptions, setLocalCustomOptions] = useState([]);
-
   const [imagesError, setImagesError] = useState(false);
   const [clearAllFlag, setClearAllFlag] = useState(false);
   const [temporarilySaved, setTemporarilySaved] = useState(false);
+
+  const [previewData, setPreviewData] = useState([1, 2, 3]);
+  const [localCustomOptions, setLocalCustomOptions] = useState([]);
 
   useEffect(() => {
     setLocalCustomOptions(customizationData.concat());
@@ -25,10 +27,16 @@ const ProductImages = ({
     console.log("Local options was changed:", localCustomOptions);
   }, [localCustomOptions]);
 
-
   const saveDataHandler = () => {
+    const error = errorHandlingHelper(localCustomOptions, previewData);
+    if (error) {
+      setImagesError(error);
+      return;
+    }
+
     setDataHandlerViewer(localCustomOptions);
     setTemporarilySaved(true);
+    setImagesError(false);
   };
 
   const localSaveDataHandler = (newModifier) => {

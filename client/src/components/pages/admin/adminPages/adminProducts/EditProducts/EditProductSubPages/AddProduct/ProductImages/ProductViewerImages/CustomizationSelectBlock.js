@@ -30,7 +30,7 @@ const CustomizationSelectBlock = ({
         status={error.option && "error"}
         onChange={selectOnChangeHandler}
         placeholder="Choose customization option"
-        options={customizationData.map((item) => ({
+        options={customizationData.map((item, index) => ({
           value: item.id,
           label: item.name,
         }))}

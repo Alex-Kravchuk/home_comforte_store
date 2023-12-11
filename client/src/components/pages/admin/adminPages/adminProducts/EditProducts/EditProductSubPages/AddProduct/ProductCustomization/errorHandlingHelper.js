@@ -38,9 +38,5 @@ export const errorHandlingHelper = (modifiers) => {
     return optionItemIsEmptyErrorText;
   }
 
-  // console.log("===============check=====================");
-  // console.log(modifierWithErrors, modifiers);
-  // console.log("================check====================");
-
   return null;
 };

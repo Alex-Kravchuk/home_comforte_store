@@ -12,6 +12,7 @@ export const TSIButton = styled(Button)`
 
 export const TSIWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
 
@@ -52,4 +53,8 @@ export const TSIErrorContainer = styled.div`
 
 export const TSIErrorText = styled.div`
   color: red;
+  font-size: 15px;
+  text-align: justify;
+  padding-right: 25px;
+  line-height: 18px;
 `;
