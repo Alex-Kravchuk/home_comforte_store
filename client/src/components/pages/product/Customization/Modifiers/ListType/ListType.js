@@ -71,7 +71,7 @@ const ListType = ({ data }) => {
               <SwiperSlide key={item.id}>
                 <ListTypeModifierContainer>
                   <ModifierImgContainer>
-                    <ModifierImg src={item.img} alt={item.title} />{" "}
+                    <ModifierImg src={item.img} alt={item.title} />
                     <ModifierImgBorderContainer />
                   </ModifierImgContainer>
 

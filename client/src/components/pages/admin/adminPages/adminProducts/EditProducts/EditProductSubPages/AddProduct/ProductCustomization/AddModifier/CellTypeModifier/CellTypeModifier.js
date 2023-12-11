@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import CellTypeModifierItem from "./CellTypeModifierItem";
 
-import {
-  ModifierList,
-  ModifierWrapper,
-  ModifierContainer,
-} from "../Modifier/Modifier.styled";
-
 const CellTypeModifier = ({
   list,
   removeHandler,
@@ -39,23 +33,19 @@ const CellTypeModifier = ({
   };
 
   return (
-    <ModifierWrapper>
-      <ModifierContainer>
-        <ModifierList>
-          {modifiers.map((modifier, index) => (
-            <CellTypeModifierItem
-              index={index}
-              data={modifier}
-              key={modifier.id}
-              modifiers={modifiers}
-              saveModifierHandler={saveModifierHandler}
-              removeModifierHandler={removeModifierHandler}
-              cantAddNewModifier={cantAddNewModifier}
-            />
-          ))}
-        </ModifierList>
-      </ModifierContainer>
-    </ModifierWrapper>
+    <>
+      {modifiers.map((modifier, index) => (
+        <CellTypeModifierItem
+          index={index}
+          data={modifier}
+          key={modifier.id}
+          modifiers={modifiers}
+          saveModifierHandler={saveModifierHandler}
+          removeModifierHandler={removeModifierHandler}
+          cantAddNewModifier={cantAddNewModifier}
+        />
+      ))}
+    </>
   );
 };
 

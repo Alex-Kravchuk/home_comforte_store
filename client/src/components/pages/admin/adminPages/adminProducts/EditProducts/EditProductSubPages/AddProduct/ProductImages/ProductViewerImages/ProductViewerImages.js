@@ -36,14 +36,6 @@ const ProductViewerImages = ({
   const [noImagesError, setNoImagesError] = useState(false);
 
   useEffect(() => {
-    // set the selected parameter and the parameter element as the first item of each list
-    if (customizationData.length > 0) {
-      setSelectedOption(customizationData[0]);
-      setSelectedOptionItem(customizationData[0].items[0]);
-    }
-  }, []);
-
-  useEffect(() => {
     if (selectedOptionItem) {
       // if selected option item contains viewerImages we save it to this component state
       // and to show the icon that indicate about savign it in parrent state
@@ -55,6 +47,18 @@ const ProductViewerImages = ({
     }
   }, [selectedOptionItem]);
 
+  // useEffect(() => {
+  //   console.log(
+  //     "customization data was changed in product images:",
+  //     customizationData
+  //   );
+
+  //   if (customizationData) {
+  //     setSelectedOption(
+  //       customizationData.find((option) => option?.id === selectedOption?.id)
+  //     );
+  //   }
+  // }, [customizationData]);
 
   useEffect(() => {
     if (clearAllFlag) {

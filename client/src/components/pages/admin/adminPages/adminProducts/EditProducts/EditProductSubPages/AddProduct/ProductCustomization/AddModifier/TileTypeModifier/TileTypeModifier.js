@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import TileTypeModifierItem from "./TileTypeModifierItem";
 
-import {
-  ModifierContainer,
-  ModifierList,
-  ModifierWrapper,
-} from "../Modifier/Modifier.styled";
-
-
 const TileTypeModifier = ({
   list,
   removeHandler,
@@ -39,26 +32,20 @@ const TileTypeModifier = ({
     setModifiers(filteredItems);
   };
 
-  
-
   return (
-    <ModifierWrapper>
-      <ModifierContainer>
-        <ModifierList>
-          {modifiers.map((modifier, index) => (
-            <TileTypeModifierItem
-              key={modifier.id}
-              data={modifier}
-              index={index}
-              modifiers={modifiers}
-              cantAddNewModifier={cantAddNewModifier}
-              saveModifierHandler={saveModifierHandler}
-              removeModifierHandler={removeModifierHandler}
-            />
-          ))}
-        </ModifierList>
-      </ModifierContainer>
-    </ModifierWrapper>
+    <>
+      {modifiers.map((modifier, index) => (
+        <TileTypeModifierItem
+          key={modifier.id}
+          data={modifier}
+          index={index}
+          modifiers={modifiers}
+          cantAddNewModifier={cantAddNewModifier}
+          saveModifierHandler={saveModifierHandler}
+          removeModifierHandler={removeModifierHandler}
+        />
+      ))}
+    </>
   );
 };
 
