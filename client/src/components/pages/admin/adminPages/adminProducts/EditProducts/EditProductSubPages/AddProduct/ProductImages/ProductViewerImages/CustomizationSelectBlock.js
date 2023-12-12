@@ -4,7 +4,10 @@ import { Select } from "antd";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
-import { PVISelectContainer } from "./ProductViewerImages.styled";
+import {
+  PVISelectContainer,
+  SelectLabelContainer,
+} from "./ProductViewerImages.styled";
 
 const CustomizationSelectBlock = ({
   saved,
@@ -44,7 +47,14 @@ const CustomizationSelectBlock = ({
           selectedOptionItem
             ? {
                 value: selectedOptionItem.id,
-                label: selectedOptionItem.title,
+                label: (
+                  <SelectLabelContainer>
+                    <span>{selectedOptionItem.title}</span>
+                    <span>
+                      {selectedOptionItem.defaultMarker ? "necessarily" : ""}
+                    </span>
+                  </SelectLabelContainer>
+                ),
               }
             : null
         }
@@ -53,7 +63,12 @@ const CustomizationSelectBlock = ({
         placeholder="Choose customization option"
         options={selectedOption?.items.map((item) => ({
           value: item.id,
-          label: item.title,
+          label: (
+            <SelectLabelContainer>
+              <span>{item.title}</span>
+              <span>{item.defaultMarker ? "necessarily" : ""}</span>
+            </SelectLabelContainer>
+          ),
         }))}
       />
 

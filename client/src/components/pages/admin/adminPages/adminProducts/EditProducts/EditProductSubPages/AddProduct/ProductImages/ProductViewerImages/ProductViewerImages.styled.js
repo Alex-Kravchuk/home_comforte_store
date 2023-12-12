@@ -60,3 +60,12 @@ export const NoImagesErrorText = styled.div`
   color: red;
   margin: -12px 0 12px 0;
 `;
+
+export const SelectLabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  span:nth-of-type(2) {
+    color: red;
+  }
+`;
