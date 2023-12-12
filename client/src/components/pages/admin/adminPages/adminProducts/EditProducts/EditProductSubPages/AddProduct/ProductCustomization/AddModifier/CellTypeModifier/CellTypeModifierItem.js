@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import { Input } from "antd";
+import { Checkbox, Input } from "antd";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
@@ -12,6 +12,7 @@ import {
   InputsContainer,
   ModifierListItem,
   ModifierInterfaceIcons,
+  DefaultTextContainer,
 } from "../Modifier/Modifier.styled";
 
 const CellTypeModifierItem = ({
@@ -21,16 +22,24 @@ const CellTypeModifierItem = ({
   cantAddNewModifier,
   saveModifierHandler,
   removeModifierHandler,
+  defaultMarkerItemIndex,
 }) => {
   const [editModeOn, setEditMode] = useState(true);
   const [titleIsEmpty, setErrorTitle] = useState(false);
   const [priceIsEmpty, setErrorPrice] = useState(false);
+  const [defaultMarker, setDefaultMarker] = useState(false);
 
   const titleInputRef = useRef();
   const priceInputRef = useRef();
 
   const canotBeAddedNewModifierError =
     index === modifiers.length - 1 && cantAddNewModifier;
+
+  // checkbox is disabled if the list already has a certain element set by default
+  const disabledCheckbox =
+    index !== defaultMarkerItemIndex && defaultMarkerItemIndex >= 0;
+
+  console.log(disabledCheckbox, "lllsa", index, defaultMarkerItemIndex);
 
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
@@ -42,6 +51,7 @@ const CellTypeModifierItem = ({
         id: data.id,
         title: titleInputRef.current.input.value,
         price: priceInputRef.current.input.value,
+        defaultMarker,
       };
 
       saveModifierHandler(newModifierData);
@@ -119,6 +129,20 @@ const CellTypeModifierItem = ({
           />
         ) : (
           <CTMText>{data.price}</CTMText>
+        )}
+
+        {editModeOn && (
+          <Checkbox
+            checked={defaultMarker}
+            disabled={disabledCheckbox}
+            onChange={(e) => setDefaultMarker(e.target.checked)}
+          >
+            set by default
+          </Checkbox>
+        )}
+
+        {defaultMarker && !editModeOn && (
+          <DefaultTextContainer>selected by default</DefaultTextContainer>
         )}
       </InputsContainer>
     </ModifierListItem>

@@ -5,13 +5,14 @@ import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import {
+  DefaultTextContainer,
   ErrorContainer,
   ModifierInterfaceIcons,
   ModifierListItem,
   ModifierTitle,
 } from "../Modifier/Modifier.styled";
 import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
-import { Input } from "antd";
+import { Checkbox, Input } from "antd";
 import {
   ModifierBodyWrapper,
   TileModifierDescr,
@@ -26,12 +27,14 @@ const TileTypeModifierItem = ({
   cantAddNewModifier,
   saveModifierHandler,
   removeModifierHandler,
+  defaultMarkerItemIndex,
 }) => {
   const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
   const [fileIsEmpty, setErrorFile] = useState(false);
   const [priceIsEmpty, setErrorPrice] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
+  const [defaultMarker, setDefaultMarker] = useState(false);
 
   const priceInputRef = useRef();
   const titleInputRef = useRef();
@@ -39,6 +42,10 @@ const TileTypeModifierItem = ({
 
   const canotBeAddedNewModifierError =
     index === modifiers.length - 1 && cantAddNewModifier;
+
+  // checkbox is disabled if the list already has a certain element set by default
+  const disabledCheckbox =
+    index !== defaultMarkerItemIndex && defaultMarkerItemIndex >= 0;
 
   useEffect(() => {
     if (file) {
@@ -59,6 +66,7 @@ const TileTypeModifierItem = ({
         title: titleInputRef.current.input.value,
         description:
           descriptionInputRef.current.resizableTextArea.textArea.value,
+        defaultMarker,
       };
 
       saveModifierHandler(newModifierData);
@@ -161,6 +169,20 @@ const TileTypeModifierItem = ({
           />
         ) : (
           <TileModifierDescr>{data.description}</TileModifierDescr>
+        )}
+
+        {editModeOn && (
+          <Checkbox
+            checked={defaultMarker}
+            disabled={disabledCheckbox}
+            onChange={(e) => setDefaultMarker(e.target.checked)}
+          >
+            set by default
+          </Checkbox>
+        )}
+
+        {defaultMarker && !editModeOn && (
+          <DefaultTextContainer>selected by default</DefaultTextContainer>
         )}
       </ModifierBodyWrapper>
     </ModifierListItem>

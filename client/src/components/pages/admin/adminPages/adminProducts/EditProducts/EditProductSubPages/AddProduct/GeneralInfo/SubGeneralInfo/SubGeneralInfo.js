@@ -14,8 +14,8 @@ import CustomizationSelectBlock from "../../ProductImages/ProductViewerImages/Cu
 // the price should depend on the selected customization option
 
 const SubGeneralInfo = ({
-  customizationData,
   categories,
+  customizationData,
   customDataHandler,
 }) => {
   const [types, setTypes] = useState([]);
@@ -33,23 +33,25 @@ const SubGeneralInfo = ({
 
   const priceRef = useRef();
 
-  // useEffect(() => {
-  //   if (selectedOptionItem) {
-  //     // if selected option item contains viewerImages we save it to this component state
-  //     // and to show the icon that indicate about savign it in parrent state
-
-  //     setImages(selectedOptionItem.viewerImages ?? []);
-  //     setSavedCustomOption(selectedOptionItemHasViewerImages);
-  //   }
-  // }, [selectedOptionItem]);
+  useEffect(() => {
+    if (selectedOptionItem) {
+      // if selected option item contains price we save it to this component state
+      // and to show the icon that indicate about savign it in parrent state
+      const optionItemHasPrice = selectedOptionItem.price !== undefined;
+      // setImages(selectedOptionItem.viewerImages ?? []);
+      setSavedCustomOption(optionItemHasPrice);
+    }
+  }, [selectedOptionItem]);
 
   const selectOnChangeHandler = (value) => {
     setSelectedOption(customizationData[value - 1]);
     setSelectedOptionItem(null);
+    setSavedCustomOption(false);
   };
 
   const selectOptionItemHandler = (value) => {
     setSelectedOptionItem(selectedOption.items[value - 1]);
+    setSavedCustomOption(false);
   };
 
   const saveCustomizationValues = () => {
@@ -130,6 +132,7 @@ const SubGeneralInfo = ({
         <FormInput placeholder="Please input the product name" />
       </Form.Item>
       <CustomizationSelectBlock
+        sizeLarge={true}
         error={selectError}
         saved={savedCustomOption}
         selectedOption={selectedOption}

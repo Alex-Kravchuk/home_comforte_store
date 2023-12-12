@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Input } from "antd";
+import { Checkbox, Input, Tooltip } from "antd";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import AssistantPhotoIcon from "@mui/icons-material/AssistantPhoto";
 
 import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
 
@@ -15,6 +16,9 @@ import {
   ModifierListItem,
   ModifierInterfaceIcons,
   InputsContainer,
+  DefaultModIconContainer,
+  SpecialIconsContainer,
+  DefaultTextContainer,
 } from "../Modifier/Modifier.styled";
 
 const ListTypeModifierItem = ({
@@ -24,17 +28,23 @@ const ListTypeModifierItem = ({
   cantAddNewModifier,
   saveModifierHandler,
   removeModifierHandler,
+  defaultMarkerItemIndex,
 }) => {
   const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
   const [fileIsEmpty, setErrorFile] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
+  const [defaultMarker, setDefaultMarker] = useState(false);
 
   const titleInputRef = useRef();
   const descriptionInputRef = useRef();
 
   const canotBeAddedNewModifierError =
     index === modifiers.length - 1 && cantAddNewModifier;
+
+  // checkbox is disabled if the list already has a certain element set by default
+  const disabledCheckbox =
+    index !== defaultMarkerItemIndex && defaultMarkerItemIndex >= 0;
 
   useEffect(() => {
     if (file) {
@@ -52,6 +62,7 @@ const ListTypeModifierItem = ({
         img: file,
         title: titleInputRef.current.input.value,
         description: descriptionInputRef.current.input.value,
+        defaultMarker,
       };
 
       saveModifierHandler(newModifierData);
@@ -80,10 +91,11 @@ const ListTypeModifierItem = ({
     setErrorTitle(false);
   };
 
+
   return (
     <ModifierListItem
-      error={canotBeAddedNewModifierError}
       editModeOn={editModeOn}
+      error={canotBeAddedNewModifierError}
     >
       <ModifierInterfaceIcons>
         {editModeOn ? (
@@ -91,7 +103,6 @@ const ListTypeModifierItem = ({
         ) : (
           <EditOutlinedIcon onClick={editModeHandler} />
         )}
-
         <DeleteOutlineOutlinedIcon
           onClick={() => removeModifierHandler(data.id)}
         />
@@ -125,6 +136,20 @@ const ListTypeModifierItem = ({
           />
         ) : (
           <ModifierDescr>{data.description}</ModifierDescr>
+        )}
+
+        {editModeOn && (
+          <Checkbox
+            checked={defaultMarker}
+            disabled={disabledCheckbox}
+            onChange={(e) => setDefaultMarker(e.target.checked)}
+          >
+            set by default
+          </Checkbox>
+        )}
+
+        {defaultMarker && !editModeOn && (
+          <DefaultTextContainer>selected by default</DefaultTextContainer>
         )}
       </InputsContainer>
     </ModifierListItem>

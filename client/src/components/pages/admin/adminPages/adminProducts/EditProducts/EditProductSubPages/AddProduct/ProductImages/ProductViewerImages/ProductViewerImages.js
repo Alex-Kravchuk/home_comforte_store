@@ -47,19 +47,6 @@ const ProductViewerImages = ({
     }
   }, [selectedOptionItem]);
 
-  // useEffect(() => {
-  //   console.log(
-  //     "customization data was changed in product images:",
-  //     customizationData
-  //   );
-
-  //   if (customizationData) {
-  //     setSelectedOption(
-  //       customizationData.find((option) => option?.id === selectedOption?.id)
-  //     );
-  //   }
-  // }, [customizationData]);
-
   useEffect(() => {
     if (clearAllFlag) {
       setImages([]);
@@ -169,7 +156,7 @@ const ProductViewerImages = ({
                 that each image rotates around its own axis (you can
                 <a> click here</a> to see an example). All images should have a
                 single color background, shadows, etc., so that when scrolling
-                the image, it appears as if the user is rotating a 3D shape
+                the image, it appears as if the user is rotating a 3D shapeg
                 around its axis. You must load the image into at least the first
                 settings modifier used by default (the first list item in each
                 selector)

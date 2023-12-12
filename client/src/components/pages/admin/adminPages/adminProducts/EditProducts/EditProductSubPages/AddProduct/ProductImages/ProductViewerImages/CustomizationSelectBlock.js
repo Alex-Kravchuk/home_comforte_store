@@ -9,6 +9,7 @@ import { PVISelectContainer } from "./ProductViewerImages.styled";
 const CustomizationSelectBlock = ({
   saved,
   error,
+  sizeLarge,
   saveHandler,
   selectedOption,
   customizationData,
@@ -19,6 +20,8 @@ const CustomizationSelectBlock = ({
   return (
     <PVISelectContainer saved={saved}>
       <Select
+        size={sizeLarge ? "large" : "medium"}
+        status={error.option && "error"}
         value={
           selectedOption
             ? {
@@ -27,7 +30,6 @@ const CustomizationSelectBlock = ({
               }
             : null
         }
-        status={error.option && "error"}
         onChange={selectOnChangeHandler}
         placeholder="Choose customization option"
         options={customizationData.map((item, index) => ({
@@ -36,6 +38,7 @@ const CustomizationSelectBlock = ({
         }))}
       />
       <Select
+        size={sizeLarge ? "large" : "medium"}
         status={error.optionItem && "error"}
         value={
           selectedOptionItem

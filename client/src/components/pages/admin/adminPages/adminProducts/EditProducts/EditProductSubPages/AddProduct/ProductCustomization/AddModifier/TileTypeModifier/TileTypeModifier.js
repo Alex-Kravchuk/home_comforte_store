@@ -14,6 +14,8 @@ const TileTypeModifier = ({
     setModifiers(list);
   }, [list]);
 
+  const defaultMarkerItemIndex = list.findIndex((item) => item.defaultMarker);
+
   const saveModifierHandler = (newModifier) => {
     const editedModifierIndex = modifiers.findIndex(
       (item) => item.id === newModifier.id
@@ -43,6 +45,7 @@ const TileTypeModifier = ({
           cantAddNewModifier={cantAddNewModifier}
           saveModifierHandler={saveModifierHandler}
           removeModifierHandler={removeModifierHandler}
+          defaultMarkerItemIndex={defaultMarkerItemIndex}
         />
       ))}
     </>

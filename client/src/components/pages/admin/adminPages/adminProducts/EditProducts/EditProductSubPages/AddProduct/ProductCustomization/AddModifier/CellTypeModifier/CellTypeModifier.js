@@ -14,6 +14,11 @@ const CellTypeModifier = ({
     setModifiers(list);
   }, [list]);
 
+  const defaultMarkerItemIndex = list.findIndex((item) => item.defaultMarker);
+
+  console.log('list', list, defaultMarkerItemIndex);
+  
+
   const saveModifierHandler = (newModifier) => {
     const editedModifierIndex = modifiers.findIndex(
       (item) => item.id === newModifier.id
@@ -40,9 +45,10 @@ const CellTypeModifier = ({
           data={modifier}
           key={modifier.id}
           modifiers={modifiers}
+          cantAddNewModifier={cantAddNewModifier} 
           saveModifierHandler={saveModifierHandler}
           removeModifierHandler={removeModifierHandler}
-          cantAddNewModifier={cantAddNewModifier}
+          defaultMarkerItemIndex={defaultMarkerItemIndex}
         />
       ))}
     </>

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const ModifierWrapper = styled.div``;
+export const ModifierWrapper = styled.div`
+  .ant-checkbox-wrapper {
+    margin-top: 10px;
+  }
+`;
 export const ModifierContainer = styled.div``;
 
 export const ModifierList = styled.div`
@@ -64,7 +68,7 @@ export const ModifierListItem = styled.div`
     width: 70px;
   }
 
-  &:hover > div:first-child {
+  &:hover > div {
     visibility: visible;
     opacity: 1;
   }
@@ -79,10 +83,36 @@ export const ModifierListItem = styled.div`
   ${({ cellType }) =>
     cellType &&
     `
-      height: 100px;
+      height: 140px;
       box-sizing: border-box;
       justify-content: center;
     `}
+`;
+
+export const SpecialIconsContainer = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 2;
+
+  svg {
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 5px;
+  }
+
+  svg {
+    margin: 5px 0 0 5px;
+  }
+
+  svg:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
 `;
 
 export const ModifierInterfaceIcons = styled.div`
@@ -101,6 +131,7 @@ export const ModifierInterfaceIcons = styled.div`
     color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: all 0.2s ease;
+    margin-top: 5px;
   }
 
   svg:first-child {
@@ -138,3 +169,16 @@ export const InputsContainer = styled.div`
       margin-top: 25px;
 }`}
 `;
+
+export const DefaultTextContainer = styled.div`
+  color: red;
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 10px;
+  text-align: center;
+`;
+
+// TODO
+// тільки один елемент модифікатора може бути вибраний за замовчуванням
+// використовувати елемент за замовчуванням як стартова ціна за товар
