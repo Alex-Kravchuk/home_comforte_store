@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Form } from "antd";
 import { useSelector } from "react-redux";
@@ -30,6 +30,12 @@ const GeneralInfo = ({
   // in this state we save the customization data with the price for each item, if it needed
   const [localCustomizationState, setLocalCustomizationState] = useState([]);
 
+  useEffect(() => {
+    if (dimensionImg !== null && dimensionInfo.length !== 0) {
+      setTemporarilySaved(false);
+    }
+  }, [dimensionImg, dimensionInfo]);
+
   const onFinishForm = async (values) => {
     try {
       if (!dimensionImg || !dimensionInfo) {
@@ -56,7 +62,7 @@ const GeneralInfo = ({
     setDimensionInfo([]);
   };
 
-  console.log("local state with prices", localCustomizationState);
+  console.log("dimension info was changed", dimensionInfo);
 
   return (
     <GeneralInfoWrapper>
@@ -72,7 +78,7 @@ const GeneralInfo = ({
           <SubGeneralInfo
             categories={categories}
             customizationData={customizationData}
-            customDataHandler={setLocalCustomizationState}
+            // customDataHandler={setLocalCustomizationState}
           />
           <DimensionInfo
             dimensionImg={dimensionImg}

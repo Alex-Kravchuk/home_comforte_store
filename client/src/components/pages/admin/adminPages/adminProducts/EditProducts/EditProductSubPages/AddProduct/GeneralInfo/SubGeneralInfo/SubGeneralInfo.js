@@ -13,88 +13,11 @@ import CustomizationSelectBlock from "../../ProductImages/ProductViewerImages/Cu
 // TODO
 // the price should depend on the selected customization option
 
-const SubGeneralInfo = ({
-  categories,
-  customizationData,
-  customDataHandler,
-}) => {
+const SubGeneralInfo = ({ categories, customizationData }) => {
   const [types, setTypes] = useState([]);
   const [subtypes, setSubtypes] = useState([]);
 
-  // these states for select component
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedOptionItem, setSelectedOptionItem] = useState(null);
-
-  const [savedCustomOption, setSavedCustomOption] = useState(false);
-  const [selectError, setSelectError] = useState({
-    option: false,
-    optionItem: false,
-  });
-
   const priceRef = useRef();
-
-  useEffect(() => {
-    if (selectedOptionItem) {
-      // if selected option item contains price we save it to this component state
-      // and to show the icon that indicate about savign it in parrent state
-      const optionItemHasPrice = selectedOptionItem.price !== undefined;
-      // setImages(selectedOptionItem.viewerImages ?? []);
-      setSavedCustomOption(optionItemHasPrice);
-    }
-  }, [selectedOptionItem]);
-
-  const selectOnChangeHandler = (value) => {
-    setSelectedOption(customizationData[value - 1]);
-    setSelectedOptionItem(null);
-    setSavedCustomOption(false);
-  };
-
-  const selectOptionItemHandler = (value) => {
-    setSelectedOptionItem(selectedOption.items[value - 1]);
-    setSavedCustomOption(false);
-  };
-
-  const saveCustomizationValues = () => {
-    if (!selectedOption) {
-      setSelectError((state) => ({ ...state, option: true }));
-      return;
-    }
-
-    if (!selectedOptionItem) {
-      setSelectError((state) => ({ ...state, optionItem: true }));
-      return;
-    }
-
-    const selectedOptionItemIndex = selectedOption.items.findIndex(
-      (item) => item.id === selectedOptionItem.id
-    );
-
-    console.log("====PRICE================================");
-    console.log(priceRef.current.value);
-    console.log("====================================");
-
-    const selectedOptionItemWithPrice = {
-      ...selectedOptionItem,
-      price: priceRef.current.value,
-    };
-
-    // remove tha save option without images and add with it
-    selectedOption.items.splice(
-      selectedOptionItemIndex,
-      1,
-      selectedOptionItemWithPrice
-    );
-
-    const customizationModifier = {
-      ...selectedOption,
-      items: selectedOption.items,
-    };
-
-    // debugger
-    setSavedCustomOption(true);
-    customDataHandler((state) => [...state, customizationModifier]);
-    setSelectError({ option: false, optionItem: false });
-  };
 
   const typesByCategoryIdHandler = (categoryId) => {
     const currentCategoryTypes = categories.filter(
@@ -119,9 +42,6 @@ const SubGeneralInfo = ({
       label: category.name,
     }));
 
-  // TODO
-  // Зробити так щоб тимчаосове збереження вимикалось коли вибираєш в селекті і модифікатора і його підпунктів
-
   return (
     <InfoBlock>
       <Form.Item
@@ -131,17 +51,6 @@ const SubGeneralInfo = ({
       >
         <FormInput placeholder="Please input the product name" />
       </Form.Item>
-      <CustomizationSelectBlock
-        sizeLarge={true}
-        error={selectError}
-        saved={savedCustomOption}
-        selectedOption={selectedOption}
-        customizationData={customizationData}
-        saveHandler={saveCustomizationValues}
-        selectedOptionItem={selectedOptionItem}
-        selectOnChangeHandler={selectOnChangeHandler}
-        selectOptionItemHandler={selectOptionItemHandler}
-      />
 
       <Form.Item
         name="price"
