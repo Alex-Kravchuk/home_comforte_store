@@ -51,7 +51,7 @@ const CustomizationSelectBlock = ({
                   <SelectLabelContainer>
                     <span>{selectedOptionItem.title}</span>
                     <span>
-                      {selectedOptionItem.defaultMarker ? "necessarily" : ""}
+                      {selectedOptionItem.defaultMarker ? "default" : ""}
                     </span>
                   </SelectLabelContainer>
                 ),
@@ -66,7 +66,7 @@ const CustomizationSelectBlock = ({
           label: (
             <SelectLabelContainer>
               <span>{item.title}</span>
-              <span>{item.defaultMarker ? "necessarily" : ""}</span>
+              <span>{item.defaultMarker ? "default" : ""}</span>
             </SelectLabelContainer>
           ),
         }))}

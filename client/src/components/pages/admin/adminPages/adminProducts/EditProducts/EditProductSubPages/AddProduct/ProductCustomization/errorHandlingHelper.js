@@ -7,6 +7,8 @@ export const errorHandlingHelper = (modifiers) => {
   const optionItemIsEmptyErrorText =
     "You cannot add an empty customization option";
 
+  const setByDefaultErrorText = "You must default to one item in each modifier";
+
   if (modifiers.length < 1) {
     return defaultErrorText;
   }
@@ -18,7 +20,6 @@ export const errorHandlingHelper = (modifiers) => {
   if (modifiersWithoutChildren) {
     return optionWithoutChildrenErrorText;
   }
-
 
   let modifierWithErrors = [];
 
@@ -36,6 +37,15 @@ export const errorHandlingHelper = (modifiers) => {
 
   if (modifierWithErrors.length > 0) {
     return optionItemIsEmptyErrorText;
+  }
+
+  const allModifiersWithDefaultMarker = modifiers.every((mod) => {
+    const itemsHasDefault = mod.items.some((item) => item.defaultMarker);
+    return itemsHasDefault;
+  });
+
+  if (!allModifiersWithDefaultMarker) {
+    return setByDefaultErrorText;
   }
 
   return null;

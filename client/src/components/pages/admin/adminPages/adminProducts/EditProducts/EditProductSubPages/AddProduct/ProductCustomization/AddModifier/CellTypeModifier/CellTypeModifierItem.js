@@ -13,6 +13,7 @@ import {
   ModifierListItem,
   ModifierInterfaceIcons,
   DefaultTextContainer,
+  ModifierPrice,
 } from "../Modifier/Modifier.styled";
 
 const CellTypeModifierItem = ({
@@ -26,7 +27,6 @@ const CellTypeModifierItem = ({
 }) => {
   const [editModeOn, setEditMode] = useState(true);
   const [titleIsEmpty, setErrorTitle] = useState(false);
-  const [priceIsEmpty, setErrorPrice] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(false);
 
   const titleInputRef = useRef();
@@ -39,19 +39,16 @@ const CellTypeModifierItem = ({
   const disabledCheckbox =
     index !== defaultMarkerItemIndex && defaultMarkerItemIndex >= 0;
 
-  console.log(disabledCheckbox, "lllsa", index, defaultMarkerItemIndex);
-
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
-    const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (!titleInputIsEmpty && !priceInputIsEmpty) {
+    if (!titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
-        title: titleInputRef.current.input.value,
-        price: priceInputRef.current.input.value,
         defaultMarker,
+        title: titleInputRef.current.input.value,
+        additionalPrice: priceInputRef.current.input.value,
       };
 
       saveModifierHandler(newModifierData);
@@ -60,10 +57,6 @@ const CellTypeModifierItem = ({
 
     if (titleInputIsEmpty) {
       setErrorTitle(true);
-    }
-
-    if (priceInputIsEmpty) {
-      setErrorPrice(true);
     }
   };
 
@@ -80,13 +73,6 @@ const CellTypeModifierItem = ({
     setErrorTitle(false);
   };
 
-  const priceInputOnChangeHanlder = (e) => {
-    if (e.target.value.length === 0) {
-      setErrorPrice(true);
-      return;
-    }
-    setErrorPrice(false);
-  };
   return (
     <ModifierListItem
       error={canotBeAddedNewModifierError}
@@ -121,14 +107,16 @@ const CellTypeModifierItem = ({
         {editModeOn ? (
           <Input
             ref={priceInputRef}
-            placeholder="Price"
+            placeholder="Additional price"
             size="small"
-            status={priceIsEmpty && "error"}
-            defaultValue={data.price}
-            onChange={priceInputOnChangeHanlder}
+            defaultValue={data.additionalPrice}
           />
         ) : (
-          <CTMText>{data.price}</CTMText>
+          <ModifierPrice>
+            {data.additionalPrice
+              ? data.additionalPrice + "$"
+              : data.additionalPrice}
+          </ModifierPrice>
         )}
 
         {editModeOn && (

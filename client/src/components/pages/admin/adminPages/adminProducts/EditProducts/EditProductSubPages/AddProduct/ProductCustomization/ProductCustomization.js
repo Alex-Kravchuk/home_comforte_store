@@ -84,6 +84,7 @@ const ProductCustomization = ({ setDataHandler }) => {
 
   const saveCustomizationDataHandler = () => {
     const error = errorHandlingHelper(modifiers);
+
     if (error) {
       setCustomizationError(error);
       return;

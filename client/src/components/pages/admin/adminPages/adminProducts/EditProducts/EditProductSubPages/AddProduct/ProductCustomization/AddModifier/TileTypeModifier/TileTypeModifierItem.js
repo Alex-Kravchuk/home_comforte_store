@@ -9,6 +9,7 @@ import {
   ErrorContainer,
   ModifierInterfaceIcons,
   ModifierListItem,
+  ModifierPrice,
   ModifierTitle,
 } from "../Modifier/Modifier.styled";
 import ProductImagesUploading from "../../../ProductImages/ProductImagesUploading/ProductImagesUploading";
@@ -32,7 +33,6 @@ const TileTypeModifierItem = ({
   const [file, setFile] = useState(null);
   const [editModeOn, setEditMode] = useState(true);
   const [fileIsEmpty, setErrorFile] = useState(false);
-  const [priceIsEmpty, setErrorPrice] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(false);
 
@@ -55,15 +55,14 @@ const TileTypeModifierItem = ({
 
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
-    const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (file && !priceInputIsEmpty && !titleInputIsEmpty) {
+    if (file  && !titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
         img: file,
-        price: priceInputRef.current.input.value,
         title: titleInputRef.current.input.value,
+        additionalPrice: priceInputRef.current.input.value,
         description:
           descriptionInputRef.current.resizableTextArea.textArea.value,
         defaultMarker,
@@ -80,10 +79,6 @@ const TileTypeModifierItem = ({
     if (titleInputIsEmpty) {
       setErrorTitle(true);
     }
-
-    if (priceInputIsEmpty) {
-      setErrorPrice(true);
-    }
   };
 
   const editModeHandler = () => {
@@ -99,13 +94,6 @@ const TileTypeModifierItem = ({
     setErrorTitle(false);
   };
 
-  const priceInputOnChangeHanlder = (e) => {
-    if (e.target.value.length === 0) {
-      setErrorPrice(true);
-      return;
-    }
-    setErrorPrice(false);
-  };
 
   return (
     <ModifierListItem
@@ -140,14 +128,16 @@ const TileTypeModifierItem = ({
         {editModeOn ? (
           <Input
             size="small"
-            placeholder="Price"
+            placeholder="Additional price"
             ref={priceInputRef}
-            defaultValue={data.price}
-            status={priceIsEmpty && "error"}
-            onChange={priceInputOnChangeHanlder}
+            defaultValue={data.additionalPrice}
           />
         ) : (
-          <ModifierTitle>{data.price}</ModifierTitle>
+          <ModifierPrice>
+            {data.additionalPrice
+              ? data.additionalPrice + "$"
+              : data.additionalPrice}
+          </ModifierPrice>
         )}
         <TileUploadImgWrapper file={file}>
           <ProductImagesUploading

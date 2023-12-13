@@ -162,6 +162,12 @@ export const ModifierDescr = styled.div`
   font-size: 12px;
 `;
 
+export const ModifierPrice = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+`;
+
 export const InputsContainer = styled.div`
   ${({ cellType }) =>
     cellType &&
@@ -178,7 +184,3 @@ export const DefaultTextContainer = styled.div`
   margin-top: 10px;
   text-align: center;
 `;
-
-// TODO
-// тільки один елемент модифікатора може бути вибраний за замовчуванням
-// використовувати елемент за замовчуванням як стартова ціна за товар

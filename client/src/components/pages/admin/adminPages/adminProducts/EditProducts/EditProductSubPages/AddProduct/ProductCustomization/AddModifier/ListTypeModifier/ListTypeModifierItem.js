@@ -19,6 +19,7 @@ import {
   DefaultModIconContainer,
   SpecialIconsContainer,
   DefaultTextContainer,
+  ModifierPrice,
 } from "../Modifier/Modifier.styled";
 
 const ListTypeModifierItem = ({
@@ -37,6 +38,7 @@ const ListTypeModifierItem = ({
   const [defaultMarker, setDefaultMarker] = useState(false);
 
   const titleInputRef = useRef();
+  const additionalPriceRef = useRef();
   const descriptionInputRef = useRef();
 
   const canotBeAddedNewModifierError =
@@ -58,11 +60,12 @@ const ListTypeModifierItem = ({
     if (!titleInputIsEmpty && file) {
       setEditMode(false);
       const newModifierData = {
-        id: data.id,
         img: file,
+        id: data.id,
+        defaultMarker,
         title: titleInputRef.current.input.value,
         description: descriptionInputRef.current.input.value,
-        defaultMarker,
+        additionalPrice: additionalPriceRef.current.input.value,
       };
 
       saveModifierHandler(newModifierData);
@@ -90,7 +93,6 @@ const ListTypeModifierItem = ({
 
     setErrorTitle(false);
   };
-
 
   return (
     <ModifierListItem
@@ -136,6 +138,21 @@ const ListTypeModifierItem = ({
           />
         ) : (
           <ModifierDescr>{data.description}</ModifierDescr>
+        )}
+
+        {editModeOn ? (
+          <Input
+            ref={additionalPriceRef}
+            placeholder="Additional price"
+            size="small"
+            defaultValue={data.additionalPrice}
+          />
+        ) : (
+          <ModifierPrice>
+            {data.additionalPrice
+              ? data.additionalPrice + "$"
+              : data.additionalPrice}
+          </ModifierPrice>
         )}
 
         {editModeOn && (
