@@ -2,18 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Form, Select } from "antd";
 import { FormLabel } from "@mui/material";
+
 import { formRules } from "../../../../../../../../../../helpers/formRules";
+
+import { InfoBlock } from "../../AddProduct.styled";
 import {
   FormInput,
   FormInputNumber,
 } from "../../../../../../../../../../styles/formComponentStyles";
-import { InfoBlock } from "../../AddProduct.styled";
-import CustomizationSelectBlock from "../../ProductImages/ProductViewerImages/CustomizationSelectBlock";
 
-// TODO
-// the price should depend on the selected customization option
-
-const SubGeneralInfo = ({ categories, customizationData }) => {
+const SubGeneralInfo = ({ categories }) => {
   const [types, setTypes] = useState([]);
   const [subtypes, setSubtypes] = useState([]);
 

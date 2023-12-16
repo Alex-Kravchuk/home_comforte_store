@@ -56,7 +56,7 @@ const TileTypeModifierItem = ({
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
 
-    if (file  && !titleInputIsEmpty) {
+    if (file && !titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
@@ -93,7 +93,6 @@ const TileTypeModifierItem = ({
 
     setErrorTitle(false);
   };
-
 
   return (
     <ModifierListItem
@@ -134,7 +133,8 @@ const TileTypeModifierItem = ({
           />
         ) : (
           <ModifierPrice>
-            {data.additionalPrice
+            {/* if price set like word (included) */}
+            {!isNaN(data.additionalPrice)
               ? data.additionalPrice + "$"
               : data.additionalPrice}
           </ModifierPrice>

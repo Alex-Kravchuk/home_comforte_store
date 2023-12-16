@@ -113,7 +113,8 @@ const CellTypeModifierItem = ({
           />
         ) : (
           <ModifierPrice>
-            {data.additionalPrice
+            {/* if price set like word (included) */}
+            {!isNaN(data.additionalPrice)
               ? data.additionalPrice + "$"
               : data.additionalPrice}
           </ModifierPrice>

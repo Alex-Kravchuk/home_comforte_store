@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PPIContainer, PPIWrapper } from "./ProductPreviewImages.styled";
 import InfoHeader from "../../InfoHeader/InfoHeader";
 import ProductImagesUploading from "../ProductImagesUploading/ProductImagesUploading";
 
-const ProductPreviewImages = () => {
+const ProductPreviewImages = ({ saveDataHandler }) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
+
+  useEffect(() => {
+    saveDataHandler(images);
+  }, [images]);
 
   const saveFileHandler = (file) => {
     if (Array.isArray(file)) {
@@ -23,8 +27,6 @@ const ProductPreviewImages = () => {
 
     setImages((state) => [...state, file]);
   };
-
-  // console.log("images PREV", images);
 
   return (
     <PPIWrapper>

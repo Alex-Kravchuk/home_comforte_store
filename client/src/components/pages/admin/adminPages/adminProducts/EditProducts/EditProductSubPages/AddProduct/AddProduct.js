@@ -73,6 +73,10 @@ const AddProduct = () => {
   console.log("customization data:", customizationData);
   console.log("====================================");
 
+  console.log("====================================");
+  console.log("preview images data:", previewImages);
+  console.log("====================================");
+
 
   return (
     <SubPageWrapper>

@@ -16,16 +16,13 @@ const ProductImages = ({
   const [clearAllFlag, setClearAllFlag] = useState(false);
   const [temporarilySaved, setTemporarilySaved] = useState(false);
 
-  const [previewData, setPreviewData] = useState([1, 2, 3]);
+  // the preview data is independent of the customization data
+  const [previewData, setPreviewData] = useState();
   const [localCustomOptions, setLocalCustomOptions] = useState([]);
 
   useEffect(() => {
     setLocalCustomOptions(customizationData.concat());
   }, [customizationData]);
-
-  useEffect(() => {
-    console.log("Local options was changed:", localCustomOptions);
-  }, [localCustomOptions]);
 
   const saveDataHandler = () => {
     const error = errorHandlingHelper(localCustomOptions, previewData);
@@ -34,6 +31,7 @@ const ProductImages = ({
       return;
     }
 
+    setDataHandlerPreview(previewData);
     setDataHandlerViewer(localCustomOptions);
     setTemporarilySaved(true);
     setImagesError(false);
@@ -87,12 +85,11 @@ const ProductImages = ({
             clearAllFlag={clearAllFlag}
             customizationData={customizationData}
             saveDataHandler={localSaveDataHandler}
-            // temporarilySavedHandler={setTemporarilySaved}
           />
         </PIBlock>
         <PIBlock>
           <InfoBlockTitle>Product images for preview</InfoBlockTitle>
-          <ProductPreviewImages />
+          <ProductPreviewImages saveDataHandler={setPreviewData} />
         </PIBlock>
       </PIContainer>
     </PIWrapper>

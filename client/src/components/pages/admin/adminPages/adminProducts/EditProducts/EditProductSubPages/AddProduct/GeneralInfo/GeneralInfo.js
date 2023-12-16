@@ -78,7 +78,6 @@ const GeneralInfo = ({
           <SubGeneralInfo
             categories={categories}
             customizationData={customizationData}
-            // customDataHandler={setLocalCustomizationState}
           />
           <DimensionInfo
             dimensionImg={dimensionImg}
