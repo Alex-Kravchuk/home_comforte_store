@@ -1,9 +1,7 @@
 import React from "react";
 
-import { Tooltip } from "antd";
+import { Tabs, Tooltip } from "antd";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-
-import EditProductsSubPages from "./EditProductSubPages/EditProductSubPages";
 
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 
@@ -13,6 +11,8 @@ import {
   AdminProductsWrapper,
   AdminProductsContainer,
 } from "../AdminProducts.styled";
+
+import Overview from "./Overview/Overview";
 
 const EditProducts = () => {
   return (
@@ -37,7 +37,8 @@ const EditProducts = () => {
             adding rules.
           </AdminPagesSubTitle>
         </AdminTitlesGroupe>
-        <EditProductsSubPages />
+
+        <Overview />
       </AdminProductsContainer>
     </AdminProductsWrapper>
   );

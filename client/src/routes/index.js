@@ -15,37 +15,39 @@ import { Provider, useSelector } from "react-redux";
 import { store } from "../redux/index";
 
 import {
+  USER_ROUTE,
   HOME_ROUTE,
   ADMIN_ROUTE,
   BRAND_ROUTE,
-  BASKET_ROUTE,
-  PRODUCT_ROUTE,
-  USER_ROUTE,
-  SEARCH_ROUTE,
   ABOUT_ROUTE,
+  ORDER_ROUTE,
+  LOGIN_ROUTE,
+  BASKET_ROUTE,
+  SEARCH_ROUTE,
+  ADMIN_ORDERS,
+  CREATE_ROUTE,
+  ADD_NEW_TYPE,
+  PROFILE_ROUTE,
+  PRODUCT_ROUTE,
+  ACCOUNT_ROUTE,
   CONTACT_ROUTE,
   SHOWROOM_ROUTE,
-  ACCOUNT_ROUTE,
-  LOGIN_ROUTE,
-  CREATE_ROUTE,
-  FORGOT_PASSWORD_ROUTE,
-  RESET_PASSWORD_ROUTE,
-  PROFILE_ROUTE,
   SETTINGS_ROUTE,
-  ORDER_ROUTE,
-  PERSONAL_SETTINGS,
-  CONTACTS_SETTINGS,
-  PAYMENT_SETTINGS,
   ADMIN_OVERVIEW,
   ADMIN_PRODUCTS,
-  ADMIN_ORDERS,
-  ADMIN_NOTIFICATIONS,
   ADMIN_SETTINGS,
-  ADD_NEW_CATEGORY,
-  ADD_NEW_TYPE,
   ADD_NEW_PRODUCT,
-  ADMIN_PRODUCTS_CATEGORY,
+  ADD_NEW_CATEGORY,
+  PAYMENT_SETTINGS,
+  PERSONAL_SETTINGS,
+  CONTACTS_SETTINGS,
+  ADMIN_NOTIFICATIONS,
   ADMIN_PRODUCTS_EDIT,
+  RESET_PASSWORD_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
+  ADMIN_PRODUCTS_PREVIEW,
+  ADMIN_PRODUCTS_CATEGORY,
+  ADMIN_PRODUCTS_ADD,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -73,7 +75,10 @@ import Overview from "../components/pages/admin/adminPages/overview/Overview";
 import AdminProducts from "../components/pages/admin/adminPages/adminProducts/AdminProducts";
 import AdminNotifications from "../components/pages/admin/adminPages/adminNotification/AdminNotification";
 import AddNewCategory from "../components/pages/admin/adminPages/adminProducts/CategoriesAndTypes/CategoriesAndTypes";
-import AddNewProduct from "../components/pages/admin/adminPages/adminProducts/EditProducts/EditProducts";
+import EditProducts from "../components/pages/admin/adminPages/adminProducts/EditProducts/EditProducts";
+import ProductPreview from "../components/pages/product/Demonstration/ProductPreview/ProductPreview";
+import PreviewProductPage from "../components/pages/product/PreviewProductPage/PreviewProductPage";
+import AddProduct from "../components/pages/admin/adminPages/adminProducts/AddProduct/AddProduct";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -115,12 +120,20 @@ export const router = createBrowserRouter(
         <Route path={ADMIN_ROUTE} element={<Admin />}>
           <Route path={ADMIN_OVERVIEW} element={<Overview />} />
           <Route path={ADMIN_PRODUCTS} element={<AdminProducts />}>
-            <Route path={ADMIN_PRODUCTS_CATEGORY} element={<AddNewCategory />} />
-            <Route path={ADMIN_PRODUCTS_EDIT} element={<AddNewProduct />} />
+            <Route
+              path={ADMIN_PRODUCTS_CATEGORY}
+              element={<AddNewCategory />}
+            />
+            <Route path={ADMIN_PRODUCTS_EDIT} element={<EditProducts />} />
+            <Route path={ADMIN_PRODUCTS_ADD} element={<AddProduct />} />
           </Route>
           <Route path={ADMIN_ORDERS} element={<AdminOrders />} />
           <Route path={ADMIN_NOTIFICATIONS} element={<AdminNotifications />} />
           <Route path={ADMIN_SETTINGS} element={<AdminSettings />} />
+          <Route
+            path={ADMIN_PRODUCTS_PREVIEW}
+            element={<PreviewProductPage />}
+          />
         </Route>
       </Route>
 

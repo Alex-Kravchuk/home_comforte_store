@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper/modules";
 
-import { UploadButtonWrapper } from "../../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
+import { UploadButtonWrapper } from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
 import {
   DescriptionContainer,
   PIUploadContainer,

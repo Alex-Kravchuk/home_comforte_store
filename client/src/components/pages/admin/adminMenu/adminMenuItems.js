@@ -1,19 +1,19 @@
 import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import BurstModeOutlinedIcon from "@mui/icons-material/BurstModeOutlined";
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-
 
 import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
 import { Link } from "react-router-dom";
 import {
-
   ADMIN_NOTIFICATIONS,
   ADMIN_ORDERS,
   ADMIN_OVERVIEW,
   ADMIN_PRODUCTS,
+  ADMIN_PRODUCTS_ADD,
   ADMIN_PRODUCTS_CATEGORY,
   ADMIN_PRODUCTS_EDIT,
   ADMIN_SETTINGS,
@@ -42,6 +42,15 @@ export const adminMenuItems = [
       },
       {
         key: "sub2",
+        label: (
+          <Link to={ADMIN_PRODUCTS + "/" + ADMIN_PRODUCTS_ADD}>
+            Add new product
+          </Link>
+        ),
+        icon: <NoteAddOutlinedIcon />,
+      },
+      {
+        key: "sub3",
         label: (
           <Link to={ADMIN_PRODUCTS + "/" + ADMIN_PRODUCTS_EDIT}>
             Edit products

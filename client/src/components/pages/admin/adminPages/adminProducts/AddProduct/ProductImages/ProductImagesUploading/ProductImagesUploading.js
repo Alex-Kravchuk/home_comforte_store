@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
 
-import { getBase64 } from "../../../../../../../../../../helpers/getBase64";
+import { getBase64 } from "../../../../../../../../helpers/getBase64";
 
 import ViewerUpload from "../ProductViewerImages/ViewerUpload";
 import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";

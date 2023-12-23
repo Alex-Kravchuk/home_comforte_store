@@ -2,11 +2,11 @@ import React from "react";
 import {
   SubPageContainer,
   SubPageWrapper,
-} from "../../../AdminProducts.styled";
-import SearchField from "../../../../../searchField/SearchField";
+} from "../../AdminProducts.styled";
+import SearchField from "../../../../searchField/SearchField";
 import { List } from "antd";
-import { adminProductListMOCK } from "../../../../../../../../assets/mock/adminProductListMOCK";
-import ProductListItem from "../../ProductListItem/ProductListItem";
+import { adminProductListMOCK } from "../../../../../../../assets/mock/adminProductListMOCK";
+import ProductListItem from "../ProductListItem/ProductListItem";
 
 const Overview = () => {
   return (

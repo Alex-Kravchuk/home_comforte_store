@@ -12,17 +12,17 @@ import {
 import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../utils/viewport_size_consts";
 
-const Product = () => {
+const Product = ({ previewMode = false }) => {
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
   return (
     <ProductWrapper>
       <ProductContainer>
         <ProudctInfoSection>
-          <Demonstration />
+          <Demonstration previewMode={previewMode} />
           {bigScreen && <Customization />}
         </ProudctInfoSection>
-        <Reviews />
+        {!previewMode && <Reviews />}
       </ProductContainer>
     </ProductWrapper>
   );

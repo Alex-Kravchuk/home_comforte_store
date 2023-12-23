@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 
-import { Button, Result, Tabs } from "antd";
+import { Link } from "react-router-dom";
+import { Button, Result, Tabs, Tooltip } from "antd";
+
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
 import ProductCustomization from "./ProductCustomization/ProductCustomization";
 
-import { useGetWindowSize } from "../../../../../../../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../../../../../../../utils/viewport_size_consts";
+import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 import {
-  SubPageWrapper,
-  SubPageContainer,
-} from "../../../AdminProducts.styled";
-
+  AdminTitlesGroupe,
+  AdminTitleContainer,
+  AdminProductsWrapper,
+  AdminProductsContainer,
+} from "../AdminProducts.styled";
 import { TabWrapper } from "./AddProduct.styled";
+import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 
 const AddProduct = () => {
   const viewport = useGetWindowSize();
@@ -77,21 +82,42 @@ const AddProduct = () => {
   console.log("preview images data:", previewImages);
   console.log("====================================");
 
-
   return (
-    <SubPageWrapper>
-      <SubPageContainer>
+    <AdminProductsWrapper>
+      <AdminProductsContainer>
+        <AdminTitlesGroupe>
+          <AdminTitleContainer>
+            <AdminPagesTitle>Add a new product</AdminPagesTitle>
+
+            <Tooltip
+              title="To be able to edit certain elements on this page, please use a device with a large screen"
+              placement="bottomLeft"
+            >
+              <InfoOutlinedIcon />
+            </Tooltip>
+          </AdminTitleContainer>
+
+          <AdminPagesSubTitle>
+            The most important feature in the product editing section is the
+            product adding part. When adding products here, do not ignore to
+            fill in all the required fields completely and follow the product
+            adding rules.
+          </AdminPagesSubTitle>
+        </AdminTitlesGroupe>
+
         {smallerThanTableScreen ? (
           <Result title="For the correct operation of this page, use a device with a large screen" />
         ) : (
           <Tabs type="card" size="small" items={items} defaultActiveKey="1" />
         )}
 
-        <Button type="primary" size="large">
-          Create a new product
-        </Button>
-      </SubPageContainer>
-    </SubPageWrapper>
+        <Link to="../../preview" state={generalData}>
+          <Button type="primary" size="large">
+            Create a new product
+          </Button>
+        </Link>
+      </AdminProductsContainer>
+    </AdminProductsWrapper>
   );
 };
 

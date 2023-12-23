@@ -18,13 +18,15 @@ export const PAYMENT_SETTINGS = "payment";
 
 // admin routes
 export const ADMIN_OVERVIEW = "overview";
-export const ADMIN_PRODUCTS = "products"
-export const ADMIN_ORDERS = "orders"
+export const ADMIN_PRODUCTS = "products";
+export const ADMIN_ORDERS = "orders";
 export const ADMIN_NOTIFICATIONS = "notifcations";
-export const ADMIN_SETTINGS = "settings"
+export const ADMIN_SETTINGS = "settings";
 // admin add products
-export const ADMIN_PRODUCTS_CATEGORY = 'categories'
-export const ADMIN_PRODUCTS_EDIT = 'edit'
+export const ADMIN_PRODUCTS_CATEGORY = "categories";
+export const ADMIN_PRODUCTS_EDIT = "edit";
+export const ADMIN_PRODUCTS_ADD = "add_new";
+export const ADMIN_PRODUCTS_PREVIEW = "preview";
 
 export const PRODUCT_ROUTE = "product/:id";
 

@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Form, Input, Select } from "antd";
-import { FormInput } from "../../../../../../../../../../../styles/formComponentStyles";
+
 import { FormLabel } from "@mui/material";
-import { formRules } from "../../../../../../../../../../../helpers/formRules";
+import { formRules } from "../../../../../../../../../helpers/formRules";
 
 const CreateNewModifierForm = ({ form }) => {
   return (
@@ -18,7 +18,7 @@ const CreateNewModifierForm = ({ form }) => {
       <Form.Item
         name="displayMethod"
         label={<FormLabel>Modifier display method:</FormLabel>}
-		rules={formRules.selectInput('display method')}
+        rules={formRules.selectInput("display method")}
       >
         <Select
           size="large"

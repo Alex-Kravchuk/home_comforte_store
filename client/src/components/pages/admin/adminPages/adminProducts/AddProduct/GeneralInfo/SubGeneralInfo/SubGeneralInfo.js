@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { Form, Select } from "antd";
 import { FormLabel } from "@mui/material";
 
-import { formRules } from "../../../../../../../../../../helpers/formRules";
+import { formRules } from "../../../../../../../../helpers/formRules";
 
 import { InfoBlock } from "../../AddProduct.styled";
 import {
   FormInput,
   FormInputNumber,
-} from "../../../../../../../../../../styles/formComponentStyles";
+} from "../../../../../../../../styles/formComponentStyles";
 
 const SubGeneralInfo = ({ categories }) => {
   const [types, setTypes] = useState([]);

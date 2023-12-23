@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthService } from "../../api/user/authService";
 
 const initialState = {
-  userData: null,
+  userData: {},
   activeUserPage: "profile",
 };
 

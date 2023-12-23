@@ -21,7 +21,7 @@ import {
 import ProductDetails from "./ProductDetails/ProductDetails";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 
-const Demonstration = () => {
+const Demonstration = ({ previewMode = false }) => {
   const [zoomOn, setZoomOn] = useState(false);
   const zoomHandler = () => setZoomOn((state) => !state);
 
@@ -50,7 +50,7 @@ const Demonstration = () => {
           <ProductPreview />
         </ViewerContainer>
         <ProductDetails />
-        <SimilarProducts />
+        {!previewMode && <SimilarProducts />}
       </DemonstrationContainer>
     </DemonstrationWrapper>
   );

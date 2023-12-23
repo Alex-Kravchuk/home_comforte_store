@@ -1,6 +1,7 @@
 import { Input } from "antd";
 import styled from "styled-components";
-import { SeatSizeContainer } from "../../../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
+import { SeatSizeContainer } from "../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
+
 
 // DI
 

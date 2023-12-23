@@ -8,7 +8,7 @@ import {
   SeparateLargeImg,
   SeparateLargeImgContainer,
 } from "../../ProductImages/ProductImagesUploading/ProductImagesUploading.styled";
-import { UploadButtonWrapper } from "../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
+import { UploadButtonWrapper } from "../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/UploadImg.styled";
 
 const DimensionUpload = ({ config }) => {
   const uploadButton = (

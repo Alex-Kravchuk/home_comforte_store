@@ -12,7 +12,7 @@ import {
   SeatSizeInfoBlock,
   SeatSizeInfoBlockLeft,
   SeatSizeInfoBlockRight,
-} from "../../../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
+} from "../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
 
 const DimensionSeatSizeItem = ({ item, setDataHandler, dimensionsData }) => {
   const [modifiedItem, setItem] = useState({});

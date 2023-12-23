@@ -13,7 +13,7 @@ import { Navigation } from "swiper/modules";
 import {
   ModalImg,
   ModalWrapper,
-} from "../../../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/PreviewModal/PreviewModal.styled";
+} from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/PreviewModal/PreviewModal.styled";
 
 const DisplayedPreview = ({ currentPreviewIndex, children }) => {
   const swiper = useSwiper();
