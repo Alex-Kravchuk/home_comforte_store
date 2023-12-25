@@ -15,11 +15,8 @@ export const CustomizationWrapper = styled.div`
   flex: 0 0 500px;
   margin-left: 25px;
 
-  box-shadow: 0px -100px 0px 0px rgba(0, 0, 0, 0.04);
-
-  @media (max-width: ${xxl}px) {
-    // flex: 0 0 450px;
-  }
+  box-shadow: ${({ previewMode }) =>
+    !previewMode && "0px -100px 0px 0px rgba(0, 0, 0, 0.04)"};
 
   @media (max-width: ${xl}px) {
     width: 100%;

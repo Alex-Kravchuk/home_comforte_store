@@ -11,11 +11,11 @@ import Modifiers from "./Modifiers/Modifiers";
 import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
 import AddToCartButton from "./AddToCartButton/AddToCartButton";
 
-const Customization = () => {
+const Customization = ({ previewMode }) => {
   const viewport = useGetWindowSize();
   const bigScreen = viewport.width >= viewport_sizes.xl;
   return (
-    <CustomizationWrapper>
+    <CustomizationWrapper previewMode={previewMode}>
       <CustomizationContainer>
         {bigScreen && <ProductHeader />}
         <Modifiers />

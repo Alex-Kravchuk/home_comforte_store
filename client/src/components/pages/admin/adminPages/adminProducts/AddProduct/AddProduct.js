@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Result, Tabs, Tooltip } from "antd";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
@@ -18,10 +19,18 @@ import {
   AdminProductsWrapper,
   AdminProductsContainer,
 } from "../AdminProducts.styled";
-import { TabWrapper } from "./AddProduct.styled";
+import {
+  ConfirmedFlag,
+  CreateButtonContainer,
+  CreateConfirmContainer,
+  ErrorText,
+  TabWrapper,
+} from "./AddProduct.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
@@ -31,6 +40,19 @@ const AddProduct = () => {
   const [previewImages, setPreviewImages] = useState([]);
   // customizationData contains different modifiers and images for product viewer
   const [customizationData, setCustomizationData] = useState([]);
+
+  const [createProductError, setCreateProductError] = useState(false);
+  const [wasConfirmed, setConfirmed] = useState(false);
+
+  useEffect(() => {
+    console.log("render productr page", location.state);
+
+    if (location.state?.confirmed) {
+      setConfirmed(true);
+    } else {
+      setConfirmed(false);
+    }
+  }, []);
 
   const items = [
     {
@@ -69,6 +91,20 @@ const AddProduct = () => {
       ),
     },
   ];
+
+  const createNewProductHandler = () => {
+    const thereAreAllProductData =
+      generalData.length !== 0 &&
+      previewImages.length !== 0 &&
+      customizationData.length !== 0;
+    if (!thereAreAllProductData) {
+      setCreateProductError(true);
+      return;
+    }
+
+    navigate("../../preview", { state: generalData });
+    setCreateProductError(false);
+  };
 
   console.log("====================================");
   console.log("general data:", generalData);
@@ -111,11 +147,26 @@ const AddProduct = () => {
           <Tabs type="card" size="small" items={items} defaultActiveKey="1" />
         )}
 
-        <Link to="../../preview" state={generalData}>
-          <Button type="primary" size="large">
-            Create a new product
-          </Button>
-        </Link>
+        <CreateButtonContainer>
+          <CreateConfirmContainer>
+            <Button
+              type="primary"
+              size="large"
+              onClick={createNewProductHandler}
+            >
+              {wasConfirmed ? "Create a new product" : "Show product preview"}
+            </Button>
+            <ConfirmedFlag wasConfirmed={wasConfirmed}>
+              Confirmed <DoneAllOutlinedIcon />
+            </ConfirmedFlag>
+          </CreateConfirmContainer>
+          {createProductError && (
+            <ErrorText>
+              You can't create a new product without all the information about
+              it
+            </ErrorText>
+          )}
+        </CreateButtonContainer>
       </AdminProductsContainer>
     </AdminProductsWrapper>
   );

@@ -19,7 +19,11 @@ export const AdminProductsWrapper = styled.div`
     }
   }
 `;
-export const AdminProductsContainer = styled.div``;
+export const AdminProductsContainer = styled.div`
+  a {
+    text-decoration: none;
+  }
+`;
 export const AdminTitlesGroupe = styled.div``;
 export const AdminTitleContainer = styled.div`
   display: flex;

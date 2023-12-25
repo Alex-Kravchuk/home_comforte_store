@@ -7,7 +7,7 @@ export const AdminMenuWrapper = styled.div`
   position: sticky;
   top: 70px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1440px) {
     width: 100%;
     position: static;
   }

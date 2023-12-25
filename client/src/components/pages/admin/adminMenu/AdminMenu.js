@@ -13,7 +13,7 @@ const AdminMenu = () => {
   const [isCollapsed, setCollapsed] = useState(false);
   const viewport = useGetWindowSize();
 
-  const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
+  const smallLaptopScreen = viewport.width <= viewport_sizes.xxl;
 
   const toggleCollapsed = () => {
     setCollapsed(!isCollapsed);

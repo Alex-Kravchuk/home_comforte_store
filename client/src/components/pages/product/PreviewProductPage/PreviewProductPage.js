@@ -18,7 +18,7 @@ const PreviewProductPage = () => {
       </h4>
       <Product previewMode={true} />
       <ButtonContainer>
-        <Link to="../products/edit">
+        <Link to="../products/add_new" state={{ confirmed: true }}>
           <Button size="large" type="primary">
             All is well. Confirm
           </Button>
