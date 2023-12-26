@@ -2,7 +2,7 @@ export const customTheme = {
   components: {
     Button: {
       colorPrimaryBorderHover: "black",
-      // colorPrimaryHover: "yellow",
+      colorPrimaryHover: "#929981",
       colorPrimary: "black",
       colorPrimaryActive: "black",
       colorPrimaryTextHover: "black",

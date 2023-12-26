@@ -18,7 +18,7 @@ export const modifiersMock = [
         descr: "Perfomance Antimicrobial Chenille",
       },
 
-      {
+    {
         id: 2,
         img: list_2,
         title: "Harbour",

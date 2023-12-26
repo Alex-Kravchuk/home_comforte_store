@@ -21,7 +21,7 @@ import {
 import ProductDetails from "./ProductDetails/ProductDetails";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 
-const Demonstration = ({ previewMode = false }) => {
+const Demonstration = ({ generalData, previewMode = false }) => {
   const [zoomOn, setZoomOn] = useState(false);
   const zoomHandler = () => setZoomOn((state) => !state);
 
@@ -39,7 +39,12 @@ const Demonstration = ({ previewMode = false }) => {
   return (
     <DemonstrationWrapper>
       <DemonstrationContainer>
-        {smallLaptopScreen && <ProductHeader />}
+        {smallLaptopScreen && (
+          <ProductHeader
+            name={generalData.subGeneral.name}
+            price={generalData.subGeneral.price}
+          />
+        )}
         <ViewerContainer>
           {viewerMode}
           {tabletScreen && (
@@ -49,7 +54,10 @@ const Demonstration = ({ previewMode = false }) => {
 
           <ProductPreview />
         </ViewerContainer>
-        <ProductDetails />
+        <ProductDetails
+          dimension={generalData?.dimension}
+          descriptionText={generalData?.subGeneral?.description}
+        />
         {!previewMode && <SimilarProducts />}
       </DemonstrationContainer>
     </DemonstrationWrapper>

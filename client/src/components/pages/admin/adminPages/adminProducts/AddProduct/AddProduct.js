@@ -97,12 +97,15 @@ const AddProduct = () => {
       generalData.length !== 0 &&
       previewImages.length !== 0 &&
       customizationData.length !== 0;
+
     if (!thereAreAllProductData) {
-      setCreateProductError(true);
-      return;
+      // setCreateProductError(true);
+      // return;
     }
 
-    navigate("../../preview", { state: generalData });
+    navigate("../../preview", {
+      state: { generalData, customizationData, previewImages },
+    });
     setCreateProductError(false);
   };
 

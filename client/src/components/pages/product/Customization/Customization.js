@@ -11,13 +11,18 @@ import Modifiers from "./Modifiers/Modifiers";
 import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
 import AddToCartButton from "./AddToCartButton/AddToCartButton";
 
-const Customization = ({ previewMode }) => {
+const Customization = ({ generalData, previewMode }) => {
   const viewport = useGetWindowSize();
   const bigScreen = viewport.width >= viewport_sizes.xl;
   return (
     <CustomizationWrapper previewMode={previewMode}>
       <CustomizationContainer>
-        {bigScreen && <ProductHeader />}
+        {bigScreen && (
+          <ProductHeader
+            name={generalData?.subGeneral?.name}
+            price={generalData?.subGeneral?.price}
+          />
+        )}
         <Modifiers />
         <AddToCartButton />
         <CustomizationFooter />

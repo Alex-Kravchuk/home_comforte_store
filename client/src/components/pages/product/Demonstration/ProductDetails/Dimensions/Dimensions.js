@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import example from "../../../../../../assets/img/viewer/dimension/dimension_example.webp";
 
@@ -10,12 +10,30 @@ import {
   DescrHeader,
   DescrContent,
 } from "./Dimensions.styled";
+import { Empty } from "antd";
+import { getBase64 } from "../../../../../../helpers/getBase64";
 
-const Dimensions = () => {
+const Dimensions = ({ img }) => {
+  const [srcURL, setSrcURL] = useState(null);
+
+  useEffect(() => {
+    if (img) {
+      getBase64(img, (url) => {
+        setSrcURL(url);
+      });
+    }
+  }, []);
+
+
   return (
     <DimensionsWrapper>
       <DimensionsContainer>
-        <DimensionsImage src={example} alt="dimensions" />
+        {srcURL ? (
+          <DimensionsImage src={srcURL} alt="dimensions" />
+        ) : (
+          <Empty description="No image data" />
+        )}
+
         <DimensionsDescr>
           <DescrHeader>How we measure</DescrHeader>
           <DescrContent>

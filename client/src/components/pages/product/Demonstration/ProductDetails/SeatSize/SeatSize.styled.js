@@ -3,7 +3,11 @@ import { textColors } from "../../../../../../styles/globalStyles";
 
 export const SeatSizeWrapper = styled.div``;
 export const SeatSizeContainer = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: ${({ noData }) => (!noData ? "none" : "1px solid rgba(0, 0, 0, 0.1)")};
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 export const SeatSizeInfoBlock = styled.div`
@@ -12,10 +16,6 @@ export const SeatSizeInfoBlock = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-
-  &:nth-last-child(2) {
-    border-bottom: none;
-  }
 `;
 
 export const SeatSizeInfoBlockLeft = styled.div`
