@@ -5,6 +5,7 @@ import { Button, Result, Tabs, Tooltip } from "antd";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
@@ -18,6 +19,8 @@ import {
   AdminTitleContainer,
   AdminProductsWrapper,
   AdminProductsContainer,
+  TabLabel,
+  TabLabelText,
 } from "../AdminProducts.styled";
 import {
   ConfirmedFlag,
@@ -27,6 +30,7 @@ import {
   TabWrapper,
 } from "./AddProduct.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
+import PreviewProductPage from "../../../../product/PreviewProductPage/PreviewProductPage";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -86,6 +90,25 @@ const AddProduct = () => {
             customizationData={customizationData}
             setDataHandlerPreview={setPreviewImages}
             setDataHandlerViewer={setCustomizationData}
+          />
+        </TabWrapper>
+      ),
+    },
+
+    {
+      key: "4",
+      label: (
+        <TabLabel>
+          <RemoveRedEyeOutlinedIcon />
+          <TabLabelText>Product preview</TabLabelText>
+        </TabLabel>
+      ),
+      children: (
+        <TabWrapper>
+          <PreviewProductPage
+            generalData={generalData}
+            previewImages={previewImages}
+            customizationData={customizationData}
           />
         </TabWrapper>
       ),

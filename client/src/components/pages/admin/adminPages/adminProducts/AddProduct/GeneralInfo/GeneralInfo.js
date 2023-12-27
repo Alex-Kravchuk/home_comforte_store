@@ -57,6 +57,10 @@ const GeneralInfo = ({
     } catch (error) {}
   };
 
+  const onChangeHandler = () => {
+    setTemporarilySaved(false);
+  };
+
   const resetDimensionValues = () => {
     setDimensionImg(null);
     setDimensionInfo([]);
@@ -67,7 +71,12 @@ const GeneralInfo = ({
   return (
     <GeneralInfoWrapper>
       <GeneralInfoContainer>
-        <Form form={form} layout="vertical" onFinish={onFinishForm}>
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onFinishForm}
+          onValuesChange={onChangeHandler}
+        >
           <TemporarySaveIcon
             error={dimensionError}
             form={form}

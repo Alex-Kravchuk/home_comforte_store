@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
 import Product from "../Product";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ButtonContainer, PPPWrapper } from "./PreviewProductPage.styled";
 import { Button } from "antd";
 
-const PreviewProductPage = () => {
-  const location = useLocation();
-  const { generalData, customizationData, previewImages } = location.state;
+const PreviewProductPage = ({
+  generalData,
+  previewImages,
+  customizationData,
+}) => {
+  // useEffect(() => {
 
-  console.log('generalData', generalData);
-  
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // }, [generalData, previewImages, customizationData]);
 
   return (
     <PPPWrapper>

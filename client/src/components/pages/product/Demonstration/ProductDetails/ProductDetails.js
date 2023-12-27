@@ -12,6 +12,7 @@ import Dimensions from "./Dimensions/Dimensions";
 import WhyHomeComfort from "./WhyHomeComfort/WhyHomeComfort";
 
 const ProductDetails = ({descriptionText, dimension}) => {
+  
   const items = [
     {
       key: "1",

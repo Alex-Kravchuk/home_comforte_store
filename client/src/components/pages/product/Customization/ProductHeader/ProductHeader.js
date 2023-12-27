@@ -18,14 +18,14 @@ const ProductHeader = ({ name, price }) => {
     <ProductHeaderCenterWrapper>
       <ProductHeaderWrapper>
         <ProductHeaderContainer>
-          <ProductName>{name}</ProductName>
+          <ProductName>{name ? name : "The name is not set"}</ProductName>
           <ProductRating>
             <ProductRatingValue>
               <Rate disabled defaultValue={4} />
             </ProductRatingValue>
             <ProductRatingNumber>75 reviews</ProductRatingNumber>
           </ProductRating>
-          <ProductPrice>${price}</ProductPrice>
+          <ProductPrice>${price ? price : "00000"}</ProductPrice>
         </ProductHeaderContainer>
       </ProductHeaderWrapper>
     </ProductHeaderCenterWrapper>

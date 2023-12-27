@@ -22,7 +22,10 @@ const Dimensions = ({ img }) => {
         setSrcURL(url);
       });
     }
-  }, []);
+  }, [img]);
+
+  console.log('img', img);
+  console.log('src', srcURL);
 
 
   return (
