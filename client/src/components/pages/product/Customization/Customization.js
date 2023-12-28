@@ -11,7 +11,11 @@ import Modifiers from "./Modifiers/Modifiers";
 import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
 import AddToCartButton from "./AddToCartButton/AddToCartButton";
 
-const Customization = ({ generalData, previewMode }) => {
+const Customization = ({
+  generalData,
+  previewMode,
+  customizationData = [],
+}) => {
   const viewport = useGetWindowSize();
   const bigScreen = viewport.width >= viewport_sizes.xl;
   return (
@@ -23,7 +27,7 @@ const Customization = ({ generalData, previewMode }) => {
             price={generalData?.subGeneral?.price}
           />
         )}
-        <Modifiers />
+        <Modifiers data={customizationData} />
         <AddToCartButton />
         <CustomizationFooter />
       </CustomizationContainer>

@@ -45,8 +45,8 @@ const Demonstration = ({
       <DemonstrationContainer>
         {smallLaptopScreen && (
           <ProductHeader
-            name={generalData.subGeneral.name}
-            price={generalData.subGeneral.price}
+            name={generalData?.subGeneral?.name}
+            price={generalData?.subGeneral?.price}
           />
         )}
         <ViewerContainer>

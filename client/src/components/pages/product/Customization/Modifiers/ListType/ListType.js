@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Scrollbar, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,9 +22,27 @@ import {
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
+import { getBase64 } from "../../../../../../helpers/getBase64";
 
 const ListType = ({ data }) => {
+  const [localTypeData, setLocalTypeData] = useState([]);
   const viewport = useGetWindowSize();
+
+  useEffect(() => {
+    data.map((listTypeItem, index) => {
+      getBase64(listTypeItem.img, (url) => {
+        setLocalTypeData((state) => [
+          ...state,
+          {
+            src: url,
+            title: listTypeItem.title,
+            id: listTypeItem.id ?? index++,
+            description: listTypeItem.description,
+          },
+        ]);
+      });
+    });
+  }, []);
 
   const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
 
@@ -53,30 +71,29 @@ const ListType = ({ data }) => {
     <ListTypeWrapper>
       <ListTypeContainer>
         {!smallLaptopScreen &&
-          data.map((item) => (
+          localTypeData.map((item) => (
             <ListTypeModifierContainer key={item.id}>
               <ModifierImgContainer>
-                <ModifierImg src={item.img} alt={item.title} />
+                <ModifierImg src={item.src} alt={item.title} />
                 <ModifierImgBorderContainer />
               </ModifierImgContainer>
-
               <ModifieTitle>{item.title}</ModifieTitle>
-              <ModifierDescr>{item.descr}</ModifierDescr>
+              <ModifierDescr>{item.description}</ModifierDescr>
             </ListTypeModifierContainer>
           ))}
 
         {smallLaptopScreen && (
           <Swiper {...swiperConfig}>
-            {data.map((item) => (
+            {localTypeData.map((item) => (
               <SwiperSlide key={item.id}>
                 <ListTypeModifierContainer>
                   <ModifierImgContainer>
-                    <ModifierImg src={item.img} alt={item.title} />
+                    <ModifierImg src={item.src} alt={item.title} />
                     <ModifierImgBorderContainer />
                   </ModifierImgContainer>
 
                   <ModifieTitle>{item.title}</ModifieTitle>
-                  <ModifierDescr>{item.descr}</ModifierDescr>
+                  <ModifierDescr>{item.description}</ModifierDescr>
                 </ListTypeModifierContainer>
               </SwiperSlide>
             ))}

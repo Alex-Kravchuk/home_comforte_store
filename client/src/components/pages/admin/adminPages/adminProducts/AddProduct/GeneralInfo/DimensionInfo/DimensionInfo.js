@@ -8,6 +8,7 @@ import DimensionSeatSizeItem from "./DimensionSeatSizeItem";
 import ProductImagesUploading from "../../ProductImages/ProductImagesUploading/ProductImagesUploading";
 
 import { InfoBlock } from "../../AddProduct.styled";
+
 import {
   DIImageContainer,
   DIImageUploadContainer,

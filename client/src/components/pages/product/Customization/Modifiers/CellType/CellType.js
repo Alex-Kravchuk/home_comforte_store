@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Cell,
@@ -7,6 +7,7 @@ import {
   CellTypeWrapper,
   CellTypeContainer,
 } from "./CellType.styled";
+import { getBase64 } from "../../../../../../helpers/getBase64";
 
 const CellType = ({ data }) => {
   return (
@@ -15,7 +16,11 @@ const CellType = ({ data }) => {
         {data.map((item) => (
           <Cell key={item.id}>
             <CellTitle>{item.title}</CellTitle>
-            <CellPrice>{item.price}</CellPrice>
+            <CellPrice>
+              {isNaN(item.additionalPrice)
+                ? item.additionalPrice
+                : item.additionalPrice + "$"}
+            </CellPrice>
           </Cell>
         ))}
       </CellTypeContainer>

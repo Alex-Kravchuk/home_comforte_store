@@ -20,6 +20,7 @@ const PreviewProductPage = ({
         previewMode={true}
         generalData={generalData}
         previewImages={previewImages}
+        customizationData={customizationData}
       />
       <ButtonContainer>
         <Link to="../products/add_new" state={{ confirmed: true }}>
