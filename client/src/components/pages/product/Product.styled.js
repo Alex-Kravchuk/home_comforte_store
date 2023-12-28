@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { sizes } from "../../../utils/css_size_consts";
 import { viewport_sizes } from "../../../utils/viewport_size_consts";
+import { css } from "@emotion/react";
 
 const { xxl, xl, l } = viewport_sizes;
 
@@ -11,16 +12,14 @@ export const ProductWrapper = styled.div`
   // I want to show it a zoomed image without a bounding box, so I use custom bounding box
   // in each appropriate place
 
-  width: ${sizes.global.contentContainerWidth}%;
+  width: ${({ previewMode }) =>
+    previewMode ? "100" : sizes.global.contentContainerWidth}%;
   margin: 0 auto;
 
   @media (max-width: ${xxl}px) {
-    width: ${sizes.xxl.contentContainerWidth}%;
+    width: ${({ previewMode }) =>
+      previewMode ? "100" : sizes.xxl.contentContainerWidth}%;
   }
-
-  // @media (max-width: ${xl}px) {
-  //   width: ${sizes.xl.contentContainerWidth}%;
-  // }
 
   @media (max-width: ${xl}px) {
     width: 100%;

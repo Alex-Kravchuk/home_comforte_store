@@ -13,19 +13,25 @@ import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../utils/viewport_size_consts";
 import { useLocation } from "react-router-dom";
 
-const Product = ({ generalData, previewMode = false }) => {
+const Product = ({ generalData, previewImages, previewMode = false }) => {
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   return (
-    <ProductWrapper>
+    <ProductWrapper previewMode={previewMode}>
       <ProductContainer>
         <ProudctInfoSection>
           <Demonstration
             previewMode={previewMode}
             generalData={generalData}
+            previewImages={previewImages}
           />
-          {bigScreen && <Customization previewMode={previewMode} generalData={generalData} />}
+          {bigScreen && (
+            <Customization
+              previewMode={previewMode}
+              generalData={generalData}
+            />
+          )}
         </ProudctInfoSection>
         {!previewMode && <Reviews />}
       </ProductContainer>

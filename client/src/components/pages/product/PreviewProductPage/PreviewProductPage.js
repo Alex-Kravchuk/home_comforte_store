@@ -9,10 +9,6 @@ const PreviewProductPage = ({
   previewImages,
   customizationData,
 }) => {
-  // useEffect(() => {
-
-  // }, [generalData, previewImages, customizationData]);
-
   return (
     <PPPWrapper>
       <h2>This is a preview page for an upcoming product</h2>
@@ -20,7 +16,11 @@ const PreviewProductPage = ({
         If everything is correct, below you should confirm the addition of the
         product
       </h4>
-      <Product previewMode={true} generalData={generalData} />
+      <Product
+        previewMode={true}
+        generalData={generalData}
+        previewImages={previewImages}
+      />
       <ButtonContainer>
         <Link to="../products/add_new" state={{ confirmed: true }}>
           <Button size="large" type="primary">

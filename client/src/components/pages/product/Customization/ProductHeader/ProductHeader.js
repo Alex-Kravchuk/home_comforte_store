@@ -13,7 +13,7 @@ import {
   ProductRatingValue,
 } from "./ProductHeader.styled";
 
-const ProductHeader = ({ name, price }) => {
+const ProductHeader = ({ name, price, rating = 0, reviewsNumber = 0 }) => {
   return (
     <ProductHeaderCenterWrapper>
       <ProductHeaderWrapper>
@@ -21,9 +21,9 @@ const ProductHeader = ({ name, price }) => {
           <ProductName>{name ? name : "The name is not set"}</ProductName>
           <ProductRating>
             <ProductRatingValue>
-              <Rate disabled defaultValue={4} />
+            <Rate disabled defaultValue={rating} />
             </ProductRatingValue>
-            <ProductRatingNumber>75 reviews</ProductRatingNumber>
+            <ProductRatingNumber>{reviewsNumber} reviews</ProductRatingNumber>
           </ProductRating>
           <ProductPrice>${price ? price : "00000"}</ProductPrice>
         </ProductHeaderContainer>

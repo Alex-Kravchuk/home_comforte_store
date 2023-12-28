@@ -30,7 +30,7 @@ const SeatSize = ({ info }) => {
             </SeatSizeInfoBlock>
           ))
         ) : (
-          <Empty />
+          <Empty description="No size information available" />
         )}
       </SeatSizeContainer>
     </SeatSizeWrapper>

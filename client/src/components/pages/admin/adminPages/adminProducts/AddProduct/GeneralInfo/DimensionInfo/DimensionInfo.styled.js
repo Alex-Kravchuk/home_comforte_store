@@ -2,7 +2,6 @@ import { Input } from "antd";
 import styled from "styled-components";
 import { SeatSizeContainer } from "../../../../../../product/Demonstration/ProductDetails/SeatSize/SeatSize.styled";
 
-
 // DI
 
 export const DILabelContainer = styled.div`
@@ -27,6 +26,12 @@ export const DISeatSizeContainer = styled(SeatSizeContainer)`
   position: relative;
   margin: 20px 0;
   padding: ${({ isEmpty }) => (isEmpty ? "20px" : "0")};
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  // penultimate element
+  & > div:nth-last-child(-n + 2) {
+    border: none;
+  }
 
   &:hover {
     & > div:last-child {
@@ -38,6 +43,11 @@ export const DISeatSizeContainer = styled(SeatSizeContainer)`
 
 export const DIImageContainer = styled.div`
   margin-top: 50px;
+`;
+
+export const DIImageUploadContainer = styled.div`
+  width: 70%;
+  margin: 0 auto;
 `;
 
 export const DIAddRemoveInterfaceContainer = styled.div`

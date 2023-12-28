@@ -24,10 +24,6 @@ const Dimensions = ({ img }) => {
     }
   }, [img]);
 
-  console.log('img', img);
-  console.log('src', srcURL);
-
-
   return (
     <DimensionsWrapper>
       <DimensionsContainer>

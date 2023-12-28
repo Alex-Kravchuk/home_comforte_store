@@ -19,7 +19,7 @@ const Description = ({ text }) => {
             <DescriptionParagraph key={index}>{paragraph}</DescriptionParagraph>
           ))
         ) : (
-          <Empty />
+          <Empty description="No description" />
         )}
       </DescriptionContainer>
     </DescriptionWrapper>
