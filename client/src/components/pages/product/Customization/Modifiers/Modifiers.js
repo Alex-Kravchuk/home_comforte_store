@@ -7,18 +7,22 @@ import { defineModifier } from "../../../../../helpers/defineModifier/defineModi
 
 import { ModifiersContainer, ModifiersWrapper } from "./Modifiers.styled";
 
-const Modifiers = ({ data }) => {
+const Modifiers = ({ data, selectedOptionHandler }) => {
   const [modifiers, setModifiers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // TODO add loading when data are fething
-    const modifiersItems = data.map((item) => defineModifier(item));
-    setModifiers(modifiersItems);
-  }, []);
 
-  console.log('data', data);
-  
+    const modifiersItems = data.map((item) =>
+      defineModifier(item, selectedOptionHandler)
+    );
+    
+    setModifiers(modifiersItems);
+  }, [data]);
+
+  console.log("data", data);
+
   return (
     <ModifiersWrapper>
       <ModifiersContainer>

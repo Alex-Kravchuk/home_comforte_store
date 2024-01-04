@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Reviews from "./Reviews/Reviews";
 import Demonstration from "./Demonstration/Demonstration";
@@ -19,8 +19,16 @@ const Product = ({
   customizationData,
   previewMode = false,
 }) => {
+  const [selectedCustomOption, setSelectedCustomOption] = useState();
+
+  useEffect(() => {
+    setSelectedCustomOption(customizationData[0]?.items[0]);
+  }, [customizationData]);
+
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
+
+  console.log("selected item", selectedCustomOption);
 
   return (
     <ProductWrapper previewMode={previewMode}>
@@ -30,12 +38,14 @@ const Product = ({
             previewMode={previewMode}
             generalData={generalData}
             previewImages={previewImages}
+            selectedCustomOption={selectedCustomOption}
           />
           {bigScreen && (
             <Customization
               previewMode={previewMode}
               generalData={generalData}
               customizationData={customizationData}
+              selectedOptionHandler={setSelectedCustomOption}
             />
           )}
         </ProudctInfoSection>

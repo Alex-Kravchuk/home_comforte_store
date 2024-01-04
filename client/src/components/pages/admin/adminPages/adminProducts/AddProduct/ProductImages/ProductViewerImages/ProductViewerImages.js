@@ -19,7 +19,6 @@ const ProductViewerImages = ({
   clearAllFlag,
   saveDataHandler,
   customizationData,
-  // temporarilySavedHandler,
 }) => {
   const [images, setImages] = useState([]);
   const [clearFileListflag, setClearFileList] = useState(false);
@@ -97,7 +96,7 @@ const ProductViewerImages = ({
     }
 
     // block the save action when a small number of images error is seen
-    if (images.length < 16) {
+    if (images.length < 17) {
       return;
     }
 
@@ -109,6 +108,8 @@ const ProductViewerImages = ({
       ...selectedOptionItem,
       viewerImages: images,
     };
+
+    console.log("suka, blet", selectedOptionItemWithImages);
 
     // remove tha save option without images and add with it
     selectedOption.items.splice(
@@ -137,7 +138,7 @@ const ProductViewerImages = ({
       setSavedCustomOption(false);
 
       if (fileList.length > 0) {
-        setImages(fileList.map((item) => item.originalFileObj));
+        setImages(fileList.map((item) => ({ ...item })));
       }
     }
   };
@@ -183,7 +184,7 @@ const ProductViewerImages = ({
         />
         {noImagesError && (
           <NoImagesErrorText>
-            You must upload a minimum of 16 images
+            You must upload a minimum of 17 images
           </NoImagesErrorText>
         )}
 

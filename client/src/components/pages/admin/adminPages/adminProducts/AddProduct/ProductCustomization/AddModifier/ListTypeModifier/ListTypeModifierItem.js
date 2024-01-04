@@ -49,6 +49,9 @@ const ListTypeModifierItem = ({
     index !== defaultMarkerItemIndex && defaultMarkerItemIndex >= 0;
 
   useEffect(() => {
+
+    console.log('filee ', file);
+    
     if (file) {
       setErrorFile(false);
     }

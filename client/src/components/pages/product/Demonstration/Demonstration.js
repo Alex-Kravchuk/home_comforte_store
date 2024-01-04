@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { images } from "./ProductViewer/imagesForTest";
 
@@ -20,12 +20,16 @@ import {
 } from "./Demonstration.styled";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
+import { getBase64 } from "../../../../helpers/getBase64";
 
 const Demonstration = ({
   generalData,
   previewImages = [],
   previewMode = false,
+  selectedCustomOption,
 }) => {
+  const [viewerImages, setViewerImages] = useState([]);
+
   const [zoomOn, setZoomOn] = useState(false);
   const zoomHandler = () => setZoomOn((state) => !state);
 
@@ -34,10 +38,37 @@ const Demonstration = ({
   const tabletScreen = viewport.width < viewport_sizes.l;
   const smallLaptopScreen = viewport.width < viewport_sizes.xl;
 
+  useEffect(() => {
+    if (selectedCustomOption?.viewerImages) {
+      formateImageHandler(selectedCustomOption.viewerImages);
+    }
+  }, [selectedCustomOption]);
+
+  const formateImageHandler = (images) => {
+    // clear before items
+    setViewerImages([]);
+
+    images.forEach((file, index) => {
+      setViewerImages((state) => [
+        ...state,
+        {
+          id: file.id ?? index++,
+          src: file.url,
+        },
+      ]);
+    });
+  };
+
+  console.log("viewer images", viewerImages);
+
   const viewerMode = zoomOn ? (
     <ZoomBox />
   ) : (
-    <ProductViewer images={images} zoomHandler={zoomHandler} />
+    <ProductViewer
+      images={viewerImages}
+      previewMode={previewMode}
+      zoomHandler={zoomHandler}
+    />
   );
 
   return (

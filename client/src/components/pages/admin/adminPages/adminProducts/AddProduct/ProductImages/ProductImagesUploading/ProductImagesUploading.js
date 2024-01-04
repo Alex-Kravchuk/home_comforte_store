@@ -109,11 +109,18 @@ const ProductImagesUploading = ({
     getBase64(info.file, (url) => {
       setImageURL(url);
       setFileList((state) => [...state, { originalFileObj: info.file, url }]);
+
+      if (viewerTypeUpload || modifierTypeUpload) {
+        saveFileHandler({ originalFileObj: info.file, url });
+      }
     });
 
-    previewTypeUpload
-      ? saveFileHandler({ originalFileObj: info.file, description: "" })
-      : saveFileHandler(info.file);
+    if (previewTypeUpload) {
+      saveFileHandler({ originalFileObj: info.file, description: "" });
+      return;
+    }
+
+    saveFileHandler(info.file);
   };
 
   const handleCancel = () => setPreviewOpen(false);
@@ -191,7 +198,7 @@ const ProductImagesUploading = ({
   };
 
   const viewerUploadConfig = {
-    maxCount: 32,
+    maxCount: 34,
     multiple: true,
     showUploadList: true,
     listType: "picture-card",

@@ -5,6 +5,8 @@ import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import ProductViewerThumbnails from "./ProductViewerThumbnails";
 
+import noImage from "../../../../../assets/img/viewer/no-image.jpg";
+
 import {
   PVWrapper,
   PVContainer,
@@ -15,9 +17,12 @@ import {
   FullScreenContainer,
   PVCurrentImgContainer,
   FullScreenIconContainer,
+  NoImageContainer,
+  NoImageText,
 } from "./ProductViewer.styled";
+import { Spin } from "antd";
 
-const ProductViewer = ({ images }) => {
+const ProductViewer = ({ images, previewMode }) => {
   const [drag, setDrag] = useState(false);
   const [currentImg, setCurrentImg] = useState(1);
   const [thumbnails, setThumbnails] = useState([]);
@@ -26,7 +31,7 @@ const ProductViewer = ({ images }) => {
 
   useEffect(() => {
     createThumbnails();
-  }, []);
+  }, [images]);
 
   useEffect(() => {
     const onFullScreenChange = () => {
@@ -171,6 +176,10 @@ const ProductViewer = ({ images }) => {
     const minis = [];
 
     // first img should be always in thumbnails
+    if (images[0] === undefined) {
+      return;
+    }
+
     minis.push(images[0]);
 
     images.forEach((img, index) => {
@@ -208,25 +217,42 @@ const ProductViewer = ({ images }) => {
 
   const currentImgIndex = currentImg <= 0 ? 0 : currentImg - 1;
 
+  // console.log("====================================");
+  // console.log(thumbnails, images);
+  // console.log("====================================");
+
   return (
     <PVWrapper>
-      <PVContainer>
-        <PVMainImgContainer>
-          <PVCurrentImgContainer>
-            <PVCurrentImg src={images[currentImgIndex].src} />
-          </PVCurrentImgContainer>
-          <ViewerField {...viewerFiledProps} />
-          <FullScreenIconContainer onClick={fullScreenHandler}>
-            <FullscreenIcon />
-            Full Screen
-          </FullScreenIconContainer>
-        </PVMainImgContainer>
-        <ProductViewerThumbnails
-          thumbnails={thumbnails}
-          selectedPreviewID={selectedPreviewID}
-          selectPreviewHandlerByClick={selectPreviewHandlerByClick}
-        />
-      </PVContainer>
+      {images.length === 0 ? (
+        <NoImageContainer>
+          <Spin />
+          {/* <PVCurrentImg src={noImage} />
+          <NoImageText>There are no product images to viewer</NoImageText> */}
+        </NoImageContainer>
+      ) : (
+        <PVContainer>
+          <PVMainImgContainer>
+            <PVCurrentImgContainer>
+              <PVCurrentImg src={images[currentImgIndex].src} />
+            </PVCurrentImgContainer>
+            <ViewerField {...viewerFiledProps} />
+            {!previewMode && (
+              <FullScreenIconContainer onClick={fullScreenHandler}>
+                <FullscreenIcon />
+                Full Screen
+              </FullScreenIconContainer>
+            )}
+          </PVMainImgContainer>
+          {thumbnails.length !== 0 && (
+            <ProductViewerThumbnails
+              thumbnails={thumbnails}
+              selectedPreviewID={selectedPreviewID}
+              selectPreviewHandlerByClick={selectPreviewHandlerByClick}
+            />
+          )}
+        </PVContainer>
+      )}
+
       {fullScreenOpen && (
         <FullScreenWrapper>
           <FullScreenContainer>

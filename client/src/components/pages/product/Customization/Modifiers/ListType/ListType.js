@@ -22,27 +22,10 @@ import {
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
-import { getBase64 } from "../../../../../../helpers/getBase64";
 
-const ListType = ({ data }) => {
-  const [localTypeData, setLocalTypeData] = useState([]);
+
+const ListType = ({ data, selectedOptionHandler }) => {
   const viewport = useGetWindowSize();
-
-  useEffect(() => {
-    data.map((listTypeItem, index) => {
-      getBase64(listTypeItem.img, (url) => {
-        setLocalTypeData((state) => [
-          ...state,
-          {
-            src: url,
-            title: listTypeItem.title,
-            id: listTypeItem.id ?? index++,
-            description: listTypeItem.description,
-          },
-        ]);
-      });
-    });
-  }, []);
 
   const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
 
@@ -71,10 +54,13 @@ const ListType = ({ data }) => {
     <ListTypeWrapper>
       <ListTypeContainer>
         {!smallLaptopScreen &&
-          localTypeData.map((item) => (
-            <ListTypeModifierContainer key={item.id}>
+          data.map((item) => (
+            <ListTypeModifierContainer
+              key={item.id} 
+              onClick={() => selectedOptionHandler(item)}
+            >
               <ModifierImgContainer>
-                <ModifierImg src={item.src} alt={item.title} />
+                <ModifierImg src={item.img.url} alt={item.title} />
                 <ModifierImgBorderContainer />
               </ModifierImgContainer>
               <ModifieTitle>{item.title}</ModifieTitle>
@@ -84,11 +70,11 @@ const ListType = ({ data }) => {
 
         {smallLaptopScreen && (
           <Swiper {...swiperConfig}>
-            {localTypeData.map((item) => (
+            {data.map((item) => (
               <SwiperSlide key={item.id}>
                 <ListTypeModifierContainer>
                   <ModifierImgContainer>
-                    <ModifierImg src={item.src} alt={item.title} />
+                    <ModifierImg src={item.img.url} alt={item.title} />
                     <ModifierImgBorderContainer />
                   </ModifierImgContainer>
 

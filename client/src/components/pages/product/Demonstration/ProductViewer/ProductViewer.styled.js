@@ -151,6 +151,10 @@ export const ViewerField = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 export const FullScreenIconContainer = styled.div`
@@ -207,4 +211,19 @@ export const FullScreenWrapper = styled.div`
 
 export const FullScreenContainer = styled.div`
   width: 60%;
+`;
+
+export const NoImageContainer = styled.div`
+  position: relative;
+  // min-height: 500px;
+`;
+
+export const NoImageText = styled.div`
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translate(-50%, 0);
+  color: rgba(0, 0, 0, 0.35);
 `;

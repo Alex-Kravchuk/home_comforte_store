@@ -15,6 +15,7 @@ const Customization = ({
   generalData,
   previewMode,
   customizationData = [],
+  selectedOptionHandler,
 }) => {
   const viewport = useGetWindowSize();
   const bigScreen = viewport.width >= viewport_sizes.xl;
@@ -27,7 +28,10 @@ const Customization = ({
             price={generalData?.subGeneral?.price}
           />
         )}
-        <Modifiers data={customizationData} />
+        <Modifiers
+          data={customizationData}
+          selectedOptionHandler={selectedOptionHandler}
+        />
         <AddToCartButton />
         <CustomizationFooter />
       </CustomizationContainer>

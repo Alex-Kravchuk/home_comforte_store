@@ -11,8 +11,7 @@ const ProductViewerThumbnails = ({
   thumbnails,
   selectedPreviewID,
   selectPreviewHandlerByClick,
-}) => {
-  return (
+}) => {return (
     <PVPreviewImagesWrapper>
       <PVPreviewImagesContainer>
         {thumbnails.map((img) => (

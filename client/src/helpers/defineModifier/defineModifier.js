@@ -2,22 +2,37 @@ import ListType from "../../components/pages/product/Customization/Modifiers/Lis
 import TileType from "../../components/pages/product/Customization/Modifiers/TileType/TileType";
 import CellType from "../../components/pages/product/Customization/Modifiers/CellType/CellType";
 
-export const defineModifier = (modifier) => {
+export const defineModifier = (modifier, selectedOptionHandler) => {
   const typesConfig = {
     list: {
       key: modifier.id,
       label: modifier.name,
-      children: <ListType data={modifier.items} />,
+      children: (
+        <ListType
+          data={modifier.items}
+          selectedOptionHandler={selectedOptionHandler}
+        />
+      ),
     },
     tile: {
       key: modifier.id,
       label: modifier.name,
-      children: <TileType data={modifier.items} />,
+      children: (
+        <TileType
+          data={modifier.items}
+          selectedOptionHandler={selectedOptionHandler}
+        />
+      ),
     },
     cell: {
       key: modifier.id,
       label: modifier.name,
-      children: <CellType data={modifier.items} />,
+      children: (
+        <CellType
+          data={modifier.items}
+          selectedOptionHandler={selectedOptionHandler}
+        />
+      ),
     },
   };
 
