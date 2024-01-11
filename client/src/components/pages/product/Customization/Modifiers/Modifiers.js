@@ -7,7 +7,12 @@ import { defineModifier } from "../../../../../helpers/defineModifier/defineModi
 
 import { ModifiersContainer, ModifiersWrapper } from "./Modifiers.styled";
 
-const Modifiers = ({ data, selectedOptionHandler }) => {
+const Modifiers = ({
+  data,
+  // modifierHandlers,
+  selectedOptionHandler,
+  filterOptionsHandler,
+}) => {
   const [modifiers, setModifiers] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,13 +20,11 @@ const Modifiers = ({ data, selectedOptionHandler }) => {
     // TODO add loading when data are fething
 
     const modifiersItems = data.map((item) =>
-      defineModifier(item, selectedOptionHandler)
+      defineModifier(item, selectedOptionHandler, filterOptionsHandler)
     );
-    
-    setModifiers(modifiersItems);
-  }, [data]);
 
-  console.log("data", data);
+    setModifiers(modifiersItems);
+  }, [data, filterOptionsHandler]);
 
   return (
     <ModifiersWrapper>

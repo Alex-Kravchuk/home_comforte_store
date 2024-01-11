@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Reviews from "./Reviews/Reviews";
 import Demonstration from "./Demonstration/Demonstration";
@@ -19,16 +19,50 @@ const Product = ({
   customizationData,
   previewMode = false,
 }) => {
-  const [selectedCustomOption, setSelectedCustomOption] = useState();
+  const [selectedOption, setSelectedOption] = useState();
 
-  useEffect(() => {
-    setSelectedCustomOption(customizationData[0]?.items[0]);
-  }, [customizationData]);
+  const [filteredOptions, setFilteredOptions] = useState([]);
 
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
-  console.log("selected item", selectedCustomOption);
+  useEffect(() => {
+    // I sort data by default marker. These items are default filter option for request to server
+    const copy = JSON.stringify(customizationData);
+    const modifiers = JSON.parse(copy).map((mod) => {
+      mod.items = mod.items.filter((item) => item.defaultMarker === true);
+      return mod;
+    });
+    // debugger;
+    setFilteredOptions(modifiers);
+  }, [customizationData]);
+
+  useEffect(() => {
+    console.log("filtered items was changed", filteredOptions);
+  }, [filteredOptions]);
+
+  const filterOptionsHandler = useCallback(
+    (modifierID, option) => {
+      // debugger;
+      const updatedModifiers = filteredOptions.map((mod) => {
+        if (mod.id === modifierID) {
+          mod.items = [option];
+        }
+        return mod;
+      });
+
+      console.log("suka", option, modifierID, updatedModifiers);
+
+      if (updatedModifiers.length > 0) {
+        setFilteredOptions(updatedModifiers);
+      }
+    },
+    [customizationData]
+  );
+
+  console.log("FILTERED:", filteredOptions);
+
+  console.log("selected item", selectedOption);
 
   return (
     <ProductWrapper previewMode={previewMode}>
@@ -38,14 +72,20 @@ const Product = ({
             previewMode={previewMode}
             generalData={generalData}
             previewImages={previewImages}
-            selectedCustomOption={selectedCustomOption}
+            // modifierHandlers={modifierHandlers}
+            selectedOption={selectedOption}
           />
           {bigScreen && (
             <Customization
               previewMode={previewMode}
               generalData={generalData}
+              selectedOptionHandler={setSelectedOption}
               customizationData={customizationData}
-              selectedOptionHandler={setSelectedCustomOption}
+              filterOptionsHandler={filterOptionsHandler}
+              // selectedCustomOption={selectedCustomOption}
+              // selectedOptionHandler={setSelectedCustomOption}
+              // selectedCustomModifier={selectedCustomModifier}
+              // selectedModifierHandler={setSelectedCustomModifier}
             />
           )}
         </ProudctInfoSection>

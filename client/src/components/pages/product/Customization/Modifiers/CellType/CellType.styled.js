@@ -39,8 +39,21 @@ export const Cell = styled.li`
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 3px 0.5px rgba(21, 21, 21, 0.1),
+      0 1px 10px 0 rgba(21, 21, 21, 0.1);
   }
+
+  ${({ selected }) =>
+    selected &&
+    `
+    background: rgba(0, 0, 0, 0.035);
+    box-shadow: 0 0 3px 0.5px rgba(21, 21, 21, 0.1),
+    0 1px 10px 0 rgba(21, 21, 21, 0.1);
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.035);
+    }
+    `}
 `;
 
 export const CellTitle = styled.div`

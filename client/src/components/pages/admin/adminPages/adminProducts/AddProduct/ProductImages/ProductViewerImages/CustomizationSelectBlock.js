@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Select } from "antd";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
 import {
+  NoDataContainer,
+  PVIConentGroup,
+  PVIContentColumn,
+  PVIContentRow,
   PVISelectContainer,
   SelectLabelContainer,
 } from "./ProductViewerImages.styled";
@@ -14,63 +18,54 @@ const CustomizationSelectBlock = ({
   error,
   sizeLarge,
   saveHandler,
-  selectedOption,
+  resetToDefault,
   customizationData,
-  selectedOptionItem,
-  selectOnChangeHandler,
-  selectOptionItemHandler,
+  optionsOnChangeHandler,
 }) => {
   return (
     <PVISelectContainer saved={saved}>
-      <Select
-        size={sizeLarge ? "large" : "medium"}
-        status={error.option && "error"}
-        value={
-          selectedOption
-            ? {
-                value: selectedOption.id,
-                label: selectedOption.title,
-              }
-            : null
-        }
-        onChange={selectOnChangeHandler}
-        placeholder="Choose customization option"
-        options={customizationData.map((item, index) => ({
-          value: item.id,
-          label: item.name,
-        }))}
-      />
-      <Select
-        size={sizeLarge ? "large" : "medium"}
-        status={error.optionItem && "error"}
-        value={
-          selectedOptionItem
-            ? {
-                value: selectedOptionItem.id,
-                label: (
-                  <SelectLabelContainer>
-                    <span>{selectedOptionItem.title}</span>
-                    <span>
-                      {selectedOptionItem.defaultMarker ? "default" : ""}
-                    </span>
-                  </SelectLabelContainer>
-                ),
-              }
-            : null
-        }
-        onChange={selectOptionItemHandler}
-        disabled={selectedOption === null}
-        placeholder="Choose customization option"
-        options={selectedOption?.items.map((item) => ({
-          value: item.id,
-          label: (
-            <SelectLabelContainer>
-              <span>{item.title}</span>
-              <span>{item.defaultMarker ? "default" : ""}</span>
-            </SelectLabelContainer>
-          ),
-        }))}
-      />
+      <PVIConentGroup>
+        <PVIContentColumn>
+          {customizationData.length === 0 && (
+            <NoDataContainer>There is no customization data</NoDataContainer>
+          )}
+          {customizationData.map(({ name, items }) => (
+            <PVIContentRow key={name}>
+              <div>{name}</div>
+              <Select
+                onChange={(value) => optionsOnChangeHandler(name, value)}
+                defaultValue={{
+                  value: items.find((item) => item.defaultMarker),
+                  label: (
+                    <SelectLabelContainer>
+                      <span>
+                        {items.find((item) => item.defaultMarker).title}
+                      </span>
+                      <span>
+                        {items.find((item) => item.defaultMarker).defaultMarker
+                          ? "default"
+                          : ""}
+                      </span>
+                    </SelectLabelContainer>
+                  ),
+                }}
+                placeholder="Choose customization option"
+                status={error.optionItem && "error"}
+                size={sizeLarge ? "large" : "medium"}
+                options={items.map((item) => ({
+                  value: item.title,
+                  label: (
+                    <SelectLabelContainer>
+                      <span>{item.title}</span>
+                      <span>{item.defaultMarker ? "default" : ""}</span>
+                    </SelectLabelContainer>
+                  ),
+                }))}
+              />
+            </PVIContentRow>
+          ))}
+        </PVIContentColumn>
+      </PVIConentGroup>
 
       {saved ? (
         <CheckCircleOutlineOutlinedIcon />

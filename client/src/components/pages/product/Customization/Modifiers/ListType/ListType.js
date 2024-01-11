@@ -23,11 +23,39 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 
-
-const ListType = ({ data, selectedOptionHandler }) => {
+const ListType = ({
+  data,
+  selectedOption,
+  selectedModifier,
+  currentModifierID,
+  selectedOptionHandler,
+  selectedModifierHandler,
+  filterOptionsHandler,
+}) => {
+  const [localSelectedOption, setLocalSelectedOption] = useState(null);
   const viewport = useGetWindowSize();
 
   const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
+
+  const checkIfSelected = (item) => {
+    if (!localSelectedOption && item.defaultMarker) {
+      return true;
+    }
+
+    if (localSelectedOption?.id !== item.id && item.defaultMarker) {
+      return false;
+    }
+
+    if (localSelectedOption?.id === item.id) {
+      return true;
+    }
+  };
+
+  const selectItemHandler = (item) => {
+    selectedOptionHandler(item);
+    setLocalSelectedOption(item);
+    filterOptionsHandler(currentModifierID, item);
+  };
 
   const swiperConfig = {
     slidesPerView: 4,
@@ -56,8 +84,9 @@ const ListType = ({ data, selectedOptionHandler }) => {
         {!smallLaptopScreen &&
           data.map((item) => (
             <ListTypeModifierContainer
-              key={item.id} 
-              onClick={() => selectedOptionHandler(item)}
+              key={item.id}
+              onClick={() => selectItemHandler(item)}
+              selected={checkIfSelected(item)}
             >
               <ModifierImgContainer>
                 <ModifierImg src={item.img.url} alt={item.title} />
@@ -68,6 +97,7 @@ const ListType = ({ data, selectedOptionHandler }) => {
             </ListTypeModifierContainer>
           ))}
 
+        {/* TODO Make the same logic when use small devices */}
         {smallLaptopScreen && (
           <Swiper {...swiperConfig}>
             {data.map((item) => (

@@ -10,7 +10,7 @@ const ViewerUpload = ({ config }) => {
   return (
     <>
       <Upload {...config}>
-        {config.fileList.length !== 32 && <PlusOutlined />}
+        {config.fileList.length !== config.maxCount && <PlusOutlined />}
       </Upload>
       <Hint length={config.fileList.length} />
       <ModalUploading {...config} />

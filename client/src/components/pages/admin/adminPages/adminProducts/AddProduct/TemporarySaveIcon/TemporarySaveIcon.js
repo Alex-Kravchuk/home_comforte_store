@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tooltip } from "antd";
+import { Popconfirm, Tooltip } from "antd";
 
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
@@ -70,11 +70,18 @@ const TemporarySaveIcon = ({
           </TSIButton>
         </Tooltip>
         {temporarySaveFlag && (
-          <Tooltip title="Reset the entred values" placement="top">
-            <TSIButton onClick={resetFieldsHandler} htmlType="submit">
+          <Popconfirm
+            title="Reset the entred values?"
+            description="Are you sure to delete all data?"
+            onConfirm={resetFieldsHandler}
+            okText="Ok"
+            cancelText="No"
+            placement="topLeft"
+          >
+            <TSIButton htmlType="submit">
               <RemoveCircleOutlineOutlinedIcon />
             </TSIButton>
-          </Tooltip>
+          </Popconfirm>
         )}
       </TSIContainer>
     </TSIWrapper>

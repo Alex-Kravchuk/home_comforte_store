@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import {
   CustomizationWrapper,
@@ -11,32 +11,36 @@ import Modifiers from "./Modifiers/Modifiers";
 import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
 import AddToCartButton from "./AddToCartButton/AddToCartButton";
 
-const Customization = ({
-  generalData,
-  previewMode,
-  customizationData = [],
-  selectedOptionHandler,
-}) => {
-  const viewport = useGetWindowSize();
-  const bigScreen = viewport.width >= viewport_sizes.xl;
-  return (
-    <CustomizationWrapper previewMode={previewMode}>
-      <CustomizationContainer>
-        {bigScreen && (
-          <ProductHeader
-            name={generalData?.subGeneral?.name}
-            price={generalData?.subGeneral?.price}
+const Customization = memo(
+  ({
+    generalData,
+    previewMode,
+    customizationData = [],
+    selectedOptionHandler,
+    filterOptionsHandler,
+  }) => {
+    const viewport = useGetWindowSize();
+    const bigScreen = viewport.width >= viewport_sizes.xl;
+    return (
+      <CustomizationWrapper previewMode={previewMode}>
+        <CustomizationContainer>
+          {bigScreen && (
+            <ProductHeader
+              name={generalData?.subGeneral?.name}
+              price={generalData?.subGeneral?.price}
+            />
+          )}
+          <Modifiers
+            data={customizationData}
+            filterOptionsHandler={filterOptionsHandler}
+            selectedOptionHandler={selectedOptionHandler}
           />
-        )}
-        <Modifiers
-          data={customizationData}
-          selectedOptionHandler={selectedOptionHandler}
-        />
-        <AddToCartButton />
-        <CustomizationFooter />
-      </CustomizationContainer>
-    </CustomizationWrapper>
-  );
-};
+          <AddToCartButton />
+          <CustomizationFooter />
+        </CustomizationContainer>
+      </CustomizationWrapper>
+    );
+  }
+);
 
 export default Customization;

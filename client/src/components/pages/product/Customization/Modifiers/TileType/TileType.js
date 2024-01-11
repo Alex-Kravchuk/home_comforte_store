@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Tile,
@@ -12,20 +12,54 @@ import {
   TileTitleContainer,
 } from "./TileType.styled";
 
-const TileType = ({ data }) => {
+const TileType = ({
+  data,
+  currentModifierID,
+  filterOptionsHandler,
+  selectedOptionHandler,
+}) => {
+  const [localSelectedOption, setLocalSelectedOption] = useState(null);
+
+  const checkIfSelected = (item) => {
+    if (!localSelectedOption && item.defaultMarker) {
+      return true;
+    }
+
+    if (localSelectedOption?.id !== item.id && item.defaultMarker) {
+      return false;
+    }
+
+    if (localSelectedOption?.id === item.id) {
+      return true;
+    }
+  };
+
+  const selectItemHandler = (item) => {
+    selectedOptionHandler(item);
+    setLocalSelectedOption(item);
+    filterOptionsHandler(currentModifierID, item);
+  };
   return (
     <TileTypeWrapper>
       <TileTypeContainer>
         {data.map((item) => (
-          <Tile key={item.id}>
+          <Tile
+            key={item.id}
+            onClick={() => selectItemHandler(item)}
+            selected={checkIfSelected(item)}
+          >
             <TileTitleContainer>
               <TileTitle>{item.title}</TileTitle>
-              <TilePrice>{item.price}</TilePrice>
+              <TilePrice>
+                {isNaN(item.additionalPrice)
+                  ? item.additionalPrice
+                  : item.additionalPrice + "$"}
+              </TilePrice>
             </TileTitleContainer>
 
             <TileDescrContainer>
-              {item.img && <TileImg src={item.img} alt={item.title} />}
-              {item.descr && <TileDescr>{item.descr}</TileDescr>}
+              {item.img && <TileImg src={item.img.url} alt={item.title} />}
+              {item.description && <TileDescr>{item.description}</TileDescr>}
             </TileDescrContainer>
           </Tile>
         ))}

@@ -53,10 +53,18 @@ export const ListTypeModifierContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
+  ${({ selected }) =>
+    selected &&
+    ` div:nth-child(1) {
+       div {
+         border: 4px solid rgba(122, 96, 24, 1);
+       }
+  }`}
+
   &:hover {
     div:nth-child(1) {
       div {
-        border: 4px solid rgba(192, 192, 192, 1);
+        border: 4px solid rgba(179, 165, 127, 1);
       }
     }
   }

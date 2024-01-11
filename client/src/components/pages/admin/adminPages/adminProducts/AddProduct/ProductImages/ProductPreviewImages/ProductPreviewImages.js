@@ -3,9 +3,8 @@ import { PPIContainer, PPIWrapper } from "./ProductPreviewImages.styled";
 import InfoHeader from "../../InfoHeader/InfoHeader";
 import ProductImagesUploading from "../ProductImagesUploading/ProductImagesUploading";
 
-const ProductPreviewImages = ({ saveDataHandler }) => {
+const ProductPreviewImages = ({ clearAllFlag, saveDataHandler, clearFileListHandler }) => {
   const [images, setImages] = useState([]);
-  const [clearFileListflag, setClearFileList] = useState(false);
 
   useEffect(() => {
     saveDataHandler(images);
@@ -37,8 +36,8 @@ const ProductPreviewImages = ({ saveDataHandler }) => {
         images={images}
         uploadType="preview"
         saveFileHandler={saveFileHandler}
-        clearFileListflag={clearFileListflag}
-        clearFileListHandler={setClearFileList}
+        clearFileListflag={clearAllFlag}
+        clearFileListHandler={clearFileListHandler}
       />
     </PPIWrapper>
   );

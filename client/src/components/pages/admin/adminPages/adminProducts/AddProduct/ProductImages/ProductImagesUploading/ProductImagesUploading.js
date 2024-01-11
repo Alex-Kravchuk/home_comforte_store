@@ -39,7 +39,10 @@ const ProductImagesUploading = ({
     // clear file list when item of customization option was change by Select (in admin tools, adding of product images)
     setFileList([]);
 
-    // if product contains images by current selected customization option we use those data for display in fileList (in admin tools, adding of product images)
+    // if product contains images by current selected customization option we use those data 
+    // for display in fileList (in admin tools, adding of product images)
+
+ 
     if (uploadedFileList && selectOptionsWasChanged) {
       uploadedFileList.forEach((item) => {
         getBase64(item, (url) => {
@@ -65,9 +68,9 @@ const ProductImagesUploading = ({
   }, [existingImage]);
 
   useEffect(() => {
-    if (clearFileListflag !== null) {
+    if (clearFileListflag) {
       setFileList([]);
-      clearFileListHandler(true);
+      clearFileListHandler(false);
     }
   }, [clearFileListflag]);
 

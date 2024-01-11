@@ -1,19 +1,41 @@
-export const errorHandlingHelper = (customizationData, previewData) => {
+import { transformObjNamesToString } from "../../../../../../../helpers/transformObjNamesToString";
+
+export const errorHandlingHelper = (
+  customizationData,
+  filters,
+  previewData
+) => {
   const defaultErrorText =
     "You have not filled in all the information in this block";
 
-  const minimumOneWithImagesErrorText =
-    "You must load the image into at least the first settings modifier used by default (the first list item in each selector)";
+  const defaultFilterNotExist = "You did not add default filter";
 
-  if (customizationData.length < 1 || previewData.length < 1) {
+  const defaultFiltersHasNoImagesErrorText =
+    "You must upload an image for the default filters";
+
+  if (filters.length < 1 || previewData.length < 1) {
     return defaultErrorText;
   }
 
-  const defaultCustomizationModifierWithImages =
-    customizationData[0].items[0].viewerImages?.length > 0;
+  const currentFilters = {};
+  customizationData.forEach((mod) => {
+    currentFilters[mod.name] = mod.items.find(
+      (item) => item.defaultMarker
+    ).title;
+  });
 
-  if (!defaultCustomizationModifierWithImages) {
-    return minimumOneWithImagesErrorText;
+  const defaultFilterOptions = transformObjNamesToString(currentFilters);
+  const defaultFilter = filters.find(
+    (fil) => fil.options === defaultFilterOptions
+  );
+
+  if (!defaultFilter) {
+    return defaultFilterNotExist;
   }
+
+  if (defaultFilter.images.length === 0) {
+    return defaultFiltersHasNoImagesErrorText;
+  }
+
   return null;
 };

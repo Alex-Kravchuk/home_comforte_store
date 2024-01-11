@@ -7,14 +7,27 @@ export const TileTypeContainer = styled.div`
 
 export const Tile = styled.div`
   width: 100%;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 
   &:hover {
     color: black;
-    border: 1px solid gray;
+    
+    background: rgba(0, 0, 0, 0.012);
   }
+
+  ${({ selected }) =>
+    selected &&
+    `
+    border: 2px solid gray; 
+    background: rgba(0, 0, 0, 0.035);
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.035);
+    }
+    `}
 `;
 
 export const TileTitleContainer = styled.div`
@@ -37,7 +50,7 @@ export const TileTitle = styled.div`
 `;
 export const TilePrice = styled.div`
   text-align: center;
-
+  font-weight: 500;
   font-size: 14px;
 `;
 export const TileImg = styled.img`

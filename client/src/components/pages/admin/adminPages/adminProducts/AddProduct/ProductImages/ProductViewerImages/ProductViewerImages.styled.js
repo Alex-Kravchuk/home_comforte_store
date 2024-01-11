@@ -36,7 +36,7 @@ export const PVISelectContainer = styled.div`
   }
 
   .ant-select-single:nth-of-type(2n) {
-    margin-left: 15px;
+    margin-left: 40px;
   }
 
   svg {
@@ -68,4 +68,28 @@ export const SelectLabelContainer = styled.div`
   span:nth-of-type(2) {
     color: red;
   }
+`;
+
+export const PVIConentGroup = styled.div`
+  display: flex;
+`;
+
+export const PVIContentRow = styled.div`
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: space-between;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export const PVIContentColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const NoDataContainer = styled.div`
+  color: red;
 `;

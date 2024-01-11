@@ -14,19 +14,32 @@ import {
   PVIClearFileListContainer,
   NoImagesErrorText,
 } from "./ProductViewerImages.styled";
+import { transformObjNamesToString } from "../../../../../../../../helpers/transformObjNamesToString";
+
+const tooltipText = `Here you must upload a minimum of 17 images to view the product.
+The product viewer works in 360, so your images should be such
+that each image rotates around its own axis. All images should have a
+single color background, shadows, etc., so that when scrolling
+the image, it appears as if the user is rotating a 3D shapeg
+around its axis. You must load the image into at least the first
+settings modifier used by default (the first list item in each
+selector)`;
 
 const ProductViewerImages = ({
   clearAllFlag,
   saveDataHandler,
   customizationData,
+  viewerFiltersData,
+  clearFileListHandler,
 }) => {
   const [images, setImages] = useState([]);
-  const [clearFileListflag, setClearFileList] = useState(false);
 
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedOptionItem, setSelectedOptionItem] = useState(null);
+  const [currentViewerFilter, setCurrentViewerFilter] = useState({});
 
   const [savedCustomOption, setSavedCustomOption] = useState(false);
+
+  const [currentFilterOptions, setCurrentFilterOptions] = useState({});
+
   const [selectError, setSelectError] = useState({
     option: false,
     optionItem: false,
@@ -35,61 +48,54 @@ const ProductViewerImages = ({
   const [noImagesError, setNoImagesError] = useState(false);
 
   useEffect(() => {
-    if (selectedOptionItem) {
-      // if selected option item contains viewerImages we save it to this component state
-      // and to show the icon that indicate about savign it in parrent state
-      const selectedOptionItemHasViewerImages =
-        selectedOptionItem.viewerImages?.length > 0;
+    setCurrentFilterOptions(createCorrectOptionsName());
+  }, [customizationData]);
 
-      setImages(selectedOptionItem.viewerImages ?? []);
-      setSavedCustomOption(selectedOptionItemHasViewerImages);
+  useEffect(() => {
+    const viewerFilter = viewerFiltersData.find(
+      (filter) =>
+        filter.options === transformObjNamesToString(currentFilterOptions)
+    );
+
+    if (viewerFilter) {
+      setSavedCustomOption(Boolean(viewerFilter?.images.length !== 0));
+      setImages(viewerFilter.images);
+      setCurrentViewerFilter(viewerFilter);
+    } else {
+      setCurrentViewerFilter({});
     }
-  }, [selectedOptionItem]);
+  }, [currentFilterOptions]);
 
   useEffect(() => {
     if (clearAllFlag) {
-      setImages([]);
-      setClearFileList(true);
-      setSelectedOption(null);
       setSavedCustomOption(false);
-      setSelectedOptionItem(null);
     }
   }, [clearAllFlag]);
+
+  const createCorrectOptionsName = () => {
+    const currentFilterObject = {};
+    customizationData.forEach((mod) => {
+      // first of all we check if there is such modifier option in current filter options
+      // if it is, we use value from that, if not - default value
+
+      // this case will be usefull when customizationData was updated
+      if (currentFilterOptions[mod.name]) {
+        currentFilterObject[mod.name] = currentFilterOptions[mod.name];
+      } else {
+        currentFilterObject[mod.name] = mod.items.find(
+          (item) => item.defaultMarker
+        ).title;
+      }
+    });
+
+    return currentFilterObject;
+  };
 
   const saveFileHandler = (file) => {
     setImages((state) => [...state, file]);
   };
 
-  const clearFileList = (wasCleared = false) => {
-    setClearFileList(!wasCleared);
-    setSelectedOption(null);
-    setSelectedOptionItem(null);
-    setSavedCustomOption(false);
-  };
-
-  const selectOnChangeHandler = (value) => {
-    setSelectedOption(customizationData[value - 1]);
-    setSelectedOptionItem(null);
-    setSavedCustomOption(false);
-    setSelectError({ option: false, optionItem: false });
-  };
-
-  const selectOptionItemHandler = (value) => {
-    setSelectedOptionItem(selectedOption.items[value - 1]);
-    setSelectError({ option: false, optionItem: false });
-  };
-
   const saveCustomizationValues = () => {
-    if (!selectedOption) {
-      setSelectError((state) => ({ ...state, option: true }));
-      return;
-    }
-
-    if (!selectedOptionItem) {
-      setSelectError((state) => ({ ...state, optionItem: true }));
-      return;
-    }
-
     if (images.length === 0) {
       setNoImagesError(true);
       return;
@@ -100,38 +106,20 @@ const ProductViewerImages = ({
       return;
     }
 
-    const selectedOptionItemIndex = selectedOption.items.findIndex(
-      (item) => item.id === selectedOptionItem.id
-    );
-
-    const selectedOptionItemWithImages = {
-      ...selectedOptionItem,
-      viewerImages: images,
-    };
-
-    console.log("suka, blet", selectedOptionItemWithImages);
-
-    // remove tha save option without images and add with it
-    selectedOption.items.splice(
-      selectedOptionItemIndex,
-      1,
-      selectedOptionItemWithImages
-    );
-
-    const customizationModifier = {
-      ...selectedOption,
-      items: selectedOption.items,
+    const viewerFilter = {
+      options: transformObjNamesToString(currentFilterOptions),
+      images: images.map((img) => img.originalFileObj),
     };
 
     setSavedCustomOption(true);
-    saveDataHandler(customizationModifier);
-    setSelectError({ option: false, optionItem: false });
+    saveDataHandler(viewerFilter);
+    // setSelectError({ option: false, optionItem: false });
   };
 
   // check fileList changes handler
   const checkFileListChanges = (fileList) => {
     const differentLength =
-      fileList.length !== selectedOptionItem?.viewerImages?.length;
+      fileList.length !== currentViewerFilter?.images?.length;
 
     if (differentLength && fileList.length !== 0) {
       setNoImagesError(false);
@@ -142,45 +130,41 @@ const ProductViewerImages = ({
       }
     }
   };
+
+  const optionsOnChangeHandler = (modifierName, value) => {
+    setSavedCustomOption(false);
+    const newOptions = { ...currentFilterOptions };
+    newOptions[modifierName] = value;
+    setCurrentFilterOptions(newOptions);
+  };
+
+  // console.log("current filter viewer", currentViewerFilter);
+
   // console.log("selected images:", images);
   // console.log("saved flag", savedCustomOption, selectedOptionItem);
+
+  // TODO file list not always changed when select onChange active
 
   return (
     <PVIWrapper>
       <PVIContainer>
         <PVIHeaderContainer>
-          <InfoHeader
-            tooltipText={
-              <div>
-                Here you must upload a minimum of 16 images to view the product.
-                The product viewer works in 360, so your images should be such
-                that each image rotates around its own axis (you can
-                <a> click here</a> to see an example). All images should have a
-                single color background, shadows, etc., so that when scrolling
-                the image, it appears as if the user is rotating a 3D shapeg
-                around its axis. You must load the image into at least the first
-                settings modifier used by default (the first list item in each
-                selector)
-              </div>
-            }
-          />
+          <InfoHeader tooltipText={<div>{tooltipText}</div>} />
 
-          <PVIClearFileListContainer onClick={clearFileList}>
+          {/* <PVIClearFileListContainer onClick={clearFileList}>
             <Tooltip title="Clear the data" placement="left">
               <DeleteSweepOutlinedIcon />
             </Tooltip>
-          </PVIClearFileListContainer>
+          </PVIClearFileListContainer> */}
         </PVIHeaderContainer>
 
         <CustomizationSelectBlock
           error={selectError}
           saved={savedCustomOption}
-          selectedOption={selectedOption}
+          resetToDefault={clearAllFlag}
           customizationData={customizationData}
           saveHandler={saveCustomizationValues}
-          selectedOptionItem={selectedOptionItem}
-          selectOnChangeHandler={selectOnChangeHandler}
-          selectOptionItemHandler={selectOptionItemHandler}
+          optionsOnChangeHandler={optionsOnChangeHandler}
         />
         {noImagesError && (
           <NoImagesErrorText>
@@ -190,13 +174,13 @@ const ProductViewerImages = ({
 
         <ProductImagesUploading
           uploadType="viewer"
+          clearFileListflag={clearAllFlag}
           saveFileHandler={saveFileHandler}
-          clearFileListflag={clearFileListflag}
-          clearFileListHandler={setClearFileList}
+          clearFileListHandler={clearFileListHandler}
           checkFileListChanges={checkFileListChanges}
-          selectOptionsWasChanged={selectedOptionItem}
+          selectOptionsWasChanged={currentViewerFilter}
           uploadedFileList={
-            selectedOptionItem ? selectedOptionItem.viewerImages : null
+            currentViewerFilter ? currentViewerFilter.images : null
           }
         />
       </PVIContainer>

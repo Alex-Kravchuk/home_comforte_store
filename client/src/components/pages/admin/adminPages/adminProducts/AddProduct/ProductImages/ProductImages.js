@@ -6,11 +6,12 @@ import ProductPreviewImages from "./ProductPreviewImages/ProductPreviewImages";
 import { Collapse } from "antd";
 import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 import { errorHandlingHelper } from "./errorHandlingHelper";
+import { transformObjNamesToString } from "../../../../../../../helpers/transformObjNamesToString";
 
 const ProductImages = ({
   customizationData,
-  setDataHandlerViewer,
   setDataHandlerPreview,
+  setDataHandlerFilters,
 }) => {
   const [imagesError, setImagesError] = useState(false);
   const [clearAllFlag, setClearAllFlag] = useState(false);
@@ -21,32 +22,60 @@ const ProductImages = ({
   const [localCustomOptions, setLocalCustomOptions] = useState([]);
 
   useEffect(() => {
-    setLocalCustomOptions(customizationData.concat());
+    resetToDefault();
   }, [customizationData]);
 
+  useEffect(() => {
+    console.log("localCustomOptions", localCustomOptions);
+  }, [localCustomOptions]);
+
+  const resetToDefault = () => {
+    const currentFilters = {};
+    customizationData.forEach((mod) => {
+      currentFilters[mod.name] = mod.items.find(
+        (item) => item.defaultMarker
+      ).title;
+    });
+
+    setLocalCustomOptions((state) => [
+      ...state,
+      {
+        options: transformObjNamesToString(currentFilters),
+        images: [],
+      },
+    ]);
+  };
+
   const saveDataHandler = () => {
-    const error = errorHandlingHelper(localCustomOptions, previewData);
+    const error = errorHandlingHelper(
+      customizationData,
+      localCustomOptions,
+      previewData
+    );
     if (error) {
+      // debugger;
       setImagesError(error);
       return;
     }
-
+    setDataHandlerFilters(localCustomOptions);
     setDataHandlerPreview(previewData);
-    setDataHandlerViewer(localCustomOptions);
     setTemporarilySaved(true);
     setImagesError(false);
   };
 
-  const localSaveDataHandler = (newModifier) => {
-    const changedModifierIndex = localCustomOptions.findIndex(
-      (option) => option.id === newModifier.id
+  const localSaveDataHandler = (newViewerOptions) => {
+    const changedViewerIndex = localCustomOptions.findIndex(
+      (viewer) => viewer.options === newViewerOptions.options
     );
 
-    if (changedModifierIndex) {
-      localCustomOptions.splice(changedModifierIndex, 1, newModifier);
-    }
+    if (changedViewerIndex >= 0) {
+      const copy = localCustomOptions.concat();
+      copy.splice(changedViewerIndex, 1, newViewerOptions);
 
-    setLocalCustomOptions(localCustomOptions);
+      setLocalCustomOptions(copy);
+    } else {
+      setLocalCustomOptions((state) => [...state, newViewerOptions]);
+    }
 
     if (temporarilySaved) {
       setTemporarilySaved(false);
@@ -55,19 +84,11 @@ const ProductImages = ({
   const resetImagesDataHandler = () => {
     setClearAllFlag(true);
 
-    // we remove only viewerImages from it
-    const localStateWithoutImages = localCustomOptions.map((customOption) => {
-      customOption.items.forEach((element) => {
-        if (Object.hasOwn(element, "viewerImages")) {
-          delete element.viewerImages;
-        }
-      });
-
-      return customOption;
-    });
-
-    setDataHandlerViewer(localStateWithoutImages);
+    setLocalCustomOptions([]);
+    setPreviewData([]);
   };
+
+  console.log("clear all flag", clearAllFlag);
 
   return (
     <PIWrapper>
@@ -84,12 +105,19 @@ const ProductImages = ({
           <ProductViewerImages
             clearAllFlag={clearAllFlag}
             customizationData={customizationData}
+            clearFileListHandler={setClearAllFlag}
+            viewerFiltersData={localCustomOptions}
             saveDataHandler={localSaveDataHandler}
+            setDataHandlerFilters={setDataHandlerFilters}
           />
         </PIBlock>
         <PIBlock>
           <InfoBlockTitle>Product images for preview</InfoBlockTitle>
-          <ProductPreviewImages saveDataHandler={setPreviewData} />
+          <ProductPreviewImages
+            clearAllFlag={clearAllFlag}
+            saveDataHandler={setPreviewData}
+            clearFileListHandler={setClearAllFlag}
+          />
         </PIBlock>
       </PIContainer>
     </PIWrapper>

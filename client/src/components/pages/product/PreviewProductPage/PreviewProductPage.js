@@ -1,16 +1,72 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Product from "../Product";
 import { Link } from "react-router-dom";
 import { ButtonContainer, PPPWrapper } from "./PreviewProductPage.styled";
 import { Button } from "antd";
+import { ProductViewerService } from "../../../../api/productViewer/productViewerService";
 
 const PreviewProductPage = ({
   generalData,
   previewImages,
   customizationData,
 }) => {
+  const [testState, setTestState] = useState([]);
+  const refff = useRef();
+  const testRequest = async () => {
+    const testData = {
+      options: {
+        material_type: 12,
+        legs: 22,
+        size: 11,
+        option99: 67,
+      },
+      furnitureId: 2,
+      modifierId: 2,
+      modifierOptionId: 12,
+    };
+
+    // console.log(refff.current.files);
+    // Array.from(refff.current.files).forEach((item) =>
+    //   console.log("file", item)
+    // );
+
+    const combinedData = { ...testData, images: refff.current.files };
+    const formdata = new FormData();
+
+    for (const key in combinedData) {
+      if (key === "options") {
+        formdata.append(key, JSON.stringify(combinedData[key]));
+      } else {
+        if (key === "images") {
+          Array.from(refff.current.files).forEach((item) =>
+            formdata.append("images", item, item.name)
+          );
+
+          break;
+        }
+
+        formdata.append(key, combinedData[key]);
+      }
+    }
+
+    // const response = await AuthService.updateUserData(formdata);
+
+    // debugger;
+    const response = await ProductViewerService.createViewer(formdata);
+
+    console.log("====================================");
+    console.log(response);
+    console.log("====================================");
+  };
   return (
     <PPPWrapper>
+      <Button onClick={testRequest}>Make test post requst</Button>
+      <input
+        type="file"
+        multiple={true}
+        onChange={(e) => console.log("eee", e)}
+        ref={refff}
+      />
       <h2>This is a preview page for an upcoming product</h2>
       <h4>
         If everything is correct, below you should confirm the addition of the
@@ -23,11 +79,11 @@ const PreviewProductPage = ({
         customizationData={customizationData}
       />
       <ButtonContainer>
-        <Link to="../products/add_new" state={{ confirmed: true }}>
+        {/* <Link to="../products/add_new" state={{ confirmed: true }}> */}
           <Button size="large" type="primary">
             All is well. Confirm
           </Button>
-        </Link>
+        {/* </Link> */}
       </ButtonContainer>
     </PPPWrapper>
   );

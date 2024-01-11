@@ -26,7 +26,8 @@ const Demonstration = ({
   generalData,
   previewImages = [],
   previewMode = false,
-  selectedCustomOption,
+  // modifierHandlers,
+  selectedOption
 }) => {
   const [viewerImages, setViewerImages] = useState([]);
 
@@ -39,10 +40,10 @@ const Demonstration = ({
   const smallLaptopScreen = viewport.width < viewport_sizes.xl;
 
   useEffect(() => {
-    if (selectedCustomOption?.viewerImages) {
-      formateImageHandler(selectedCustomOption.viewerImages);
+    if (selectedOption?.viewerImages) {
+      formateImageHandler(selectedOption.viewerImages);
     }
-  }, [selectedCustomOption]);
+  }, [selectedOption]);
 
   const formateImageHandler = (images) => {
     // clear before items
@@ -58,8 +59,6 @@ const Demonstration = ({
       ]);
     });
   };
-
-  console.log("viewer images", viewerImages);
 
   const viewerMode = zoomOn ? (
     <ZoomBox />

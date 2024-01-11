@@ -44,6 +44,8 @@ const AddProduct = () => {
   const [previewImages, setPreviewImages] = useState([]);
   // customizationData contains different modifiers and images for product viewer
   const [customizationData, setCustomizationData] = useState([]);
+  // viewerFiltersData contains filters for request with images, which will be display in viewer
+  const [viewerFiltersData, setViewerFiltersData] = useState([]);
 
   const [createProductError, setCreateProductError] = useState(false);
   const [wasConfirmed, setConfirmed] = useState(false);
@@ -88,8 +90,10 @@ const AddProduct = () => {
         <TabWrapper>
           <ProductImages
             customizationData={customizationData}
+            viewerFiltersData={viewerFiltersData}
             setDataHandlerPreview={setPreviewImages}
             setDataHandlerViewer={setCustomizationData}
+            setDataHandlerFilters={setViewerFiltersData}
           />
         </TabWrapper>
       ),
@@ -109,6 +113,7 @@ const AddProduct = () => {
             generalData={generalData}
             previewImages={previewImages}
             customizationData={customizationData}
+            viewerFiltersData={viewerFiltersData}
           />
         </TabWrapper>
       ),
@@ -142,6 +147,10 @@ const AddProduct = () => {
 
   console.log("====================================");
   console.log("preview images data:", previewImages);
+  console.log("====================================");
+
+  console.log("====================================");
+  console.log("filters options:", viewerFiltersData);
   console.log("====================================");
 
   return (
