@@ -9,6 +9,7 @@ const PreviewProductPage = ({
   generalData,
   previewImages,
   customizationData,
+  viewerFiltersData,
 }) => {
   const [testState, setTestState] = useState([]);
   const refff = useRef();
@@ -72,18 +73,19 @@ const PreviewProductPage = ({
         If everything is correct, below you should confirm the addition of the
         product
       </h4>
+
       <Product
         previewMode={true}
         generalData={generalData}
         previewImages={previewImages}
         customizationData={customizationData}
+        viewerFiltersData={viewerFiltersData}
       />
+
       <ButtonContainer>
-        {/* <Link to="../products/add_new" state={{ confirmed: true }}> */}
-          <Button size="large" type="primary">
-            All is well. Confirm
-          </Button>
-        {/* </Link> */}
+        <Button size="large" type="primary">
+          All is well. Confirm
+        </Button>
       </ButtonContainer>
     </PPPWrapper>
   );

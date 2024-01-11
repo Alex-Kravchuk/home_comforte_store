@@ -34,11 +34,6 @@ const ListTypeModifier = ({
     setModifiers(filteredItems);
   };
 
-  console.log(
-    "check by default",
-    list.findIndex((item) => item.defaultMarker)
-  );
-
   return (
     <>
       {modifiers.map((modifier, index) => (

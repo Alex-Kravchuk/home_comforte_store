@@ -1,46 +1,41 @@
-import React, { memo } from "react";
+import React from "react";
+
+import Modifiers from "./Modifiers/Modifiers";
+import ProductHeader from "./ProductHeader/ProductHeader";
+import AddToCartButton from "./AddToCartButton/AddToCartButton";
+import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
+
+import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 
 import {
   CustomizationWrapper,
   CustomizationContainer,
 } from "./Customization.styled";
-import ProductHeader from "./ProductHeader/ProductHeader";
-import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../../../utils/viewport_size_consts";
-import Modifiers from "./Modifiers/Modifiers";
-import CustomizationFooter from "./CustomizationFooter/CustomizationFooter";
-import AddToCartButton from "./AddToCartButton/AddToCartButton";
 
-const Customization = memo(
-  ({
-    generalData,
-    previewMode,
-    customizationData = [],
-    selectedOptionHandler,
-    filterOptionsHandler,
-  }) => {
-    const viewport = useGetWindowSize();
-    const bigScreen = viewport.width >= viewport_sizes.xl;
-    return (
-      <CustomizationWrapper previewMode={previewMode}>
-        <CustomizationContainer>
-          {bigScreen && (
-            <ProductHeader
-              name={generalData?.subGeneral?.name}
-              price={generalData?.subGeneral?.price}
-            />
-          )}
-          <Modifiers
-            data={customizationData}
-            filterOptionsHandler={filterOptionsHandler}
-            selectedOptionHandler={selectedOptionHandler}
+const Customization = ({
+  generalData,
+  previewMode,
+  customizationData = [],
+  filtersHandler,
+}) => {
+  const viewport = useGetWindowSize();
+  const bigScreen = viewport.width >= viewport_sizes.xl;
+  return (
+    <CustomizationWrapper previewMode={previewMode}>
+      <CustomizationContainer>
+        {bigScreen && (
+          <ProductHeader
+            name={generalData?.subGeneral?.name}
+            price={generalData?.subGeneral?.price}
           />
-          <AddToCartButton />
-          <CustomizationFooter />
-        </CustomizationContainer>
-      </CustomizationWrapper>
-    );
-  }
-);
+        )}
+        <Modifiers data={customizationData} filtersHandler={filtersHandler} />
+        <AddToCartButton />
+        <CustomizationFooter />
+      </CustomizationContainer>
+    </CustomizationWrapper>
+  );
+};
 
 export default Customization;

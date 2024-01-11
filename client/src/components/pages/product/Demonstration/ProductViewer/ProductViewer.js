@@ -5,20 +5,17 @@ import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import ProductViewerThumbnails from "./ProductViewerThumbnails";
 
-import noImage from "../../../../../assets/img/viewer/no-image.jpg";
-
 import {
   PVWrapper,
   PVContainer,
   ViewerField,
   PVCurrentImg,
+  NoImageContainer,
   FullScreenWrapper,
   PVMainImgContainer,
   FullScreenContainer,
   PVCurrentImgContainer,
   FullScreenIconContainer,
-  NoImageContainer,
-  NoImageText,
 } from "./ProductViewer.styled";
 import { Spin } from "antd";
 
@@ -217,17 +214,11 @@ const ProductViewer = ({ images, previewMode }) => {
 
   const currentImgIndex = currentImg <= 0 ? 0 : currentImg - 1;
 
-  // console.log("====================================");
-  // console.log(thumbnails, images);
-  // console.log("====================================");
-
   return (
     <PVWrapper>
       {images.length === 0 ? (
         <NoImageContainer>
           <Spin />
-          {/* <PVCurrentImg src={noImage} />
-          <NoImageText>There are no product images to viewer</NoImageText> */}
         </NoImageContainer>
       ) : (
         <PVContainer>

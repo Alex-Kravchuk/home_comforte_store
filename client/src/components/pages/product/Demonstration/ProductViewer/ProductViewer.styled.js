@@ -67,7 +67,7 @@ export const PVPreviewImagesContainer = styled.div`
   width: fit-content;
   border: 1px solid lightgray;
   border-radius: 10px;
-  padding: 20px 70px;
+  padding: 20px 40px;
   max-width: 683px;
   width: 100%;
 
@@ -76,7 +76,7 @@ export const PVPreviewImagesContainer = styled.div`
   }
 
   @media (max-width: 1200px) {
-    padding: 15px 30px;
+    padding: 15px 0;
   }
 
   @media (max-width: ${l}px) {
@@ -93,8 +93,8 @@ export const PVPreviewImagesContainer = styled.div`
 export const PVPreviewImgContainer = styled.div`
   position: relative;
   cursor: pointer;
-  padding: 10px 0;
-  margin: 0 15px;
+  padding: 10px 5px;
+  margin: 0 5px;
   opacity: 0.9;
   border: ${({ selected }) =>
     selected ? "1px solid black" : "1px solid transparent"};
@@ -122,7 +122,6 @@ export const PVPreviewImgContainer = styled.div`
 
   @media (max-width: ${l}px) {
     width: 70px;
-    margin: 0 5px;
   }
 
   @media (max-width: ${ml}px) {
@@ -215,7 +214,6 @@ export const FullScreenContainer = styled.div`
 
 export const NoImageContainer = styled.div`
   position: relative;
-  // min-height: 500px;
 `;
 
 export const NoImageText = styled.div`

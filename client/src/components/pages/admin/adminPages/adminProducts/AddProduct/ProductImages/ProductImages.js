@@ -7,6 +7,7 @@ import { Collapse } from "antd";
 import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 import { errorHandlingHelper } from "./errorHandlingHelper";
 import { transformObjNamesToString } from "../../../../../../../helpers/transformObjNamesToString";
+import { createDefaultFilters } from "./createDefaultFilters";
 
 const ProductImages = ({
   customizationData,
@@ -30,17 +31,12 @@ const ProductImages = ({
   }, [localCustomOptions]);
 
   const resetToDefault = () => {
-    const currentFilters = {};
-    customizationData.forEach((mod) => {
-      currentFilters[mod.name] = mod.items.find(
-        (item) => item.defaultMarker
-      ).title;
-    });
+    const defaultFilters = createDefaultFilters(customizationData);
 
     setLocalCustomOptions((state) => [
       ...state,
       {
-        options: transformObjNamesToString(currentFilters),
+        options: transformObjNamesToString(defaultFilters),
         images: [],
       },
     ]);

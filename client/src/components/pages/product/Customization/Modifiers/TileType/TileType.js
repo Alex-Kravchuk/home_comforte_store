@@ -12,12 +12,7 @@ import {
   TileTitleContainer,
 } from "./TileType.styled";
 
-const TileType = ({
-  data,
-  currentModifierID,
-  filterOptionsHandler,
-  selectedOptionHandler,
-}) => {
+const TileType = ({ currentModifier, filtersHandler }) => {
   const [localSelectedOption, setLocalSelectedOption] = useState(null);
 
   const checkIfSelected = (item) => {
@@ -35,14 +30,13 @@ const TileType = ({
   };
 
   const selectItemHandler = (item) => {
-    selectedOptionHandler(item);
     setLocalSelectedOption(item);
-    filterOptionsHandler(currentModifierID, item);
+    filtersHandler(currentModifier.name, item.title);
   };
   return (
     <TileTypeWrapper>
       <TileTypeContainer>
-        {data.map((item) => (
+        {currentModifier.items.map((item) => (
           <Tile
             key={item.id}
             onClick={() => selectItemHandler(item)}

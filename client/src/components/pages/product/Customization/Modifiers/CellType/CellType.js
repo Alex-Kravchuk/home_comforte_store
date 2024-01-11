@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 import {
   Cell,
@@ -8,12 +8,7 @@ import {
   CellTypeContainer,
 } from "./CellType.styled";
 
-const CellType = ({
-  data,
-  currentModifierID,
-  filterOptionsHandler,
-  selectedOptionHandler,
-}) => {
+const CellType = ({ currentModifier, filtersHandler }) => {
   const [localSelectedOption, setLocalSelectedOption] = useState(null);
 
   const checkIfSelected = (item) => {
@@ -31,14 +26,13 @@ const CellType = ({
   };
 
   const selectItemHandler = (item) => {
-    selectedOptionHandler(item);
     setLocalSelectedOption(item);
-    filterOptionsHandler(currentModifierID, item);
+    filtersHandler(currentModifier.name, item.title);
   };
   return (
     <CellTypeWrapper>
       <CellTypeContainer>
-        {data.map((item) => (
+        {currentModifier.items.map((item) => (
           <Cell
             key={item.id}
             onClick={() => selectItemHandler(item)}

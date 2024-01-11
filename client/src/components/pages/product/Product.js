@@ -1,68 +1,53 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 
 import Reviews from "./Reviews/Reviews";
 import Demonstration from "./Demonstration/Demonstration";
 import Customization from "./Customization/Customization";
+
+import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
+import { createDefaultFilters } from "../admin/adminPages/adminProducts/AddProduct/ProductImages/createDefaultFilters";
+import { transformObjNamesToString } from "../../../helpers/transformObjNamesToString";
 
 import {
   ProductWrapper,
   ProductContainer,
   ProudctInfoSection,
 } from "./Product.styled";
-import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
-import { viewport_sizes } from "../../../utils/viewport_size_consts";
-import { useLocation } from "react-router-dom";
 
 const Product = ({
   generalData,
   previewImages,
   customizationData,
+  viewerFiltersData,
   previewMode = false,
 }) => {
-  const [selectedOption, setSelectedOption] = useState();
-
-  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [currentFilters, setCurrentFilters] = useState({});
+  const [currenViewerImages, setCurrentViewerImages] = useState([]);
 
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
-    // I sort data by default marker. These items are default filter option for request to server
-    const copy = JSON.stringify(customizationData);
-    const modifiers = JSON.parse(copy).map((mod) => {
-      mod.items = mod.items.filter((item) => item.defaultMarker === true);
-      return mod;
-    });
-    // debugger;
-    setFilteredOptions(modifiers);
-  }, [customizationData]);
+    setCurrentFilters(createDefaultFilters(customizationData));
+  }, []);
 
   useEffect(() => {
-    console.log("filtered items was changed", filteredOptions);
-  }, [filteredOptions]);
+    const currentFiltersInString = transformObjNamesToString(currentFilters);
+    const viewer = viewerFiltersData.find(
+      (view) => view.options === currentFiltersInString
+    );
 
-  const filterOptionsHandler = useCallback(
-    (modifierID, option) => {
-      // debugger;
-      const updatedModifiers = filteredOptions.map((mod) => {
-        if (mod.id === modifierID) {
-          mod.items = [option];
-        }
-        return mod;
-      });
+    if (viewer) {
+      setCurrentViewerImages(viewer.images);
+    }
+  }, [currentFilters]);
 
-      console.log("suka", option, modifierID, updatedModifiers);
+  const filtersHandler = (modifierName, optionTitle) => {
+    setCurrentFilters((state) => ({ ...state, [modifierName]: optionTitle }));
+  };
 
-      if (updatedModifiers.length > 0) {
-        setFilteredOptions(updatedModifiers);
-      }
-    },
-    [customizationData]
-  );
-
-  console.log("FILTERED:", filteredOptions);
-
-  console.log("selected item", selectedOption);
+  console.log("current filters", currentFilters);
 
   return (
     <ProductWrapper previewMode={previewMode}>
@@ -72,20 +57,14 @@ const Product = ({
             previewMode={previewMode}
             generalData={generalData}
             previewImages={previewImages}
-            // modifierHandlers={modifierHandlers}
-            selectedOption={selectedOption}
+            viewerImages={currenViewerImages}
           />
           {bigScreen && (
             <Customization
               previewMode={previewMode}
               generalData={generalData}
-              selectedOptionHandler={setSelectedOption}
+              filtersHandler={filtersHandler}
               customizationData={customizationData}
-              filterOptionsHandler={filterOptionsHandler}
-              // selectedCustomOption={selectedCustomOption}
-              // selectedOptionHandler={setSelectedCustomOption}
-              // selectedCustomModifier={selectedCustomModifier}
-              // selectedModifierHandler={setSelectedCustomModifier}
             />
           )}
         </ProudctInfoSection>

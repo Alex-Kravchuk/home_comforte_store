@@ -2,17 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { Collapse, Empty } from "antd";
 
-import { modifiersMock } from "../../../../../assets/mock/modifiers/modifiersMock";
 import { defineModifier } from "../../../../../helpers/defineModifier/defineModifier";
 
 import { ModifiersContainer, ModifiersWrapper } from "./Modifiers.styled";
 
-const Modifiers = ({
-  data,
-  // modifierHandlers,
-  selectedOptionHandler,
-  filterOptionsHandler,
-}) => {
+const Modifiers = ({ data, filtersHandler }) => {
   const [modifiers, setModifiers] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -20,11 +14,11 @@ const Modifiers = ({
     // TODO add loading when data are fething
 
     const modifiersItems = data.map((item) =>
-      defineModifier(item, selectedOptionHandler, filterOptionsHandler)
+      defineModifier(item, filtersHandler)
     );
 
     setModifiers(modifiersItems);
-  }, [data, filterOptionsHandler]);
+  }, [data, filtersHandler]);
 
   return (
     <ModifiersWrapper>

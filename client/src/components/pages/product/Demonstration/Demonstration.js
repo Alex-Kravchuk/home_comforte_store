@@ -13,26 +13,24 @@ import ProductPreview from "./ProductPreview/ProductPreview";
 import ProductHeader from "../Customization/ProductHeader/ProductHeader";
 import ViewerToggleButton from "./ViewerToggleButton/VIewerToggleButton";
 
+import ProductDetails from "./ProductDetails/ProductDetails";
+import SimilarProducts from "./SimilarProducts/SimilarProducts";
+
 import {
   ViewerContainer,
   DemonstrationWrapper,
   DemonstrationContainer,
 } from "./Demonstration.styled";
-import ProductDetails from "./ProductDetails/ProductDetails";
-import SimilarProducts from "./SimilarProducts/SimilarProducts";
-import { getBase64 } from "../../../../helpers/getBase64";
 
 const Demonstration = ({
   generalData,
+  viewerImages,
   previewImages = [],
   previewMode = false,
-  // modifierHandlers,
-  selectedOption
 }) => {
-  const [viewerImages, setViewerImages] = useState([]);
+  const [localImages, setLocalImages] = useState([]);
 
   const [zoomOn, setZoomOn] = useState(false);
-  const zoomHandler = () => setZoomOn((state) => !state);
 
   const viewport = useGetWindowSize();
 
@@ -40,17 +38,19 @@ const Demonstration = ({
   const smallLaptopScreen = viewport.width < viewport_sizes.xl;
 
   useEffect(() => {
-    if (selectedOption?.viewerImages) {
-      formateImageHandler(selectedOption.viewerImages);
+    if (viewerImages.length !== 0) {
+      formateImageHandler(viewerImages);
     }
-  }, [selectedOption]);
+  }, [viewerImages]);
+
+  const zoomHandler = () => setZoomOn((state) => !state);
 
   const formateImageHandler = (images) => {
     // clear before items
-    setViewerImages([]);
+    setLocalImages([]);
 
     images.forEach((file, index) => {
-      setViewerImages((state) => [
+      setLocalImages((state) => [
         ...state,
         {
           id: file.id ?? index++,
@@ -64,7 +64,7 @@ const Demonstration = ({
     <ZoomBox />
   ) : (
     <ProductViewer
-      images={viewerImages}
+      images={localImages}
       previewMode={previewMode}
       zoomHandler={zoomHandler}
     />

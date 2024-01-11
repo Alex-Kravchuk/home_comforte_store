@@ -23,15 +23,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 
-const ListType = ({
-  data,
-  selectedOption,
-  selectedModifier,
-  currentModifierID,
-  selectedOptionHandler,
-  selectedModifierHandler,
-  filterOptionsHandler,
-}) => {
+const ListType = ({ currentModifier, filtersHandler }) => {
   const [localSelectedOption, setLocalSelectedOption] = useState(null);
   const viewport = useGetWindowSize();
 
@@ -52,9 +44,8 @@ const ListType = ({
   };
 
   const selectItemHandler = (item) => {
-    selectedOptionHandler(item);
     setLocalSelectedOption(item);
-    filterOptionsHandler(currentModifierID, item);
+    filtersHandler(currentModifier.name, item.title);
   };
 
   const swiperConfig = {
@@ -82,7 +73,7 @@ const ListType = ({
     <ListTypeWrapper>
       <ListTypeContainer>
         {!smallLaptopScreen &&
-          data.map((item) => (
+          currentModifier.items.map((item) => (
             <ListTypeModifierContainer
               key={item.id}
               onClick={() => selectItemHandler(item)}
@@ -100,7 +91,7 @@ const ListType = ({
         {/* TODO Make the same logic when use small devices */}
         {smallLaptopScreen && (
           <Swiper {...swiperConfig}>
-            {data.map((item) => (
+            {currentModifier.items.map((item) => (
               <SwiperSlide key={item.id}>
                 <ListTypeModifierContainer>
                   <ModifierImgContainer>

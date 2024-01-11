@@ -33,19 +33,10 @@ const ProductViewerImages = ({
   clearFileListHandler,
 }) => {
   const [images, setImages] = useState([]);
-
-  const [currentViewerFilter, setCurrentViewerFilter] = useState({});
-
-  const [savedCustomOption, setSavedCustomOption] = useState(false);
-
-  const [currentFilterOptions, setCurrentFilterOptions] = useState({});
-
-  const [selectError, setSelectError] = useState({
-    option: false,
-    optionItem: false,
-  });
-
   const [noImagesError, setNoImagesError] = useState(false);
+  const [savedCustomOption, setSavedCustomOption] = useState(false);
+  const [currentViewerFilter, setCurrentViewerFilter] = useState({});
+  const [currentFilterOptions, setCurrentFilterOptions] = useState({});
 
   useEffect(() => {
     setCurrentFilterOptions(createCorrectOptionsName());
@@ -96,24 +87,19 @@ const ProductViewerImages = ({
   };
 
   const saveCustomizationValues = () => {
-    if (images.length === 0) {
-      setNoImagesError(true);
-      return;
-    }
-
     // block the save action when a small number of images error is seen
-    if (images.length < 17) {
+    if (images.length === 0 || images.length < 17) {
+      setNoImagesError(true);
       return;
     }
 
     const viewerFilter = {
       options: transformObjNamesToString(currentFilterOptions),
-      images: images.map((img) => img.originalFileObj),
+      images,
     };
 
     setSavedCustomOption(true);
     saveDataHandler(viewerFilter);
-    // setSelectError({ option: false, optionItem: false });
   };
 
   // check fileList changes handler
@@ -138,28 +124,14 @@ const ProductViewerImages = ({
     setCurrentFilterOptions(newOptions);
   };
 
-  // console.log("current filter viewer", currentViewerFilter);
-
-  // console.log("selected images:", images);
-  // console.log("saved flag", savedCustomOption, selectedOptionItem);
-
-  // TODO file list not always changed when select onChange active
-
   return (
     <PVIWrapper>
       <PVIContainer>
         <PVIHeaderContainer>
           <InfoHeader tooltipText={<div>{tooltipText}</div>} />
-
-          {/* <PVIClearFileListContainer onClick={clearFileList}>
-            <Tooltip title="Clear the data" placement="left">
-              <DeleteSweepOutlinedIcon />
-            </Tooltip>
-          </PVIClearFileListContainer> */}
         </PVIHeaderContainer>
 
         <CustomizationSelectBlock
-          error={selectError}
           saved={savedCustomOption}
           resetToDefault={clearAllFlag}
           customizationData={customizationData}

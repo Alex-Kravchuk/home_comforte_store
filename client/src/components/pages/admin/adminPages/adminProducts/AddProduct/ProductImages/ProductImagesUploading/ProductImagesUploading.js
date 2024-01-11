@@ -86,8 +86,6 @@ const ProductImagesUploading = ({
 
   const beforeUpload = (file) => {
     return new Promise((resolve, reject) => {
-      console.log("file type", file.type);
-
       const isValidFormat =
         file.type === "image/jpeg" ||
         file.type === "image/jpg" ||

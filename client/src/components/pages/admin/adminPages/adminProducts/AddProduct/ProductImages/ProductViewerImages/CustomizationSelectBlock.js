@@ -15,10 +15,8 @@ import {
 
 const CustomizationSelectBlock = ({
   saved,
-  error,
   sizeLarge,
   saveHandler,
-  resetToDefault,
   customizationData,
   optionsOnChangeHandler,
 }) => {
@@ -50,7 +48,6 @@ const CustomizationSelectBlock = ({
                   ),
                 }}
                 placeholder="Choose customization option"
-                status={error.optionItem && "error"}
                 size={sizeLarge ? "large" : "medium"}
                 options={items.map((item) => ({
                   value: item.title,
