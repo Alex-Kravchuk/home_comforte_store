@@ -17,6 +17,7 @@ class CategoryService {
         );
       }
 
+
       await category.update({ id, name });
     });
 

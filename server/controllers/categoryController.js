@@ -29,7 +29,7 @@ class CategoryController {
     try {
       const { data } = req.body;
 
-      console.log(data);
+      // console.log(data, 'suka nagui pisos');
       const response = await categoryService.updateCategory(data);
       return res.json(response);
     } catch (error) {

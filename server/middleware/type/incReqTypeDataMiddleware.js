@@ -7,6 +7,7 @@ module.exports = async (req, res, next) => {
 
     const { name, categoryId } = req.body;
 
+
     if (!name) {
       return next(
         ApiError.requestDataAreNotDefined(

@@ -34,7 +34,7 @@ const createModifier = (displayMethod, images = [], details) => {
     return modifier;
   }
 
-  if (displayMethod === "table") {
+  if (displayMethod === "cell") {
     modifier = details.map((detail, index) => {
       const { title, price } = detail;
       return {

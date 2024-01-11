@@ -113,11 +113,18 @@ const Rating = sequelize.define("rating", {
   rating: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
 });
 
-const Collection = sequelize.define("collections", {
+const Collection = sequelize.define("collection", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },
+});
+
+const Viewer = sequelize.define("viewer", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  options: { type: DataTypes.JSON, allowNull: false },
+  modifierOptionId: { type: DataTypes.INTEGER, allowNull: false },
+  images: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
 });
 
 // user settings
@@ -194,23 +201,30 @@ Dimension.belongsTo(Furniture);
 Collection.hasMany(Furniture);
 Furniture.belongsTo(Collection);
 
+Furniture.hasMany(Viewer);
+Viewer.belongsTo(Furniture);
+
+Modifier.hasMany(Viewer);
+Viewer.belongsTo(Modifier);
+
 module.exports = {
-  Admin,
   User,
-  Basket,
-  Furniture,
-  BasketFurniture,
   Type,
+  Admin,
+  Guest,
+  Token,
+  Basket,
+  Viewer,
   Rating,
   Review,
-  PurchaseHistory,
-  Collection,
-  Category,
   SubType,
   Preview,
   Modifier,
+  Category,
   Dimension,
-  Guest,
-  Token,
+  Furniture,
+  Collection,
+  PurchaseHistory,
+  BasketFurniture,
   ResetPasswordToken,
 };
