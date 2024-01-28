@@ -60,6 +60,9 @@ const Demonstration = ({
     });
   };
 
+  console.log('localImages', localImages);
+  
+
   const viewerMode = zoomOn ? (
     <ZoomBox />
   ) : (

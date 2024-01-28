@@ -56,11 +56,11 @@ const TileTypeModifierItem = ({
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
 
-    if (file && !titleInputIsEmpty) {
+    if (!titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
-        img: file,
+        img: file ?? "",
         title: titleInputRef.current.input.value,
         additionalPrice: priceInputRef.current.input.value,
         description:
@@ -72,9 +72,9 @@ const TileTypeModifierItem = ({
       return;
     }
 
-    if (!file) {
-      setErrorFile(true);
-    }
+    // if (!file) {
+    //   setErrorFile(true);
+    // }
 
     if (titleInputIsEmpty) {
       setErrorTitle(true);

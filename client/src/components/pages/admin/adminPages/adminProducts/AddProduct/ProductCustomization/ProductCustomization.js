@@ -12,6 +12,7 @@ import { errorHandlingHelper } from "./errorHandlingHelper";
 import { AMList } from "./AddModifier/AddModifier.styled";
 import { PCContainer, PCWrapper } from "./ProductCustomization.styled";
 
+
 const ProductCustomization = ({ setDataHandler }) => {
   const [modifiers, setModifiers] = useState([]);
 

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { Select } from "antd";
+import { Select, Tooltip } from "antd";
+
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
+import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
 import {
@@ -18,8 +20,12 @@ const CustomizationSelectBlock = ({
   sizeLarge,
   saveHandler,
   customizationData,
+  clearFileListHandler,
   optionsOnChangeHandler,
 }) => {
+
+  console.log('saved flag', saved);
+  
   return (
     <PVISelectContainer saved={saved}>
       <PVIConentGroup>
@@ -67,8 +73,14 @@ const CustomizationSelectBlock = ({
       {saved ? (
         <CheckCircleOutlineOutlinedIcon />
       ) : (
-        <AddTaskOutlinedIcon onClick={saveHandler} />
+        <Tooltip title="Save">
+          <AddTaskOutlinedIcon onClick={saveHandler} />
+        </Tooltip>
       )}
+
+      <Tooltip title="Clear filelist">
+        <DeleteSweepOutlinedIcon onClick={() => clearFileListHandler(true)} />
+      </Tooltip>
     </PVISelectContainer>
   );
 };

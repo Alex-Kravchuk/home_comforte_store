@@ -29,6 +29,8 @@ const Product = ({
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
+
+    // TODO there are no default markers
     setCurrentFilters(createDefaultFilters(customizationData));
   }, []);
 
@@ -48,6 +50,8 @@ const Product = ({
   };
 
   console.log("current filters", currentFilters);
+
+  // TODO Якщо зміна параметру не впливає на зображення, то ігнорувати цю зміну (наприклад як Choose Size)
 
   return (
     <ProductWrapper previewMode={previewMode}>
@@ -75,3 +79,7 @@ const Product = ({
 };
 
 export default Product;
+
+
+// TODO скачати різін фото з різними фільтрами та протестувати все, чи добре працює
+// провести рефакторінг та написати коментарі до склданих ділянок коду

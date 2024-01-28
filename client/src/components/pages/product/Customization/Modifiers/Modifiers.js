@@ -27,6 +27,7 @@ const Modifiers = ({ data, filtersHandler }) => {
           <Empty description="There are no customization options" />
         ) : (
           <Collapse
+            accordion
             size="large"
             items={modifiers}
             defaultActiveKey={["1"]}

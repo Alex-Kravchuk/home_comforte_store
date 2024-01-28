@@ -39,16 +39,11 @@ const ProductImagesUploading = ({
     // clear file list when item of customization option was change by Select (in admin tools, adding of product images)
     setFileList([]);
 
-    // if product contains images by current selected customization option we use those data 
+    // if product contains images by current selected customization option we use those data
     // for display in fileList (in admin tools, adding of product images)
-
- 
     if (uploadedFileList && selectOptionsWasChanged) {
       uploadedFileList.forEach((item) => {
-        getBase64(item, (url) => {
-          setImageURL(url);
-          setFileList((state) => [...state, { originalFileObj: item, url }]);
-        });
+        setFileList((state) => [...state, item]);
       });
     }
   }, [selectOptionsWasChanged]);
@@ -56,6 +51,7 @@ const ProductImagesUploading = ({
   useEffect(() => {
     // when something changes in fileList we change the state in the parent component indicating the changes,
     // so we need to save it again (in admin tools, adding of product images)
+
     if (checkFileListChanges) {
       checkFileListChanges(fileList);
     }
@@ -121,7 +117,9 @@ const ProductImagesUploading = ({
       return;
     }
 
-    saveFileHandler(info.file);
+    if (dimensionTypeUpload) {
+      saveFileHandler(info.file);
+    }
   };
 
   const handleCancel = () => setPreviewOpen(false);
@@ -140,7 +138,7 @@ const ProductImagesUploading = ({
 
   const onRemoveHandler = (removedItem) => {
     setImageURL(null);
-    // saveFileHandler(null);
+
     setFileList((state) =>
       state.filter((file) => file.uid !== removedItem.uid)
     );
@@ -199,7 +197,7 @@ const ProductImagesUploading = ({
   };
 
   const viewerUploadConfig = {
-    maxCount: 34,
+    maxCount: 32,
     multiple: true,
     showUploadList: true,
     listType: "picture-card",

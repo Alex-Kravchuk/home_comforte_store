@@ -61,13 +61,6 @@ const PreviewProductPage = ({
   };
   return (
     <PPPWrapper>
-      <Button onClick={testRequest}>Make test post requst</Button>
-      <input
-        type="file"
-        multiple={true}
-        onChange={(e) => console.log("eee", e)}
-        ref={refff}
-      />
       <h2>This is a preview page for an upcoming product</h2>
       <h4>
         If everything is correct, below you should confirm the addition of the

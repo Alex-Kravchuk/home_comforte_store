@@ -23,7 +23,11 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 
-const ListType = ({ currentModifier, filtersHandler }) => {
+const ListType = ({
+  currentModifier,
+  filtersHandler,
+  sideDescription = false,
+}) => {
   const [localSelectedOption, setLocalSelectedOption] = useState(null);
   const viewport = useGetWindowSize();
 

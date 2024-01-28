@@ -42,12 +42,17 @@ export const PVISelectContainer = styled.div`
   svg {
     margin-left: 50px;
     cursor: pointer;
-    color: ${({ saved }) => (saved ? "#60a360" : "rgba(0, 0, 0, 0.3))")};
     transition: all 0.2s ease;
+    color: ${({ saved }) => (saved ? "#60a360" : "rgba(0, 0, 0, 0.3))")};
   }
+
 
   svg:hover {
     color: ${({ saved }) => (saved ? "#84e684" : "rgba(0, 0, 0, 0.8)")};
+  }
+
+  svg:last-child {
+    color: red;
   }
 
   svg:active {

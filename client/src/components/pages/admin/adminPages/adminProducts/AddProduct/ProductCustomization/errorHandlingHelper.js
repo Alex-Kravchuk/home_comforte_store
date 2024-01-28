@@ -25,6 +25,7 @@ export const errorHandlingHelper = (modifiers) => {
 
   modifiers.forEach(({ name, items }) => {
     const lastElement = items[items.length - 1];
+
     const lastElementIsEmpty =
       lastElement?.img === null ||
       lastElement?.price === null ||

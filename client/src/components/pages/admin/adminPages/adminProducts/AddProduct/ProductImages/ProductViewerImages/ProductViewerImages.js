@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Tooltip } from "antd";
+import { Empty, Tooltip } from "antd";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 
 import InfoHeader from "../../InfoHeader/InfoHeader";
@@ -43,17 +43,21 @@ const ProductViewerImages = ({
   }, [customizationData]);
 
   useEffect(() => {
+    setImages([]);
     const viewerFilter = viewerFiltersData.find(
       (filter) =>
         filter.options === transformObjNamesToString(currentFilterOptions)
     );
 
+    console.log("viewerFilter", viewerFilter);
+
     if (viewerFilter) {
-      setSavedCustomOption(Boolean(viewerFilter?.images.length !== 0));
+      setSavedCustomOption(viewerFilter.images.length !== 0);
       setImages(viewerFilter.images);
       setCurrentViewerFilter(viewerFilter);
     } else {
       setCurrentViewerFilter({});
+      setSavedCustomOption(false);
     }
   }, [currentFilterOptions]);
 
@@ -88,7 +92,7 @@ const ProductViewerImages = ({
 
   const saveCustomizationValues = () => {
     // block the save action when a small number of images error is seen
-    if (images.length === 0 || images.length < 17) {
+    if (images.length === 0 || images.length < 32) {
       setNoImagesError(true);
       return;
     }
@@ -110,7 +114,6 @@ const ProductViewerImages = ({
     if (differentLength && fileList.length !== 0) {
       setNoImagesError(false);
       setSavedCustomOption(false);
-
       if (fileList.length > 0) {
         setImages(fileList.map((item) => ({ ...item })));
       }
@@ -118,11 +121,12 @@ const ProductViewerImages = ({
   };
 
   const optionsOnChangeHandler = (modifierName, value) => {
-    setSavedCustomOption(false);
     const newOptions = { ...currentFilterOptions };
     newOptions[modifierName] = value;
     setCurrentFilterOptions(newOptions);
   };
+
+  console.log("check current filters", currentViewerFilter, images);
 
   return (
     <PVIWrapper>
@@ -131,30 +135,37 @@ const ProductViewerImages = ({
           <InfoHeader tooltipText={<div>{tooltipText}</div>} />
         </PVIHeaderContainer>
 
-        <CustomizationSelectBlock
-          saved={savedCustomOption}
-          resetToDefault={clearAllFlag}
-          customizationData={customizationData}
-          saveHandler={saveCustomizationValues}
-          optionsOnChangeHandler={optionsOnChangeHandler}
-        />
-        {noImagesError && (
-          <NoImagesErrorText>
-            You must upload a minimum of 17 images
-          </NoImagesErrorText>
-        )}
+        {customizationData.length !== 0 ? (
+          <>
+            <CustomizationSelectBlock
+              saved={savedCustomOption}
+              resetToDefault={clearAllFlag}
+              customizationData={customizationData}
+              saveHandler={saveCustomizationValues}
+              clearFileListHandler={clearFileListHandler}
+              optionsOnChangeHandler={optionsOnChangeHandler}
+            />
+            {noImagesError && (
+              <NoImagesErrorText>
+                You must upload a minimum of 32 images
+              </NoImagesErrorText>
+            )}
 
-        <ProductImagesUploading
-          uploadType="viewer"
-          clearFileListflag={clearAllFlag}
-          saveFileHandler={saveFileHandler}
-          clearFileListHandler={clearFileListHandler}
-          checkFileListChanges={checkFileListChanges}
-          selectOptionsWasChanged={currentViewerFilter}
-          uploadedFileList={
-            currentViewerFilter ? currentViewerFilter.images : null
-          }
-        />
+            <ProductImagesUploading
+              uploadType="viewer"
+              clearFileListflag={clearAllFlag}
+              saveFileHandler={saveFileHandler}
+              clearFileListHandler={clearFileListHandler}
+              checkFileListChanges={checkFileListChanges}
+              selectOptionsWasChanged={currentViewerFilter}
+              uploadedFileList={
+                currentViewerFilter ? currentViewerFilter.images : null
+              }
+            />
+          </>
+        ) : (
+          <Empty description="There are no product customization options" />
+        )}
       </PVIContainer>
     </PVIWrapper>
   );
