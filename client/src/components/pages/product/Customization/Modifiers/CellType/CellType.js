@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 
 import {
   Cell,
@@ -27,6 +27,7 @@ const CellType = ({ currentModifier, filtersHandler }) => {
 
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
+
     filtersHandler(currentModifier.name, item.title);
   };
   return (

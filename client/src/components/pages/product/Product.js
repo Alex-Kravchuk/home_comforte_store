@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Reviews from "./Reviews/Reviews";
 import Demonstration from "./Demonstration/Demonstration";
@@ -22,14 +22,15 @@ const Product = ({
   viewerFiltersData,
   previewMode = false,
 }) => {
-  const [currentFilters, setCurrentFilters] = useState({});
+  const [currentFilters, setCurrentFilters] = useState();
   const [currenViewerImages, setCurrentViewerImages] = useState([]);
+
+  const [currentFiltersForOrder, setCurrentFiltersForOrder] = useState();
 
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
-
     // TODO there are no default markers
     setCurrentFilters(createDefaultFilters(customizationData));
   }, []);
@@ -46,10 +47,13 @@ const Product = ({
   }, [currentFilters]);
 
   const filtersHandler = (modifierName, optionTitle) => {
-    setCurrentFilters((state) => ({ ...state, [modifierName]: optionTitle }));
+    setCurrentFilters((state) => ({
+      ...state,
+      [modifierName]: optionTitle,
+    }));
   };
 
-  console.log("current filters", currentFilters);
+  console.log("current filters", currentFilters, viewerFiltersData);
 
   // TODO Якщо зміна параметру не впливає на зображення, то ігнорувати цю зміну (наприклад як Choose Size)
 
@@ -79,7 +83,6 @@ const Product = ({
 };
 
 export default Product;
-
 
 // TODO скачати різін фото з різними фільтрами та протестувати все, чи добре працює
 // провести рефакторінг та написати коментарі до склданих ділянок коду

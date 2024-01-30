@@ -2,19 +2,34 @@ import React from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import {
+  CheckboxContainer,
   ModifierTitleContainer,
+  ModifierTitleLeftContainer,
   ModifierTitleWrapper,
   TitlePart,
   TitlePartGroupe,
 } from "./ModifierTitle.styled";
-import { Popconfirm, Tooltip } from "antd";
+import { Checkbox, Popconfirm } from "antd";
 
-const ModifierTitle = ({ name, displaymethod, id, deleteHandler }) => {
+const ModifierTitle = ({
+  id,
+  name,
+  displaymethod,
+  deleteHandler,
+  displayAffectHandler,
+}) => {
   const stopPropagationHandler = (e) => e.stopPropagation();
   return (
     <ModifierTitleWrapper>
       <ModifierTitleContainer>
-        <TitlePart>{name}</TitlePart>
+        <ModifierTitleLeftContainer>
+          <TitlePart>{name}</TitlePart>
+          <CheckboxContainer onClick={stopPropagationHandler}>
+            <span>do not affect the display of product</span>
+            <Checkbox onChange={(e) => displayAffectHandler(id, e.target.checked)} />
+          </CheckboxContainer>
+        </ModifierTitleLeftContainer>
+
         <TitlePartGroupe>
           <Popconfirm
             onClick={stopPropagationHandler}

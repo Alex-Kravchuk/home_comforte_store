@@ -46,12 +46,11 @@ export const PVISelectContainer = styled.div`
     color: ${({ saved }) => (saved ? "#60a360" : "rgba(0, 0, 0, 0.3))")};
   }
 
-
   svg:hover {
     color: ${({ saved }) => (saved ? "#84e684" : "rgba(0, 0, 0, 0.8)")};
   }
 
-  svg:last-child {
+  & > svg:last-child {
     color: red;
   }
 
@@ -97,4 +96,24 @@ export const PVIContentColumn = styled.div`
 
 export const NoDataContainer = styled.div`
   color: red;
+`;
+
+export const SelectContainer = styled.div`
+  position: relative;
+  padding-left: 30px;
+
+  & > div > svg {
+    margin-left: 0;
+    color: rgba(0, 0, 0, 0.5);
+  }
+`;
+
+export const InfoIconContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: center;
+  padding-left: 0 15px;
 `;

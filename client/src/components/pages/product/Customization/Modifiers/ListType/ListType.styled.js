@@ -95,6 +95,8 @@ export const ModifierImg = styled.img`
   height: 100%;
   box-sizing: border-box;
 `;
+
+export const ModifierDescrContainer = styled.div``;
 export const ModifieTitle = styled.div`
   text-align: center;
   font-size: 14px;

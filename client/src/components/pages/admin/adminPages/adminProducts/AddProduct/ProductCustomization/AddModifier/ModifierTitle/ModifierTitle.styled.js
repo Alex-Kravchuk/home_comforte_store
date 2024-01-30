@@ -11,6 +11,10 @@ export const ModifierTitleContainer = styled.div`
   }
 `;
 
+export const ModifierTitleLeftContainer = styled.div`
+  display: flex;
+`;
+
 export const TitlePart = styled.div`
   svg {
     transition: all 0.2s ease;
@@ -27,4 +31,12 @@ export const TitlePartGroupe = styled.div`
   display: flex;
   justify-content: space-between;
   width: 70px;
+`;
+
+export const CheckboxContainer = styled.div`
+  margin-left: 100px;
+
+  span {
+    margin-right: 20px;
+  }
 `;

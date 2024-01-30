@@ -23,11 +23,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 
-const ListType = ({
-  currentModifier,
-  filtersHandler,
-  sideDescription = false,
-}) => {
+const ListType = ({ currentModifier, filtersHandler }) => {
   const [localSelectedOption, setLocalSelectedOption] = useState(null);
   const viewport = useGetWindowSize();
 
@@ -49,6 +45,7 @@ const ListType = ({
 
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
+
     filtersHandler(currentModifier.name, item.title);
   };
 
@@ -87,6 +84,7 @@ const ListType = ({
                 <ModifierImg src={item.img.url} alt={item.title} />
                 <ModifierImgBorderContainer />
               </ModifierImgContainer>
+
               <ModifieTitle>{item.title}</ModifieTitle>
               <ModifierDescr>{item.description}</ModifierDescr>
             </ListTypeModifierContainer>

@@ -135,7 +135,7 @@ const TileTypeModifierItem = ({
           <ModifierPrice>
             {/* if price set like word (included) */}
             {!isNaN(data.additionalPrice)
-              ? data.additionalPrice + "$"
+              ? "+" + data.additionalPrice + "$"
               : data.additionalPrice}
           </ModifierPrice>
         )}

@@ -31,6 +31,7 @@ const TileType = ({ currentModifier, filtersHandler }) => {
 
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
+
     filtersHandler(currentModifier.name, item.title);
   };
   return (
@@ -47,7 +48,7 @@ const TileType = ({ currentModifier, filtersHandler }) => {
               <TilePrice>
                 {isNaN(item.additionalPrice)
                   ? item.additionalPrice
-                  : item.additionalPrice + "$"}
+                  : "+" + item.additionalPrice + "$"}
               </TilePrice>
             </TileTitleContainer>
 

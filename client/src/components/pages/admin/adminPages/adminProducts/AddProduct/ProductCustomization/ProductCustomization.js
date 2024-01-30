@@ -12,7 +12,6 @@ import { errorHandlingHelper } from "./errorHandlingHelper";
 import { AMList } from "./AddModifier/AddModifier.styled";
 import { PCContainer, PCWrapper } from "./ProductCustomization.styled";
 
-
 const ProductCustomization = ({ setDataHandler }) => {
   const [modifiers, setModifiers] = useState([]);
 
@@ -37,15 +36,31 @@ const ProductCustomization = ({ setDataHandler }) => {
 
   const onAddModifier = ({ name, displayMethod }) => {
     const newModifier = {
-      id: modifiers.length + 1,
       name,
+      items: [],
       displayMethod,
       furnitureId: 1,
-      items: [],
+      noAffectToDisplay: false,
+      id: modifiers.length + 1,
     };
 
     setModifiers((state) => [...state, newModifier]);
   };
+
+  const displayAffectHandler = (id, value) => {
+    const updatedData = modifiers.map((mod) => {
+      if (mod.id === id) {
+        mod.noAffectToDisplay = value;
+        return mod;
+      }
+
+      return mod;
+    });
+
+    setModifiers(updatedData);
+  };
+
+  // TODO Зробити окремі списки фільтрів. Ті які впливають на зображеня і ті які потрібні для замолвення (всі)
 
   const saveChangesHandler = (modifierId, newModifiersItems) => {
     const changedModifierItems = modifiers.map((mod) => {
@@ -68,6 +83,7 @@ const ProductCustomization = ({ setDataHandler }) => {
           name={name}
           displaymethod={displayMethod}
           deleteHandler={onDeleteModifier}
+          displayAffectHandler={displayAffectHandler}
         />
       ),
       children: (
@@ -100,6 +116,9 @@ const ProductCustomization = ({ setDataHandler }) => {
     setModifiers([]);
     setDataHandler([]);
   };
+
+  console.log('modifiers', modifiers);
+  
 
   return (
     <PCWrapper>
