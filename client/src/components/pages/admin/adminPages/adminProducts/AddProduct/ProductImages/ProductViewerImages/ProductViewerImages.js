@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-import { Empty, Tooltip } from "antd";
-import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
+import { Empty } from "antd";
 
 import InfoHeader from "../../InfoHeader/InfoHeader";
 import CustomizationSelectBlock from "./CustomizationSelectBlock";
 import ProductImagesUploading from "../ProductImagesUploading/ProductImagesUploading";
 
+import { transformObjNamesToString } from "../../../../../../../../helpers/transformObjNamesToString";
+
 import {
   PVIWrapper,
   PVIContainer,
-  PVIHeaderContainer,
-  PVIClearFileListContainer,
   NoImagesErrorText,
+  PVIHeaderContainer,
 } from "./ProductViewerImages.styled";
-import { transformObjNamesToString } from "../../../../../../../../helpers/transformObjNamesToString";
 
-const tooltipText = `Here you must upload a minimum of 17 images to view the product.
+const tooltipText = `Here you must upload 32 images to view the product.
 The product viewer works in 360, so your images should be such
 that each image rotates around its own axis. All images should have a
 single color background, shadows, etc., so that when scrolling
@@ -49,8 +48,6 @@ const ProductViewerImages = ({
         filter.options === transformObjNamesToString(currentFilterOptions)
     );
 
-    console.log("viewerFilter", viewerFilter);
-
     if (viewerFilter) {
       setSavedCustomOption(viewerFilter.images.length !== 0);
       setImages(viewerFilter.images);
@@ -70,6 +67,10 @@ const ProductViewerImages = ({
   const createCorrectOptionsName = () => {
     const currentFilterObject = {};
     customizationData.forEach((mod) => {
+      // we will ignore modifiers with no affect to display
+      if (mod.noAffectToDisplay) {
+        return;
+      }
       // first of all we check if there is such modifier option in current filter options
       // if it is, we use value from that, if not - default value
 
@@ -82,7 +83,6 @@ const ProductViewerImages = ({
         ).title;
       }
     });
-
     return currentFilterObject;
   };
 
@@ -111,6 +111,7 @@ const ProductViewerImages = ({
     const differentLength =
       fileList.length !== currentViewerFilter?.images?.length;
 
+    // if length i different show indicator that something was changed and update images list
     if (differentLength && fileList.length !== 0) {
       setNoImagesError(false);
       setSavedCustomOption(false);

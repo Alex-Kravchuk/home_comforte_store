@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button, Result, Tabs, Tooltip } from "antd";
+import { Result, Tabs, Tooltip } from "antd";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ProductImages from "./ProductImages/ProductImages";
 import ProductCustomization from "./ProductCustomization/ProductCustomization";
+import PreviewProductPage from "../../../../product/PreviewProductPage/PreviewProductPage";
 
 import { useGetWindowSize } from "../../../../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../../../../utils/viewport_size_consts";
 
 import {
+  TabLabel,
+  TabLabelText,
   AdminTitlesGroupe,
   AdminTitleContainer,
   AdminProductsWrapper,
   AdminProductsContainer,
-  TabLabel,
-  TabLabelText,
 } from "../AdminProducts.styled";
-import {
-  ConfirmedFlag,
-  CreateButtonContainer,
-  CreateConfirmContainer,
-  ErrorText,
-  TabWrapper,
-} from "./AddProduct.styled";
+import { TabWrapper } from "./AddProduct.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
-import PreviewProductPage from "../../../../product/PreviewProductPage/PreviewProductPage";
 
 const AddProduct = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
 
@@ -46,19 +36,6 @@ const AddProduct = () => {
   const [customizationData, setCustomizationData] = useState([]);
   // viewerFiltersData contains filters for request with images, which will be display in viewer
   const [viewerFiltersData, setViewerFiltersData] = useState([]);
-
-  const [createProductError, setCreateProductError] = useState(false);
-  const [wasConfirmed, setConfirmed] = useState(false);
-
-  useEffect(() => {
-    console.log("render productr page", location.state);
-
-    if (location.state?.confirmed) {
-      setConfirmed(true);
-    } else {
-      setConfirmed(false);
-    }
-  }, []);
 
   const items = [
     {
@@ -120,23 +97,6 @@ const AddProduct = () => {
     },
   ];
 
-  const createNewProductHandler = () => {
-    const thereAreAllProductData =
-      generalData.length !== 0 &&
-      previewImages.length !== 0 &&
-      customizationData.length !== 0;
-
-    if (!thereAreAllProductData) {
-      // setCreateProductError(true);
-      // return;
-    }
-
-    navigate("../../preview", {
-      state: { generalData, customizationData, previewImages },
-    });
-    setCreateProductError(false);
-  };
-
   console.log("====================================");
   console.log("general data:", generalData);
   console.log("====================================");
@@ -181,27 +141,6 @@ const AddProduct = () => {
         ) : (
           <Tabs type="card" size="small" items={items} defaultActiveKey="1" />
         )}
-
-        <CreateButtonContainer>
-          <CreateConfirmContainer>
-            <Button
-              type="primary"
-              size="large"
-              onClick={createNewProductHandler}
-            >
-              {wasConfirmed ? "Create a new product" : "Show product preview"}
-            </Button>
-            <ConfirmedFlag wasConfirmed={wasConfirmed}>
-              Confirmed <DoneAllOutlinedIcon />
-            </ConfirmedFlag>
-          </CreateConfirmContainer>
-          {createProductError && (
-            <ErrorText>
-              You can't create a new product without all the information about
-              it
-            </ErrorText>
-          )}
-        </CreateButtonContainer>
       </AdminProductsContainer>
     </AdminProductsWrapper>
   );

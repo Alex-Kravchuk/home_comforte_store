@@ -6,8 +6,8 @@ import Customization from "./Customization/Customization";
 
 import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../utils/viewport_size_consts";
-import { createDefaultFilters } from "../admin/adminPages/adminProducts/AddProduct/ProductImages/createDefaultFilters";
 import { transformObjNamesToString } from "../../../helpers/transformObjNamesToString";
+import { createDefaultFilters } from "../admin/adminPages/adminProducts/AddProduct/ProductImages/createDefaultFilters";
 
 import {
   ProductWrapper,
@@ -31,8 +31,11 @@ const Product = ({
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
-    // TODO there are no default markers
+    /**
+     * I have divided the filters into two categories in order to use the filters that change the product image separately from the filters that keep the image unchanged
+     *  */
     setCurrentFilters(createDefaultFilters(customizationData));
+    setCurrentFiltersForOrder(createDefaultFilters(customizationData, true));
   }, []);
 
   useEffect(() => {
@@ -46,16 +49,25 @@ const Product = ({
     }
   }, [currentFilters]);
 
-  const filtersHandler = (modifierName, optionTitle) => {
-    setCurrentFilters((state) => ({
-      ...state,
-      [modifierName]: optionTitle,
-    }));
+  const filtersHandler = (modifierName, optionTitle, noAffectToDisplay) => {
+    // we pass noAffectToDisplay flag from each type of modifiers and if it's true,
+    // we write this filter only to order filters, not in for display
+    if (noAffectToDisplay) {
+      setCurrentFiltersForOrder((state) => ({
+        ...state,
+        [modifierName]: optionTitle,
+      }));
+    } else {
+      setCurrentFilters((state) => ({
+        ...state,
+        [modifierName]: optionTitle,
+      }));
+    }
   };
 
-  console.log("current filters", currentFilters, viewerFiltersData);
-
-  // TODO Якщо зміна параметру не впливає на зображення, то ігнорувати цю зміну (наприклад як Choose Size)
+  console.log("filters for order:", currentFiltersForOrder);
+  console.log("filters for display:", currentFilters);
+  console.log("viewer filters data:", viewerFiltersData);
 
   return (
     <ProductWrapper previewMode={previewMode}>

@@ -17,14 +17,18 @@ export const errorHandlingHelper = (
     return defaultErrorText;
   }
 
-  const currentFilters = {};
+  // we don't write modifiers with noAffectToDisplay flag to default filters
+  const currentDefaultFilters = {};
   customizationData.forEach((mod) => {
-    currentFilters[mod.name] = mod.items.find(
+    if (mod.noAffectToDisplay) {
+      return;
+    }
+    currentDefaultFilters[mod.name] = mod.items.find(
       (item) => item.defaultMarker
     ).title;
   });
 
-  const defaultFilterOptions = transformObjNamesToString(currentFilters);
+  const defaultFilterOptions = transformObjNamesToString(currentDefaultFilters);
   const defaultFilter = filters.find(
     (fil) => fil.options === defaultFilterOptions
   );

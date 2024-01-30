@@ -28,7 +28,11 @@ const CellType = ({ currentModifier, filtersHandler }) => {
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
 
-    filtersHandler(currentModifier.name, item.title);
+    filtersHandler(
+      currentModifier.name,
+      item.title,
+      currentModifier.noAffectToDisplay
+    );
   };
   return (
     <CellTypeWrapper>

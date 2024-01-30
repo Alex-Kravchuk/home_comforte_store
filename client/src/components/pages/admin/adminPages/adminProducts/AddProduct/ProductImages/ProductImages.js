@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { PIBlock, PIContainer, PIWrapper } from "./ProductImages.styled";
-import { InfoBlockTitle } from "../AddProduct.styled";
+
+import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 import ProductViewerImages from "./ProductViewerImages/ProductViewerImages";
 import ProductPreviewImages from "./ProductPreviewImages/ProductPreviewImages";
-import { Collapse } from "antd";
-import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
+
 import { errorHandlingHelper } from "./errorHandlingHelper";
-import { transformObjNamesToString } from "../../../../../../../helpers/transformObjNamesToString";
 import { createDefaultFilters } from "./createDefaultFilters";
+import { transformObjNamesToString } from "../../../../../../../helpers/transformObjNamesToString";
+
+import { InfoBlockTitle } from "../AddProduct.styled";
+import { PIBlock, PIContainer, PIWrapper } from "./ProductImages.styled";
 
 const ProductImages = ({
   customizationData,
@@ -48,6 +50,7 @@ const ProductImages = ({
       localCustomOptions,
       previewData
     );
+
     if (error) {
       // debugger;
       setImagesError(error);
@@ -64,6 +67,8 @@ const ProductImages = ({
       (viewer) => viewer.options === newViewerOptions.options
     );
 
+    // it's need for first item in options list, because the first element is created before the images are loaded
+    // so we find it in list and change it to new item with images
     if (changedViewerIndex >= 0) {
       const copy = localCustomOptions.concat();
       copy.splice(changedViewerIndex, 1, newViewerOptions);
@@ -83,8 +88,6 @@ const ProductImages = ({
     setLocalCustomOptions([]);
     setPreviewData([]);
   };
-
-  console.log("clear all flag", clearAllFlag);
 
   return (
     <PIWrapper>

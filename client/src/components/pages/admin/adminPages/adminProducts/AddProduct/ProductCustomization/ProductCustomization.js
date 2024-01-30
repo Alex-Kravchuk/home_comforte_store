@@ -35,6 +35,7 @@ const ProductCustomization = ({ setDataHandler }) => {
   };
 
   const onAddModifier = ({ name, displayMethod }) => {
+    // noAffectToDisplay flag needs for sort modifiers, if true - thoose modifiers only for order, if false - for viewer
     const newModifier = {
       name,
       items: [],
@@ -60,7 +61,6 @@ const ProductCustomization = ({ setDataHandler }) => {
     setModifiers(updatedData);
   };
 
-  // TODO Зробити окремі списки фільтрів. Ті які впливають на зображеня і ті які потрібні для замолвення (всі)
 
   const saveChangesHandler = (modifierId, newModifiersItems) => {
     const changedModifierItems = modifiers.map((mod) => {
@@ -117,7 +117,6 @@ const ProductCustomization = ({ setDataHandler }) => {
     setDataHandler([]);
   };
 
-  console.log('modifiers', modifiers);
   
 
   return (
