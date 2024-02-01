@@ -10,11 +10,11 @@ import {
   CartButtonIconContainer,
 } from "./AddToCartButton.styled";
 
-const AddToCartButton = () => {
+const AddToCartButton = ({ sum = 0 }) => {
   return (
     <CartButtonWrapper>
       <CartButtonContainer>
-        <CartButtonPriceContainer>$6090</CartButtonPriceContainer>
+        <CartButtonPriceContainer>${sum}</CartButtonPriceContainer>
         <CartButtonIconContainer>
           <ShoppingCartOutlinedIcon />
           Add to cart

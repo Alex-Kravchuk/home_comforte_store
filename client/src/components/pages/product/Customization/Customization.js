@@ -14,6 +14,7 @@ import {
 } from "./Customization.styled";
 
 const Customization = ({
+  totalPrice,
   generalData,
   previewMode,
   customizationData = [],
@@ -27,7 +28,7 @@ const Customization = ({
         {bigScreen && (
           <ProductHeader
             name={generalData?.subGeneral?.name}
-            price={generalData?.subGeneral?.price}
+            price={totalPrice}
           />
         )}
         <Modifiers data={customizationData} filtersHandler={filtersHandler} />

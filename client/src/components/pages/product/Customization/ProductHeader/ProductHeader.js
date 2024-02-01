@@ -25,7 +25,7 @@ const ProductHeader = ({ name, price, rating = 0, reviewsNumber = 0 }) => {
             </ProductRatingValue>
             <ProductRatingNumber>{reviewsNumber} reviews</ProductRatingNumber>
           </ProductRating>
-          <ProductPrice>${price ? price : "00000"}</ProductPrice>
+          <ProductPrice>${price ? price : "0"}</ProductPrice>
         </ProductHeaderContainer>
       </ProductHeaderWrapper>
     </ProductHeaderCenterWrapper>

@@ -28,10 +28,15 @@ const CellType = ({ currentModifier, filtersHandler }) => {
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
 
+    const additionalPrice = isNaN(item.additionalPrice)
+      ? 0
+      : Number(item.additionalPrice);
+      
     filtersHandler(
       currentModifier.name,
       item.title,
-      currentModifier.noAffectToDisplay
+      currentModifier.noAffectToDisplay,
+      additionalPrice
     );
   };
   return (

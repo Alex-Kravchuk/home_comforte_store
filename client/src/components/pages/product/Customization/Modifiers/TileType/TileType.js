@@ -32,7 +32,16 @@ const TileType = ({ currentModifier, filtersHandler }) => {
   const selectItemHandler = (item) => {
     setLocalSelectedOption(item);
 
-    filtersHandler(currentModifier.name, item.title, currentModifier.noAffectToDisplay);
+    const additionalPrice = isNaN(item.additionalPrice)
+      ? 0
+      : Number(item.additionalPrice);
+
+    filtersHandler(
+      currentModifier.name,
+      item.title,
+      currentModifier.noAffectToDisplay,
+      additionalPrice
+    );
   };
   return (
     <TileTypeWrapper>

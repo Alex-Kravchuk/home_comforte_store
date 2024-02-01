@@ -25,7 +25,9 @@ const Product = ({
   const [currentFilters, setCurrentFilters] = useState();
   const [currenViewerImages, setCurrentViewerImages] = useState([]);
 
-  const [currentFiltersForOrder, setCurrentFiltersForOrder] = useState();
+  const [currentFiltersForOrder, setCurrentFiltersForOrder] = useState([]);
+
+  const [totalPrice, setTotalPrice] = useState(generalData?.subGeneral?.price);
 
   const vieport = useGetWindowSize();
   const bigScreen = vieport.width >= viewport_sizes.xl;
@@ -39,6 +41,18 @@ const Product = ({
   }, []);
 
   useEffect(() => {
+    // create a total price of all current filter options
+    if (currentFiltersForOrder.length > 0) {
+      const total = currentFiltersForOrder.reduce(
+        (sum, filter) => sum + filter.additionalPrice,
+        0
+      );
+
+      setTotalPrice(total + generalData?.subGeneral?.price);
+    }
+  }, [currentFiltersForOrder]);
+
+  useEffect(() => {
     const currentFiltersInString = transformObjNamesToString(currentFilters);
     const viewer = viewerFiltersData.find(
       (view) => view.options === currentFiltersInString
@@ -49,15 +63,27 @@ const Product = ({
     }
   }, [currentFilters]);
 
-  const filtersHandler = (modifierName, optionTitle, noAffectToDisplay) => {
+  const filtersHandler = (
+    modifierName,
+    optionTitle,
+    noAffectToDisplay,
+    additionalPrice
+  ) => {
+    const updatedFilters = currentFiltersForOrder.map((filter) => {
+      if (filter.hasOwnProperty(modifierName)) {
+        filter[modifierName] = optionTitle;
+        filter.additionalPrice = additionalPrice;
+
+        return filter;
+      }
+      return filter;
+    });
+
+    setCurrentFiltersForOrder(updatedFilters);
+
     // we pass noAffectToDisplay flag from each type of modifiers and if it's true,
-    // we write this filter only to order filters, not in for display
-    if (noAffectToDisplay) {
-      setCurrentFiltersForOrder((state) => ({
-        ...state,
-        [modifierName]: optionTitle,
-      }));
-    } else {
+    // we don't write this filter to filters for display, only to order filters
+    if (!noAffectToDisplay) {
       setCurrentFilters((state) => ({
         ...state,
         [modifierName]: optionTitle,
@@ -74,6 +100,7 @@ const Product = ({
       <ProductContainer>
         <ProudctInfoSection>
           <Demonstration
+            totalPrice={totalPrice}
             previewMode={previewMode}
             generalData={generalData}
             previewImages={previewImages}
@@ -81,6 +108,7 @@ const Product = ({
           />
           {bigScreen && (
             <Customization
+              totalPrice={totalPrice}
               previewMode={previewMode}
               generalData={generalData}
               filtersHandler={filtersHandler}

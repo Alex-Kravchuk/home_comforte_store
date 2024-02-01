@@ -5,6 +5,8 @@ import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import ProductViewerThumbnails from "./ProductViewerThumbnails";
 
+import noImage from "../../../../../assets/img/viewer/no-image.jpg";
+
 import {
   PVWrapper,
   PVContainer,
@@ -218,7 +220,7 @@ const ProductViewer = ({ images, previewMode }) => {
     <PVWrapper>
       {images.length === 0 ? (
         <NoImageContainer>
-          <Spin />
+          <img src={noImage} />
         </NoImageContainer>
       ) : (
         <PVContainer>

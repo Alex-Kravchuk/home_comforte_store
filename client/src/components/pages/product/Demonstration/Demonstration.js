@@ -23,6 +23,7 @@ import {
 } from "./Demonstration.styled";
 
 const Demonstration = ({
+  totalPrice,
   generalData,
   viewerImages,
   previewImages = [],
@@ -76,7 +77,7 @@ const Demonstration = ({
         {smallLaptopScreen && (
           <ProductHeader
             name={generalData?.subGeneral?.name}
-            price={generalData?.subGeneral?.price}
+            price={totalPrice}
           />
         )}
         <ViewerContainer>

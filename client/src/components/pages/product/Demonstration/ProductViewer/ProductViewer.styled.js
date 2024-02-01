@@ -214,6 +214,10 @@ export const FullScreenContainer = styled.div`
 
 export const NoImageContainer = styled.div`
   position: relative;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export const NoImageText = styled.div`
