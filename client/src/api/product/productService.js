@@ -1,5 +1,6 @@
 import axios from "axios";
 import { $host } from "..";
+import { asyncGetBase64 } from "../../helpers/getBase64";
 
 // get menu data
 
@@ -75,9 +76,60 @@ export class ProductService {
   };
 
   static updateCategories = async (data) => {
-    console.log('product service client', data);
-    
     const response = await $host.put("api/category/update", { data });
+    return response;
+  };
+
+  static createProduct = async (data) => {
+    const { name, price, description, category, type, subtype } = data;
+    const response = await $host.post("api/furniture", {
+      name,
+      price,
+      description,
+      typeId: type,
+      subTypeId: subtype,
+      categoryId: category,
+    });
+    return response.data;
+  };
+
+  static createProductDimension = async (data) => {
+    const formData = new FormData();
+
+    for (const key in data) {
+      const element = data[key];
+      formData.append(key, element);
+    }
+
+    const response = await $host.post("api/dimension", formData);
+    return response;
+  };
+
+  static createProductModifier = async (data, productId) => {
+    // preparing data for request
+    // default customization data has File object inside and url in base64 format
+    // {...img: {originalFileObj: File, url: [base64 string]}
+    // so we need remove File object from data for request and leave only base64 url
+    // I use base64 string on server side, convert it and write to static folder
+
+    const preparedData = data.map((mod) => {
+      const updatedItems = mod.items.map((item) => {
+        if (item.hasOwnProperty("img")) {
+          // Tile type modifier always has img field, but can be use without img
+          item.img = item.img.url ?? null;
+        }
+
+        return item;
+      });
+
+      mod.items = JSON.stringify(updatedItems);
+      return mod;
+    });
+
+    const response = await $host.post("api/modifier", {
+      data: preparedData,
+      furnitureId: productId,
+    });
     return response;
   };
 }

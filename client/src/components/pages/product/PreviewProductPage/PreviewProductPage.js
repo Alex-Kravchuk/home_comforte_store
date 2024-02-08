@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Product from "../Product";
-import { Link } from "react-router-dom";
-import { ButtonContainer, PPPWrapper } from "./PreviewProductPage.styled";
-import { Button } from "antd";
+
 import { ProductViewerService } from "../../../../api/productViewer/productViewerService";
+
+import { PPPWrapper } from "./PreviewProductPage.styled";
+import { Button } from "antd";
+import { asyncGetBase64 } from "../../../../helpers/getBase64";
 
 const PreviewProductPage = ({
   generalData,
@@ -34,14 +36,18 @@ const PreviewProductPage = ({
     const combinedData = { ...testData, images: refff.current.files };
     const formdata = new FormData();
 
+    const TESTTEST = await asyncGetBase64(refff.current.files[0])
+
+    debugger
+
     for (const key in combinedData) {
       if (key === "options") {
         formdata.append(key, JSON.stringify(combinedData[key]));
       } else {
         if (key === "images") {
-          Array.from(refff.current.files).forEach((item) =>
-            formdata.append("images", item, item.name)
-          );
+          Array.from(refff.current.files).forEach((item) => { 
+            formdata.append("images", item, item.name);
+          });
 
           break;
         }
@@ -61,6 +67,14 @@ const PreviewProductPage = ({
   };
   return (
     <PPPWrapper>
+      <Button onClick={testRequest}>Make test post requst</Button>
+      <input
+        type="file"
+        multiple={true}
+        onChange={(e) => console.log("eee", e)}
+        ref={refff}
+      />
+
       <h2>This is a preview page for an upcoming product</h2>
       <h4>
         If everything is correct, below you should confirm the addition of the
@@ -74,12 +88,6 @@ const PreviewProductPage = ({
         customizationData={customizationData}
         viewerFiltersData={viewerFiltersData}
       />
-
-      <ButtonContainer>
-        <Button size="large" type="primary">
-          All is well. Confirm
-        </Button>
-      </ButtonContainer>
     </PPPWrapper>
   );
 };

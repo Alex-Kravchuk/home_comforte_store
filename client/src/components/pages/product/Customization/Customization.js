@@ -32,7 +32,7 @@ const Customization = ({
           />
         )}
         <Modifiers data={customizationData} filtersHandler={filtersHandler} />
-        <AddToCartButton />
+        <AddToCartButton totalPrice={totalPrice} />
         <CustomizationFooter />
       </CustomizationContainer>
     </CustomizationWrapper>

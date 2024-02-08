@@ -90,3 +90,13 @@ export const ConfirmedFlag = styled.div`
 
   color: ${({ wasConfirmed }) => (wasConfirmed ? "green" : "inherit")};
 `;
+
+export const ButtonContainer = styled.div`
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
+`;

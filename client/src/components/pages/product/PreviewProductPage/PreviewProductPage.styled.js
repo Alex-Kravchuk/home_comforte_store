@@ -11,12 +11,3 @@ export const PPPWrapper = styled.div`
     text-align: center;
   }
 `;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-
-  a {
-    text-decoration: none;
-  }
-`;

@@ -3,18 +3,17 @@ import React from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import {
-  CartButtonContainer,
   CartButtonWrapper,
-  CartButtonPriceContainer,
-  CartButtonPrice,
+  CartButtonContainer,
   CartButtonIconContainer,
+  CartButtonPriceContainer,
 } from "./AddToCartButton.styled";
 
-const AddToCartButton = ({ sum = 0 }) => {
+const AddToCartButton = ({ totalPrice = 0 }) => {
   return (
     <CartButtonWrapper>
       <CartButtonContainer>
-        <CartButtonPriceContainer>${sum}</CartButtonPriceContainer>
+        <CartButtonPriceContainer>${totalPrice}</CartButtonPriceContainer>
         <CartButtonIconContainer>
           <ShoppingCartOutlinedIcon />
           Add to cart
