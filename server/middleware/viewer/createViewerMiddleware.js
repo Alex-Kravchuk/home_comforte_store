@@ -6,10 +6,11 @@ module.exports = async function (req, res, next) {
   try {
     const { options, modifierId, furnitureId, modifierOptionId } = req.body;
 
-    console.log("====================================");
-    console.log(req.body);
-    console.log(req.files);
-
+    console.log("=================pop===================");
+    // console.log(req.body.images);
+    // console.log(req.files.images);
+    // console.log(req.files.images[0]);
+    
     console.log("====================================");
     // return
     const allDataAreGiven =
@@ -29,6 +30,9 @@ module.exports = async function (req, res, next) {
     console.log("REQ FILES", req.files);
 
     const { images } = req.files;
+
+    console.log('IMAGES', JSON.parse(images[0].name));
+    
 
     if (!images) {
       return next(

@@ -2,36 +2,14 @@ const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
 
 const { Furniture, Rating } = require("../models/models");
+const furnitureService = require("../services/furniture-service");
 
 class FurnitureController {
   static errorSource = "furniture controller";
   async create(req, res, next) {
     try {
-      let filesNames;
-
-      const {
-        name,
-        typeId,
-        categoryId,
-        subTypeId,
-        collectionId,
-        description,
-        price,
-      } = req.body;
-
-      const { img } = req.files;
-      filesNames = createImgName(img, "ARRAY");
-
-      const furniture = await Furniture.create({
-        name,
-        price: Number(price),
-        typeId,
-        categoryId,
-        subTypeId,
-        description,
-        collectionId,
-        img: filesNames,
-      });
+  
+      const furniture = await furnitureService.createFurniture(req.body);
 
       return res.json(furniture);
     } catch (error) {

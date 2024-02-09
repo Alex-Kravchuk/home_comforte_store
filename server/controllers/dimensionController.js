@@ -1,33 +1,13 @@
 const ApiError = require("../error/ApiError");
 
 const { Dimension } = require("../models/models");
-const createImgName = require("../helpers/createImgName");
+const furnitureService = require("../services/furniture-service");
 
 class DimensionController {
   static errorSource = "dimension controller";
   async create(req, res, next) {
     try {
-      let fileName;
-      const { furnitureId, details } = req.body;
-
-      const detailsParse = JSON.parse(details);
-
-      const alreadyExists = await Dimension.findOne({ where: { furnitureId } });
-      if (alreadyExists) {
-        return next(ApiError.duplicateName(DimensionController.errorSource));
-      }
-
-      if (req.files) {
-        const { img } = req.files;
-        fileName = createImgName(img, "STRING");
-      }
-
-      const dimension = await Dimension.create({
-        furnitureId,
-        details: detailsParse,
-        img: fileName,
-      });
-
+      const dimension = await furnitureService.createFurnitureDimenions(req);
       return res.json(dimension);
     } catch (error) {
       return next(

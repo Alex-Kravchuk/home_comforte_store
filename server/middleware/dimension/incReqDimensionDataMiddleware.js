@@ -1,5 +1,5 @@
 const ApiError = require("../../error/ApiError");
-const { Furniture } = require("../../models/models");
+const { Furniture, Dimension } = require("../../models/models");
 
 module.exports = async (req, res, next) => {
   try {
@@ -31,6 +31,14 @@ module.exports = async (req, res, next) => {
             "The furnitureId violates the foreign key rule. The furniture with this identifier was not found",
             errorSource
           )
+        );
+      }
+
+      // TODO not required
+      const alreadyExists = await Dimension.findOne({ where: { furnitureId } });
+      if (alreadyExists) {
+        return next(
+          ApiError.duplicate("dimension value", FurnitureService.errorSource)
         );
       }
     }

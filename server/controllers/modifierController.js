@@ -1,38 +1,20 @@
 const ApiError = require("../error/ApiError");
 const { Modifier } = require("../models/models");
 
-const createImgName = require("../helpers/createImgName");
-const createModifier = require("../helpers/createModifier");
+const furnitureService = require("../services/furniture-service");
 
 class ModifierController {
   static errorSource = "modifier controller";
   async create(req, res, next) {
     try {
-      let fileNames;
-      const { name, descriptions, displayMethod, furnitureId } = req.body;
+      const { data, furnitureId } = req.body;
 
-      const alreadyExists = await Modifier.findOne({
-        where: { name, furnitureId },
-      });
+      const modifiers = await furnitureService.createModifiers(
+        data,
+        furnitureId
+      );
 
-      if (alreadyExists) {
-        return next(ApiError.duplicateName(ModifierController.errorSource));
-      }
-
-      if (req.files) {
-        const { img } = req.files;
-        fileNames = createImgName(img, "ARRAY");
-      }
-
-      const items = createModifier(displayMethod, fileNames, descriptions);
-      const modifier = await Modifier.create({
-        name,
-        items,
-        displayMethod,
-        furnitureId,
-      });
-
-      return res.json(modifier);
+      return res.json(modifiers);
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, ModifierController.errorSource)
@@ -40,7 +22,7 @@ class ModifierController {
     }
   }
 
-// to get all modifiers of current furniture
+  // to get all modifiers of current furniture
   async getOne(req, res) {
     try {
       const { id } = req.params;

@@ -86,8 +86,7 @@ const Furniture = sequelize.define("furniture", {
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   price: { type: DataTypes.INTEGER, allowNull: false },
   rating: { type: DataTypes.STRING, defaultValue: 0 },
-  img: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
-  description: { type: DataTypes.STRING, allowNull: false },
+  description: { type: DataTypes.TEXT, allowNull: false },
 });
 
 const Modifier = sequelize.define("modifier", {
@@ -123,7 +122,6 @@ const Collection = sequelize.define("collection", {
 const Viewer = sequelize.define("viewer", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   options: { type: DataTypes.JSON, allowNull: false },
-  modifierOptionId: { type: DataTypes.INTEGER, allowNull: false },
   images: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
 });
 
@@ -203,9 +201,6 @@ Furniture.belongsTo(Collection);
 
 Furniture.hasMany(Viewer);
 Viewer.belongsTo(Furniture);
-
-Modifier.hasMany(Viewer);
-Viewer.belongsTo(Modifier);
 
 module.exports = {
   User,

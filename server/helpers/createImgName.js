@@ -16,7 +16,6 @@ const createImgName = (image, type) => {
     image.forEach((img) => {
       let fileName = uuid.v4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
-
       filesNames.push(fileName);
     });
 
