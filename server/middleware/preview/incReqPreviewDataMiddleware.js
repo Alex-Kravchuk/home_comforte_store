@@ -1,20 +1,11 @@
 const ApiError = require("../../error/ApiError");
-const { Furniture } = require("../../models/models");
+const { Furniture, Preview } = require("../../models/models");
 
 module.exports = async (req, res, next) => {
   try {
     const errorSource = "preview controller";
 
-    const { furnitureId, details } = req.body;
-
-    if (!details) {
-      return next(
-        ApiError.requestDataAreNotDefined(
-          "The details are not defined",
-          errorSource
-        )
-      );
-    }
+    const { furnitureId } = req.body;
 
     if (isNaN(furnitureId)) {
       return next(
@@ -35,9 +26,17 @@ module.exports = async (req, res, next) => {
       }
     }
 
+    const alreadyExists = await Preview.findOne({ where: { furnitureId } });
+    if (alreadyExists) {
+      return next(ApiError.duplicate("preview", errorSource));
+    }
+
     if (!req.files) {
       return next(
-        ApiError.requestDataAreNotDefined("The img is not defined", errorSource)
+        ApiError.requestDataAreNotDefined(
+          "The images are not defined",
+          errorSource
+        )
       );
     }
 

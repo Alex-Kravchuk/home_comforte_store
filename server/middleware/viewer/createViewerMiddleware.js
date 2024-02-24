@@ -4,17 +4,13 @@ const { Viewer } = require("../../models/models");
 module.exports = async function (req, res, next) {
   const errorSource = "viewer controller";
   try {
-    const { options, modifierId, furnitureId, modifierOptionId } = req.body;
+    const { options, furnitureId } = req.body;
 
     console.log("=================pop===================");
-    // console.log(req.body.images);
-    // console.log(req.files.images);
-    // console.log(req.files.images[0]);
-    
+    console.log(req.body);
     console.log("====================================");
-    // return
-    const allDataAreGiven =
-      options && modifierId && furnitureId && modifierOptionId;
+
+    const allDataAreGiven = options && furnitureId;
 
     if (!allDataAreGiven) {
       return next(ApiError.requestDataAreNotDefined(null, errorSource));
@@ -27,32 +23,36 @@ module.exports = async function (req, res, next) {
       );
     }
 
-    console.log("REQ FILES", req.files);
+    // duplicate checking
 
-    const { images } = req.files;
+    // when options is array
+    if (Array.isArray(options)) {
+      for (const option of options) {
+        console.log("prin options", option);
 
-    console.log('IMAGES', JSON.parse(images[0].name));
-    
+        const viewer = await Viewer.findOne({
+          where: {
+            options: JSON.parse(option),
+            furnitureId,
+          },
+        });
 
-    if (!images) {
-      return next(
-        ApiError.requestDataAreNotDefined("No image selected", errorSource)
-      );
-    }
+        if (viewer) {
+          return next(ApiError.duplicate("options", errorSource));
+        }
+      }
+    } else {
+      // when options is string
+      const viewer = await Viewer.findOne({
+        where: {
+          options: JSON.parse(options),
+          furnitureId,
+        },
+      });
 
-    // name checking
-
-    const viewer = await Viewer.findOne({
-      where: {
-        options: JSON.parse(options),
-        modifierId,
-        furnitureId,
-        modifierOptionId,
-      },
-    });
-
-    if (viewer) {
-      return next(ApiError.duplicateName(errorSource));
+      if (viewer) {
+        return next(ApiError.duplicate("options", errorSource));
+      }
     }
 
     next();
