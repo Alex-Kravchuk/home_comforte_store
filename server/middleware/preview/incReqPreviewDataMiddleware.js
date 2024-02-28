@@ -7,6 +7,10 @@ module.exports = async (req, res, next) => {
 
     const { furnitureId } = req.body;
 
+    console.log('====================================');
+    console.log(req.body);
+    console.log('====================================');
+
     if (isNaN(furnitureId)) {
       return next(
         ApiError.requestDataAreNotDefined(

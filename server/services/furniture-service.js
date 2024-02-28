@@ -162,14 +162,20 @@ class FurnitureService {
   }
 
   async createFurniturePreview(images, furnitureId) {
-    console.log("furniture IDDDDDD", furnitureId);
+    console.log("furniture IDDDDDD", images);
 
-    const content = Array.from(images).map((img) => {
+    const content = Array.from(images).map((image) => {
       // img.name is descriptions for preview image from client
-      const imgName = createImgName(img, "STRING");
+      const img = createImgName(image, "STRING");
+      const description = image.name === "no description" ? "" : image.name;
 
-      return { description: img.name, img: imgName };
+      console.log("description:", description);
+      console.log("image:", img);
+
+      return { description: description, img: img };
     });
+
+    console.log("CONTENT", content);
 
     const preview = await Preview.create({
       furnitureId,

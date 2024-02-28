@@ -17,7 +17,10 @@ class AdminService {
       return;
     }
 
-    const hashPassword = bcrypt.hash(process.env.ADMIN_PASSWORD, 5);
+    const hashPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 5);
+
+    console.log('hashpassword', hashPassword);
+    
     const admin = await Admin.create({
       email: process.env.ADMIN_EMAIL,
       name: process.env.ADMIN_NAME,
