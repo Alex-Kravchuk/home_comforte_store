@@ -65,7 +65,10 @@ const CellTypeModifierItem = ({
   };
 
   const titleInputOnChangeHandler = (e) => {
-    if (e.target.value.length === 0) {
+    // throw error if string has " symbol for correct work JSON on server side
+    const regexStringCheck = /"/;
+
+    if (e.target.value.length === 0 || regexStringCheck.test(e.target.value)) {
       setErrorTitle(true);
       return;
     }

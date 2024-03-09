@@ -113,17 +113,27 @@ const AddProduct = () => {
         details: JSON.stringify(generalData.dimension.info),
       };
 
-      const productDimension = await ProductService.createProductDimension(
-        dimensionConfig
-      );
+      // const productDimension = await ProductService.createProductDimension(
+      //   dimensionConfig
+      // );
 
-      const productModifier = await ProductService.createProductModifier(
+      const productModifiers = await ProductService.createProductModifier(
         customizationData,
         product.id
       );
 
+      // const productViewer = await ProductService.createProductViewer(
+      //   viewerFiltersData,
+      //   product.id
+      // );
+
+      // const productPreview = await ProductService.createProductPreviewImage(
+      //   previewImages,
+      //   product.id
       
-      console.log("product dimensions:", productDimension);
+      // );
+
+      // console.log("product dimensions:", productDimension);
     } catch (error) {
       console.log("error:", error.message);
     }

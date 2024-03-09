@@ -40,9 +40,10 @@ const ProductCustomization = ({ setDataHandler }) => {
       name,
       items: [],
       displayMethod,
-      furnitureId: 1,
       noAffectToDisplay: false,
       id: modifiers.length + 1,
+
+      // TODO IF ID IS NEEded
     };
 
     setModifiers((state) => [...state, newModifier]);
@@ -60,7 +61,6 @@ const ProductCustomization = ({ setDataHandler }) => {
 
     setModifiers(updatedData);
   };
-
 
   const saveChangesHandler = (modifierId, newModifiersItems) => {
     const changedModifierItems = modifiers.map((mod) => {
@@ -116,8 +116,6 @@ const ProductCustomization = ({ setDataHandler }) => {
     setModifiers([]);
     setDataHandler([]);
   };
-
-  
 
   return (
     <PCWrapper>

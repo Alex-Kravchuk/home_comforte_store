@@ -36,16 +36,12 @@ const PreviewProductPage = ({
     const combinedData = { ...testData, images: refff.current.files };
     const formdata = new FormData();
 
-    const TESTTEST = await asyncGetBase64(refff.current.files[0])
-
-    debugger
-
     for (const key in combinedData) {
       if (key === "options") {
         formdata.append(key, JSON.stringify(combinedData[key]));
       } else {
         if (key === "images") {
-          Array.from(refff.current.files).forEach((item) => { 
+          Array.from(refff.current.files).forEach((item) => {
             formdata.append("images", item, item.name);
           });
 

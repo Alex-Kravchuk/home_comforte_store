@@ -84,11 +84,13 @@ const ListType = ({ currentModifier, filtersHandler }) => {
       <ListTypeContainer>
         {!smallLaptopScreen &&
           currentModifier.items.map((item) => (
+            
             <ListTypeModifierContainer
               key={item.id}
               onClick={() => selectItemHandler(item)}
               selected={checkIfSelected(item)}
             >
+              {console.log(item, 'from LISTTY{E')}
               <ModifierImgContainer>
                 <ModifierImg src={item.img.url} alt={item.title} />
                 <ModifierImgBorderContainer />

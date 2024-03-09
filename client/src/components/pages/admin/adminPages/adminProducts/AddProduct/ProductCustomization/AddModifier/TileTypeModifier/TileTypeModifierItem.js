@@ -34,6 +34,7 @@ const TileTypeModifierItem = ({
   const [editModeOn, setEditMode] = useState(true);
   const [fileIsEmpty, setErrorFile] = useState(false);
   const [titleIsEmpty, setErrorTitle] = useState(false);
+  const [priceIsEmpty, setErrorPrice] = useState(false);
   const [defaultMarker, setDefaultMarker] = useState(false);
 
   const priceInputRef = useRef();
@@ -55,12 +56,13 @@ const TileTypeModifierItem = ({
 
   const saveModifierChanges = () => {
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
+    const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (!titleInputIsEmpty) {
+    if (!titleInputIsEmpty && !priceInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,
-        img: file ?? "",
+        img: file ?? '',
         title: titleInputRef.current.input.value,
         additionalPrice: priceInputRef.current.input.value,
         description:
@@ -72,12 +74,12 @@ const TileTypeModifierItem = ({
       return;
     }
 
-    // if (!file) {
-    //   setErrorFile(true);
-    // }
-
     if (titleInputIsEmpty) {
       setErrorTitle(true);
+    }
+
+    if (priceInputIsEmpty) {
+      setErrorPrice(true);
     }
   };
 
@@ -86,12 +88,24 @@ const TileTypeModifierItem = ({
   };
 
   const titleInputOnChangeHandler = (e) => {
-    if (e.target.value.length === 0) {
+    // throw error if string has " symbol for correct work JSON on server side
+    const regexStringCheck = /"/;
+
+    if (e.target.value.length === 0 || regexStringCheck.test(e.target.value)) {
       setErrorTitle(true);
       return;
     }
 
     setErrorTitle(false);
+  };
+
+  const priceInputOnChangeHandler = (e) => {
+    if (e.target.value.length === 0) {
+      setErrorPrice(true);
+      return;
+    }
+
+    setErrorPrice(false);
   };
 
   return (
@@ -127,9 +141,11 @@ const TileTypeModifierItem = ({
         {editModeOn ? (
           <Input
             size="small"
-            placeholder="Additional price"
             ref={priceInputRef}
+            placeholder="Additional price"
+            status={priceIsEmpty && "error"}
             defaultValue={data.additionalPrice}
+            onChange={priceInputOnChangeHandler}
           />
         ) : (
           <ModifierPrice>

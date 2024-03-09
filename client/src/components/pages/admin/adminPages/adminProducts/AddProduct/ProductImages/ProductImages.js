@@ -52,7 +52,6 @@ const ProductImages = ({
     );
 
     if (error) {
-      // debugger;
       setImagesError(error);
       return;
     }

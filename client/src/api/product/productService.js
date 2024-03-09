@@ -112,24 +112,85 @@ export class ProductService {
     // so we need remove File object from data for request and leave only base64 url
     // I use base64 string on server side, convert it and write to static folder
 
+    const formData = new FormData();
+
+    // we make copy of each part of customization data for request,
+    // because we remove img from original data
+
     const preparedData = data.map((mod) => {
       const updatedItems = mod.items.map((item) => {
+        const itemCopy = Object.assign({}, item);
+        const imageNameConfig = { modifierID: mod.id, modifierItemID: item.id };
+
+        const itemFile = item.img.originalFileObj;
+
+        // Tile type modifier always has img field, but can be use without img
         if (item.hasOwnProperty("img")) {
-          // Tile type modifier always has img field, but can be use without img
-          item.img = item.img.url ?? null;
+          formData.append("images", itemFile, JSON.stringify(imageNameConfig));
         }
 
-        return item;
+        delete itemCopy.img;
+
+        return itemCopy;
       });
 
-      mod.items = JSON.stringify(updatedItems);
-      return mod;
+      const modCopy = JSON.parse(JSON.stringify(mod));
+      modCopy.items = updatedItems;
+      return modCopy;
     });
 
-    const response = await $host.post("api/modifier", {
-      data: preparedData,
-      furnitureId: productId,
+    formData.append("data", JSON.stringify(preparedData));
+    formData.append("furnitureId", productId);
+
+    const response = await $host.post("api/modifier", formData);
+    return response;
+  };
+
+  static createProductViewer = async (data, productId) => {
+    const preparedImagesData = data.map((item) => ({
+      ...item,
+      images: item.images.map((img) => img.originalFileObj),
+    }));
+
+    const formdata = new FormData();
+
+    // console.log("prepared images", preparedImagesData);
+
+    formdata.append("furnitureId", productId);
+
+    preparedImagesData.forEach((item) => {
+      formdata.append("options", item.options);
+      item.images.forEach((img) => {
+        formdata.append("images", img, item.options);
+      });
     });
+
+    const response = await $host.post("api/viewer", formdata);
+    return response;
+  };
+
+  static createProductPreviewImage = async (data, productId) => {
+    const formdata = new FormData();
+
+    formdata.append("furnitureId", productId);
+
+    console.log("sukaaaaa", data);
+
+    data.forEach((prevItem) => {
+      // write preview image description as a name in File object
+      // for simplify data for request
+      console.log("PREVI ITEM", prevItem);
+
+      formdata.append(
+        "images",
+        prevItem.originalFileObj,
+        // if prevItem doesn't have desctiprion, we pass such string for equal on the server side
+        // and after true equal we pass emty string for such item in DB
+        prevItem.description || "no description"
+      );
+    });
+
+    const response = await $host.post("api/preview", formdata);
     return response;
   };
 }

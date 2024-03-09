@@ -35,6 +35,7 @@ const CustomizationSelectBlock = ({
           )}
           {customizationData.map(({ name, items, noAffectToDisplay }) => (
             <CustomizationSelectRow
+              key={name}
               name={name}
               items={items}
               sizeLarge={sizeLarge}
