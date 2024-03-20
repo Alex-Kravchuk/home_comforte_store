@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { images } from "./ProductViewer/imagesForTest";
-
 import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 
 import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
@@ -26,6 +24,7 @@ const Demonstration = ({
   totalPrice,
   generalData,
   viewerImages,
+  customizationData,
   previewImages = [],
   previewMode = false,
 }) => {
@@ -85,7 +84,9 @@ const Demonstration = ({
           {tabletScreen && (
             <ViewerToggleButton zoomOn={zoomOn} zoomHandler={zoomHandler} />
           )}
-          {smallLaptopScreen && <Customization />}
+          {smallLaptopScreen && (
+            <Customization customizationData={customizationData} />
+          )}
 
           <ProductPreview previewImages={previewImages} />
         </ViewerContainer>

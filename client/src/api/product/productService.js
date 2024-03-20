@@ -96,13 +96,16 @@ export class ProductService {
   static createProductDimension = async (data) => {
     const formData = new FormData();
 
+    console.log("suk", data);
+
     for (const key in data) {
       const element = data[key];
+
       formData.append(key, element);
     }
 
     const response = await $host.post("api/dimension", formData);
-    return response;
+    return response.data;
   };
 
   static createProductModifier = async (data, productId) => {
@@ -118,7 +121,13 @@ export class ProductService {
     // because we remove img from original data
 
     const preparedData = data.map((mod) => {
+      const modCopy = JSON.parse(JSON.stringify(mod));
+
       const updatedItems = mod.items.map((item) => {
+        if (!item.img) {
+          return item;
+        }
+
         const itemCopy = Object.assign({}, item);
         const imageNameConfig = { modifierID: mod.id, modifierItemID: item.id };
 
@@ -134,7 +143,6 @@ export class ProductService {
         return itemCopy;
       });
 
-      const modCopy = JSON.parse(JSON.stringify(mod));
       modCopy.items = updatedItems;
       return modCopy;
     });
@@ -143,7 +151,7 @@ export class ProductService {
     formData.append("furnitureId", productId);
 
     const response = await $host.post("api/modifier", formData);
-    return response;
+    return response.data;
   };
 
   static createProductViewer = async (data, productId) => {
@@ -166,7 +174,7 @@ export class ProductService {
     });
 
     const response = await $host.post("api/viewer", formdata);
-    return response;
+    return response.data;
   };
 
   static createProductPreviewImage = async (data, productId) => {
@@ -191,6 +199,6 @@ export class ProductService {
     });
 
     const response = await $host.post("api/preview", formdata);
-    return response;
+    return response.data;
   };
 }

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Button, Result, Tabs, Tooltip } from "antd";
+import { Button, Result, Spin, Tabs, Tooltip, message } from "antd";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
@@ -21,15 +22,17 @@ import {
   AdminProductsWrapper,
   AdminProductsContainer,
 } from "../AdminProducts.styled";
-import { ButtonContainer, TabWrapper } from "./AddProduct.styled";
+import { ButtonContainer, ErrorText, TabWrapper } from "./AddProduct.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 import { ProductService } from "../../../../../../api/product/productService";
 
 const AddProduct = () => {
   const viewport = useGetWindowSize();
   const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const [activeTab, setActiveTab] = useState("1");
-
   // generalData contains information about the general data of the product and its dimensions
   const [generalData, setGeneralData] = useState([]);
   // previewImages contains images from the real world
@@ -38,6 +41,10 @@ const AddProduct = () => {
   const [customizationData, setCustomizationData] = useState([]);
   // viewerFiltersData contains filters for request with images, which will be display in viewer
   const [viewerFiltersData, setViewerFiltersData] = useState([]);
+
+  useEffect(() => {
+    console.log("general data was reset", generalData);
+  }, [generalData]);
 
   const items = [
     {
@@ -101,11 +108,12 @@ const AddProduct = () => {
 
   const createProductRequest = async () => {
     try {
+      setLoading(true);
       const product = await ProductService.createProduct(
         generalData.subGeneral
       );
 
-      console.log("product:", product);
+      console.log("suchasd", product);
 
       const dimensionConfig = {
         furnitureId: product.id,
@@ -113,14 +121,14 @@ const AddProduct = () => {
         details: JSON.stringify(generalData.dimension.info),
       };
 
-      // const productDimension = await ProductService.createProductDimension(
-      //   dimensionConfig
-      // );
-
-      const productModifiers = await ProductService.createProductModifier(
-        customizationData,
-        product.id
+      const productDimension = await ProductService.createProductDimension(
+        dimensionConfig
       );
+
+      // const productModifiers = await ProductService.createProductModifier(
+      //   customizationData,
+      //   product.id
+      // );
 
       // const productViewer = await ProductService.createProductViewer(
       //   viewerFiltersData,
@@ -130,13 +138,37 @@ const AddProduct = () => {
       // const productPreview = await ProductService.createProductPreviewImage(
       //   previewImages,
       //   product.id
-      
       // );
 
+      console.log("product:", product);
       // console.log("product dimensions:", productDimension);
+      // console.log("product modifiers:", productModifiers);
+      // console.log("product viewer:", productViewer);
+      // console.log("product preview:", productPreview);
+      setLoading(false);
+      setError(false);
+      messageApi.open({
+        type: "success",
+        content: "The product was successfully created!",
+      });
     } catch (error) {
-      console.log("error:", error.message);
+      console.log("error:", error);
+      setLoading(false);
+      setError(error.response.data.message);
+      messageApi.open({
+        type: "error",
+        content: error.response.data.message,
+      });
     }
+  };
+
+  const resetForNewProduct = () => {
+    setActiveTab("1");
+    window.scrollTo(0, 0);
+    setGeneralData([]);
+    setPreviewImages([]);
+    setCustomizationData([]);
+    setViewerFiltersData([]);
   };
 
   console.log("====================================");
@@ -186,16 +218,41 @@ const AddProduct = () => {
             size="small"
             items={items}
             defaultActiveKey="1"
+            activeKey={activeTab}
             onChange={(key) => setActiveTab(key)}
           />
         )}
 
         {activeTab === "4" && (
-          <ButtonContainer>
-            <Button size="large" type="primary" onClick={createProductRequest}>
-              All is well. Confirm
-            </Button>
-          </ButtonContainer>
+          <>
+            {contextHolder}
+
+            {!loading && error === false ? (
+              <Result
+                status="success"
+                title="Product was successfully created!"
+                extra={[
+                  <Button key="redirect">
+                    Go to the created product page
+                  </Button>,
+                  <Button key="new" onClick={resetForNewProduct}>
+                    Add a new product
+                  </Button>,
+                ]}
+              />
+            ) : (
+              <ButtonContainer>
+                <Button
+                  size="large"
+                  type="primary"
+                  loading={loading}
+                  onClick={createProductRequest}
+                >
+                  All is well. Confirm
+                </Button>
+              </ButtonContainer>
+            )}
+          </>
         )}
       </AdminProductsContainer>
     </AdminProductsWrapper>

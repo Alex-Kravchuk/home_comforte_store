@@ -76,7 +76,7 @@ export const CreateConfirmContainer = styled.div`
 export const ErrorText = styled.div`
   color: red;
   font-size: 18px;
-  font-weight: 600;
+  margin-top: 10px;
 `;
 
 export const ConfirmedFlag = styled.div`

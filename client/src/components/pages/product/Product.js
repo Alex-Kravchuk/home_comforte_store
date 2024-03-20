@@ -105,6 +105,7 @@ const Product = ({
             generalData={generalData}
             previewImages={previewImages}
             viewerImages={currenViewerImages}
+            customizationData={customizationData}
           />
           {bigScreen && (
             <Customization
@@ -123,6 +124,3 @@ const Product = ({
 };
 
 export default Product;
-
-// TODO скачати різін фото з різними фільтрами та протестувати все, чи добре працює
-// провести рефакторінг та написати коментарі до склданих ділянок коду

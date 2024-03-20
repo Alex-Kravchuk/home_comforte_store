@@ -28,10 +28,6 @@ const PreviewProductPage = ({
       modifierOptionId: 12,
     };
 
-    // console.log(refff.current.files);
-    // Array.from(refff.current.files).forEach((item) =>
-    //   console.log("file", item)
-    // );
 
     const combinedData = { ...testData, images: refff.current.files };
     const formdata = new FormData();
