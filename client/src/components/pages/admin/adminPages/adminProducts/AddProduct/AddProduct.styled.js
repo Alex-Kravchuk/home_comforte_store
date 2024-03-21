@@ -100,3 +100,7 @@ export const ButtonContainer = styled.div`
     text-decoration: none;
   }
 `;
+
+export const ResultContainer = styled.div`
+    
+`

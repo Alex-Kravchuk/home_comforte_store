@@ -22,7 +22,12 @@ import {
   AdminProductsWrapper,
   AdminProductsContainer,
 } from "../AdminProducts.styled";
-import { ButtonContainer, ErrorText, TabWrapper } from "./AddProduct.styled";
+import {
+  ButtonContainer,
+  ErrorText,
+  ResultContainer,
+  TabWrapper,
+} from "./AddProduct.styled";
 import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 import { ProductService } from "../../../../../../api/product/productService";
 
@@ -121,9 +126,9 @@ const AddProduct = () => {
         details: JSON.stringify(generalData.dimension.info),
       };
 
-      const productDimension = await ProductService.createProductDimension(
-        dimensionConfig
-      );
+      // const productDimension = await ProductService.createProductDimension(
+      //   dimensionConfig
+      // );
 
       // const productModifiers = await ProductService.createProductModifier(
       //   customizationData,
@@ -224,7 +229,7 @@ const AddProduct = () => {
         )}
 
         {activeTab === "4" && (
-          <>
+          <ResultContainer>
             {contextHolder}
 
             {!loading && error === false ? (
@@ -252,7 +257,7 @@ const AddProduct = () => {
                 </Button>
               </ButtonContainer>
             )}
-          </>
+          </ResultContainer>
         )}
       </AdminProductsContainer>
     </AdminProductsWrapper>
