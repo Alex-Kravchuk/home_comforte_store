@@ -6,9 +6,18 @@ import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
-import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
+import {
+  SubPageContainer,
+  SubPageWrapper,
+} from "../../../AdminProducts.styled";
+import {
+  getMenuData,
+  saveUpdatedMenuData,
+} from "../../../../../../../../redux/loading/loadingSlice";
+import { useDispatch } from "react-redux";
 
 const Categories = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -29,7 +38,10 @@ const Categories = () => {
       setLoading(true);
       const { category } = values;
       await ProductService.createCategory(category);
+      const updatedMenuData = await ProductService.getAllCategories();
 
+      dispatch(saveUpdatedMenuData(updatedMenuData));
+      
       messageApi.open({
         type: "success",
         content: "New category successfully added",

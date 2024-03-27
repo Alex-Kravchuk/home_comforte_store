@@ -39,6 +39,11 @@ export const MenuItem = styled.div`
 
   color: ${({ activeMenuItem }) => (activeMenuItem ? "#000" : "")};
 
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
   @media (max-width: 1200px) {
     margin: 0 10px;
   }

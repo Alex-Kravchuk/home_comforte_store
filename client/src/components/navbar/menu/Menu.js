@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 
+import { Link } from "react-router-dom";
+
 import DropDownMenu from "./dropdown/DropDownMenu";
 
 import { useMouseLeave } from "../../../hooks/useMouseLeave";
@@ -36,7 +38,7 @@ const Menu = ({ bigScreen, menuData, scrollDown }) => {
                   activeMenuItem={index === currentHover}
                   onMouseOver={() => hoverHandler(index)}
                 >
-                  {name}
+                  <Link to={`products/` + name.toLowerCase()}>{name}</Link>
                 </MenuItem>
               ))}
               <DropDownMenu

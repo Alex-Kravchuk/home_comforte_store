@@ -48,6 +48,8 @@ import {
   ADMIN_PRODUCTS_PREVIEW,
   ADMIN_PRODUCTS_CATEGORY,
   ADMIN_PRODUCTS_ADD,
+  CATEGORY_ROUTE,
+  PRODUCTLIIST_ROUTE,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -79,8 +81,9 @@ import EditProducts from "../components/pages/admin/adminPages/adminProducts/Edi
 import ProductPreview from "../components/pages/product/Demonstration/ProductPreview/ProductPreview";
 import PreviewProductPage from "../components/pages/product/PreviewProductPage/PreviewProductPage";
 import AddProduct from "../components/pages/admin/adminPages/adminProducts/AddProduct/AddProduct";
-import AllCategories from "../components/pages/category/AllCategories";
+import Category from "../components/pages/category/Category";
 import NotFoundPage from "../components/pages/404/notFoundPage";
+import ProductList from "../components/pages/productList/ProductList";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -139,7 +142,8 @@ export const router = createBrowserRouter(
         </Route>
       </Route>
 
-      <Route path="product/:category_name" element={<AllCategories />} />
+      <Route path={CATEGORY_ROUTE} element={<Category />} />
+      <Route path={PRODUCTLIIST_ROUTE} element={<ProductList />} />
       <Route path={BASKET_ROUTE} element={<Basket />} />
       <Route path={PRODUCT_ROUTE} element={<Product />} />
       <Route path={BRAND_ROUTE} element={<Brand />} />
