@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 
 import { message } from "antd";
+import { useDispatch } from "react-redux";
 
 import AddNewTypeForm from "./AddNewTypeForm/AddNewTypeForm";
 
 import { messageStyleConfig } from "../../../../../../../../styles/globalStyles";
 import { ProductService } from "../../../../../../../../api/product/productService";
-import { SubPageContainer, SubPageWrapper } from "../../../AdminProducts.styled";
-
+import {
+  SubPageContainer,
+  SubPageWrapper,
+} from "../../../AdminProducts.styled";
+import { saveUpdatedMenuData } from "../../../../../../../../redux/loading/loadingSlice";
 
 const Types = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -56,6 +61,9 @@ const Types = () => {
       }
 
       await ProductService.createType(formdata);
+
+      const updatedMenuData = await ProductService.getAllCategories();
+      dispatch(saveUpdatedMenuData(updatedMenuData));
 
       messageApi.open({
         type: "success",

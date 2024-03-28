@@ -37,6 +37,11 @@ export const CategoryCard = styled.div`
   cursor: pointer;
   margin: 0 10px;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   svg {
     transition: all 0.2s ease;
     position: relative;

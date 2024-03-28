@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link,  useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { ProductService } from "../../../api/product/productService";
+
 import {
-  AllContainer,
+  PageTitle,
   AllWrapper,
-  CategoriesList,
-  CategoryCard,
   CategoryImg,
+  CategoryCard,
+  AllContainer,
   CategoryName,
   PageSubtitle,
-  PageTitle,
+  CategoriesList,
   PageTitleContainer,
 } from "./Category.styled";
 
@@ -25,7 +26,7 @@ const Category = () => {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [params]);
 
   const getCategories = async () => {
     const data = await ProductService.getAllCategories();
@@ -62,18 +63,17 @@ const Category = () => {
         <CategoriesList>
           {correctPathParams &&
             localData.types.map((type) => (
-              <Link to="all-sofas">
-                <CategoryCard>
+              <CategoryCard>
+                <Link to="all-sofas">
                   <CategoryImg src={process.env.REACT_APP_API_URL + type.img} />
                   <CategoryName>
                     {type.name}
                     <ArrowRightAltIcon />
                   </CategoryName>
-                </CategoryCard>
-              </Link>
+                </Link>
+              </CategoryCard>
             ))}
         </CategoriesList>
-        
       </AllContainer>
     </AllWrapper>
   );

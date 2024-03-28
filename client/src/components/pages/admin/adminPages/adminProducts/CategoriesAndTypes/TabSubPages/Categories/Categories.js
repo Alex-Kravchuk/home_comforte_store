@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { message } from "antd";
+import { useDispatch } from "react-redux";
 
 import AddNewCategoryForm from "./AddNewCategoryForm/AddNewCategoryForm";
 
@@ -14,7 +15,6 @@ import {
   getMenuData,
   saveUpdatedMenuData,
 } from "../../../../../../../../redux/loading/loadingSlice";
-import { useDispatch } from "react-redux";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -38,8 +38,8 @@ const Categories = () => {
       setLoading(true);
       const { category } = values;
       await ProductService.createCategory(category);
+      
       const updatedMenuData = await ProductService.getAllCategories();
-
       dispatch(saveUpdatedMenuData(updatedMenuData));
       
       messageApi.open({

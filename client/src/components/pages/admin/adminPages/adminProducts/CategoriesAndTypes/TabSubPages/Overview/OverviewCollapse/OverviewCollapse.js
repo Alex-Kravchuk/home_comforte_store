@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Collapse, Empty } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Label from "./Label/Label";
 
@@ -10,9 +10,12 @@ import {
   OverviewCollapseWrapper,
   OverviewCollapseContainer,
 } from "./OverviewCollapse.styled";
+import { ProductService } from "../../../../../../../../../api/product/productService";
+import { saveUpdatedMenuData } from "../../../../../../../../../redux/loading/loadingSlice";
 
-const OverviewCollapse = ({ changeDataHandler }) => {
+const OverviewCollapse = () => {
   const { data: menuData } = useSelector((state) => state.menuData);
+  const dispatch = useDispatch();
 
   const [categories, setCategories] = useState([]);
   const [collapseItems, setCollapseItems] = useState([]);
@@ -30,7 +33,7 @@ const OverviewCollapse = ({ changeDataHandler }) => {
    * If an item has the same ID and name, I will give it a new name
    */
 
-  const saveChanges = (id, oldName, newName) => {
+  const saveChanges = async (id, oldName, newName) => {
     const copyData = JSON.parse(JSON.stringify(menuData));
 
     const copyCategories = copyData.map((category) => {
@@ -67,7 +70,9 @@ const OverviewCollapse = ({ changeDataHandler }) => {
       return category;
     });
 
-    changeDataHandler(copyCategories);
+    const response = await ProductService.updateCategories(copyCategories);
+    dispatch(saveUpdatedMenuData(response.data));
+
     setCategories(copyCategories);
   };
 
@@ -76,7 +81,7 @@ const OverviewCollapse = ({ changeDataHandler }) => {
    * I'm filtering each category and subcategory
    * and remove the item if its name matches the one that was clicked
    */
-  const deleteCategory = (name) => {
+  const deleteCategory = async (name) => {
     const copyData = JSON.parse(JSON.stringify(menuData));
     const filteredCategories = copyData.filter(
       (category) => category.name !== name
@@ -96,9 +101,10 @@ const OverviewCollapse = ({ changeDataHandler }) => {
       return category;
     });
 
-    debugger
+    
+    const response = await ProductService.updateCategories(filteredData);
+    dispatch(saveUpdatedMenuData(response.data));
 
-    changeDataHandler(filteredData);
     setCategories(filteredData);
   };
 
