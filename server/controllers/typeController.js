@@ -8,12 +8,17 @@ class TypeController {
   async create(req, res, next) {
     try {
       const { name, categoryId } = req.body;
-      const { img } = req.files;
+      const { icon, preview } = req.files;
 
-      let imgName;
-      imgName = createImgName(img, "STRING");
+      // let imgName;
+      // imgName = createImgName(img, "STRING");
 
-      const type = await Type.create({ name, img: imgName, categoryId });
+      const type = await Type.create({
+        name,
+        icon: createImgName(icon, "STRING"),
+        preview: createImgName(preview, "STRING"),
+        categoryId,
+      });
       return res.json(type);
     } catch (error) {
       return next(ApiError.unexpectedError(error, TypeController.errorSource));

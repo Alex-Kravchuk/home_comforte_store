@@ -73,7 +73,9 @@ const Category = sequelize.define("category", {
 const Type = sequelize.define("type", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false },
-  img: { type: DataTypes.STRING, allowNull: false },
+  icon: { type: DataTypes.STRING, allowNull: false },
+  // preview is an image with better quality
+  preview: { type: DataTypes.STRING, allowNull: false },
 });
 
 const SubType = sequelize.define("sub_type", {

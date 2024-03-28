@@ -6,14 +6,7 @@ module.exports = async (req, res, next) => {
     const errorSource = "modifier controller";
 
     const { furnitureId, data } = req.body;
-
-    console.log('====================================');
-    console.log(req.body);
-    console.log('====================================');
-
-    console.log('=================FILES===================');
-    console.log(req.files);
-    console.log('=================FILES===================');
+    
     const allDataAreGiven = data && furnitureId;
 
     if (!allDataAreGiven) {

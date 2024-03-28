@@ -8,9 +8,11 @@ class ModifierController {
   async create(req, res, next) {
     try {
       const { data, furnitureId } = req.body;
+      const { images } = req.files;
 
       const modifiers = await furnitureService.createModifiers(
-        data,
+        JSON.parse(data),
+        images,
         furnitureId
       );
 

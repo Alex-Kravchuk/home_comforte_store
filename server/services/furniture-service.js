@@ -58,56 +58,50 @@ class FurnitureService {
     return dimension;
   }
 
-  async createModifiers(data, furnitureId) {
+  async createModifiers(data, images, furnitureId) {
     const modifiers = [];
-    const regExpTemplate = /^data:image\/\w+;base64,/; // meta info base64
 
     const preparedData = data.map((mod) => {
-      const modItems = JSON.parse(mod.items);
-      modItems.forEach((item) => {
-        if (item.hasOwnProperty("img")) {
-          // remove meta info from base64 string
-          item.img = item.img?.replace(regExpTemplate, "") ?? null;
+      mod.items.forEach((item) => {
+        if (Array.isArray(images)) {
+          images.forEach((img) => {
+            // make the img name from such {%22modifierID%22:%221%22,%22modifierItemID%22:%221%22}
+            // to such {"modifierID": "1", "modifierItemID": "1"} and parse it as JSON obj
+            const parsedImgName = JSON.parse(img.name.replace(/%22/g, '"'));
+            const coincidenceImg =
+              mod.id === parsedImgName.modifierID &&
+              item.id === parsedImgName.modifierItemID;
+
+            if (coincidenceImg) {
+              const fileName = createImgName(img, "STRING");
+              item.img = fileName;
+            }
+          });
+        } else {
+          // if images is not array, use it as object
+          const parsedImgName = JSON.parse(images.name.replace(/%22/g, '"'));
+            const coincidenceImg =
+              mod.id === parsedImgName.modifierID &&
+              item.id === parsedImgName.modifierItemID;
+
+            if (coincidenceImg) {
+              const fileName = createImgName(images, "STRING");
+              item.img = fileName;
+            }
         }
       });
-
-      mod.items = modItems;
       return mod;
     });
 
     // use "for of" cycle, because async task
     for (const mod of preparedData) {
       const { displayMethod, name, noAffectToDisplay, items } = mod;
-      const updatedItems = [];
-
-      items.forEach((item) => {
-        if (item.img) {
-          let fileName = uuid.v4() + ".jpg";
-          fs.writeFile(
-            `./static/${fileName}`,
-            item.img,
-            { encoding: "base64" },
-            (err) => {
-              if (err) {
-                console.log("Error from file system writing:", err.message);
-              } else {
-                console.log("File was successfully added");
-              }
-            }
-          );
-
-          updatedItems.push({ ...item, img: fileName });
-        } else {
-          updatedItems.push({ ...item });
-        }
-      });
-
       const modifier = await Modifier.create({
         name,
+        items,
         furnitureId,
         displayMethod,
         noAffectToDisplay,
-        items: updatedItems,
       });
 
       modifiers.push(modifier);

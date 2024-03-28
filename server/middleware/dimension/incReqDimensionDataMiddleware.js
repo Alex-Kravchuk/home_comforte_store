@@ -6,6 +6,7 @@ module.exports = async (req, res, next) => {
     const errorSource = "dimension controller";
 
     const { furnitureId, details } = req.body;
+
     if (!details) {
       return next(
         ApiError.requestDataAreNotDefined(
@@ -18,7 +19,7 @@ module.exports = async (req, res, next) => {
     if (isNaN(furnitureId)) {
       return next(
         ApiError.requestDataAreNotDefined(
-          "The typeId is not in the correct format or is undefined",
+          "The furniture ID is not in the correct format or is undefined",
           errorSource
         )
       );
