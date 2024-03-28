@@ -18,7 +18,7 @@ const Types = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [typeImg, setTypeImg] = useState();
+  const [typeImg, setTypeImg] = useState({ icon: null, preview: null });
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -52,7 +52,11 @@ const Types = () => {
       setLoading(true);
       // console.log("values", values);
 
-      const combinedData = { ...values, img: typeImg };
+      const combinedData = {
+        ...values,
+        icon: typeImg.icon,
+        preview: typeImg.preview,
+      };
       const formdata = new FormData();
 
       for (const key in combinedData) {

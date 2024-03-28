@@ -45,6 +45,7 @@ export const CategoryCard = styled.div`
   svg {
     transition: all 0.2s ease;
     position: relative;
+    font-size: 32px;
     left: 0px;
   }
 
@@ -58,11 +59,10 @@ export const CategoryCard = styled.div`
 
 export const CategoryName = styled.div`
   display: flex;
-  font-size: 20px;
-  align-items: center;
+  font-size: 22px;
   margin-top: 10px;
 `;
 
 export const CategoryImg = styled.img`
-  width: 100px;
+  width: 300px;
 `;

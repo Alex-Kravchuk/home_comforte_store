@@ -18,6 +18,12 @@ const AddNewTypeForm = ({
   onSubmitHandler,
   saveFileHandler,
 }) => {
+  const iconImageHandler = (file) => {
+    saveFileHandler((state) => ({ ...state, icon: file }));
+  };
+  const previewImageHandler = (file) => {
+    saveFileHandler((state) => ({ ...state, preview: file }));
+  };
   return (
     <Form onFinish={onSubmitHandler} layout="vertical">
       <Form.Item
@@ -51,8 +57,11 @@ const AddNewTypeForm = ({
           </FormInputTip>
         </FormInputWithTipWrapper>
       </Form.Item>
-      <Form.Item label={<FormLabel>Upload image</FormLabel>}>
-        <UploadImg saveFileHandler={saveFileHandler} />
+      <Form.Item label={<FormLabel>Upload menu icon</FormLabel>}>
+        <UploadImg saveFileHandler={iconImageHandler} />
+      </Form.Item>
+      <Form.Item label={<FormLabel>Upload preview image</FormLabel>}>
+        <UploadImg saveFileHandler={previewImageHandler} />
       </Form.Item>
       <Form.Item>
         <FromSubmitButton

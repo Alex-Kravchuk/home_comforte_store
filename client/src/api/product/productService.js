@@ -22,13 +22,14 @@ export class ProductService {
         }
 
         for (let type of types) {
-          const { img, id, categoryId, name } = type;
+          const { icon, preview, id, categoryId, name } = type;
 
           const newItem = {
             id,
-            img,
-            categoryId,
             name,
+            icon,
+            preview,
+            categoryId,
             subTypes: subTypes.filter(({ typeId }) => typeId === id),
           };
 

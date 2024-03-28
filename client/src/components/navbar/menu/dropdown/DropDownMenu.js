@@ -45,7 +45,7 @@ const DropDownMenu = ({
               >
                 <TypeTitleContainer>
                   <TypeTitleImg
-                    src={process.env.REACT_APP_API_URL + type.img}
+                    src={process.env.REACT_APP_API_URL + type.icon}
                   />
                   <TypeTitleName>{type.name}</TypeTitleName>
                 </TypeTitleContainer>

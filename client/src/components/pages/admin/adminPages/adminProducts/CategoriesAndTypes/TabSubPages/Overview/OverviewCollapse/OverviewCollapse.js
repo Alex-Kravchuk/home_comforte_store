@@ -101,7 +101,7 @@ const OverviewCollapse = () => {
       return category;
     });
 
-    
+    // TODO IT DO NOT DELETE ITEM FROM DB
     const response = await ProductService.updateCategories(filteredData);
     dispatch(saveUpdatedMenuData(response.data));
 
@@ -134,7 +134,7 @@ const OverviewCollapse = () => {
         </Label>
       ),
       children:
-        category.types.length > 0 ? (
+        category?.types?.length > 0 ? (
           <Collapse
             ghost
             items={category?.types.map((type) => ({
@@ -149,7 +149,7 @@ const OverviewCollapse = () => {
                 </Label>
               ),
               children:
-                type.subTypes.length > 0 ? (
+                type?.subTypes?.length > 0 ? (
                   type.subTypes.map((subtype) => (
                     <Label
                       key={subtype.name}

@@ -65,7 +65,7 @@ const Category = () => {
             localData.types.map((type) => (
               <CategoryCard>
                 <Link to="all-sofas">
-                  <CategoryImg src={process.env.REACT_APP_API_URL + type.img} />
+                  <CategoryImg src={process.env.REACT_APP_API_URL + type.preview} />
                   <CategoryName>
                     {type.name}
                     <ArrowRightAltIcon />
