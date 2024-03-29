@@ -30,19 +30,15 @@ const DropDownMenu = ({
     closeDropDownHandler();
   };
 
+  const formate = (text) => text.split(" ").join("-").toLowerCase();
+
   return (
     <DropdownMenuWrapper scrollDown={scroll} currentHover={currentHover}>
       {dataAreExist && (
         <DropdownMenuContainer>
           {typesOfProducts.map((type) => (
             <TypeColumn key={type.id}>
-              <Link
-                to={
-                  routeTempalte +
-                  "all-" +
-                  type.name.split(" ").join("-").toLowerCase()
-                }
-              >
+              <Link to={routeTempalte + "all-" + formate(type.name)}>
                 <TypeTitleContainer>
                   <TypeTitleImg
                     src={process.env.REACT_APP_API_URL + type.icon}
@@ -57,7 +53,9 @@ const DropDownMenu = ({
                     <Link
                       to={
                         routeTempalte +
-                        subtype.name.split(" ").join("-").toLowerCase()
+                        formate(type.name) +
+                        "/" +
+                        formate(subtype.name)
                       }
                     >
                       {subtype.name}
@@ -66,11 +64,7 @@ const DropDownMenu = ({
                 ))}
                 <SubTypeName onClick={closeDropDown} key={type.name}>
                   <Link
-                    to={
-                      routeTempalte +
-                      "all-" +
-                      type.name.split(" ").join("-").toLowerCase()
-                    }
+                    to={routeTempalte + "all-" + formate(type.name)}
                   >{`All ${type.name.toLowerCase()}`}</Link>
                 </SubTypeName>
               </SubTypeContainer>

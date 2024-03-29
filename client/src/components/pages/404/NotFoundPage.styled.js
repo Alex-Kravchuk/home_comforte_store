@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
 
 export const NofFoundWrapper = styled.div`
   width: 50%;
@@ -7,6 +8,16 @@ export const NofFoundWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+
+  @media (max-width: 760px) {
+    width: 80%;
+    padding: 120px 0;
+  }
+
+  @media (max-width: 428px) {
+    width: 90%;
+    padding: 100px 0;
+  }
 `;
 
 export const NotFoundContainer = styled.div`
@@ -20,7 +31,7 @@ export const SubContainer = styled.div`
   justify-content: space-between;
 `;
 export const Title = styled.div`
-  font-size: 46px;
+  font-size: ${getResponsiveFontSize(46, 38)};
   font-weight: 600;
   margin-bottom: 30px;
 `;

@@ -8,7 +8,7 @@ import {
 
 import MobileFooterLinks from "../../../footer/mainLinks/mobileFooterLinks/MobileFooterLinks";
 
-const SideMenuFooter = ({ closeHandler }) => {
+const SideMenuFooter = () => {
   return (
     <SideMenuFooterWrapper>
       <SideMenuFooterContainer>

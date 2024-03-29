@@ -49,7 +49,8 @@ import {
   ADMIN_PRODUCTS_CATEGORY,
   ADMIN_PRODUCTS_ADD,
   CATEGORY_ROUTE,
-  PRODUCTLIIST_ROUTE,
+  NESTED_PRODUCT_LIST_ROUTE,
+  ALL_PRODUCT_LIST_ROUTE,
 } from "../utils/routes_consts";
 import {
   createBrowserRouter,
@@ -143,7 +144,8 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route path={CATEGORY_ROUTE} element={<Category />} />
-      <Route path={PRODUCTLIIST_ROUTE} element={<ProductList />} />
+      <Route path={NESTED_PRODUCT_LIST_ROUTE} element={<ProductList />} />
+      <Route path={ALL_PRODUCT_LIST_ROUTE} element={<ProductList />} />
       <Route path={BASKET_ROUTE} element={<Basket />} />
       <Route path={PRODUCT_ROUTE} element={<Product />} />
       <Route path={BRAND_ROUTE} element={<Brand />} />

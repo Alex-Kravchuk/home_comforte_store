@@ -39,8 +39,8 @@ const SideMenu = ({ opened, closeHandler, menuData }) => {
     >
       <DrawerContentWrapper>
         <DrawerContentContainer>
-          <SideMenuMain menuData={menuData} />
-          <SideMenuFooter closeHandler={closeHandler} />
+          <SideMenuMain menuData={menuData} closeHandler={closeHandler} />
+          <SideMenuFooter />
         </DrawerContentContainer>
       </DrawerContentWrapper>
     </Drawer>

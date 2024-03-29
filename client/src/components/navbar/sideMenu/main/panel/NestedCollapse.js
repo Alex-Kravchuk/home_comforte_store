@@ -7,18 +7,23 @@ import PanelHeader from "./PanelHeader";
 import { NestedPanelWrapper } from "./Panel.styled";
 import { SideMenuSubItem } from "../SideMenuMain.styled";
 
-const NestedCollapse = ({ type }) => {
-  const { img, name, subTypes } = type;
+const NestedCollapse = ({ type, redirectHandler }) => {
+  const { icon, name, subTypes } = type;
 
   return (
     <Collapse accordion expandIconPosition="start" ghost>
       <NestedPanelWrapper
-        header={<PanelHeader text={name} img={img} />}
+        header={<PanelHeader text={name} img={icon} />}
         collapsible={subTypes.length === 0 && "disabled"}
         showArrow={subTypes.length !== 0}
+        onClick={
+          subTypes.length === 0 ? () => redirectHandler(type.name) : null
+        }
       >
-        {subTypes.map(({ name }) => (
-          <SideMenuSubItem>{name}</SideMenuSubItem>
+        {subTypes.map((subType) => (
+          <SideMenuSubItem onClick={() => redirectHandler(type.name, subType.name)}>
+            {subType.name}
+          </SideMenuSubItem>
         ))}
       </NestedPanelWrapper>
     </Collapse>

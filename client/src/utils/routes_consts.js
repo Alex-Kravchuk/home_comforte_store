@@ -29,7 +29,9 @@ export const ADMIN_PRODUCTS_ADD = "add_new";
 export const ADMIN_PRODUCTS_PREVIEW = "preview";
 
 export const CATEGORY_ROUTE = "products/:category_name";
-export const PRODUCTLIIST_ROUTE = "products/:category_name/:subcategory_name";
+export const NESTED_PRODUCT_LIST_ROUTE =
+  "products/:category_name/:type_name/:subtype_name";
+export const ALL_PRODUCT_LIST_ROUTE = "products/:category_name/:type_name/";
 export const PRODUCT_ROUTE = "product/:id";
 
 export const BRAND_ROUTE = "/brands";

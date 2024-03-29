@@ -1,23 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Collapse } from "antd";
 
 import NestedCollapse from "./panel/NestedCollapse";
 
 import { SideMenuItem, SideMenuContainer } from "./SideMenuMain.styled";
+import { Link, useNavigate } from "react-router-dom";
 
-const SideMenuMain = ({ menuData }) => {
-  // debugger;
+const SideMenuMain = ({ menuData, closeHandler }) => {
+  const [activeKey, setActiveKey] = useState([]);
+  const navigate = useNavigate();
+
+  const onPanelClick = (typeRouteName, subTypeRouteName) => {
+    console.log("LIGNKS", typeRouteName, subTypeRouteName);
+
+    const clickedCategoryName = menuData[activeKey[0] - 1].name;
+    const routeTempalte = subTypeRouteName
+      ? "products/" +
+        clickedCategoryName.toLowerCase() +
+        `/${typeRouteName.split(" ").join("-").toLowerCase()}/${subTypeRouteName
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`
+      : "products/" +
+        clickedCategoryName.toLowerCase() +
+        `/${typeRouteName.split(" ").join("-").toLowerCase()}`;
+
+    navigate(routeTempalte);
+    closeHandler();
+  };
+
   return (
     <SideMenuContainer>
-      <Collapse accordion expandIconPosition="end" ghost>
+      <Collapse
+        accordion
+        expandIconPosition="end"
+        ghost
+        onChange={(key) => setActiveKey(key)}
+      >
         {menuData !== undefined &&
           menuData.map((item) => {
             const types = item.types ?? [];
             return (
               <SideMenuItem header={item.name} key={item.id}>
                 {types.map((type) => (
-                  <NestedCollapse type={type} />
+                  <NestedCollapse type={type} redirectHandler={onPanelClick} />
                 ))}
               </SideMenuItem>
             );
