@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+import { getResponsiveFontSize } from "../../../helpers/getResponsiveFontSize";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
+
+const { ml } = viewport_sizes;
+
 export const AllWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -16,7 +21,7 @@ export const PageTitleContainer = styled.div`
 `;
 export const PageTitle = styled.div`
   text-align: center;
-  font-size: 36px;
+  font-size: ${getResponsiveFontSize(36, 28)};
   margin: 15px 0;
 `;
 
@@ -25,10 +30,17 @@ export const PageSubtitle = styled.div`
   text-align: center;
   font-size: 16px;
   line-height: 24px;
+
+  @media (max-width: ${ml}px) {
+    width: 100%;
+  }
 `;
 
 export const CategoriesList = styled.div`
   padding: 25px 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
 `;
 
 export const CategoryCard = styled.div`
@@ -59,10 +71,10 @@ export const CategoryCard = styled.div`
 
 export const CategoryName = styled.div`
   display: flex;
-  font-size: 22px;
+  font-size: ${getResponsiveFontSize(22, 18)};
   margin-top: 10px;
 `;
 
 export const CategoryImg = styled.img`
-  width: 300px;
+  width: 100%;
 `;

@@ -5,6 +5,8 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { ProductService } from "../../../api/product/productService";
 
+import { Container } from "../../../styles/globalStyles";
+
 import {
   PageTitle,
   AllWrapper,
@@ -50,31 +52,35 @@ const Category = () => {
   console.log(params, "THIS IS PARAMS");
   return (
     <AllWrapper>
-      <AllContainer>
-        <PageTitleContainer>
-          <PageTitle>All {localData.name}</PageTitle>
-          <PageSubtitle>
-            You’re in the designer’s seat with thousands of ways to customize.
-            Our configurations range from sofas to storage sleepers, chaise
-            sectionals to accent chairs, and more.
-          </PageSubtitle>
-        </PageTitleContainer>
+      <Container>
+        <AllContainer>
+          <PageTitleContainer>
+            <PageTitle>All {localData.name}</PageTitle>
+            <PageSubtitle>
+              You’re in the designer’s seat with thousands of ways to customize.
+              Our configurations range from sofas to storage sleepers, chaise
+              sectionals to accent chairs, and more.
+            </PageSubtitle>
+          </PageTitleContainer>
 
-        <CategoriesList>
-          {correctPathParams &&
-            localData.types.map((type) => (
-              <CategoryCard>
-                <Link to="all-sofas">
-                  <CategoryImg src={process.env.REACT_APP_API_URL + type.preview} />
-                  <CategoryName>
-                    {type.name}
-                    <ArrowRightAltIcon />
-                  </CategoryName>
-                </Link>
-              </CategoryCard>
-            ))}
-        </CategoriesList>
-      </AllContainer>
+          <CategoriesList>
+            {correctPathParams &&
+              localData.types.map((type) => (
+                <CategoryCard key={type.name}>
+                  <Link to="all-sofas">
+                    <CategoryImg
+                      src={process.env.REACT_APP_API_URL + type.preview}
+                    />
+                    <CategoryName>
+                      {type.name}
+                      <ArrowRightAltIcon />
+                    </CategoryName>
+                  </Link>
+                </CategoryCard>
+              ))}
+          </CategoriesList>
+        </AllContainer>
+      </Container>
     </AllWrapper>
   );
 };
