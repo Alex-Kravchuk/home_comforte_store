@@ -38,7 +38,7 @@ const Menu = ({ bigScreen, menuData, scrollDown }) => {
                   activeMenuItem={index === currentHover}
                   onMouseOver={() => hoverHandler(index)}
                 >
-                  <Link to={`products/` + name.toLowerCase()}>{name}</Link>
+                  <Link to={name.toLowerCase()}>{name}</Link>
                 </MenuItem>
               ))}
               <DropDownMenu

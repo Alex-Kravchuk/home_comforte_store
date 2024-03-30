@@ -11,20 +11,16 @@ const SideMenuMain = ({ menuData, closeHandler }) => {
   const [activeKey, setActiveKey] = useState([]);
   const navigate = useNavigate();
 
+  const formate = (text) => text.split(" ").join("-").toLowerCase();
+
   const onPanelClick = (typeRouteName, subTypeRouteName) => {
     console.log("LIGNKS", typeRouteName, subTypeRouteName);
 
     const clickedCategoryName = menuData[activeKey[0] - 1].name;
     const routeTempalte = subTypeRouteName
-      ? "products/" +
-        clickedCategoryName.toLowerCase() +
-        `/${typeRouteName.split(" ").join("-").toLowerCase()}/${subTypeRouteName
-          .split(" ")
-          .join("-")
-          .toLowerCase()}`
-      : "products/" +
-        clickedCategoryName.toLowerCase() +
-        `/${typeRouteName.split(" ").join("-").toLowerCase()}`;
+      ? clickedCategoryName.toLowerCase() +
+        `/all-${formate(typeRouteName)}/${formate(subTypeRouteName)}`
+      : clickedCategoryName.toLowerCase() + `/all-${formate(typeRouteName)}`;
 
     navigate(routeTempalte);
     closeHandler();

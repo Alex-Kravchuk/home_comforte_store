@@ -78,4 +78,8 @@ export const CategoryName = styled.div`
 export const CategoryImg = styled.img`
   width: 100%;
   max-width: 300px;
+
+  @media (max-width: 600px) {
+    max-width: unset;
+  }
 `;

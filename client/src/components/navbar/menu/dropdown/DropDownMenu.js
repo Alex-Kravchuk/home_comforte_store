@@ -24,7 +24,7 @@ const DropDownMenu = ({
   const dataAreExist = menuCategories[currentHover];
   const typesOfProducts = dataAreExist?.types ? dataAreExist.types : [];
 
-  const routeTempalte = "products/" + dataAreExist?.name.toLowerCase() + "/";
+  const routeTempalte = dataAreExist?.name.toLowerCase() + "/";
 
   const closeDropDown = () => {
     closeDropDownHandler();
@@ -53,6 +53,7 @@ const DropDownMenu = ({
                     <Link
                       to={
                         routeTempalte +
+                        "all-" +
                         formate(type.name) +
                         "/" +
                         formate(subtype.name)

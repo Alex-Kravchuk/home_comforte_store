@@ -6,7 +6,6 @@ import { Breadcrumbs } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { HOME_ROUTE } from "../../utils/routes_consts";
 
-
 const Breadcrumb = () => {
   const { pathname } = useLocation();
   const [breadcrumbItems, setBreadcrumbItems] = useState([]);
@@ -24,6 +23,20 @@ const Breadcrumb = () => {
     setBreadcrumbItems(pathNamesWithoutHomeRoute);
   };
 
+  const determinePreviousRoute = (currentIndex) => {
+    let route = [];
+    // TODO find better solution
+    for (let i = 0; i <= currentIndex; i++) {
+      route.push(breadcrumbItems[i]);
+    }
+
+    return route.join("/");
+  };
+
+  console.log('====================================');
+  console.log(breadcrumbItems);
+  console.log('====================================');
+
   return (
     <BreadCrumbWrapper>
       <Container>
@@ -31,17 +44,32 @@ const Breadcrumb = () => {
           <Link to={HOME_ROUTE}>
             <BreadCrumbItem>Home</BreadCrumbItem>
           </Link>
-          <Link to={HOME_ROUTE}>
-            <BreadCrumbItem>Living</BreadCrumbItem>
-          </Link>
-          <Link to={HOME_ROUTE}>
-            <BreadCrumbItem>All custom sectionals</BreadCrumbItem>
-          </Link>
-          {breadcrumbItems.map((item, index) => (
-            <Link key={index}>
-              <BreadCrumbItem>{item}</BreadCrumbItem>
-            </Link>
-          ))}
+          {breadcrumbItems.map((item, index) => {
+            let itemName = item.split("-");
+
+            // debugger;
+            if (itemName.length === 1) {
+              itemName = itemName[0].charAt(0).toUpperCase() + item.slice(1);
+
+              return (
+                <Link to={determinePreviousRoute(index)} key={index}>
+                  <BreadCrumbItem>{itemName}</BreadCrumbItem>
+                </Link>
+              );
+            }
+
+            if (itemName.length > 1) {
+              itemName =
+                itemName[0].charAt(0).toUpperCase() +
+                itemName.join(" ").slice(1);
+
+              return (
+                <Link to={determinePreviousRoute(index)} key={index}>
+                  <BreadCrumbItem>{itemName}</BreadCrumbItem>
+                </Link>
+              );
+            }
+          })}
         </Breadcrumbs>
       </Container>
     </BreadCrumbWrapper>

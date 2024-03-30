@@ -36,8 +36,6 @@ const Category = () => {
       (menuItem) => menuItem.name.toLowerCase() === params.category_name
     );
 
-    console.log('CALL getCategories func');
-    
 
     if (correctCategoryName) {
       setCorrectPathParams(true);

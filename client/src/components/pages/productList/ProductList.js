@@ -9,7 +9,7 @@ const ProductList = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  console.log("params", params);
+  // console.log("params", params);
 
   useEffect(() => {
     checkCorrectPath();
