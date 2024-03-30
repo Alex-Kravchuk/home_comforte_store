@@ -36,10 +36,13 @@ const Category = () => {
       (menuItem) => menuItem.name.toLowerCase() === params.category_name
     );
 
+    console.log('CALL getCategories func');
+    
+
     if (correctCategoryName) {
       setCorrectPathParams(true);
     } else {
-      navigate("*");
+      return navigate("/*", {replace: true});
     }
 
     const currentCategory = data.find(

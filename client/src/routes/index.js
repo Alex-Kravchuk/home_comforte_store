@@ -55,6 +55,7 @@ import {
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from "react-router-dom";
 import Search from "../components/pages/search/Search";
@@ -154,7 +155,8 @@ export const router = createBrowserRouter(
       <Route path={ABOUT_ROUTE} element={<About />} />
       <Route path={CONTACT_ROUTE} element={<Contact />} />
       <Route path={SHOWROOM_ROUTE} element={<Showroom />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="not-found-page" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to="not-found-page" replace />} />
     </Route>
   )
 );
