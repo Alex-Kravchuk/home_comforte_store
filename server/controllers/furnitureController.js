@@ -10,8 +10,8 @@ class FurnitureController {
     try {
   
       const furniture = await furnitureService.createFurniture(req.body);
-
       return res.json(furniture);
+      
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, FurnitureController.errorSource)

@@ -36,11 +36,10 @@ const Category = () => {
       (menuItem) => menuItem.name.toLowerCase() === params.category_name
     );
 
-
     if (correctCategoryName) {
       setCorrectPathParams(true);
     } else {
-      return navigate("/*", {replace: true});
+      return navigate("/*", { replace: true });
     }
 
     const currentCategory = data.find(
@@ -73,7 +72,7 @@ const Category = () => {
                       src={process.env.REACT_APP_API_URL + type.preview}
                     />
                     <CategoryName>
-                      {type.name}
+                      <div>{type.name}</div>
                       <ArrowRightAltIcon />
                     </CategoryName>
                   </Link>

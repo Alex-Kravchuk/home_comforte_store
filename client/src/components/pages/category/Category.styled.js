@@ -73,6 +73,10 @@ export const CategoryName = styled.div`
   display: flex;
   font-size: ${getResponsiveFontSize(22, 18)};
   margin-top: 10px;
+
+  div:first-child {
+    line-height: 28px;
+  }
 `;
 
 export const CategoryImg = styled.img`

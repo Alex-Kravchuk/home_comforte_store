@@ -40,7 +40,11 @@ const SideMenuMain = ({ menuData, closeHandler }) => {
             return (
               <SideMenuItem header={item.name} key={item.id}>
                 {types.map((type) => (
-                  <NestedCollapse type={type} redirectHandler={onPanelClick} />
+                  <NestedCollapse
+                    type={type}
+                    key={type.name}
+                    redirectHandler={onPanelClick}
+                  />
                 ))}
               </SideMenuItem>
             );

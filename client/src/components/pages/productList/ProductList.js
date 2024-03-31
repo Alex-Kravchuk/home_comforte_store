@@ -1,19 +1,45 @@
-import React, { useEffect } from "react";
-import { PLContainer, PLWrapper } from "./ProductList.styled";
-import { Container } from "../../../styles/globalStyles";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import { ProductService } from "../../../api/product/productService";
+import ProductListHeader from "./ProductListHeader/ProductListHeader";
+
+import List  from "./List/List";
+import Filters from "./Filters/Filters";
+
+import { Container } from "../../../styles/globalStyles";
+import { PLContainer, PLMainSection, PLWrapper } from "./ProductList.styled";
 
 const ProductList = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  // console.log("params", params);
+  const [headerTitle, setHeaderTitle] = useState("");
 
   useEffect(() => {
     checkCorrectPath();
+    makeHeaderTitle();
   }, [params]);
+
+  const makeHeaderTitle = () => {
+    const paramsValues = Object.values(params);
+    let lastOneParams = paramsValues[paramsValues.length - 1].split("-");
+
+    if (lastOneParams.length === 1) {
+      setHeaderTitle(
+        lastOneParams[0].charAt(0).toUpperCase() + lastOneParams[0].slice(1)
+      );
+
+      return;
+    }
+
+    if (lastOneParams.length > 1) {
+      lastOneParams[0] =
+        lastOneParams[0].charAt(0).toUpperCase() + lastOneParams[0].slice(1);
+
+      setHeaderTitle(lastOneParams.join(" "));
+    }
+  };
 
   const checkCorrectPath = async () => {
     const { category_name, type_name, subtype_name } = params;
@@ -58,16 +84,11 @@ const ProductList = () => {
     <PLWrapper>
       <Container>
         <PLContainer>
-          <h2>THIS IS A PRODUCT LIST PAGE: </h2>
-          <div>
-            category_name: <strong>{params.category_name}</strong>
-          </div>
-          <div>
-            type_name: <strong>{params.type_name}</strong>
-          </div>
-          <div>
-            subtype_name: <strong>{params.subtype_name}</strong>
-          </div>
+          <ProductListHeader title={headerTitle} />
+          <PLMainSection>
+            <Filters />
+            <List />
+          </PLMainSection>
         </PLContainer>
       </Container>
     </PLWrapper>
