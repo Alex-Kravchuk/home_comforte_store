@@ -47,6 +47,23 @@ export const FiltersDrawerContainer = styled.div`
   }
 `;
 
+export const DrawerBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  .ant-btn.ant-btn-lg {
+    font-size: 18px;
+    padding: 10px;
+    height: auto;
+  }
+
+  button {
+    width: 95%;
+    color: rgba(0, 0, 0, 0.75);
+    background: #d2ddbd;
+  }
+`;
+
 export const SelectContainer = styled.div`
   display: flex;
   align-items: center;

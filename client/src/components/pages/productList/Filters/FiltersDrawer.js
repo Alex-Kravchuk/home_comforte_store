@@ -1,11 +1,15 @@
 import React from "react";
 
-import { Drawer, Select } from "antd";
+import { Button, Drawer, Select } from "antd";
 
 import { useGetWindowSize } from "../../../../hooks/useGetWindowSize";
 import { viewport_sizes } from "../../../../utils/viewport_size_consts";
 
-import { FiltersDrawerContainer, SelectContainer } from "./Filters.styled";
+import {
+  DrawerBtnContainer,
+  FiltersDrawerContainer,
+  SelectContainer,
+} from "./Filters.styled";
 import { SelectLabel } from "../ProductListHeader/ProductListHeader.styled";
 
 const FiltersDrawer = ({ open, onCloseDrawer, children }) => {
@@ -45,6 +49,11 @@ const FiltersDrawer = ({ open, onCloseDrawer, children }) => {
           />
         </SelectContainer>
         {children}
+        <DrawerBtnContainer>
+          <Button size="large" onClick={() => onCloseDrawer(false)}>
+            Show 13 products
+          </Button>
+        </DrawerBtnContainer>
       </FiltersDrawerContainer>
     </Drawer>
   );
