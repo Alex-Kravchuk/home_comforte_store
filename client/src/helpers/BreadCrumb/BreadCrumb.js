@@ -33,10 +33,6 @@ const Breadcrumb = () => {
     return route.join("/");
   };
 
-  console.log('====================================');
-  console.log(breadcrumbItems);
-  console.log('====================================');
-
   return (
     <BreadCrumbWrapper>
       <Container>
@@ -47,7 +43,7 @@ const Breadcrumb = () => {
           {breadcrumbItems.map((item, index) => {
             let itemName = item.split("-");
 
-            // debugger;
+          
             if (itemName.length === 1) {
               itemName = itemName[0].charAt(0).toUpperCase() + item.slice(1);
 

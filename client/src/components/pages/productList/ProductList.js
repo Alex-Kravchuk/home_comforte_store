@@ -4,17 +4,24 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProductService } from "../../../api/product/productService";
 import ProductListHeader from "./ProductListHeader/ProductListHeader";
 
-import List  from "./List/List";
+import List from "./List/List";
 import Filters from "./Filters/Filters";
 
 import { Container } from "../../../styles/globalStyles";
 import { PLContainer, PLMainSection, PLWrapper } from "./ProductList.styled";
+import { useGetWindowSize } from "../../../hooks/useGetWindowSize";
+import { viewport_sizes } from "../../../utils/viewport_size_consts";
+import FiltersDrawer from "./Filters/FiltersDrawer";
 
 const ProductList = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const viewport = useGetWindowSize();
 
   const [headerTitle, setHeaderTitle] = useState("");
+  const [openFiltersDrawer, setOpenFiltersDrawer] = useState(false);
+
+  const smallScreen = viewport.width < viewport_sizes.xl;
 
   useEffect(() => {
     checkCorrectPath();
@@ -84,9 +91,18 @@ const ProductList = () => {
     <PLWrapper>
       <Container>
         <PLContainer>
-          <ProductListHeader title={headerTitle} />
+          <ProductListHeader
+            title={headerTitle}
+            onOpenDrawer={setOpenFiltersDrawer}
+          />
           <PLMainSection>
-            <Filters />
+            {!smallScreen && <Filters />}
+            <FiltersDrawer
+              open={openFiltersDrawer}
+              onCloseDrawer={setOpenFiltersDrawer}
+            >
+              <Filters />
+            </FiltersDrawer>
             <List />
           </PLMainSection>
         </PLContainer>

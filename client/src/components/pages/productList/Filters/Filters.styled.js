@@ -40,3 +40,14 @@ export const FilterDescr = styled.div`
   color: ${textColors.plain};
   text-align: justifyl;
 `;
+
+export const FiltersDrawerContainer = styled.div`
+  .ant-select-single.ant-select-lg {
+    margin: 10px;
+  }
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;

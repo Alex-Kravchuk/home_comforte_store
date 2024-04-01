@@ -2,16 +2,17 @@ import React from "react";
 
 import { Checkbox, Collapse } from "antd";
 
+import { filterItems } from "./filterItems";
+
 import {
-  FiltersWrapper,
-  FiltersContainer,
-  CollapseLable,
-  FiltersList,
   Filter,
   FilterName,
+  FiltersList,
   FilterDescr,
+  CollapseLable,
+  FiltersWrapper,
+  FiltersContainer,
 } from "./Filters.styled";
-import { filterItems } from "./filterItems";
 
 const Filters = () => {
   const items = filterItems.map((config) => ({
