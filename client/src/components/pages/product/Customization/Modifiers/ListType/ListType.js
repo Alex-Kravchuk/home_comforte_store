@@ -90,7 +90,6 @@ const ListType = ({ currentModifier, filtersHandler }) => {
               onClick={() => selectItemHandler(item)}
               selected={checkIfSelected(item)}
             >
-              {console.log(item, 'from LISTTY{E')}
               <ModifierImgContainer>
                 <ModifierImg src={item.img.url} alt={item.title} />
                 <ModifierImgBorderContainer />

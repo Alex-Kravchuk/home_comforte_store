@@ -129,7 +129,7 @@ const ProductImagesUploading = ({
 
     let selectedFileIndex;
     fileList.forEach((file, index) => {
-      if (file.uid === previewItem.uid) {
+      if (file.originalFileObj.uid === previewItem.uid) {
         selectedFileIndex = index;
       }
     });
@@ -140,7 +140,7 @@ const ProductImagesUploading = ({
     setImageURL(null);
 
     setFileList((state) =>
-      state.filter((file) => file.uid !== removedItem.uid)
+      state.filter((file) => file.originalFileObj.uid !== removedItem.uid)
     );
   };
 
@@ -200,7 +200,7 @@ const ProductImagesUploading = ({
     maxCount: 32,
     multiple: true,
     showUploadList: true,
-    listType: "picture-card",
+    listType: "text",
     accept: "image/png, image/jpg, image/jpeg, image/webp",
     onChange: handleChange,
     onRemove: onRemoveHandler,

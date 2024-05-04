@@ -6,9 +6,7 @@ const Hint = ({ length }) => {
   return (
     <HintWrapper>
       <HintContaiter>
-        <ErrorHint condition={condition}>
-          You must choose 32 images
-        </ErrorHint>
+        <ErrorHint condition={condition}>You must choose 32 images</ErrorHint>
         <InfoHint>Number of images: {length}</InfoHint>
       </HintContaiter>
     </HintWrapper>

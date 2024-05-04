@@ -10,9 +10,10 @@ import TemporarySaveIcon from "../TemporarySaveIcon/TemporarySaveIcon";
 import { GeneralInfoContainer, GeneralInfoWrapper } from "./GeneralInfo.styled";
 
 const GeneralInfo = ({
+  resetFields,
   setDataHandler,
   customizationData,
-  setCustomizationDataHandler,
+  // setCustomizationDataHandler,
 }) => {
   const [form] = Form.useForm();
 
@@ -28,13 +29,22 @@ const GeneralInfo = ({
   const [temporarilySaved, setTemporarilySaved] = useState(false);
 
   // in this state we save the customization data with the price for each item, if it needed
-  const [localCustomizationState, setLocalCustomizationState] = useState([]);
+  // const [localCustomizationState, setLocalCustomizationState] = useState([]);
 
   useEffect(() => {
     if (dimensionImg !== null && dimensionInfo.length !== 0) {
       setTemporarilySaved(false);
     }
   }, [dimensionImg, dimensionInfo]);
+
+  useEffect(() => {
+    if (resetFields) {
+      form.resetFields();
+      setDimensionInfo([]);
+      setDimensionImg(null);
+      setTemporarilySaved(false);
+    }
+  }, [resetFields]);
 
   const onFinishForm = async (values) => {
     try {
@@ -66,7 +76,7 @@ const GeneralInfo = ({
     setDimensionInfo([]);
   };
 
-  console.log("dimension info was changed", dimensionInfo);
+  console.log("dimension info was changed", dimensionInfo, dimensionImg);
 
   return (
     <GeneralInfoWrapper>
@@ -84,10 +94,7 @@ const GeneralInfo = ({
             temporarilySaveHandler={setTemporarilySaved}
             resetDataHandler={resetDimensionValues}
           />
-          <SubGeneralInfo
-            categories={categories}
-            customizationData={customizationData}
-          />
+          <SubGeneralInfo categories={categories} />
           <DimensionInfo
             dimensionImg={dimensionImg}
             dimensionsData={dimensionInfo}

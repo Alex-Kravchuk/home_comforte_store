@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 
 // PVI = ProductViewerImages
 
-export const PVIWrapper = styled.div``;
+export const PVIWrapper = styled.div`
+  .ant-upload-wrapper .ant-upload-list .ant-upload-list-item {
+    cursor: pointer;
+  }
+`;
 
 export const PVIContainer = styled.div``;
 export const PVIHeaderContainer = styled.div`
@@ -116,4 +120,21 @@ export const InfoIconContainer = styled.div`
   display: flex;
   align-items: center;
   padding-left: 0 15px;
+`;
+
+export const UploadButtonWrapper = styled.div`
+  width: 102px;
+  height: 102px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px dashed #d9d9d9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: #1677ff;
+  }
+}
 `;

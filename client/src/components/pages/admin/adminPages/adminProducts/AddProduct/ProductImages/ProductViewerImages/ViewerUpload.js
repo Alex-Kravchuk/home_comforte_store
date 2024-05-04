@@ -5,14 +5,27 @@ import { PlusOutlined } from "@ant-design/icons";
 
 import Hint from "../ProductImagesUploading/Hint/Hint";
 import ModalUploading from "../ProductImagesUploading/ModalUploading/ModalUploading";
+import { UploadButtonWrapper } from "./ProductViewerImages.styled";
 
 const ViewerUpload = ({ config }) => {
+  // we get originals files from fileList (originalFileObj)
+  // for correct work of upload file list
+  const originalFiles = config.fileList.map((file) => file.originalFileObj);
+
+  console.log("===============Check filelist=====================");
+  console.log(config.fileList);
+  console.log("====================================");
   return (
     <>
-      <Upload {...config}>
-        {config.fileList.length !== config.maxCount && <PlusOutlined />}
+      <Hint length={originalFiles.length} />
+      <Upload {...config} fileList={originalFiles}>
+        {originalFiles.length !== config.maxCount && (
+          <UploadButtonWrapper>
+            <PlusOutlined />
+          </UploadButtonWrapper>
+        )}
       </Upload>
-      <Hint length={config.fileList.length} />
+
       <ModalUploading {...config} />
     </>
   );

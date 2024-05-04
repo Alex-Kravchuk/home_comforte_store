@@ -37,9 +37,15 @@ const Demonstration = ({
   const tabletScreen = viewport.width < viewport_sizes.l;
   const smallLaptopScreen = viewport.width < viewport_sizes.xl;
 
+  // TODO перевірити всі нюанси які тільки що зробив 
+  // (очищення всіх полів коли нажимаєш кнопку стоврити новий продукт)
+  // і зроибит коміт
+
   useEffect(() => {
     if (viewerImages.length !== 0) {
       formateImageHandler(viewerImages);
+    } else {
+      setLocalImages([]);
     }
   }, [viewerImages]);
 

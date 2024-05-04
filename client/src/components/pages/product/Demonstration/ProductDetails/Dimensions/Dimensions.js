@@ -21,6 +21,8 @@ const Dimensions = ({ img }) => {
       getBase64(img, (url) => {
         setSrcURL(url);
       });
+    } else {
+      setSrcURL(null);
     }
   }, [img]);
 

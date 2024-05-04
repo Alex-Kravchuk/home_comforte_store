@@ -4,8 +4,6 @@ import { Form, Select } from "antd";
 import { FormLabel } from "@mui/material";
 
 import { formRules } from "../../../../../../../../helpers/formRules";
-
-import { InfoBlock } from "../../AddProduct.styled";
 import {
   FormInput,
   FormInputNumber,
@@ -41,7 +39,7 @@ const SubGeneralInfo = ({ categories }) => {
     }));
 
   return (
-    <InfoBlock>
+    <>
       <Form.Item
         name="name"
         label={<FormLabel>Product name:</FormLabel>}
@@ -123,7 +121,7 @@ const SubGeneralInfo = ({ categories }) => {
           autoSize={{ minRows: 4 }}
         />
       </Form.Item>
-    </InfoBlock>
+    </>
   );
 };
 

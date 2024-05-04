@@ -32,12 +32,14 @@ import { AdminPagesSubTitle, AdminPagesTitle } from "../../../Admin.styled";
 import { ProductService } from "../../../../../../api/product/productService";
 
 const AddProduct = () => {
-  const viewport = useGetWindowSize();
-  const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
   const [activeTab, setActiveTab] = useState("1");
+  const [resetFields, setResetFields] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const viewport = useGetWindowSize();
+  const smallerThanTableScreen = viewport.width <= viewport_sizes.l;
   // generalData contains information about the general data of the product and its dimensions
   const [generalData, setGeneralData] = useState([]);
   // previewImages contains images from the real world
@@ -58,6 +60,7 @@ const AddProduct = () => {
       children: (
         <TabWrapper>
           <GeneralInfo
+            resetFields={resetFields}
             setDataHandler={setGeneralData}
             customizationData={customizationData}
             setCustomizationDataHandler={setCustomizationData}
@@ -70,7 +73,10 @@ const AddProduct = () => {
       label: "Product customization options",
       children: (
         <TabWrapper>
-          <ProductCustomization setDataHandler={setCustomizationData} />
+          <ProductCustomization
+            resetFields={resetFields}
+            setDataHandler={setCustomizationData}
+          />
         </TabWrapper>
       ),
     },
@@ -80,6 +86,7 @@ const AddProduct = () => {
       children: (
         <TabWrapper>
           <ProductImages
+            resetFields={resetFields}
             customizationData={customizationData}
             viewerFiltersData={viewerFiltersData}
             setDataHandlerPreview={setPreviewImages}
@@ -113,6 +120,22 @@ const AddProduct = () => {
 
   const createProductRequest = async () => {
     try {
+      const notAllDataAreGiven =
+        generalData.length === 0 ||
+        previewImages.length === 0 ||
+        customizationData.length === 0 ||
+        viewerFiltersData.length === 0;
+
+      if (notAllDataAreGiven) {
+        messageApi.open({
+          type: "error",
+          content:
+            "You have not provided all the required information about the product",
+        });
+
+        return;
+      }
+
       setLoading(true);
       const product = await ProductService.createProduct(
         generalData.subGeneral
@@ -126,30 +149,30 @@ const AddProduct = () => {
         details: JSON.stringify(generalData.dimension.info),
       };
 
-      // const productDimension = await ProductService.createProductDimension(
-      //   dimensionConfig
-      // );
+      const productDimension = await ProductService.createProductDimension(
+        dimensionConfig
+      );
 
-      // const productModifiers = await ProductService.createProductModifier(
-      //   customizationData,
-      //   product.id
-      // );
+      const productModifiers = await ProductService.createProductModifier(
+        customizationData,
+        product.id
+      );
 
-      // const productViewer = await ProductService.createProductViewer(
-      //   viewerFiltersData,
-      //   product.id
-      // );
+      const productViewer = await ProductService.createProductViewer(
+        viewerFiltersData,
+        product.id
+      );
 
-      // const productPreview = await ProductService.createProductPreviewImage(
-      //   previewImages,
-      //   product.id
-      // );
+      const productPreview = await ProductService.createProductPreviewImage(
+        previewImages,
+        product.id
+      );
 
       console.log("product:", product);
-      // console.log("product dimensions:", productDimension);
-      // console.log("product modifiers:", productModifiers);
-      // console.log("product viewer:", productViewer);
-      // console.log("product preview:", productPreview);
+      console.log("product dimensions:", productDimension);
+      console.log("product modifiers:", productModifiers);
+      console.log("product viewer:", productViewer);
+      console.log("product preview:", productPreview);
       setLoading(false);
       setError(false);
       messageApi.open({
@@ -159,21 +182,33 @@ const AddProduct = () => {
     } catch (error) {
       console.log("error:", error);
       setLoading(false);
-      setError(error.response.data.message);
-      messageApi.open({
-        type: "error",
-        content: error.response.data.message,
-      });
+      if (error.response) {
+        setError(error.response?.data.message);
+        messageApi.open({
+          type: "error",
+          content: error.response.data.message,
+        });
+      } else {
+        setError(error.message);
+        messageApi.open({
+          type: "error",
+          content: error.message,
+        });
+      }
     }
   };
 
   const resetForNewProduct = () => {
+    setResetFields(true);
+    setError(null);
+    setLoading(false);
     setActiveTab("1");
     window.scrollTo(0, 0);
     setGeneralData([]);
     setPreviewImages([]);
     setCustomizationData([]);
     setViewerFiltersData([]);
+    // setResetFields(false);
   };
 
   console.log("====================================");

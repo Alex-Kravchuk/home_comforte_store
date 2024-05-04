@@ -6,6 +6,7 @@ export const HintContaiter = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+  margin: 10px 0;
 `;
 export const ErrorHint = styled.div`
   transition: all 0.2s ease;

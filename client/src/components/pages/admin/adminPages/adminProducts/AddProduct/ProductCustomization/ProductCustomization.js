@@ -12,7 +12,7 @@ import { errorHandlingHelper } from "./errorHandlingHelper";
 import { AMList } from "./AddModifier/AddModifier.styled";
 import { PCContainer, PCWrapper } from "./ProductCustomization.styled";
 
-const ProductCustomization = ({ setDataHandler }) => {
+const ProductCustomization = ({ resetFields, setDataHandler }) => {
   const [modifiers, setModifiers] = useState([]);
 
   const [collapseItems, setCollapseItems] = useState([]);
@@ -21,6 +21,14 @@ const ProductCustomization = ({ setDataHandler }) => {
   // has been stored in the state of the parent component
   const [temporarilySaved, setTemporarilySaved] = useState(false);
   const [customizationError, setCustomizationError] = useState(false);
+
+  useEffect(() => {
+    if (resetFields) {
+      setModifiers([]);
+      setCollapseItems([]);
+      setTemporarilySaved(false);
+    }
+  }, [resetFields]);
 
   useEffect(() => {
     setTemporarilySaved(false);

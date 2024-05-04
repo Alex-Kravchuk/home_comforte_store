@@ -19,7 +19,6 @@ import {
   PVCurrentImgContainer,
   FullScreenIconContainer,
 } from "./ProductViewer.styled";
-import { Spin } from "antd";
 
 const ProductViewer = ({ images, previewMode }) => {
   const [drag, setDrag] = useState(false);

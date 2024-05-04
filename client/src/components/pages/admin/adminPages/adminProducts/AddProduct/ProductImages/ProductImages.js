@@ -12,6 +12,7 @@ import { InfoBlockTitle } from "../AddProduct.styled";
 import { PIBlock, PIContainer, PIWrapper } from "./ProductImages.styled";
 
 const ProductImages = ({
+  resetFields,
   customizationData,
   setDataHandlerPreview,
   setDataHandlerFilters,
@@ -23,6 +24,15 @@ const ProductImages = ({
   // the preview data is independent of the customization data
   const [previewData, setPreviewData] = useState();
   const [localCustomOptions, setLocalCustomOptions] = useState([]);
+
+  useEffect(() => {
+    if (resetFields) {
+      setPreviewData([]);
+      setClearAllFlag(true);
+      setLocalCustomOptions([]);
+      setTemporarilySaved(false);
+    }
+  }, [resetFields]);
 
   useEffect(() => {
     resetToDefault();
