@@ -25,7 +25,7 @@ export const ADMIN_SETTINGS = "settings";
 // admin add products
 export const ADMIN_PRODUCTS_CATEGORY = "categories";
 export const ADMIN_PRODUCTS_EDIT = "edit";
-export const ADMIN_PRODUCTS_ADD = "add_new";
+export const ADMIN_PRODUCTS_ADD = "add-new-product";
 export const ADMIN_PRODUCTS_PREVIEW = "preview";
 
 export const CATEGORY_ROUTE = ":category_name";

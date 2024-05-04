@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { dataMock } from "./dataMock";
 import {
   ProductPreviewContainer,
   ProductPreviewWrapper,
@@ -22,20 +21,21 @@ const ProductPreview = ({ previewImages }) => {
 
   useEffect(() => {
     if (previewImages.length > 0) {
-      previewImages.map((previewItem, index) => {
-        getBase64(previewItem.originalFileObj, (url) => {
-          setLocalPrevImages((state) => [
-            ...state,
-            {
-              id: previewItem.id ?? index++,
-              src: url,
-              description: previewItem.description,
-            },
-          ]);
+      const locals = [];
+      previewImages.map(({ description, originalFileObj }) => {
+        getBase64(originalFileObj, (url) => {
+          locals.push({
+            src: url,
+            description,
+          });
         });
       });
+
+      setLocalPrevImages(locals);
     }
-  }, []);
+  }, [previewImages]);
+
+  // console.log("previewImages", previewImages, localPrevImages);
 
   return (
     <ProductPreviewWrapper>
@@ -44,8 +44,8 @@ const ProductPreview = ({ previewImages }) => {
           <Empty description="No preview images" />
         ) : (
           <Swiper navigation={true} modules={[Navigation]}>
-            {localPrevImages.map(({ id, src, description }) => (
-              <SwiperSlide key={id}>
+            {localPrevImages.map(({ src, description }) => (
+              <SwiperSlide key={src}>
                 <SliderImg src={src} alt="prev" />
                 <SlideDescription>{description}</SlideDescription>
               </SwiperSlide>

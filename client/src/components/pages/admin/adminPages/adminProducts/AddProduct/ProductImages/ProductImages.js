@@ -65,6 +65,7 @@ const ProductImages = ({
       setImagesError(error);
       return;
     }
+
     setDataHandlerFilters(localCustomOptions);
     setDataHandlerPreview(previewData);
     setTemporarilySaved(true);
@@ -125,6 +126,7 @@ const ProductImages = ({
             clearAllFlag={clearAllFlag}
             saveDataHandler={setPreviewData}
             clearFileListHandler={setClearAllFlag}
+            temporarilySaveHandler={setTemporarilySaved}
           />
         </PIBlock>
       </PIContainer>

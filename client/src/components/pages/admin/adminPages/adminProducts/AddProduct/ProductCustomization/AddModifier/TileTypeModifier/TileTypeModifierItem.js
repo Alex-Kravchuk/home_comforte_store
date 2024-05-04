@@ -58,7 +58,7 @@ const TileTypeModifierItem = ({
     const titleInputIsEmpty = titleInputRef.current.input.value.length === 0;
     const priceInputIsEmpty = priceInputRef.current.input.value.length === 0;
 
-    if (!titleInputIsEmpty && !priceInputIsEmpty) {
+    if (!titleInputIsEmpty) {
       setEditMode(false);
       const newModifierData = {
         id: data.id,

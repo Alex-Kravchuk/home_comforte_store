@@ -127,7 +127,7 @@ const ProductViewerImages = ({
     setCurrentFilterOptions(newOptions);
   };
 
-  console.log("check current filters", currentViewerFilter, images);
+  console.log("IMAGES FORM VIEWER", images);
 
   return (
     <PVIWrapper>

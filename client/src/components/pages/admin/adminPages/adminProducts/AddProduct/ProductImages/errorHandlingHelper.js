@@ -29,6 +29,7 @@ export const errorHandlingHelper = (
   });
 
   const defaultFilterOptions = transformObjNamesToString(currentDefaultFilters);
+  // debugger
   const defaultFilter = filters.find(
     (fil) => fil.options === defaultFilterOptions
   );

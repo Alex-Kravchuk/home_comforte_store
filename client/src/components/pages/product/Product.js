@@ -100,10 +100,10 @@ const Product = ({
 
   // console.log("filters for order:", currentFiltersForOrder);
   // console.log("filters for display:", currentFilters);
-  // console.log("viewer filters data:", viewerFiltersData);
+  console.log("viewer filters data:", viewerFiltersData);
 
-  console.log("GENERAL DATA", generalData);
-  console.log("Viewer Images", currenViewerImages);
+  // console.log("GENERAL DATA", generalData);
+  console.log("Preview Images", previewImages);
 
   return (
     <ProductWrapper previewMode={previewMode}>

@@ -3,7 +3,12 @@ import { PPIContainer, PPIWrapper } from "./ProductPreviewImages.styled";
 import InfoHeader from "../../InfoHeader/InfoHeader";
 import ProductImagesUploading from "../ProductImagesUploading/ProductImagesUploading";
 
-const ProductPreviewImages = ({ clearAllFlag, saveDataHandler, clearFileListHandler }) => {
+const ProductPreviewImages = ({
+  clearAllFlag,
+  saveDataHandler,
+  clearFileListHandler,
+  temporarilySaveHandler,
+}) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -11,6 +16,7 @@ const ProductPreviewImages = ({ clearAllFlag, saveDataHandler, clearFileListHand
   }, [images]);
 
   const saveFileHandler = (file) => {
+    temporarilySaveHandler(false);
     if (Array.isArray(file)) {
       // check if item has originalFileObj field that means it's array with
       // description fields

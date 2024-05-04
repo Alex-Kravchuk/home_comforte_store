@@ -103,6 +103,8 @@ const ProductImagesUploading = ({
       return;
     }
 
+    console.log("IMAGES FROM HANDLE CHANGE", info.fileList);
+
     getBase64(info.file, (url) => {
       setImageURL(url);
       setFileList((state) => [...state, { originalFileObj: info.file, url }]);
