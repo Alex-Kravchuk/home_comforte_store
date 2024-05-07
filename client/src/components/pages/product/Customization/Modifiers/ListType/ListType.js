@@ -29,6 +29,7 @@ const ListType = ({ currentModifier, filtersHandler }) => {
 
   const smallLaptopScreen = viewport.width <= viewport_sizes.xl;
 
+
   const checkIfSelected = (item) => {
     if (!localSelectedOption && item.defaultMarker) {
       return true;

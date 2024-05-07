@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
 
-import { getBase64 } from "../../../../../../../../helpers/getBase64";
+import {
+  getBase64,
+  asyncGetBase64,
+} from "../../../../../../../../helpers/getBase64";
 
 import ViewerUpload from "../ProductViewerImages/ViewerUpload";
 import DimensionUpload from "../../GeneralInfo/DimensionInfo/DimensionUpload";
@@ -33,8 +36,6 @@ const ProductImagesUploading = ({
   const modifierTypeUpload = uploadType === "modifier";
   const dimensionTypeUpload = uploadType === "dimension";
 
-  // console.log("upload file list", uploadedFileList);
-
   useEffect(() => {
     // clear file list when item of customization option was change by Select (in admin tools, adding of product images)
     setFileList([]);
@@ -64,10 +65,12 @@ const ProductImagesUploading = ({
   }, [existingImage]);
 
   useEffect(() => {
+    // debugger;
     if (clearFileListflag) {
-      setFileList([]);
       clearFileListHandler(false);
+      setFileList([]);
     }
+
   }, [clearFileListflag]);
 
   const defaultFileList = img
@@ -97,22 +100,27 @@ const ProductImagesUploading = ({
       }
     });
   };
-
-  const handleChange = (info) => {
+  const testArr = [];
+  const handleChange = async (info) => {
     if (info.file.status === "removed") {
       return;
     }
-
-    console.log("IMAGES FROM HANDLE CHANGE", info.fileList);
 
     getBase64(info.file, (url) => {
       setImageURL(url);
       setFileList((state) => [...state, { originalFileObj: info.file, url }]);
 
       if (viewerTypeUpload || modifierTypeUpload) {
+        // console.log("IMAGES FROM GETBASE 64", info.file);
         saveFileHandler({ originalFileObj: info.file, url });
       }
     });
+
+    // -----TEST BLOCK------
+
+    const url = await asyncGetBase64(info.file);
+    testArr.push({ originalFileObj: info.file, url });
+    // ---- TEST BLOCK-------
 
     if (previewTypeUpload) {
       saveFileHandler({ originalFileObj: info.file, description: "" });

@@ -33,10 +33,6 @@ const ModalUploading = ({
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const activeSlideFileName = fileList[activeSlideIndex]?.originalFileObj.name;
 
-  console.log('====================================');
-  console.log(currentPreviewIndex);
-  console.log('====================================');
-
   return (
     <ModalWrapper>
       <Modal

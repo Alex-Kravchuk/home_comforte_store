@@ -32,13 +32,8 @@ const Product = ({
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
-    if (previewMode) {
-      setTotalPrice(0);
-      setCurrentViewerImages([]);
-    }
-  }, [generalData, previewImages, customizationData]);
 
-  useEffect(() => {
+    
     /**
      * I have divided the filters into two categories in order to use the filters
      *  that change the product image separately from the filters that keep the image unchanged
@@ -99,8 +94,8 @@ const Product = ({
   };
 
   // console.log("filters for order:", currentFiltersForOrder);
-  // console.log("filters for display:", currentFilters);
-  console.log("viewer filters data:", viewerFiltersData);
+  console.log("filters for display:", currentFilters);
+  console.log("viewer filters data:", currenViewerImages);
 
   // console.log("GENERAL DATA", generalData);
   console.log("Preview Images", previewImages);

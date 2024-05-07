@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Cell,
@@ -31,7 +31,7 @@ const CellType = ({ currentModifier, filtersHandler }) => {
     const additionalPrice = isNaN(item.additionalPrice)
       ? 0
       : Number(item.additionalPrice);
-      
+
     filtersHandler(
       currentModifier.name,
       item.title,

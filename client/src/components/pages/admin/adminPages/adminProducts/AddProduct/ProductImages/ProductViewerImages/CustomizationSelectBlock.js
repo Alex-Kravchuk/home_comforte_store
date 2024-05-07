@@ -22,10 +22,9 @@ const CustomizationSelectBlock = ({
   saveHandler,
   customizationData,
   clearFileListHandler,
+  currentFilterOptions,
   optionsOnChangeHandler,
 }) => {
-  console.log("saved flag", saved);
-
   return (
     <PVISelectContainer saved={saved}>
       <PVIConentGroup>
@@ -55,7 +54,9 @@ const CustomizationSelectBlock = ({
       )}
 
       <Tooltip title="Clear filelist">
-        <DeleteSweepOutlinedIcon onClick={() => clearFileListHandler(true)} />
+        <DeleteSweepOutlinedIcon
+          onClick={() => clearFileListHandler(currentFilterOptions)}
+        />
       </Tooltip>
     </PVISelectContainer>
   );

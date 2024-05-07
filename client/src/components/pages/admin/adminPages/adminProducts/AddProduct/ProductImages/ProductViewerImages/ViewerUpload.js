@@ -12,9 +12,6 @@ const ViewerUpload = ({ config }) => {
   // for correct work of upload file list
   const originalFiles = config.fileList.map((file) => file.originalFileObj);
 
-  console.log("===============VIEWER UPLOAD FILELIST=====================");
-  console.log(config.fileList);
-  console.log("====================================");
   return (
     <>
       <Hint length={originalFiles.length} />

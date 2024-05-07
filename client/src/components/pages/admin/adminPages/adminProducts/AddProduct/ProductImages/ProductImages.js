@@ -38,10 +38,6 @@ const ProductImages = ({
     resetToDefault();
   }, [customizationData]);
 
-  useEffect(() => {
-    console.log("localCustomOptions", localCustomOptions);
-  }, [localCustomOptions]);
-
   const resetToDefault = () => {
     const defaultFilters = createDefaultFilters(customizationData);
 
@@ -92,11 +88,18 @@ const ProductImages = ({
       setTemporarilySaved(false);
     }
   };
-  const resetImagesDataHandler = () => {
-    setClearAllFlag(true);
 
-    setLocalCustomOptions([]);
+  const resetViewerImagesHandler = (filter) => {
+    setLocalCustomOptions((state) =>
+      state.filter((opt) => opt.options !== filter)
+    );
+  };
+
+  const resetImagesDataHandler = () => {
     setPreviewData([]);
+    setClearAllFlag(true);
+    setLocalCustomOptions([]);
+    setDataHandlerPreview([]);
   };
 
   return (
@@ -114,10 +117,11 @@ const ProductImages = ({
           <ProductViewerImages
             clearAllFlag={clearAllFlag}
             customizationData={customizationData}
-            clearFileListHandler={setClearAllFlag}
             viewerFiltersData={localCustomOptions}
             saveDataHandler={localSaveDataHandler}
+            clearFileListHandler={setClearAllFlag}
             setDataHandlerFilters={setDataHandlerFilters}
+            clearViewerFileListHandler={resetViewerImagesHandler}
           />
         </PIBlock>
         <PIBlock>

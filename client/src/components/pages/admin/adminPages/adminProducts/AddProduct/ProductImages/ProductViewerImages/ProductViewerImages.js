@@ -30,11 +30,13 @@ const ProductViewerImages = ({
   customizationData,
   viewerFiltersData,
   clearFileListHandler,
+  clearViewerFileListHandler,
 }) => {
   const [images, setImages] = useState([]);
   const [noImagesError, setNoImagesError] = useState(false);
   const [savedCustomOption, setSavedCustomOption] = useState(false);
   const [currentViewerFilter, setCurrentViewerFilter] = useState({});
+  const [localClearFileList, setLocalClearFileList] = useState(false);
   const [currentFilterOptions, setCurrentFilterOptions] = useState({});
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const ProductViewerImages = ({
 
   useEffect(() => {
     setImages([]);
+
     const viewerFilter = viewerFiltersData.find(
       (filter) =>
         filter.options === transformObjNamesToString(currentFilterOptions)
@@ -59,10 +62,18 @@ const ProductViewerImages = ({
   }, [currentFilterOptions]);
 
   useEffect(() => {
-    if (clearAllFlag) {
+    const fileListForFilterOptionsExist = viewerFiltersData.find(
+      (filter) =>
+        filter.options === transformObjNamesToString(currentFilterOptions)
+    );
+
+    if (!fileListForFilterOptionsExist) {
       setSavedCustomOption(false);
+      setLocalClearFileList(true);
+    } else {
+      setLocalClearFileList(false);
     }
-  }, [clearAllFlag]);
+  }, [viewerFiltersData]);
 
   const createCorrectOptionsName = () => {
     const currentFilterObject = {};
@@ -127,8 +138,6 @@ const ProductViewerImages = ({
     setCurrentFilterOptions(newOptions);
   };
 
-  console.log("IMAGES FORM VIEWER", images);
-
   return (
     <PVIWrapper>
       <PVIContainer>
@@ -140,10 +149,12 @@ const ProductViewerImages = ({
           <>
             <CustomizationSelectBlock
               saved={savedCustomOption}
-              resetToDefault={clearAllFlag}
               customizationData={customizationData}
               saveHandler={saveCustomizationValues}
-              clearFileListHandler={clearFileListHandler}
+              clearFileListHandler={clearViewerFileListHandler}
+              currentFilterOptions={transformObjNamesToString(
+                currentFilterOptions
+              )}
               optionsOnChangeHandler={optionsOnChangeHandler}
             />
             {noImagesError && (
@@ -154,11 +165,12 @@ const ProductViewerImages = ({
 
             <ProductImagesUploading
               uploadType="viewer"
-              clearFileListflag={clearAllFlag}
               saveFileHandler={saveFileHandler}
               clearFileListHandler={clearFileListHandler}
               checkFileListChanges={checkFileListChanges}
               selectOptionsWasChanged={currentViewerFilter}
+              // we can remove the list of files both locally and globally for the entire Image block
+              clearFileListflag={localClearFileList || clearAllFlag}
               uploadedFileList={
                 currentViewerFilter ? currentViewerFilter.images : null
               }
