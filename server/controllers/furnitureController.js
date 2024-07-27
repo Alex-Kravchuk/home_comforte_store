@@ -1,17 +1,37 @@
 const createImgName = require("../helpers/createImgName");
 const ApiError = require("../error/ApiError");
 
-const { Furniture, Rating } = require("../models/models");
+const { Furniture } = require("../models/models");
 const furnitureService = require("../services/furniture-service");
 
 class FurnitureController {
   static errorSource = "furniture controller";
+
+  // TESTING IMAGE CROOP
+
+  async getProductList(req, res, next) {
+    // TODO create a middleware for check reques data
+    try {
+      const { categoryId, typeId, subTypeId } = req.body;
+      const furnitures = await furnitureService.getFurnituresByTypeId(
+        categoryId,
+        typeId,
+        subTypeId
+      );
+      return res.json(furnitures);
+    } catch (error) {
+      return next(
+        ApiError.unexpectedError(error, FurnitureController.errorSource)
+      );
+    }
+  }
+
+  // TESTNS IMAGE CROOP
+
   async create(req, res, next) {
     try {
-  
       const furniture = await furnitureService.createFurniture(req.body);
       return res.json(furniture);
-      
     } catch (error) {
       return next(
         ApiError.unexpectedError(error, FurnitureController.errorSource)

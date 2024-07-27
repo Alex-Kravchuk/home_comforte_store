@@ -11,6 +11,8 @@ const {
 const fs = require("fs");
 const uuid = require("uuid");
 
+// TODO добавити 3 тестових продукти
+
 class FurnitureService {
   static errorSource = "furniture service";
 
@@ -80,14 +82,14 @@ class FurnitureService {
         } else {
           // if images is not array, use it as object
           const parsedImgName = JSON.parse(images.name.replace(/%22/g, '"'));
-            const coincidenceImg =
-              mod.id === parsedImgName.modifierID &&
-              item.id === parsedImgName.modifierItemID;
+          const coincidenceImg =
+            mod.id === parsedImgName.modifierID &&
+            item.id === parsedImgName.modifierItemID;
 
-            if (coincidenceImg) {
-              const fileName = createImgName(images, "STRING");
-              item.img = fileName;
-            }
+          if (coincidenceImg) {
+            const fileName = createImgName(images, "STRING");
+            item.img = fileName;
+          }
         }
       });
       return mod;
@@ -156,7 +158,7 @@ class FurnitureService {
   }
 
   async createFurniturePreview(images, furnitureId) {
-    console.log("furniture IDDDDDD", images);
+    // console.log("furniture IDDDDDD", images);
 
     const content = Array.from(images).map((image) => {
       // img.name is descriptions for preview image from client
@@ -177,6 +179,63 @@ class FurnitureService {
     });
 
     return preview;
+  }
+
+  async getFurnituresByTypeId(categoryId, typeId, subTypeId = 0) {
+    const furnituresWithPreview = [];
+
+    // List of product can be showed without subTypeId filter,
+    // but in order to avoid a mistake,
+    // when subTypeId was not assigned we use default value like 0,
+    // because subTypeId with ID = 0 isn't exist.
+    // So with those filters we get empty list of products and it means 
+    // we need keep search without subTypeId
+
+    const furnitures = await Furniture.findAll({
+      where: {
+        categoryId,
+        typeId,
+        subTypeId,
+      },
+    });
+
+    // if we cant found with such parametrs, keep finding without subtypeID
+    if (furnitures.length === 0) {
+      const furnitures = await Furniture.findAll({
+        where: {
+          categoryId,
+          typeId,
+        },
+      });
+
+      if (furnitures.length === 0) {
+        return null;
+      }
+
+      for (const fur of furnitures) {
+        const viewerByFurnitureId = await Viewer.findOne({
+          where: { furnitureId: fur.id },
+        });
+
+        fur.dataValues.previewImg = viewerByFurnitureId.images[0];
+
+        furnituresWithPreview.push(fur);
+      }
+
+      return furnituresWithPreview;
+    }
+
+    for (const fur of furnitures) {
+      const viewerByFurnitureId = await Viewer.findOne({
+        where: { furnitureId: fur.id },
+      });
+
+      fur.dataValues.previewImg = viewerByFurnitureId.images[0];
+
+      furnituresWithPreview.push(fur);
+    }
+
+    return furnituresWithPreview;
   }
 }
 

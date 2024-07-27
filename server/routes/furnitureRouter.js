@@ -5,6 +5,13 @@ const furnitureController = require("../controllers/furnitureController");
 const createFurnitureMiddleware = require("../middleware/furniture/createFurnitureMiddleware");
 const checkCorrectIdMiddleware = require("../middleware/checkCorrectIdMiddleware");
 
+
+
+
+router.post("/getProductList",  furnitureController.getProductList);
+
+
+
 router.post("/", createFurnitureMiddleware, furnitureController.create);
 router.get("/", furnitureController.getAll);
 router.get(
