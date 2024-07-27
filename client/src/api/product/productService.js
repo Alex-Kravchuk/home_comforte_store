@@ -202,4 +202,14 @@ export class ProductService {
     const response = await $host.post("api/preview", formdata);
     return response.data;
   };
+
+  static getListOfProduct = async ({ categoryId, typeId, subTypeId }) => {
+    const response = await $host.post("api/furniture/getProductList", {
+      categoryId,
+      typeId,
+      subTypeId,
+    });
+
+    return response.data
+  };
 }

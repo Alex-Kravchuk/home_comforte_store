@@ -61,6 +61,11 @@ const DropDownMenu = ({
                         "/" +
                         formate(subtype.name)
                       }
+                      state={{
+                        typeId: type.id,
+                        categoryId: type.categoryId,
+                        subTypeId: subtype.id,
+                      }}
                     >
                       {subtype.name}
                     </Link>
@@ -69,6 +74,10 @@ const DropDownMenu = ({
                 <SubTypeName onClick={closeDropDown} key={type.name}>
                   <Link
                     to={routeTempalte + "all-" + formate(type.name)}
+                    state={{
+                      typeId: type.id,
+                      categoryId: type.categoryId,
+                    }}
                   >{`All ${type.name.toLowerCase()}`}</Link>
                 </SubTypeName>
               </SubTypeContainer>

@@ -8,6 +8,7 @@ import ProductPrevDescription from "./ProductPrevDescription";
 
 import { ListWrapper } from "./List.styled";
 import { useLocation } from "react-router-dom";
+import { ProductService } from "../../../../api/product/productService";
 
 const List = () => {
   const [listOfProduct, setListOfProducts] = useState([]);
@@ -17,15 +18,12 @@ const List = () => {
 
   useEffect(() => {
     getRequestData();
-  }, []);
+  }, [state]);
 
   const getRequestData = async () => {
     try {
       setLoading(true);
-      const { data } = await $host.post("api/furniture/test", {
-        viewerId: 1,
-        furnitureId: 1,
-      });
+      const data = await ProductService.getListOfProduct(state);
 
       setListOfProducts(data ?? []);
     } catch (error) {
