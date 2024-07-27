@@ -32,8 +32,6 @@ const Product = ({
   const bigScreen = vieport.width >= viewport_sizes.xl;
 
   useEffect(() => {
-
-    
     /**
      * I have divided the filters into two categories in order to use the filters
      *  that change the product image separately from the filters that keep the image unchanged
@@ -64,6 +62,12 @@ const Product = ({
       setCurrentViewerImages(viewer.images);
     }
   }, [currentFilters]);
+
+  useEffect(() => {
+    if (previewMode && viewerFiltersData.length === 0) {
+      setCurrentViewerImages([]);
+    }
+  }, [viewerFiltersData]);
 
   const filtersHandler = (
     modifierName,

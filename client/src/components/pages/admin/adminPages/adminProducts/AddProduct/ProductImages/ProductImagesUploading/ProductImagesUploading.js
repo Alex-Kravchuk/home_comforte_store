@@ -65,12 +65,10 @@ const ProductImagesUploading = ({
   }, [existingImage]);
 
   useEffect(() => {
-    // debugger;
     if (clearFileListflag) {
       clearFileListHandler(false);
       setFileList([]);
     }
-
   }, [clearFileListflag]);
 
   const defaultFileList = img
@@ -100,35 +98,50 @@ const ProductImagesUploading = ({
       }
     });
   };
-  const testArr = [];
+
   const handleChange = async (info) => {
     if (info.file.status === "removed") {
       return;
     }
 
-    getBase64(info.file, (url) => {
-      setImageURL(url);
-      setFileList((state) => [...state, { originalFileObj: info.file, url }]);
-
-      if (viewerTypeUpload || modifierTypeUpload) {
-        // console.log("IMAGES FROM GETBASE 64", info.file);
-        saveFileHandler({ originalFileObj: info.file, url });
-      }
-    });
-
-    // -----TEST BLOCK------
-
+    console.log(info.fileList);
     const url = await asyncGetBase64(info.file);
-    testArr.push({ originalFileObj: info.file, url });
-    // ---- TEST BLOCK-------
+    setImageURL(url);
+
+    if (viewerTypeUpload) {
+      setFileList((state) => [...state, { originalFileObj: info.file }]);
+      saveFileHandler({ originalFileObj: info.file });
+      return;
+    }
+
+    //  BAG - файли додаються в хаотичному порядку. Потрібно очищати список, і з другого разу все працює правильно
+    //  файли, які заходять в хендлер йдуть в правильному порядку. Значить проблема в асинхронному (і синхронному getBase64).
+    //  якщо колись буде бажання то спробувати виправити таким чином, щоб забрати звіси getBase64,
+    // і використовувати його на місцях, де він конретно потрібен
+
+
+    // TODO
+    // При редіректі, після створення продукту, для створення нового продукту не повністю очищаються дані від старого продукту
+    // Покопатись десь в стейтах, які не чистяться
+
+
+
+
+    // СТВОРИВ 3 продукти суукаблять
+    if (modifierTypeUpload) {
+      saveFileHandler({ originalFileObj: info.file, url });
+      return;
+    }
 
     if (previewTypeUpload) {
+      setFileList((state) => [...state, { originalFileObj: info.file, url }]);
       saveFileHandler({ originalFileObj: info.file, description: "" });
       return;
     }
 
     if (dimensionTypeUpload) {
       saveFileHandler(info.file);
+      return;
     }
   };
 

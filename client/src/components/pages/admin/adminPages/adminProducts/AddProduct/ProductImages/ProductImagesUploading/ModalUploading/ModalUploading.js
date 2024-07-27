@@ -14,6 +14,7 @@ import {
   ModalImg,
   ModalWrapper,
 } from "../../../../../../../user/userPages/settings/Tabs/Personal/UploadAvatar/PreviewModal/PreviewModal.styled";
+import { asyncGetBase64 } from "../../../../../../../../../helpers/getBase64";
 
 const DisplayedPreview = ({ currentPreviewIndex, children }) => {
   const swiper = useSwiper();
@@ -30,8 +31,26 @@ const ModalUploading = ({
   previewOpenHandler,
   cancelHandler,
 }) => {
+  const [localFileList, setLocalFileList] = useState([]);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const activeSlideFileName = fileList[activeSlideIndex]?.originalFileObj.name;
+  const activeSlideFileName = localFileList[activeSlideIndex]?.originalFileObj?.name;
+
+  useEffect(() => {
+    if (fileList.length) {
+      createFileListWithURLs();
+    }
+  }, [fileList]);
+
+  const createFileListWithURLs = async () => {
+    setLocalFileList(
+      await Promise.all(
+        fileList.map(async ({ originalFileObj }) => ({
+          originalFileObj,
+          url: await asyncGetBase64(originalFileObj),
+        }))
+      )
+    );
+  };
 
   return (
     <ModalWrapper>
@@ -48,7 +67,7 @@ const ModalUploading = ({
           onSlideChange={(slide) => setActiveSlideIndex(slide.activeIndex)}
         >
           <DisplayedPreview currentPreviewIndex={currentPreviewIndex} />
-          {fileList.map((file) => (
+          {localFileList.map((file) => (
             <SwiperSlide key={file.url}>
               <ModalImg alt="modalimage" src={file.url} />
             </SwiperSlide>

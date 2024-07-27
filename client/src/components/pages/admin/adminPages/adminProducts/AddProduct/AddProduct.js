@@ -208,7 +208,6 @@ const AddProduct = () => {
     setPreviewImages([]);
     setCustomizationData([]);
     setViewerFiltersData([]);
-    // setResetFields(false);
   };
 
   console.log("====================================");

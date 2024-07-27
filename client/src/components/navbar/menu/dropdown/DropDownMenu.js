@@ -38,7 +38,10 @@ const DropDownMenu = ({
         <DropdownMenuContainer>
           {typesOfProducts.map((type) => (
             <TypeColumn key={type.id}>
-              <Link to={routeTempalte + "all-" + formate(type.name)}>
+              <Link
+                to={routeTempalte + "all-" + formate(type.name)}
+                state={{ typeId: type.id, categoryId: type.categoryId }}
+              >
                 <TypeTitleContainer>
                   <TypeTitleImg
                     src={process.env.REACT_APP_API_URL + type.icon}

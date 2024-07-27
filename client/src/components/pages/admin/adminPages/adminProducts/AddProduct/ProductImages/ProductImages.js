@@ -100,6 +100,7 @@ const ProductImages = ({
     setClearAllFlag(true);
     setLocalCustomOptions([]);
     setDataHandlerPreview([]);
+    setDataHandlerFilters([]);
   };
 
   return (

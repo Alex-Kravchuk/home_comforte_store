@@ -14,6 +14,7 @@ import {
   NoImagesErrorText,
   PVIHeaderContainer,
 } from "./ProductViewerImages.styled";
+import { asyncGetBase64 } from "../../../../../../../../helpers/getBase64";
 
 const tooltipText = `Here you must upload 32 images to view the product.
 The product viewer works in 360, so your images should be such
@@ -101,7 +102,7 @@ const ProductViewerImages = ({
     setImages((state) => [...state, file]);
   };
 
-  const saveCustomizationValues = () => {
+  const saveCustomizationValues = async () => {
     // block the save action when a small number of images error is seen
     if (images.length === 0 || images.length < 32) {
       setNoImagesError(true);
@@ -110,7 +111,12 @@ const ProductViewerImages = ({
 
     const viewerFilter = {
       options: transformObjNamesToString(currentFilterOptions),
-      images,
+      images: await Promise.all(
+        images.map(async ({ originalFileObj }) => ({
+          originalFileObj,
+          url: await asyncGetBase64(originalFileObj),
+        }))
+      ),
     };
 
     setSavedCustomOption(true);
